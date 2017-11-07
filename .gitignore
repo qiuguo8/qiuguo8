@@ -1,9 +1,10 @@
 ##ignore this file##
-/node_modules/ 
+/node_modules/
+/web/bundle/ 
 .classpath
 .project
 .settings      
- ##filter databfile¡¢sln file##
+ ##filter databfileï¿½ï¿½sln file##
 *.mdb  
 *.ldb  
 *.sln    

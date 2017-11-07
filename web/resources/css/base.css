@@ -1,0 +1,76 @@
+
+@import url('../../../node_modules/element-ui/lib/theme-chalk/index.css');
+
+html,body{margin:0px;padding:0px;width:100%}
+#vue-app{margin:0px;padding:0px;width:100%}
+p,span,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;color:#fff;line-height:1.428571429;color:#222}
+*,*:before,*:after{box-sizing: border-box}
+
+.transition-ones{transition: all 1s ease;-webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;}
+.transition-halfs{transition: all .5s ease;-webkit-transition: all .5s ease;-moz-transition: all .5s ease;-o-transition: all .5s ease;}
+.float-left{float: left}
+.float-right{float: right}
+.text-center{text-align: center}
+.text-elipse{text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
+.container{margin-left: auto;margin-right: auto;}
+.container:before,.container:after{content: "";display: table;box-sizing: border-box;clear:both}
+@media(min-width:992px){
+    .container{width: 968px}
+}
+@media(min-width:1200px){
+    .container{width: 1170px}
+}
+/*业务页面头部菜单 start*/
+nav ul{list-style: none}
+.header-container{z-index:1200;position:fixed;top:0px;left:0px;width:100%;height: 70px;background-color:#333;padding:5px;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1)}
+.header-container>nav{position: relative;height: 100%;}
+.header-container>nav>div{position: relative;height: 100%;display: inline-block}
+.header-container>nav>div>img{position: relative;height: 100%;}
+.header-menu-icon{display: none;}
+.header-container>nav .header-menu{float: right;padding:10px;height: auto;position: relative}
+.header-container>nav .header-menu-list{float: right;padding:10px 0px;border-radius: 5px}
+.header-container>nav .header-menu-list>li{float: left;color:#fff;font-size:16px;padding:10px 20px;margin:0px 10px;cursor:pointer;text-align: center}
+.header-container>nav .header-menu-list>li:hover{background-color: #e90304;border-radius: 5px}
+.header-container>nav>.user-info{float: right;cursor: pointer}
+.header-container>nav>.user-info>.msg-tip{position: absolute;right: 3px;color:#fff;background-color: #e90304;padding:3px 4px;font-size: 12px;border-radius: 100%}
+.user-info>.user-img-wrap{padding:5px 6px;border-radius: 100%;overflow: hidden;margin:3px 5px 5px;background-color:#eee}
+.user-info>.user-img-wrap>img{height: 40px;width: 40px;}
+.header-container>nav>.visitor-operation{float: right}
+.header-container>nav>.visitor-operation p{float: left;color:#fff;padding:5px 20px;cursor: pointer;font-size:16px}
+.header-container>nav>.visitor-operation p:hover{color:#ff6633}
+@media(min-width:320px){
+    .header-container>nav .header-menu{padding:13px}
+    .header-container>nav .header-menu-icon{width:40px;height: 40px;display: block;font-size:36px;color:#fff;margin:0px}
+    .header-container>nav .header-menu:hover ul{display: block;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1)}
+    .header-container>nav .header-menu-list{z-index:2000;position: absolute;top:64px;right:-30px;margin:0px;background-color:#333;display: none;width:130px}
+    .header-container>nav .header-menu-list>li{float: none}
+}
+@media(min-width:1360px){
+    .header-container>nav .header-menu{padding:0px}
+    .header-container>nav .header-menu-icon{display: none}
+    .header-container>nav .header-menu-list{width:auto;display:block;position: relative;top:0px;left:0px;}
+    .header-container>nav .header-menu-list>li{float: left}
+}
+/*业务页面头部菜单 end*/
+
+/*业务主体 start*/
+.index-container{margin-top:80px;}
+.carousel-wrap{position: absolute;display: inline-block}
+.carousel-wrap>.el-carousel>.el-carousel__container{width:640px;height:360px}
+.normal-news{padding:10px 10px 10px 30px;margin-left: 640px;text-align: left}
+.normal-news-list{list-style: none;padding:15px 0px;margin:0px;}
+.normal-news-list li{padding:5px;cursor: pointer;opacity: 0.8;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:80%}
+.normal-news-list li:hover{opacity: 1}
+.normal-news-title{border-bottom: 2px solid rgb(255, 102, 51)}
+.normal-news-title span{font-size:18px;color:#fff;background-color: rgb(255, 102, 51);padding:10px;display: inline-block}
+@media(min-width:320px){
+    .index-center{text-align: center}
+    .carousel-wrap{position: relative}
+    .normal-news{margin:0px;padding:0px;width:640px;display:inline-block;}
+}
+@media(min-width:1120px){
+    .index-center{text-align: left}
+    .carousel-wrap{position: absolute}
+    .normal-news{margin:0px;margin-left: 640px;width:auto;padding:10px 10px 10px 30px;display:block}
+}
+/*业务主体 end*/

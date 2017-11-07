@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>球果吧</title>
+        <link href="web/resources/css/base.css" rel="stylesheet" charset="utf-8">
+    </head>
+    <body>
+        <div id="vue-app">
+            <router-view name="header"></router-view>
+			<router-view></router-view>
+			<router-view name="footer"></router-view>
+			<loading-bar
+				  id="loading-bar"
+				  :on-error-done="errorDone"
+				  :on-progress-done="progressDone"
+				  :progress="progress"
+				  :error="error" >
+			</loading-bar>
+        </div>
+    </body>
+</html>
