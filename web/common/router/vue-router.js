@@ -7,6 +7,7 @@ const routes = [
         components:{
             default:resolve => require(['modules/business/index/vues/index.vue'],resolve),
             header:resolve => require(['modules/business/index/vues/header.vue'],resolve),
+            footer:resolve => require(['modules/business/index/vues/footer.vue'],resolve),
         },
         children:[{
             path:'/',

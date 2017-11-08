@@ -16,9 +16,9 @@
                 <p>注册</p>
             </div> -->
             <div class="header-menu">
-                <div class="el-icon-menu header-menu-icon"></div>
-                <ul class="header-menu-list">
-                    <li class="transition-halfs">首页</li>
+                <div class="el-icon-menu header-menu-icon" @click="showMenu($event)"></div>
+                <ul class="header-menu-list" ref="menu">
+                    <router-link tag="li" :to="{name:'business-index'}" class="transition-halfs">首页</router-link>
                     <li class="transition-halfs">发推荐</li>
                     <li class="transition-halfs">排行榜</li>
                     <li class="transition-halfs">买推荐</li>
@@ -36,8 +36,23 @@
 export default {
     data(){
         return {
-
         }
+    },
+    methods:{
+        showMenu(e){
+            var $menu = $(this.$refs.menu);
+            e.preventDefault();
+            e.stopPropagation();
+            if(e.path.indexOf(this.$refs.menu)<0){
+                $menu.removeClass('menu-show');
+                return;
+            }
+            if($menu.hasClass('menu-show')){
+                $menu.removeClass('menu-show');
+            }else{
+                $menu.addClass('menu-show');
+            }
+        },
     }
 }
 </script>

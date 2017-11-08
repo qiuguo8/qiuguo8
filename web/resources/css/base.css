@@ -11,20 +11,45 @@ p,span,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Micro
 .float-left{float: left}
 .float-right{float: right}
 .text-center{text-align: center}
+.text-left{text-align: left}
 .text-elipse{text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
 .container{margin-left: auto;margin-right: auto;}
 .container:before,.container:after{content: "";display: table;box-sizing: border-box;clear:both}
-@media(min-width:992px){
-    .container{width: 968px}
+@media(min-width:320px){
+    .container{width:100%;max-width: 750px}
 }
-@media(min-width:1200px){
-    .container{width: 1170px}
+@media(min-width:768px){
+    .container{width:100%;max-width: 750px}
+}
+@media(min-width:992px){
+    .min-max-640{width: 640px;display: inline-block}
+    .container{width: 968px;max-width: initial}
+}
+@media(min-width:1120px){
+    .min-max-640{width: 100%;}
+    .container{width: 1170px;max-width: initial}
+}
+
+@media(min-width:312px){
+    .content-wrap{margin:0px 0px 20px}
+    .content-25-to-50{width:98%;}
+    .content-50-to-100{width:98%;display: block;}
+}
+@media(min-width:750px){
+    .content-wrap{margin:0px 1% 20px}
+    .content-25-to-50{width:48%;max-width: 320px}
+    .content-50-to-100{width:98%;display: block;max-width: 640px}
+}
+@media(min-width:1120px){
+    .content-wrap{margin:0px 1% 20px}
+    .content-25-to-50{width:23%;}
+    .content-50-to-100{width:48%;display: inline-block}
 }
 /*业务页面头部菜单 start*/
 nav ul{list-style: none}
 .header-container{z-index:1200;position:fixed;top:0px;left:0px;width:100%;height: 70px;background-color:#333;padding:5px;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1)}
 .header-container>nav{position: relative;height: 100%;}
-.header-container>nav>div{position: relative;height: 100%;display: inline-block}
+.header-container>nav>div{position: relative;height: 100%;display: inline-block;z-index:1000}
 .header-container>nav>div>img{position: relative;height: 100%;}
 .header-menu-icon{display: none;}
 .header-container>nav .header-menu{float: right;padding:10px;height: auto;position: relative}
@@ -38,9 +63,11 @@ nav ul{list-style: none}
 .header-container>nav>.visitor-operation{float: right}
 .header-container>nav>.visitor-operation p{float: left;color:#fff;padding:5px 20px;cursor: pointer;font-size:16px}
 .header-container>nav>.visitor-operation p:hover{color:#ff6633}
+.header-container>nav .header-menu>.menu-show{display:block}
 @media(min-width:320px){
-    .header-container>nav .header-menu{padding:13px}
+    .header-container>nav .header-menu{padding:13px;cursor: pointer}
     .header-container>nav .header-menu-icon{width:40px;height: 40px;display: block;font-size:36px;color:#fff;margin:0px}
+    .header-container>nav .header-menu-icon:hover{color:#e90304}
     .header-container>nav .header-menu:hover ul{display: block;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1)}
     .header-container>nav .header-menu-list{z-index:2000;position: absolute;top:64px;right:-30px;margin:0px;background-color:#333;display: none;width:130px}
     .header-container>nav .header-menu-list>li{float: none}
@@ -53,24 +80,58 @@ nav ul{list-style: none}
 }
 /*业务页面头部菜单 end*/
 
+/*业务页面脚部菜单 start*/
+.footer-container{position: relative;background-color: #333;padding:0px;margin:0px;min-height: 70px;font-size:12px;text-align: center}
+.footer-container>div{position: relative;margin-left:10%}
+.footer-container>div>.footer-logo-wrap{position: relative;height:60px;display: inline-block;z-index:1000;position: absolute;top:5px;left:0px}
+.footer-container>div>.footer-logo-wrap>img{position: relative;height: 100%}
+.footer-container .footer-menu{padding:5px;height: auto;position: relative;list-style: none;margin-left:170px}
+.footer-container .footer-menu-list{padding:0px 0px;border-radius: 5px}
+.footer-container .footer-menu-list>li{display: inline-block;color:#fff;font-size:16px;padding:5px 5px;margin:0px 10px;cursor:pointer;text-align: center}
+/*业务页面脚部菜单 end*/
+
 /*业务主体 start*/
-.index-container{margin-top:80px;}
-.carousel-wrap{position: absolute;display: inline-block}
-.carousel-wrap>.el-carousel>.el-carousel__container{width:640px;height:360px}
+.index-container{margin-top:80px;padding:0px 5px}
+.carousel-wrap{position: absolute;display: inline-block;width:100%;max-width:640px;}
+.carousel-wrap>.el-carousel>.el-carousel__container{height:360px}
 .normal-news{padding:10px 10px 10px 30px;margin-left: 640px;text-align: left}
 .normal-news-list{list-style: none;padding:15px 0px;margin:0px;}
 .normal-news-list li{padding:5px;cursor: pointer;opacity: 0.8;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:80%}
 .normal-news-list li:hover{opacity: 1}
 .normal-news-title{border-bottom: 2px solid rgb(255, 102, 51)}
 .normal-news-title span{font-size:18px;color:#fff;background-color: rgb(255, 102, 51);padding:10px;display: inline-block}
-@media(min-width:320px){
-    .index-center{text-align: center}
-    .carousel-wrap{position: relative}
-    .normal-news{margin:0px;padding:0px;width:640px;display:inline-block;}
+@media(min-width:318px){
+    .index-center{text-align: center;min-height: 240px}
+    .carousel-wrap{position: relative;}
+    .carousel-wrap>.el-carousel>.el-carousel__container{height:240px}
+    .normal-news{margin:0px;padding:0px;width:100%;max-width:640px;display:inline-block;}
+}
+@media(min-width:750px){
+    .carousel-wrap>.el-carousel>.el-carousel__container{height:360px}
 }
 @media(min-width:1120px){
-    .index-center{text-align: left}
+    .index-center{text-align: left;min-height: 360px}
     .carousel-wrap{position: absolute}
     .normal-news{margin:0px;margin-left: 640px;width:auto;padding:10px 10px 10px 30px;display:block}
 }
+.rank-list{text-align: center;}
+.rank-list>.list-name{padding:5px 0px;border:1px solid rgba(0,0,0,0.1)}
+.list-detail{list-style: none;border-left:1px solid rgba(0,0,0,0.1);border-right:1px solid rgba(0,0,0,0.1);padding:5px 0px;margin:0px}
+.list-detail li{display: inline-block;margin:0px 5px;cursor: pointer}
+.other-thing .thing-btn{padding:10px}
+.other-thing .good-interview{padding: 0px 10px 15px}
+.other-thing .good-interview>.img-wrap{position: relative}
+.other-thing .good-interview>.img-wrap img{width: 60px;height: 60px;border-radius: 100%;background-color: #eee}
+@media(min-width:312px){
+    .other-thing,.rank-list{float: none;}
+}
+@media(min-width:750px){
+    .other-thing{float: none;display: inline-block;}
+    .rank-list{float: left;display: inline-block;}
+}
+@media(min-width:1120px){
+    .other-thing{float: right}
+    .rank-list{float: left}
+}
 /*业务主体 end*/
+
