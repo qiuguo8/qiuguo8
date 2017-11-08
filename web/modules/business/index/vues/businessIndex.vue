@@ -32,10 +32,10 @@
                     <li>北单</li>
                 </ul>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                    <el-table-column prop="index" label="排行" width="50"></el-table-column>
-                    <el-table-column  prop="userName" label="用户名" width="90"> </el-table-column>
-                    <el-table-column prop="rank" label="级别" width="50"></el-table-column>
-                    <el-table-column prop="winpercent" label="胜率"></el-table-column>
+                    <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                    <el-table-column prop="rank" label="级别" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
             </div>
             <div class="content-wrap other-thing content-25-to-50">

@@ -6,6 +6,7 @@ html,body{margin:0px;padding:0px;width:100%}
 p,span,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;color:#fff;line-height:1.428571429;color:#222}
 *,*:before,*:after{box-sizing: border-box}
 
+.table-fixed{table-layout:fixed}
 .transition-ones{transition: all 1s ease;-webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;}
 .transition-halfs{transition: all .5s ease;-webkit-transition: all .5s ease;-moz-transition: all .5s ease;-o-transition: all .5s ease;}
 .float-left{float: left}
@@ -82,12 +83,14 @@ nav ul{list-style: none}
 
 /*业务页面脚部菜单 start*/
 .footer-container{position: relative;background-color: #333;padding:0px;margin:0px;min-height: 70px;font-size:12px;text-align: center}
-.footer-container>div{position: relative;margin-left:10%}
+.footer-container>.foot-content{position: relative;margin-left:10%}
 .footer-container>div>.footer-logo-wrap{position: relative;height:60px;display: inline-block;z-index:1000;position: absolute;top:5px;left:0px}
 .footer-container>div>.footer-logo-wrap>img{position: relative;height: 100%}
 .footer-container .footer-menu{padding:5px;height: auto;position: relative;list-style: none;margin-left:170px}
 .footer-container .footer-menu-list{padding:0px 0px;border-radius: 5px}
 .footer-container .footer-menu-list>li{display: inline-block;color:#fff;font-size:16px;padding:5px 5px;margin:0px 10px;cursor:pointer;text-align: center}
+.footer-container .footer-web-alert{width:85%;display: inline-block;}
+.footer-container .footer-web-alert>p{color:#fff;font-size:12px;margin-top:0px}
 /*业务页面脚部菜单 end*/
 
 /*业务主体 start*/
