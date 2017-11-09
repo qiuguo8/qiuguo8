@@ -1,0 +1,79 @@
+<template>
+    <div class="recommend-rank index-center">
+        <ul class="select-list content-wrap text-center">
+            <li>亚盘</li>
+            <li>大小球</li>
+            <li>竞彩足球</li>
+            <li>北京单场</li>
+        </ul>
+        <div class="min-max-640 text-left">
+            <div class="content-wrap types-news type-rank-list content-50-to-100" style="display:inline-block">
+                <ul class="select-list date-list">
+                    <li>3天</li>
+                    <li>7天</li>
+                    <li>30天</li>
+                </ul>
+                <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
+                    <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="recommender" label="推荐师" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                    <el-table-column prop="number" label="场次" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="recommend" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                </el-table>
+            </div>
+            <div class="content-wrap rank-list rank-rule content-25-to-100">
+                <div class="list-name">排行规则</div>
+                <div class="rule-text">
+
+                </div>
+            </div>
+            <div class="content-wrap other-thing content-25-to-100 text-center">
+                <div class="content-wrap rank-common content-100-to-50">
+                    <div class="list-name">上周周榜</div>
+                    <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
+                        <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                        <el-table-column prop="userType" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column prop="achivement" label="胜/负/平" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column prop="winpercent" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    </el-table>
+                </div>
+                <div class="content-wrap rank-common content-100-to-50 text-center">
+                    <div class="list-name">上周周榜</div>
+                    <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
+                        <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                        <el-table-column prop="userType" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column prop="achivement" label="胜/负/平" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column prop="winpercent" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    </el-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import Vue from 'vue'
+import {Input,Button,Table,TableColumn} from 'element-ui'
+Vue.component(Input.name,Input);
+Vue.component(Button.name,Button);
+Vue.component(Table.name, Table)
+Vue.component(TableColumn.name, TableColumn)
+
+export default {
+    data(){
+        return {
+            tableData3:[{index:'1',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'2',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'3',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'4',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'}],
+            tableData4:[{index:'1',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
+                        {index:'2',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
+                        {index:'3',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
+                        {index:'4',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
+                        {index:'5',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'}]
+        }
+    }
+}
+</script>

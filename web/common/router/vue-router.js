@@ -13,7 +13,23 @@ const routes = [
             path:'/',
             name:'business-index',
             component:resolve => require(['modules/business/index/vues/businessIndex.vue'],resolve)
-        }]
+        },
+        {
+            path:'/buy-recommend',
+            name:'buy-recommend',
+            component:resolve => require(['modules/business/buyrecommend/vues/buyrecommend.vue'],resolve)
+        },
+        {
+            path:'/recommend-rank',
+            name:'recommend-rank',
+            component:resolve => require(['modules/business/recommendrank/vues/recommendrank.vue'],resolve)
+        },
+        {
+            path:'/send-recommend',
+            name:'send-recommend',
+            component:resolve => require(['modules/business/sendrecommend/vues/sendrecommend.vue'],resolve)
+        }
+        ]
     }
 ];
 

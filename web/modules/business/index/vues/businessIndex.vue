@@ -87,6 +87,3 @@ export default {
     },
 }
 </script>
-<style lang="stylus" scoped>
-.full-half>.el-carousel>.el-carousel__container{height:360px}
-</style>
