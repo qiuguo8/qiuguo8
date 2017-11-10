@@ -6,9 +6,9 @@
             <li>竞彩足球</li>
             <li>北京单场</li>
         </ul>
-        <div class="min-max-640 text-left">
+        <div class="">
             <div class="content-wrap types-news type-rank-list content-50-to-100" style="display:inline-block">
-                <ul class="select-list date-list">
+                <ul class="select-list date-list text-left">
                     <li>3天</li>
                     <li>7天</li>
                     <li>30天</li>
@@ -23,7 +23,7 @@
             </div>
             <div class="content-wrap rank-list rank-rule content-25-to-100">
                 <div class="list-name">排行规则</div>
-                <div class="rule-text">
+                <div class="rule-text text-left">
 
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     </el-table>
                 </div>
                 <div class="content-wrap rank-common content-100-to-50 text-center">
-                    <div class="list-name">上周周榜</div>
+                    <div class="list-name">9月月榜</div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
                         <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                         <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>

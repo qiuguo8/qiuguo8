@@ -22,15 +22,15 @@
             <div class="header-menu">
                 <div class="el-icon-menu header-menu-icon" ref="menuicon"></div>
                 <ul class="header-menu-list" ref="menu">
-                    <router-link tag="li" :to="{name:'business-index'}" class="transition-halfs">首页</router-link>
-                    <router-link tag="li" :to="{name:'buy-recommend'}" class="transition-halfs">买推荐</router-link>
-                    <router-link tag="li" :to="{name:'recommend-rank'}" class="transition-halfs">排行榜</router-link>
-                    <router-link tag="li" :to="{name:'send-recommend'}" class="transition-halfs">发推荐</router-link>
-                    <li class="transition-halfs">即时比分</li>
+                    <router-link tag="li" :to="{name:'business-index'}" active-class="active" class="transition-halfs">首页</router-link>
+                    <router-link tag="li" :to="{name:'buy-recommend'}" active-class="active" class="transition-halfs">买推荐</router-link>
+                    <router-link tag="li" :to="{name:'recommend-rank'}" active-class="active" class="transition-halfs">排行榜</router-link>
+                    <router-link tag="li" :to="{name:'send-recommend'}" active-class="active" class="transition-halfs">发推荐</router-link>
+                    <router-link tag="li" :to="{name:'in-time-goal'}" active-class="active" class="transition-halfs">即时比分</router-link>
                     <!-- <li>优惠活动</li> -->
                     <li class="transition-halfs">使用帮助</li>
                     <li class="transition-halfs">登录</li>
-                    <li class="transition-halfs">注册</li>
+                    <router-link tag="li" :to="{name:'register'}" class="transition-halfs">注册</router-link>
                 </ul>
             </div>
             <!-- <div class="visitor-operation">

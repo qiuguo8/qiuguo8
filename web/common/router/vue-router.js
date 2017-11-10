@@ -11,6 +11,16 @@ const routes = [
         },
         children:[{
             path:'/',
+            name:'index',
+            redirect:'/bussiness-index'
+        },
+        {
+            path:'/register',
+            name:'register',
+            component:resolve => require(['modules/common/user/vues/register.vue'],resolve)
+        },
+        {
+            path:'/business-index',
             name:'business-index',
             component:resolve => require(['modules/business/index/vues/businessIndex.vue'],resolve)
         },
@@ -28,6 +38,11 @@ const routes = [
             path:'/send-recommend',
             name:'send-recommend',
             component:resolve => require(['modules/business/sendrecommend/vues/sendrecommend.vue'],resolve)
+        },
+        {
+            path:'/in-time-goal',
+            name:'in-time-goal',
+            component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         }
         ]
     }
