@@ -76,13 +76,13 @@
                 <el-button type="danger">200</el-button>
             </div>
         </div>
-        <div class="content-wrap rank-list intro-rank-list content-25-to-100">
+        <div class="content-wrap float-left text-center rank-common intro-rank-list content-25-to-100">
             <div class="list-name">七天胜率排行</div>
             <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                <el-table-column prop="index" label="排行" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="achivement" label="当周成绩" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="winpercent" label="胜率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="achivement" label="当周成绩" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="winpercent" label="胜率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
         </div>
   </div>

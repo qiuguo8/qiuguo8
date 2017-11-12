@@ -21,13 +21,13 @@
                     <el-table-column prop="recommend" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
             </div>
-            <div class="content-wrap rank-list rank-rule content-25-to-100">
+            <div class="content-wrap rank-common float-left rank-rule content-25-to-100">
                 <div class="list-name">排行规则</div>
                 <div class="rule-text text-left">
 
                 </div>
             </div>
-            <div class="content-wrap other-thing content-25-to-100 text-center">
+            <div class="content-wrap float-right content-25-to-100 text-center">
                 <div class="content-wrap rank-common content-100-to-50">
                     <div class="list-name">上周周榜</div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">

@@ -4,13 +4,13 @@
             <div class="header-logo-wrap">
                 <img src="/web/resources/img/index/logo.jpg"/>
             </div>
-            <div class="user-info" v-if="false">
+            <div class="user-info" v-if="true">
                 <span class="msg-tip">11</span>
                 <div class="user-img-wrap" ref="usericon">
                     <img src="/web/resources/img/index/user-img.png">
                 </div>
                 <ul class="user-menu-list" ref="userlist">
-                    <li class="transition-halfs">个人中心</li>
+                    <router-link tag="li" :to="{name:'person-center'}" active-class="active" class="transition-halfs">个人中心</router-link>
                     <li class="transition-halfs">我的关注</li>
                     <li class="transition-halfs">关注发单</li>
                     <li class="transition-halfs">我的消息</li>
@@ -29,7 +29,7 @@
                     <router-link tag="li" :to="{name:'in-time-goal'}" active-class="active" class="transition-halfs">即时比分</router-link>
                     <!-- <li>优惠活动</li> -->
                     <li class="transition-halfs">使用帮助</li>
-                    <li class="transition-halfs">登录</li>
+                    <li class="transition-halfs" @click="showLogin()">登录</li>
                     <router-link tag="li" :to="{name:'register'}" class="transition-halfs">注册</router-link>
                 </ul>
             </div>
@@ -41,6 +41,8 @@
     </header>
 </template>
 <script>
+import sysUtil from 'web/common/utils/sysUtil.js'
+
 export default {
     data(){
         return {
@@ -70,6 +72,9 @@ export default {
         },
         showUserMenu(e){
              this.showMenu(e,this.$refs.usericon,this.$refs.userlist);
+        },
+        showLogin(){
+            sysUtil.showLogin();
         }
     }
 }

@@ -25,7 +25,7 @@
                 <el-table-column  prop="matchTime" label="比赛时间" min-width="60" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="hostTeam" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="customTeam" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="wholeGoal" label="全场让球" min-width="100" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="wholeGoal" label="全场让球" min-width="140" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <el-radio-group v-model="radio3">
                             <el-radio-button label="host">主</el-radio-button>
@@ -33,7 +33,7 @@
                         </el-radio-group>
                     </template>
                 </el-table-column>
-                <el-table-column prop="wholeSize" label="全场大小" min-width="100" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="wholeSize" label="全场大小" min-width="140" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <el-radio-group v-model="radio3">
                             <el-radio-button label="big">大</el-radio-button>
@@ -43,7 +43,7 @@
                 </el-table-column>
             </el-table>
         </div>
-        <div class="content-25-to-100 right-aside content-wrap">
+        <div class="content-25-to-100 float-left content-wrap">
             <div class="send-rule rank-text">
                 <div class="list-name text-center">推荐规则</div>
                 <div class="rule-text">

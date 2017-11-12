@@ -1,5 +1,6 @@
 
 @import url('../../../node_modules/element-ui/lib/theme-chalk/index.css');
+@import url('../../../node_modules/font-awesome/css/font-awesome.min.css');
 
 html,body{margin:0px;padding:0px;width:100%}
 #vue-app{margin:0px;padding:0px;width:100%}
@@ -7,6 +8,7 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
 *,*:before,*:after{box-sizing: border-box}
 
 .table-fixed{table-layout:fixed}
+.hor-ver-mid{top:50%;left:50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%)}
 .transition-ones{transition: all 1s ease;-webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;}
 .transition-halfs{transition: all .5s ease;-webkit-transition: all .5s ease;-moz-transition: all .5s ease;-o-transition: all .5s ease;}
 .float-left{float: left}
@@ -15,6 +17,7 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
 .text-left{text-align: left}
 .text-elipse{text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
 .clear-fix{clear:both}
+.hide{display: none}
 .container{margin-left: auto;margin-right: auto;min-height: 100%}
 .container:before,.container:after{content: "";display: table;box-sizing: border-box;clear:both}
 @media(min-width:320px){
@@ -37,7 +40,7 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
 } */
 
 @media(min-width:312px){
-    .content-wrap{margin:0px 0px 20px}
+    .content-wrap{margin:0px 0px 20px;display: inline-block}
     .content-25-to-50{width:98%;}
     .content-75-to-100{width:98%;float:none}
     .content-25-to-100{width:98%;}
@@ -48,7 +51,7 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
 }
 @media(min-width:750px){
     .content-wrap{margin:0px 1% 20px}
-    .content-25-to-50{width:48%;max-width: 320px}
+    .content-25-to-50{width:48%;}
     .content-25-to-100{width:98%;}
     .content-40-to-100{width:98%;}
     .content-75-to-100{width:98%;float:none}
@@ -66,12 +69,11 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
     .content-60-to-100{width:58%;display: inline-block}
     .content-100-to-50{width:98%;display: inline-block;float: none}
 }
-.right-aside{float:left}
 .btn{outline: none;border-style: none;}
 
 /*排行类通用 start*/
 .rank-common,.rank-text{margin-bottom:20px}
-.rank-common>.list-name{padding:10px 0px;border:1px solid rgba(0,0,0,0.1);letter-spacing: 3px}
+.rank-common>.list-name{padding:10px 0px;border:1px solid rgba(0,0,0,0.1);border-bottom:none;letter-spacing: 3px;text-align: center}
 .rank-text{border:1px solid rgba(0, 0, 0, 0.1)}
 .rank-text>.list-name{padding:10px 0px;letter-spacing:3px;border-bottom:1px solid rgba(0, 0, 0, 0.1)}
 /*排行类通用 start*/
@@ -92,7 +94,7 @@ nav ul{list-style: none}
 .header-container>nav>.user-info>.msg-tip{position: absolute;right: 3px;color:#fff;background-color: #e90304;padding:3px 4px;font-size: 12px;border-radius: 100%}
 .user-info>.user-img-wrap{padding:5px 6px;border-radius: 100%;overflow: hidden;margin:3px 5px 5px;background-color:#eee}
 .user-info>.user-img-wrap>img{height: 40px;width: 40px;}
-.user-info>.user-menu-list{box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;padding:5px;z-index:2000;position: absolute;top:64px;right:-30px;margin:0px;background-color:#333;display: none;width:130px}
+.user-info>.user-menu-list{box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;padding:5px;z-index:2000;position: absolute;top:60px;right:-30px;margin:0px;background-color:#333;display: none;width:130px}
 .user-info>.user-menu-list>li{float: none;font-size:16px;margin:0px 10px;padding:10px 15px;color:#fff;text-align: center}
 .user-info>.user-menu-list>li:hover{background-color: #e90304;border-radius: 2px}
 .user-info>.menu-show{display: block}
@@ -103,11 +105,12 @@ nav ul{list-style: none}
 .header-container>nav .header-menu-icon:hover~ul{display: block;}
 .header-container>nav .header-menu:hover ul{display: block;}
 .header-container>nav .user-img-wrap:hover~ul{display: block;}
+.header-container>nav .user-info:hover ul{display: block;}
 @media(min-width:320px){
     .header-container>nav .header-menu{padding:17px;cursor: pointer;}
     .header-container>nav>.header-logo-wrap{height: 40px;margin:10px 0px}
     .header-container>nav .header-menu-icon{width:30px;height: 30px;display: block;font-size:30px;color:#fff;margin:0px}
-    .header-container>nav .header-menu-list{padding:5px;z-index:2000;position: absolute;top:64px;right:-5px;margin:0px;background-color:#333;display: none;width:70px;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);}
+    .header-container>nav .header-menu-list{padding:5px;z-index:2000;position: absolute;top:60px;right:-5px;margin:0px;background-color:#333;display: none;width:70px;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);}
     .header-container>nav .header-menu-list>li{float: none;font-size:12px;padding:5px;margin:5px 0px}
     .user-info>.user-img-wrap{margin:8px 5px 5px;}
     .user-info>.user-img-wrap>img{height: 30px;width: 30px;}
@@ -176,7 +179,6 @@ nav ul{list-style: none}
     .normal-news{margin:0px;margin-left: 640px;width:auto;padding:10px 10px 10px 30px;display:block}
 }
 .rank-list{text-align: center;}
-.other-thing>.list-name,.rank-list>.list-name{padding:10px 0px;border:1px solid rgba(0,0,0,0.1);letter-spacing: 3px}
 .list-detail{list-style: none;border-left:1px solid rgba(0,0,0,0.1);border-right:1px solid rgba(0,0,0,0.1);padding:5px 0px;margin:0px}
 .list-detail li{display: inline-block;margin:0px 5px;cursor: pointer}
 .other-thing .thing-btn{padding:10px}
@@ -205,7 +207,7 @@ nav ul{list-style: none}
 .select-types>.types-list{list-style: none;margin:0px;display: inline-block;width:80%;padding-left:10px}
 .select-types>.types-list>li{display: inline-block;padding:10px;margin:3px;cursor: pointer}
 .select-types>.types-list>li:hover{background-color:#e90304;color:#fff;border-radius: 3px}
-.search-input{display: inline-block;padding:5px 5px 5px;}
+.search-input{display: inline-block;padding:5px 0px;}
 .types-select{margin-left:0px;margin-right:0px;width:75%}
 .intros-wrap{margin-top: 20px;}
 .intros-wrap>.intro-wrap{display: inline-block;width:250px;text-align: left;padding:5px;margin:5px;}
@@ -263,3 +265,43 @@ nav ul{list-style: none}
 .in-time-goal{min-height: 600px;}
 /*in-time-goal end*/
 
+/*register start*/
+.edit-form{width:80%;max-width: 640px}
+.label-tip h2,.label-tip p{margin:16px 0px}
+.register-img{position: relative;padding:20px 5px}
+.register-img img{width: 100%;position: relative}
+/*register end*/
+
+/*login start*/
+.login-dialog{min-width: 320px}
+.login-form{width:90%}
+.login-dialog .el-dialog__body{padding-top:15px;padding-bottom:0px}
+.login-form .miss-pass{display: inline-block;cursor: pointer}
+.login-form .el-checkbox>span.el-checkbox__label{margin-right:50px}
+.login-dialog .other-login{padding:5px 0px;text-align: center}
+.login-dialog .other-login>label{color:#999;margin-right: 10px}
+.login-dialog .other-login>span{font-size:20px;color:#999;margin:0px 5px 10px;padding:5px;cursor: pointer;display: inline-block}
+.login-dialog .other-login>span:hover{color:#666}
+/*login end*/
+
+/*pensoncenter start*/
+.left-menu{width:25%;list-style: none;margin:0px;padding:0px;text-align: center;z-index:1100}
+.left-menu li{display:inline-block;width: 80%;min-width:150px;padding:10px 20px;background-color: #fff;margin:1px 0px;text-align: center;cursor: pointer;border-radius: 3px;border:1px solid rgba(0, 0, 0, 0.1)}
+.left-menu li:hover{color:#fff;background-color: #333}
+.left-side-btn{display: none;;background-color:#e90304;width:30px;padding:5px 7px;color:#fff;position: absolute;cursor: pointer;left:165px;z-index:2100}
+.left-menu:hover{left:0px}
+@media(min-width:318px){
+    .left-menu{width: 100px;position:fixed;left:-150px;top:70px}
+    .left-menu li{margin:0px;box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);border-radius: 0px}
+    .left-side-btn{display: block}
+}
+@media(min-width:1120px){
+    .left-menu{width: 25%;position: relative;;left:0px;top:0px}
+    .left-menu li{margin:1px 0px;box-shadow: initial}
+    .left-side-btn{display: none}
+}
+.common-info{margin-bottom:20px}
+.common-info .btn-list{display: inline-block}
+.short-info-wrap{border-bottom:1px solid rgba(0,0,0,0.1);display: inline-block;margin:0px 30px}
+.short-info-wrap img{width:90px;height:90px;border-radius: 100%;}
+/*pensoncenter end*/

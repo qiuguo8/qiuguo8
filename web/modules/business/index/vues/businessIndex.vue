@@ -21,9 +21,9 @@
             </ul>
         </div>
     </div>
-    <div class="el-col-24 index-center content-wrap text-center">
-        <div class="min-max-640 text-left">
-            <div class="content-wrap rank-list content-25-to-50">
+    <div class="el-col-24 index-center content-wrap">
+        <div class="min-max-640 text-center">
+            <div class="content-wrap rank-list rank-common content-25-to-50">
                 <div class="list-name">七天胜率排行</div>
                 <ul class="list-detail">
                     <li>亚盘</li>

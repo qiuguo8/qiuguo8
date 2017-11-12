@@ -11,8 +11,8 @@ function isNumber(val){
     return flag;
 }
 function isAllLegalString(val){
-    var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]$/g;
-    return reg.exec(val);
+    var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/g;
+    return reg.test(val);
 }
 
 function hasLetter(val){

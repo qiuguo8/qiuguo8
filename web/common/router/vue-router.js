@@ -12,7 +12,7 @@ const routes = [
         children:[{
             path:'/',
             name:'index',
-            redirect:'/bussiness-index'
+            redirect:'/business-index'
         },
         {
             path:'/register',
@@ -43,6 +43,11 @@ const routes = [
             path:'/in-time-goal',
             name:'in-time-goal',
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
+        },
+        {
+            path:'/person-center',
+            name:'person-center',
+            component:resolve => require(['modules/common/user/vues/personcenter.vue'],resolve)
         }
         ]
     }
