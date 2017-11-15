@@ -2,16 +2,16 @@
     <el-dialog @open="commonLogin()" title="用户登录" custom-class="login-dialog" :visible.sync="dialogFormVisible">
         <div class="login-form" v-if="isCommon">
             <el-form :model="loginForm" status-icon :rules="rules" ref="form">
-                <el-form-item label="用户名" prop="loginName" label-width="100px">
+                <el-form-item label="用户名" prop="loginName" label-width="80px">
                     <el-input v-model="loginForm.loginName" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="pass" label-width="100px">
+                <el-form-item label="密码" prop="pass" label-width="80px">
                     <el-input type="password" v-model="loginForm.pass" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="验证码" prop="checkCode" label-width="100px">
+                <el-form-item label="验证码" prop="checkCode" label-width="80px">
                     <el-input v-model="loginForm.checkCode" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label-width="120px" prop="isAuto">
+                <el-form-item label-width="80px" prop="isAuto">
                     <el-checkbox v-model="loginForm.isAuto">自动登录</el-checkbox>
                     <a class="miss-pass">忘记密码?</a>
                 </el-form-item>

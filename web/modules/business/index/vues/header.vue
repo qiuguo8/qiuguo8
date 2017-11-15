@@ -10,7 +10,7 @@
                     <img src="/web/resources/img/index/user-img.png">
                 </div>
                 <ul class="user-menu-list" ref="userlist">
-                    <router-link tag="li" :to="{name:'person-center'}" active-class="active" class="transition-halfs">个人中心</router-link>
+                    <router-link tag="li" :to="{name:'person-info'}" active-class="active" class="transition-halfs">个人中心</router-link>
                     <li class="transition-halfs">我的关注</li>
                     <li class="transition-halfs">关注发单</li>
                     <li class="transition-halfs">我的消息</li>

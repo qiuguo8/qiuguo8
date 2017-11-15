@@ -20,16 +20,27 @@
                     <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="recommend" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
+                <div class="block">
+                    <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage4"
+                    :page-sizes="[10, 15, 20, 25]"
+                    :page-size="15"
+                    layout=" prev, pager, next, jumper"
+                    :total="400">
+                    </el-pagination>
+                </div>
             </div>
-            <div class="content-wrap rank-common float-left rank-rule content-25-to-100">
-                <div class="list-name">排行规则</div>
+            <div class="content-wrap rank-common float-right rank-rule content-25-to-100">
+                <div class="list-name"><span>排行规则</span></div>
                 <div class="rule-text text-left">
 
                 </div>
             </div>
-            <div class="content-wrap float-right content-25-to-100 text-center">
+            <div class="content-wrap float-left last-rank content-25-to-100 text-center">
                 <div class="content-wrap rank-common content-100-to-50">
-                    <div class="list-name">上周周榜</div>
+                    <div class="list-name"><span>上周周榜</span></div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
                         <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                         <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -39,7 +50,7 @@
                     </el-table>
                 </div>
                 <div class="content-wrap rank-common content-100-to-50 text-center">
-                    <div class="list-name">9月月榜</div>
+                    <div class="list-name"><span>9月月榜</span></div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
                         <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                         <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -54,11 +65,12 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Input,Button,Table,TableColumn} from 'element-ui'
+import {Input,Button,Table,TableColumn,Pagination} from 'element-ui'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
+Vue.component(Pagination.name, Pagination)
 
 export default {
     data(){

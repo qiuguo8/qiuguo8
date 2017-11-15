@@ -47,7 +47,14 @@ const routes = [
         {
             path:'/person-center',
             name:'person-center',
-            component:resolve => require(['modules/common/user/vues/personcenter.vue'],resolve)
+            component:resolve => require(['modules/common/user/vues/personcenter.vue'],resolve),
+            children:[
+                {
+                    path:'/',
+                    name:'person-info',
+                    component:resolve => require(['modules/common/user/vues/personinfo.vue'],resolve),
+                }
+            ]
         }
         ]
     }

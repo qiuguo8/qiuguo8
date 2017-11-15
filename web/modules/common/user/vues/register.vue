@@ -18,7 +18,10 @@
                         <el-input type="password" v-model="regisForm.checkPass" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="验证码" prop="checkCode">
-                        <el-input v-model.number="regisForm.checkCode" auto-complete="off"></el-input>
+                        <div class="el-col-12">
+                            <el-input v-model.number="regisForm.checkCode" auto-complete="off"></el-input>
+                        </div>
+                        <div id="vPic" style="float:left;width:80px;height:40px;margin-left:10px"></div>
                     </el-form-item>
                     <el-form-item prop="isSigned">
                         <el-checkbox v-model="regisForm.isSigned">我已满18岁并同意《球果吧服务条款》</el-checkbox>
@@ -41,6 +44,7 @@ import {Form,FormItem,Input,Button,Checkbox} from 'element-ui'
 import validationUtil from 'web/common/utils/validationUtil.js'
 import formUtil from 'web/common/utils/formUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
+import 'web/common/utils/pVerify.js'
 Vue.component(Form.name,Form);
 Vue.component(FormItem.name,FormItem);
 Vue.component(Input.name,Input);
@@ -117,9 +121,29 @@ export default {
                 isSigned:[
                     {type:'boolean',validator:formUtil.isChecked('请勾选协议'),trigger:'change'},
                 ],
-
+            },
+            picVerifyObj:{
+                verify:null,
+                createVPic:function(){
+                    this.verify = new GVerify({
+                        id:'vPic',
+                        type:"number",
+                        isOnclick:false
+                    });
+                },
+                refresh:function(){
+                    this.verify.refresh();
+                },
+                validate:function(){
+                    if(this.verifyCode){
+                        return this.verify.validate(this.verifyCode);
+                    }
+                }
             }
         }
+    },
+    mounted(){
+        this.picVerifyObj.createVPic();
     },
     methods:{
         submitForm(){

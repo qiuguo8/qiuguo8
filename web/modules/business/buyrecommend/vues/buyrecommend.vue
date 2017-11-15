@@ -31,22 +31,12 @@
         </div>
         <div class="clear-fix"></div>
         <div class="intros-wrap content-wrap content-75-to-100">
-            <div class="intro-wrap transition-ones">
+            <div class="intro-wrap transition-halfs">
                 <div class="match-name">曼城VS曼联</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">关注</el-button>
-                </div>
-                <div class="intro-text">
-                    xxxxxxx
-                </div>
-                <el-button type="danger">200</el-button>
-            </div>
-            <div class="intro-wrap transition-ones">
-                <div class="match-name">曼城VS曼联</div>
-                <div class="intro-info">
-                    <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">关注</el-button>
+                    <el-button type="success" v-if="false">已关注</el-button>
+                    <button class="el-button btn-orange">关注</button>
                 </div>
                 <div class="intro-text">
                     xxxxxxx
@@ -57,7 +47,7 @@
                 <div class="match-name">曼城VS曼联</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">关注</el-button>
+                    <el-button type="success">已关注</el-button>
                 </div>
                 <div class="intro-text">
                     xxxxxxx
@@ -68,7 +58,18 @@
                 <div class="match-name">曼城VS曼联</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">关注</el-button>
+                    <el-button type="success">已关注</el-button>
+                </div>
+                <div class="intro-text">
+                    xxxxxxx
+                </div>
+                <el-button type="danger">200</el-button>
+            </div>
+            <div class="intro-wrap transition-halfs">
+                <div class="match-name">曼城VS曼联</div>
+                <div class="intro-info">
+                    <img src="/web/resources/img/index/logo.jpg"/>
+                    <el-button type="success">已关注</el-button>
                 </div>
                 <div class="intro-text">
                     xxxxxxx
@@ -77,7 +78,7 @@
             </div>
         </div>
         <div class="content-wrap float-left text-center rank-common intro-rank-list content-25-to-100">
-            <div class="list-name">七天胜率排行</div>
+            <div class="list-name"><span>七天胜率排行</span></div>
             <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
                 <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
