@@ -19,7 +19,7 @@
             <ul class="achive-rank-list">
                 <li class="content-wrap content-100-to-50">
                     <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
-                    <span class="el-col-12 user-name">对对对点</span>
+                    <span class="el-col-12 user-name text-elipse">对对对点</span>
                     <span class="el-col-8 achive">100/110/100</span>
                 </li>
                 <li class="content-wrap content-100-to-50">
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="content-wrap types-news content-50-to-100" style="display:inline-block">
-                <el-tabs :tab-position="tabPosition" style="height: 200px;">
+                <el-tabs :tab-position="tabPosition">
                     <el-tab-pane label="新闻">
                         <ul class="normal-news-list">
                             <li class="transition-halfs">xxxxxxxyyxxxxxxx</li>

@@ -11,7 +11,7 @@ const routes = [
         },
         children:[{
             path:'/',
-            name:'index',
+            name:'visitor-index',
             redirect:'/business-index'
         },
         {
@@ -22,26 +22,41 @@ const routes = [
         {
             path:'/business-index',
             name:'business-index',
+            meta:{
+                aliasName:'首页'
+            },
             component:resolve => require(['modules/business/index/vues/businessIndex.vue'],resolve)
         },
         {
             path:'/buy-recommend',
             name:'buy-recommend',
+            meta:{
+                aliasName:'买推荐'
+            },
             component:resolve => require(['modules/business/buyrecommend/vues/buyrecommend.vue'],resolve)
         },
         {
             path:'/recommend-rank',
             name:'recommend-rank',
+            meta:{
+                aliasName:'排行榜'
+            },
             component:resolve => require(['modules/business/recommendrank/vues/recommendrank.vue'],resolve)
         },
         {
             path:'/send-recommend',
             name:'send-recommend',
+            meta:{
+                aliasName:'发推荐'
+            },
             component:resolve => require(['modules/business/sendrecommend/vues/sendrecommend.vue'],resolve)
         },
         {
             path:'/in-time-goal',
             name:'in-time-goal',
+            meta:{
+                aliasName:'即时比分'
+            },
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         },
         {
@@ -52,6 +67,9 @@ const routes = [
                 {
                     path:'/',
                     name:'person-info',
+                    meta:{
+                        aliasName:'个人中心'
+                    },
                     component:resolve => require(['modules/common/user/vues/personinfo.vue'],resolve),
                 }
             ]
@@ -61,4 +79,4 @@ const routes = [
 ];
 
 
-export default routes;
+export default routes

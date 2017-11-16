@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import VueRouter from "vue-router"
+window.VueRouter = VueRouter;
 import VueResource from "vue-resource"
 import routes from "web/common/router/vue-router"
 import vueLoadingBar from 'vue2-loading-bar'
@@ -8,6 +9,9 @@ import comVue from 'web/modules/commonVue'
 import jquery from 'jquery'
 window.$ = jquery;
 window.jquery = jquery;
+
+import routerUtil from 'web/common/utils/routerUtil.js'
+import {Notification} from 'element-ui'
 
 Vue.use(VueRouter);
 Vue.use(VueResource); 
@@ -18,7 +22,7 @@ var loadingTimer;
 var router =  new VueRouter({
 	routes:routes
 });
-
+routerUtil(router);
 var vue = new Vue({
 	router:router,
 	data:{
@@ -37,7 +41,7 @@ var vue = new Vue({
 		LoadingBar:vueLoadingBar
 	}
 }).$mount("#vue-app");
-console.log(vue);
+// console.log(vue);
 comVue.$on("on-progress-start",function(data){
 	startLoad();
 });

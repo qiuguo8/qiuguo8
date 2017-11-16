@@ -15,13 +15,13 @@ export default{
     },
     mounted(){
         var $goTop = $(this.$refs.goTop);
-        window.onscroll = ()=>{
-            if(window.scrollY>100){
+        $(window).on('scroll',function(){
+            if($(window).scrollTop()>100){
                 $goTop.removeClass('hide');
             }else{
                 $goTop.addClass('hide');
             }
-        }
+        })
     },
     methods:{
         goTop(){

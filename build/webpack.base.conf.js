@@ -57,7 +57,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('web'), resolve('test')],
+        include: [resolve('web')],
          options: {
           //plugins: [require('babel-plugin-transform-vue-jsx'),require("babel-polyfill")]
           plugins: [require("babel-polyfill")]
