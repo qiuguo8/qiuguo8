@@ -12,6 +12,7 @@
             <div class="left-side-btn hor-ver-mid">个人中心菜单</div>
         </ul>
         <div class="content-wrap content-75-to-100 float-left">
+            <person-info-header></person-info-header>
             <router-view></router-view>
         </div>
     </div>
@@ -20,8 +21,11 @@
 import Vue from 'vue';
 import {Button} from 'element-ui'
 Vue.component(Button.name,Button);
+import personInfoHeader from 'web/modules/common/user/vues/personinfoheader.vue'
 
 export default {
-  
+    components:{
+        personInfoHeader:personInfoHeader
+    }
 }
 </script>

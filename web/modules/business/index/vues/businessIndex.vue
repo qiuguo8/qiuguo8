@@ -70,9 +70,83 @@
             </ul>
         </div>
     </div>
+    <div class="intros-wrap intros-wrap-index content-wrap">
+        <div class="left-aside">
+            最热推荐
+        </div>
+        <div class="intro-wrap intro-wrap-index transition-halfs">
+            <div class="match-name">曼城VS曼联</div>
+            <div class="intro-info">
+                <img src="/web/resources/img/index/logo.jpg"/>
+                <el-button type="success" v-if="false">已关注</el-button>
+                <button class="el-button btn-orange">关注</button>
+            </div>
+            <div class="intro-text">
+                xxxxxxx
+            </div>
+            <el-button type="danger">200</el-button>
+        </div>
+        <div class="intro-wrap intro-wrap-index transition-halfs">
+            <div class="match-name">曼城VS曼联</div>
+            <div class="intro-info">
+                <img src="/web/resources/img/index/logo.jpg"/>
+                <el-button type="success">已关注</el-button>
+            </div>
+            <div class="intro-text">
+                xxxxxxx
+            </div>
+            <el-button type="danger">200</el-button>
+        </div>
+        <div class="intro-wrap intro-wrap-index transition-halfs">
+            <div class="match-name">曼城VS曼联</div>
+            <div class="intro-info">
+                <img src="/web/resources/img/index/logo.jpg"/>
+                <el-button type="success">已关注</el-button>
+            </div>
+            <div class="intro-text">
+                xxxxxxx
+            </div>
+            <el-button type="danger">200</el-button>
+        </div>
+        <div class="intro-wrap intro-wrap-index transition-halfs">
+            <div class="match-name">曼城VS曼联</div>
+            <div class="intro-info">
+                <img src="/web/resources/img/index/logo.jpg"/>
+                <el-button type="success">已关注</el-button>
+            </div>
+            <div class="intro-text">
+                xxxxxxx
+            </div>
+            <el-button type="danger">200</el-button>
+        </div>
+    </div>
     <div class="el-col-24 content-wrap text-center transition-halfs">
-        <div class="text-left min-max-640 normal-news content-wrap">
-            <div class="normal-news-title"><span>最热推荐</span></div>
+        <div class="text-left min-max-640 content-wrap content-30-to-100">
+            <div class="normal-news-title"><span class="list-name">头条</span><span class="more-btn">更多</span></div>
+            <ul class="normal-news-list">
+                <li class="transition-halfs">xxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+            </ul>
+        </div>
+        <div class="text-left min-max-640 content-wrap content-30-to-100">
+            <div class="normal-news-title"><span class="list-name">新闻</span><span class="more-btn">更多</span></div>
+            <ul class="normal-news-list">
+                <li class="transition-halfs">xxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+                <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
+            </ul>
+        </div>
+        <div class="text-left min-max-640 content-wrap content-30-to-100">
+            <div class="normal-news-title"><span class="list-name">足球预测</span><span class="more-btn">更多</span></div>
             <ul class="normal-news-list">
                 <li class="transition-halfs">xxxxxxxxxxxxxx</li>
                 <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
@@ -84,7 +158,7 @@
             </ul>
         </div>
     </div>
-    <div class="el-col-24 index-center content-wrap">
+    <!-- <div class="el-col-24 index-center content-wrap">
         <div class="min-max-640 text-center">
             <div class="content-wrap rank-list rank-common content-25-to-50">
                 <div class="list-name"><span>七天胜率排行</span></div>
@@ -103,10 +177,10 @@
             </div>
             <div class="content-wrap other-thing rank-common content-25-to-50">
                 <div class="list-name"><span>名家专访</span></div>
-                <!-- <div class="thing-btn text-left">
+                <div class="thing-btn text-left">
                     <button class="el-button el-button--primary">发布推荐</button>
                     <button class="el-button el-button--danger float-right">有奖投稿</button>
-                </div> -->
+                </div>
                 <div class="good-interview">
                     <div class="img-wrap text-center">
                         <img src="/web/resources/img/index/user-img.png"/>
@@ -155,7 +229,7 @@
                 </el-tabs>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 </template>
 <script>
