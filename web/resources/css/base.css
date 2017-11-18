@@ -4,7 +4,7 @@
 
 html,body{margin:0px;padding:0px;width:100%;}
 #vue-app{margin:0px;padding:0px;width:100%;}
-p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;color:#fff;line-height:1.428571429;color:#222}
+body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;color:#fff;line-height:1.428571429;color:#222}
 *,*:before,*:after{box-sizing: border-box}
 
 .table-fixed{table-layout:fixed}
@@ -19,8 +19,8 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
 .text-elipse{text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
 .clear-fix{clear:both}
 .hide{display: none}
-.row,.container{margin-left: auto;margin-right: auto;min-height: 100%}
-.row:before,.row:after,.container:before,.container:after{content: "";display: table;box-sizing: border-box;clear:both}
+.row-new,.container{margin-left: auto;margin-right: auto;min-height: 100%}
+.row-new:before,.row-new:after,.container:before,.container:after{content: "";display: table;box-sizing: border-box;clear:both}
 @media(min-width:320px){
     .min-max-640{max-width: 640px;display: inline-block}
     .container{width:100%;max-width: 750px}
@@ -52,6 +52,12 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
     .content-60-to-100{width:98%;display: block;}
     .content-60-to-60{width:98%;display: inline-block}
     .content-100-to-50{width:98%;display: block;float:none}
+    .content-mid-100{width:100%}
+    .float-left-to-100{float:none;width: 100%}
+    .float-left-to-none{float:none;}
+}
+@media(min-width:540px){
+    .float-left-to-100{float:none;width: auto}
 }
 @media(min-width:750px){
     .content-wrap{margin:0px 1% 20px}
@@ -65,6 +71,9 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
     .content-60-to-100{width:98%;display: block;}
     .content-60-to-60{width:58%;display: inline-block}
     .content-100-to-50{width:48%;display: block;max-width: 640px;float:left}
+    .content-mid-100{width:40%}
+    .float-left-to-100{float:left}
+    .float-left-to-none{float:left}
 }
 @media(min-width:1120px){
     .content-wrap{margin:0px 1% 20px}
@@ -78,14 +87,16 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
     .content-60-to-100{width:58%;display: inline-block}
     .content-60-to-60{width:58%;display: inline-block}
     .content-100-to-50{width:98%;display: inline-block;float: none}
+    .content-mid-100{width:45%}
 }
 .btn{outline: none;border-style: none;}
 .btn-orange{background-color: rgba(255, 102, 51, 1);border-color: rgba(255, 102, 51, 1);color:#fff}
 .btn-orange:hover{background-color: rgba(255, 102, 51, 0.7);color:#fff}
 .goTop{z-index:1190;position: fixed;right: 40px;bottom:100px;font-size:26px;color:#ccc;background-color:#eee;width:50px;height:50px;opacity: 0.5;cursor: pointer;text-align: center;padding:4px 0px}
 .goTop:hover{opacity: 0.8}
-.left-aside{opacity:0.7;border-radius:3px;position: absolute;top:0px;left:0px;width:40px;text-align: right;font-size: 16px;padding:10px 11px 12px 0px;background-color: #e90304;color:#fff;margin-top:90px}
+.left-aside{opacity:0.7;border-radius:3px;position: absolute;top:0px;left:0px;width:40px;text-align: right;font-size: 16px;padding:10px 11px 12px 0px;background-color: #e90304;color:#fff;margin-top:70px}
 .left-aside:hover{opacity: 0.9}
+.backdrop{position: fixed;width:100%;height: 100%;top:0px;left:0px;background-color: rgba(0, 0, 0, 0.5);z-index:1300}
 /*排行类通用 start*/
 .rank-common,.rank-text{margin-bottom:20px}
 .rank-common>.list-name{padding:10px 0px 9px;letter-spacing: 3px;text-align: center}
@@ -97,7 +108,7 @@ p,div{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft 
 
 /*业务页面头部菜单 start*/
 nav ul{list-style: none}
-.header-container{z-index:1200;position:fixed;top:0px;left:0px;width:100%;height: 70px;background-color:#333;padding:5px;}
+.header-container{z-index:1200;position:fixed;top:-1px;left:0px;width:100%;height: 70px;background-color:#333;padding:5px;}
 .header-container>nav{position: relative;height: 100%;}
 .header-container>nav>div{position: relative;height: 100%;display: inline-block;z-index:1000}
 .header-container>nav>div>img{position: relative;height: 100%;}
@@ -379,3 +390,33 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .left-menu-table>ul{list-style: none;margin:0px;padding:5px;position: absolute;left:0px;top:0px;text-align: center}
 .left-menu-table>ul>li{padding:10px 5px}
 /*personinfo end*/
+
+/*personfocus start*/
+.focus-wrap{margin-bottom:15px;padding:10px 0px 0px}
+.focus-wrap:hover{box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1)}
+.focus-wrap>.short-info-wrap{margin-left:5px;margin-right:5px;margin-bottom:10px}
+.focus-info>div{float: left}
+.focus-info>div>p{margin:3px;letter-spacing: 1px}
+.focus-wrap>.achive-text{background-color: #eee;margin-bottom:10px;display: inline-block}
+.achive-text>p{margin:3px;padding:6px 3px}
+.focus-wrap>.recommends{padding:3px 5px;display: inline-block;background-color: #eee;}
+.focus-wrap>.recommends>p{margin:1px;padding:2px;text-align: left;border-bottom: 1px solid #e90304}
+.focus-wrap>.recommends>ul{list-style: none;margin:0px;padding:5px}
+.focus-wrap>.recommends>ul>li{padding:3px 3px;margin:0px}
+.focus-wrap>.recommends>ul>li>span:not(:last-child){padding:10px 0px}
+/*personfocus end*/
+
+/*personmessage start*/
+.person-messages .fa{font-size:20px;margin:5px 8px}
+.message-wrap{padding:10px 5px;border-top:1px dashed rgba(0, 0, 0, 0.1);border-bottom:1px dotted rgba(0, 0, 0, 0.1);margin:5px 0px}
+.message-wrap>.mess-content{display: inline-block}
+.message-wrap>.mess-content>p{margin:8px 10px}
+.message-wrap>.mess-content>p.mess-type{color:#e90304}
+.message-wrap>.mess-content>p.mess-date{color:#999;font-size:12px}
+.let-aside-icon{margin-top:10px;padding:6px 3px;border:2px solid rgba(0, 0, 0, 0.1);border-radius: 100%;color:rgba(255, 102, 51, 1);}
+.message-wrap>.let-aside-icon>.fa{font-size:24px}
+/*personmessage end*/
+
+/*recommendrecord start*/
+.recommend-record .hor-ver-mid{position: fixed;z-index:1300}
+/*recommendrecord end*/

@@ -9,13 +9,16 @@ import comVue from 'web/modules/commonVue'
 import jquery from 'jquery'
 window.$ = jquery;
 window.jquery = jquery;
-
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
 import routerUtil from 'web/common/utils/routerUtil.js'
 import {Notification} from 'element-ui'
+
 
 Vue.use(VueRouter);
 Vue.use(VueResource); 
 Vue.use(Vuex);
+Vue.use(MuseUI);
 
 var loadingTimer;
 

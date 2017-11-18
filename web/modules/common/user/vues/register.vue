@@ -1,7 +1,7 @@
 <template>
     <div class="register">
         <div class="register-wrap content-wrap content-60-to-100 float-left">
-            <div class="label-tip row">
+            <div class="label-tip row-new">
                 <h2 class="float-left">欢迎注册FOX推荐账号</h2>
                 <p class="float-right" @click="showLogin()">已是用户，马上登录</p>
             </div>

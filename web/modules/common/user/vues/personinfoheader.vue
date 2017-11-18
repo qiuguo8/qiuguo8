@@ -1,6 +1,6 @@
 <template>
     <div class="person-info text-center">
-        <div class="common-info row">
+        <div class="common-info row-new">
             <div class="short-info-wrap">
                 <img src="web/resources/img/index/u170.jpg"/>
                 <div class="short-info">

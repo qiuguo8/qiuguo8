@@ -71,6 +71,30 @@ const routes = [
                         aliasName:'个人中心'
                     },
                     component:resolve => require(['modules/common/user/vues/personinfo.vue'],resolve),
+                },
+                {
+                    path:'/person-focus',
+                    name:'person-focus',
+                    meta:{
+                        aliasName:'我的关注'
+                    },
+                    component:resolve => require(['modules/common/user/vues/personfocus.vue'],resolve),
+                },
+                {
+                    path:'/person-message',
+                    name:'person-message',
+                    meta:{
+                        aliasName:'我的消息'
+                    },
+                    component:resolve => require(['modules/common/user/vues/personmessage.vue'],resolve),
+                },
+                {
+                    path:'/recommend-record',
+                    name:'recommend-record',
+                    meta:{
+                        aliasName:'推荐记录'
+                    },
+                    component:resolve => require(['modules/common/user/vues/recommendrecord.vue'],resolve),
                 }
             ]
         }
