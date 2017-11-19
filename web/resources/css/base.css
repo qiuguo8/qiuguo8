@@ -51,6 +51,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-50-to-100{width:98%;display: block;}
     .content-60-to-100{width:98%;display: block;}
     .content-60-to-60{width:98%;display: inline-block}
+    .content-55-to-55{width:98%;display: inline-block}
     .content-100-to-50{width:98%;display: block;float:none}
     .content-mid-100{width:100%}
     .float-left-to-100{float:none;width: 100%}
@@ -70,6 +71,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-50-to-100{width:98%;display: block;max-width: 640px}
     .content-60-to-100{width:98%;display: block;}
     .content-60-to-60{width:58%;display: inline-block}
+    .content-55-to-55{width:55%;display: inline-block}
     .content-100-to-50{width:48%;display: block;max-width: 640px;float:left}
     .content-mid-100{width:40%}
     .float-left-to-100{float:left}
@@ -89,7 +91,10 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-100-to-50{width:98%;display: inline-block;float: none}
     .content-mid-100{width:45%}
 }
-.btn{outline: none;border-style: none;}
+.btn{outline: none;border-style: none;cursor: pointer}
+.btn-padding{padding:5px 20px}
+.btn-danger{color:#fff;background-color: rgb(233, 3, 4);opacity: 0.8;border:1px solid rgba(233,3,4,0.8)}
+.btn:hover{opacity: 1}
 .btn-orange{background-color: rgba(255, 102, 51, 1);border-color: rgba(255, 102, 51, 1);color:#fff}
 .btn-orange:hover{background-color: rgba(255, 102, 51, 0.7);color:#fff}
 .goTop{z-index:1190;position: fixed;right: 40px;bottom:100px;font-size:26px;color:#ccc;background-color:#eee;width:50px;height:50px;opacity: 0.5;cursor: pointer;text-align: center;padding:4px 0px}
@@ -419,4 +424,29 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 
 /*recommendrecord start*/
 .recommend-record .hor-ver-mid{position: fixed;z-index:1300}
+.row-new .form-control label{padding:10px;}
+.row-new .form-control{margin-bottom: 10px}
+.form-control .mu-date-picker,.form-control .mu-date-picker>.mu-text-field{width:100%}
+.mu-date-picker .mu-text-field-content>.mu-text-field-hint{font-size:14px;padding:5px 15px;line-height:28px;color:#d8dce4}
+.mu-date-picker .mu-text-field-content>.mu-text-field-input{border-radius:5px;border:1px solid #d8dce5;height:38px;padding:0px 15px}
+.mu-date-picker .mu-text-field-content>div:last-child>.mu-text-field-line{height: 0px}
+
+.mu-date-picker-dialog>.mu-dialog-body .mu-date-display{background-color: #e90304}
+.mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container .mu-day-button>.mu-day-button-bg{background-color: #e90304}
+.mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container .mu-calendar-actions>button{color:#e90304}
+.mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container>.mu-calendar-year-container .selected>.mu-year-button-text{color:#e90304}
+.mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container>.mu-calendar-year-container .mu-year-button.hover>.mu-year-button-text{color:#e90304}
 /*recommendrecord end*/
+
+/*recharge start*/
+.recharge .charge-wrap{border:1px solid rgba(0, 0, 0, 0.1)}
+.recharge .charge-wrap>.head{position:relative;font-size:16px;padding: 10px;border-bottom: 1px solid rgba(0, 0, 0, 0.1);background-color: rgba(255, 102, 51, 1);color:#fff}
+.recharge .charge-wrap>.head>span:last-child{position: absolute;right:10px;top:12px;font-size: 14px;cursor: pointer}
+.recharge .charge-wrap>.type-list{padding:25px 20px 20px}
+.recharge .charge-wrap>.type-list>.user-name{border-bottom: 1px dashed rgba(0, 0, 0, 0.3);padding:10px 10px}
+.recharge .charge-wrap>.type-list>.user-name>span:last-child{margin-left:50px}
+.recharge .charge-wrap>.type-list>.charge-tip{font-weight: bold}
+.recharge .charge-wrap>.type-list .el-input-group{width:20%;min-width: 150px}
+.weixin-pay{padding:10px 0px}
+.charge-btn{padding:5px 30px;font-size: 18px}
+/*recharge end*/

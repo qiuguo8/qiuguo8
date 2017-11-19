@@ -21,7 +21,7 @@
                     <el-button type="primary">修改宣言</el-button>
                 </div>
             </div>
-            <div class="content-60-to-60 text-left two-colums-to-one achive-info transition-halfs">
+            <div class="content-55-to-55 text-left two-colums-to-one achive-info transition-halfs">
                 <div class="float-left">
                     当前级别：专家级
                 </div>

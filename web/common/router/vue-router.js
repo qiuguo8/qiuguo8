@@ -95,6 +95,30 @@ const routes = [
                         aliasName:'推荐记录'
                     },
                     component:resolve => require(['modules/common/user/vues/recommendrecord.vue'],resolve),
+                },
+                {
+                    path:'/buy-record',
+                    name:'buy-record',
+                    meta:{
+                        aliasName:'购买记录'
+                    },
+                    component:resolve => require(['modules/common/user/vues/buyrecord.vue'],resolve),
+                },
+                {
+                    path:'/recharge',
+                    name:'recharge',
+                    meta:{
+                        aliasName:'我要充值'
+                    },
+                    component:resolve => require(['modules/business/trade/vues/recharge.vue'],resolve),
+                },
+                {
+                    path:'/money-flow-detail',
+                    name:'money-flow-detail',
+                    meta:{
+                        aliasName:'资金明细'
+                    },
+                    component:resolve => require(['modules/common/user/vues/moneyflowdetail.vue'],resolve),
                 }
             ]
         }

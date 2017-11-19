@@ -5,11 +5,11 @@
             <router-link tag="li" :to="{name:'person-focus'}" class="transition-halfs">我的关注</router-link>
             <router-link tag="li" :to="{name:'person-message'}" class="transition-halfs">我的消息</router-link>
             <router-link tag="li" :to="{name:'recommend-record'}" class="transition-halfs">推荐记录</router-link>
-            <li class="transition-halfs">购买记录</li>
-            <li class="transition-halfs">我要充值</li>
+            <router-link tag="li" :to="{name:'buy-record'}" class="transition-halfs">购买记录</router-link>
+            <router-link tag="li" :to="{name:'recharge'}" class="transition-halfs">我要充值</router-link>
             <li class="transition-halfs">我要提现</li>
             <li class="transition-halfs">我要推广</li>
-            <li class="transition-halfs">资金明细</li>
+            <router-link tag="li" :to="{name:'money-flow-detail'}" class="transition-halfs">资金明细</router-link>
             <div class="left-side-btn hor-ver-mid">个人中心菜单</div>
         </ul>
         <div class="content-wrap content-75-to-100 float-left">
