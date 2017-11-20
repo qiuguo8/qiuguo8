@@ -2,19 +2,23 @@
     <div class="achive-detail">
         <div class="achive-list">
             <p class="select-name"><span>战绩</span></p>
-            <ul class="select-list content-wrap text-center">
-                <li>亚盘</li>
-                <li>大小球</li>
-                <li>竞彩足球</li>
-                <li>北京单场</li>
-            </ul>
+            <!-- <ul class="select-list content-wrap text-center">
+                <li><el-radio-button v-model="testVal" class="danger-radio small-checkbox">亚盘</el-radio-button></li>
+                <li><el-radio-button v-model="testVal" class="danger-checkbox small-checkbox">大小球</el-radio-button></li>
+                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">竞彩足球</el-checkbox-button></li>
+                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">北京单场</el-checkbox-button></li>
+            </ul> -->
+             <el-radio-group v-model="radioVal" class="select-list radio-list text-center">
+                <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+             </el-radio-group> 
             <div class="left-menu-table">
                 <ul>
-                    <li>近3天</li>
-                    <li>近7天</li>
-                    <li>近30天</li>
-                    <li>上周</li>
-                    <li>上月</li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
                 </ul>
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -26,14 +30,14 @@
                     <el-table-column prop="right" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="profit" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
-                <div class="block">
+                <div class="block text-center">
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
                     :current-page="currentPage4"
                     :page-sizes="[10, 15, 20, 25]"
                     :page-size="15"
-                    layout=" prev, pager, next, jumper"
+                    layout=" prev, pager, next"
                     :total="400">
                     </el-pagination>
                 </div>
@@ -42,18 +46,18 @@
         <div class="achive-list">
             <p class="select-name"><span>战绩</span></p>
             <ul class="select-list content-wrap text-center">
-                <li>亚盘</li>
-                <li>大小球</li>
-                <li>竞彩足球</li>
-                <li>北京单场</li>
+                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">亚盘</el-checkbox-button></li>
+                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">大小球</el-checkbox-button></li>
+                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">竞彩足球</el-checkbox-button></li>
+                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">北京单场</el-checkbox-button></li>
             </ul>
             <div class="left-menu-table">
                 <ul>
-                    <li>近3天</li>
-                    <li>近7天</li>
-                    <li>近30天</li>
-                    <li>上周</li>
-                    <li>上月</li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
+                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
                 </ul>
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -62,14 +66,14 @@
                     <el-table-column prop="right" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="profit" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
-                <div class="block text-right">
+                <div class="block text-center">
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
                     :current-page="currentPage4"
                     :page-sizes="[10, 15, 20, 25]"
                     :page-size="15"
-                    layout=" prev, pager, next, jumper"
+                    layout=" prev, pager, next"
                     :total="400">
                     </el-pagination>
                 </div>
@@ -104,13 +108,15 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Input,Button,Table,TableColumn,Pagination} from 'element-ui'
+import {Input,Button,Table,TableColumn,Pagination,CheckboxButton,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
 Vue.component(Pagination.name, Pagination)
-
+Vue.component(CheckboxButton.name, CheckboxButton)
+Vue.component(RadioButton.name, RadioButton)
+Vue.component(RadioGroup.name, RadioGroup)
 export default {
     data(){
         return {
@@ -124,6 +130,8 @@ export default {
                         {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},
                         {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},
                         {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},],
+            testVal:false,
+            radioVal:'1'
         }
     }
 }

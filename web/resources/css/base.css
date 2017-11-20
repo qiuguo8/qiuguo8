@@ -111,6 +111,19 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .rank-text>.list-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
 /*排行类通用 start*/
 
+/*重写ui框架css start*/
+.el-checkbox.is-bordered{padding:1px 20px 1px 10px}
+.el-checkbox-button.danger-checkbox>.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent}
+.danger-checkbox.is-checked>.el-checkbox-button__inner{background-color: rgb(233, 3, 4);color:#fff;border-color:transparent;}
+.danger-checkbox.is-checked.is-focus>.el-checkbox-button__inner{border-color:rgba(233,3,4,0.8)}
+.danger-checkbox:not(.is-checked)>.el-checkbox-button__inner:hover{color:#e90304}
+.el-checkbox-button.small-checkbox>.el-checkbox-button__inner{padding:12px 17px}
+.radio-list>.el-radio-button{margin:0px 20px}
+.el-radio-button.danger-radio .el-radio-button__inner{border-radius: 0px;border-color:transparent}
+.el-radio-button.danger-radio.is-active .el-radio-button__inner{background-color: #e90304;border-color:transparent;box-shadow: none}
+.el-radio-button.danger-radio:not(.is-active) .el-radio-button__inner:hover{color:#e90304}
+/*重写ui框架css end*/
+
 /*业务页面头部菜单 start*/
 nav ul{list-style: none}
 .header-container{z-index:1200;position:fixed;top:-1px;left:0px;width:100%;height: 70px;background-color:#333;padding:5px;}
@@ -379,8 +392,10 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .achive-list{margin-bottom:30px}
 .achive-list>.select-list{display: inline-block;width: auto}
 .achive-list>.select-list>li{padding:10px 15px}
+.achive-list>.select-list>li:hover{background-color: #fff}
+.achive-list>.select-list>li .el-checkbox-button>span:hover{background-color: #e90304;color:#fff}
 .achive-list>.select-name{display: inline-block;margin:0px;margin-bottom:10px;text-align: center;font-size: 18px}
-.achive-list>.select-name>span{padding:10px 10px 11px;border-bottom: 3px solid #e90304;display: inline-block;letter-spacing: 5px;text-align: center}
+.achive-list>.select-name>span{margin-left:5px;padding:10px 10px 11px;border-bottom: 3px solid #e90304;display: inline-block;letter-spacing: 5px;text-align: center}
 @media(min-width:318px){
     .achive-list .two-colums-to-one>div{width:98%}
     .achive-list>.select-name{width: 100%;border-bottom: 1px solid #e90304}
@@ -392,8 +407,8 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .achive-list .two-colums-to-one>div{text-align: right}
 .achive-list .two-colums-to-one span{text-align:left;padding:10px 0px}
 .left-menu-table{padding-left:80px;position: relative}
-.left-menu-table>ul{list-style: none;margin:0px;padding:5px;position: absolute;left:0px;top:0px;text-align: center}
-.left-menu-table>ul>li{padding:10px 5px}
+.left-menu-table>ul{list-style: none;margin:0px;padding:5px 0px;position: absolute;left:0px;top:0px;text-align: center}
+.left-menu-table>ul>li{padding:10px 0px}
 /*personinfo end*/
 
 /*personfocus start*/
@@ -427,8 +442,8 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .row-new .form-control label{padding:10px;}
 .row-new .form-control{margin-bottom: 10px}
 .form-control .mu-date-picker,.form-control .mu-date-picker>.mu-text-field{width:100%}
-.mu-date-picker .mu-text-field-content>.mu-text-field-hint{font-size:14px;padding:5px 15px;line-height:28px;color:#d8dce4}
-.mu-date-picker .mu-text-field-content>.mu-text-field-input{border-radius:5px;border:1px solid #d8dce5;height:38px;padding:0px 15px}
+.mu-date-picker .mu-text-field-content>.mu-text-field-hint{font-size:14px;padding:5px 15px;line-height:30px;color:#d8dce4}
+.mu-date-picker .mu-text-field-content>.mu-text-field-input{border-radius:5px;border:1px solid #d8dce5;height:40px;padding:0px 15px}
 .mu-date-picker .mu-text-field-content>div:last-child>.mu-text-field-line{height: 0px}
 
 .mu-date-picker-dialog>.mu-dialog-body .mu-date-display{background-color: #e90304}
@@ -446,7 +461,22 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .recharge .charge-wrap>.type-list>.user-name{border-bottom: 1px dashed rgba(0, 0, 0, 0.3);padding:10px 10px}
 .recharge .charge-wrap>.type-list>.user-name>span:last-child{margin-left:50px}
 .recharge .charge-wrap>.type-list>.charge-tip{font-weight: bold}
-.recharge .charge-wrap>.type-list .el-input-group{width:20%;min-width: 150px}
+.recharge .charge-wrap>.type-list .el-input-group{width:20%;min-width: 160px}
 .weixin-pay{padding:10px 0px}
 .charge-btn{padding:5px 30px;font-size: 18px}
 /*recharge end*/
+
+/*withdraw start*/
+.withdraw>.withdraw-wrap{border:1px solid rgba(0, 0, 0, 0.1)}
+.withdraw-wrap .head{position: relative;padding:10px;border-bottom: 1px solid rgba(0, 0, 0, 0.1);background-color: rgba(255, 102, 51, 1);color:#fff}
+.withdraw>.withdraw-wrap>.head>span:first-child{font-size:16px}
+.withdraw>.withdraw-wrap>.head>span:not(:first-child){font-size:14px;cursor:pointer;float: right;margin-top:2px;border-left:1px solid #fff;padding:0px 10px}
+.withdraw>.withdraw-wrap>.head>span:last-child{border-left: none}
+.withdraw>.withdraw-wrap>.form-wrap{padding:30px 40px 20px}
+/*withdraw end*/
+
+/*announce start*/
+.announce .get-url-wrap{padding:20px;border:1px solid rgba(0, 0, 0, 0.1);margin-bottom:20px}
+.announce .get-url-wrap>label{padding:8px 5px}
+.announce .label-wrap label{padding:10px;border-bottom:3px solid #e90304;display: inline-block;margin-bottom:10px}
+/*announce end*/

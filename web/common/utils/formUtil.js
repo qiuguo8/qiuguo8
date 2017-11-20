@@ -25,9 +25,28 @@ const formUtil = {
     },
     isLegalName(mess){
         return (rule,value,callback)=>{
-            console.log(value);
             if(!validationUtil.isNull(value)){
                 if(!validationUtil.isAllLegalString(value)){
+                    callback(new Error(mess));
+                }
+            }
+            callback();
+        }
+    },
+    isMoney(mess){
+        return (rule,value,callback)=>{
+            if(!validationUtil.isNull(value)){
+                if(!validationUtil.isMoney(value)){
+                    callback(new Error(mess));
+                }
+            }
+            callback();
+        }
+    },
+    isNumber(mess){
+        return (rule,value,callback)=>{
+            if(!validationUtil.isNull(value)){
+                if(!validationUtil.isNumber(value)){
                     callback(new Error(mess));
                 }
             }

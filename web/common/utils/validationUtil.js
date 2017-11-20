@@ -7,7 +7,9 @@ function isNull(val){
 function isNumber(val){
     var flag = true;
     flag = !isNaN(+val);
-    flag = val != Infinity || val != -Infinity;
+    if(flag){
+        flag = val != Infinity || val != -Infinity;
+    }
     return flag;
 }
 function isAllLegalString(val){
@@ -39,13 +41,20 @@ function pwdSafety(val){
     return flag;
 }
 
+function isMoney(val){
+    var reg = /^\d+(\.\d{1,2})?$/g;
+    var result = reg.exec(val);
+    return result;
+}
+
 const validationUtil = {
     isNull:isNull,
     isNumber:isNumber,
     isAllLegalString:isAllLegalString,
     hasLetter:hasLetter,
     hasNumber:hasNumber,
-    pwdSafety:pwdSafety
+    pwdSafety:pwdSafety,
+    isMoney:isMoney
 }
 
 export default validationUtil;

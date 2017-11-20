@@ -113,12 +113,28 @@ const routes = [
                     component:resolve => require(['modules/business/trade/vues/recharge.vue'],resolve),
                 },
                 {
+                    path:'/withdraw',
+                    name:'withdraw',
+                    meta:{
+                        aliasName:'我要提现'
+                    },
+                    component:resolve => require(['modules/business/trade/vues/withdraw.vue'],resolve),
+                },
+                {
                     path:'/money-flow-detail',
                     name:'money-flow-detail',
                     meta:{
                         aliasName:'资金明细'
                     },
                     component:resolve => require(['modules/common/user/vues/moneyflowdetail.vue'],resolve),
+                },
+                {
+                    path:'/user-announce',
+                    name:'user-announce',
+                    meta:{
+                        aliasName:'我要推广'
+                    },
+                    component:resolve => require(['modules/common/user/vues/announce.vue'],resolve),
                 }
             ]
         }

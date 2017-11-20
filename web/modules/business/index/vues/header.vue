@@ -11,11 +11,11 @@
                 </div>
                 <ul class="user-menu-list" ref="userlist">
                     <router-link tag="li" :to="{name:'person-info'}" active-class="active" class="transition-halfs">个人中心</router-link>
-                    <li class="transition-halfs">我的关注</li>
-                    <li class="transition-halfs">关注发单</li>
-                    <li class="transition-halfs">我的消息</li>
-                    <li class="transition-halfs">充值</li>
-                    <li class="transition-halfs">提现</li>
+                    <router-link tag="li" :to="{name:'person-focus'}" class="transition-halfs">我的关注</router-link>
+                    <router-link tag="li" :to="{name:'recommend-record'}" class="transition-halfs">购买记录</router-link>
+                    <router-link tag="li" :to="{name:'person-message'}" class="transition-halfs">我的消息</router-link>
+                    <router-link tag="li" :to="{name:'recharge'}" class="transition-halfs">充值</router-link>
+                    <router-link tag="li" :to="{name:'withdraw'}"li class="transition-halfs">提现</router-link>
                     <li class="transition-halfs">退出</li>
                 </ul>
             </div>

@@ -6,7 +6,7 @@
                 <p class="user-name">用户名：<span>百万财神</span><span>（充值满百即送100%积分）</span></p>
                 <p class="charge-tip">请输入充值金额及选择网上银行进行充值（注：资金一经充值成功，则充值部分资金将不能体现。）</p>
                 <div class="el-col-24">
-                    <el-form :model="chargeForm" status-icon :rules="rules" ref="chargeForm" label-width="80px">
+                    <el-form :model="chargeForm" :rules="rules" ref="chargeForm" label-width="80px">
                         <el-form-item label="充值金额" prop="money">
                             <el-input type="primary" v-model="chargeForm.money" auto-complete="off">
                                 <label slot="append">
@@ -38,8 +38,8 @@
 </template>
 <script>
 import Vue from 'vue'
+import formUtil from 'web/common/utils/formUtil.js'
 import {RadioGroup,Radio,Form,FormItem,Input,Button} from 'element-ui'
-// Vue.component(Dialog.name,Dialog);
 Vue.component(Form.name,Form);
 Vue.component(FormItem.name,FormItem);
 Vue.component(Input.name,Input);
@@ -55,7 +55,8 @@ export default {
             },
             rules:{
                 money:[
-                    {required:true,message:'金额不能为空',trigger:'change blur'}
+                    {required:true,message:'金额不能为空',trigger:'change blur'},
+                    {validator:formUtil.isMoney('输入的金额格式不正确'),trigger:'change blur'}
                 ]
             }
         }
