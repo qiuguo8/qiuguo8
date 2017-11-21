@@ -8,10 +8,14 @@
                 <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">竞彩足球</el-checkbox-button></li>
                 <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">北京单场</el-checkbox-button></li>
             </ul> -->
-             <el-radio-group v-model="radioVal" class="select-list radio-list text-center">
-                <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
-                <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
-             </el-radio-group> 
+            <div class="select-list content-wrap">
+                <el-radio-group v-model="radioVal" class="radio-list">
+                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                    <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                    <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                </el-radio-group>
+            </div> 
             <div class="left-menu-table">
                 <ul>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
@@ -30,7 +34,7 @@
                     <el-table-column prop="right" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="profit" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
-                <div class="block text-center">
+                <div class="page-block text-center">
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
@@ -66,7 +70,7 @@
                     <el-table-column prop="right" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="profit" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
-                <div class="block text-center">
+                <div class="page-block text-center">
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"

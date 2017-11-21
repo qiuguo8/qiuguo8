@@ -111,18 +111,91 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .rank-text>.list-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
 /*排行类通用 start*/
 
+/*animate start*/
+@keyframes keepRotate{
+    from {
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+        -o-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+        -o-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+    }
+}
+@-webkit-keyframes keepRotate{
+    from {
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+        -o-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+        -o-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+    }
+}
+@-o-keyframes keepRotate{
+    from {
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+        -o-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+        -o-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+    }
+}
+@-moz-keyframes keepRotate{
+    from {
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+        -o-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+        -o-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+    }
+}
+.keepRotate{animation: keepRotate 1s linear infinite;-webkit-animation: keepRotate 1s linear infinite;-o-animation: keepRotate 1s linear infinite;-moz-animation: keepRotate 1s linear infinite;transform-origin: 50% 50%;-webkit-transform-origin: 50% 50%;-o-transform-origin: 50% 50%;-moz-transform-origin: 50% 50%}
+/*animate start*/
+
 /*重写ui框架css start*/
-.el-checkbox.is-bordered{padding:1px 20px 1px 10px}
-.el-checkbox-button.danger-checkbox>.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent}
+.el-checkbox.is-bordered{padding:1px 20px 1}
+.el-checkbox-button.danger-checkbox>.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent;}
 .danger-checkbox.is-checked>.el-checkbox-button__inner{background-color: rgb(233, 3, 4);color:#fff;border-color:transparent;}
 .danger-checkbox.is-checked.is-focus>.el-checkbox-button__inner{border-color:rgba(233,3,4,0.8)}
 .danger-checkbox:not(.is-checked)>.el-checkbox-button__inner:hover{color:#e90304}
 .el-checkbox-button.small-checkbox>.el-checkbox-button__inner{padding:12px 17px}
-.radio-list>.el-radio-button{margin:0px 20px}
-.el-radio-button.danger-radio .el-radio-button__inner{border-radius: 0px;border-color:transparent}
-.el-radio-button.danger-radio.is-active .el-radio-button__inner{background-color: #e90304;border-color:transparent;box-shadow: none}
+.radio-list>.el-radio-button{margin:5px 20px;box-shadow: none!important}
+.el-radio-button.danger-radio .el-radio-button__inner{border-radius: 0px;border:none}
+.el-radio-button.danger-radio.is-active .el-radio-button__inner{background-color: #e90304;border:none;box-shadow: none!important;-webkit-box-shadow:none!important}
 .el-radio-button.danger-radio:not(.is-active) .el-radio-button__inner:hover{color:#e90304}
+
+.page-block{padding:10px 0px;position: relative;left:-25px}
+.page-block .el-pager>li{min-width: 30px;height:30px;margin:0px 4px;margin:0px 1px;border-radius:100%;transition: all .5s linear;-webkit-transition: all .5s linear;-o-transition: all .5s linear;-moz-transition: all .5s linear}
+.page-block .el-pager>li.active{background-color:#333;color:#fff;}
+.page-block .el-pager>li:not(.active):hover{color:#e90304;}
+.page-block>.el-pagination>button{min-width: 30px}
+.page-block>.el-pagination>button:hover{color:#e90304}
 /*重写ui框架css end*/
+
+/*infinite-scroll start*/
+.infinite-scroll{padding:10px;margin:10px 0px;font-size:16px;cursor: pointer}
+.infinite-scroll>span:first-child{color:#999;cursor: no-drop}
+.infinite-scroll>span:first-child i{margin:0px 10px;font-size:24px;position: relative;top:3px}
+/*infinite-scroll end*/
 
 /*业务页面头部菜单 start*/
 nav ul{list-style: none}
@@ -272,7 +345,7 @@ nav ul{list-style: none}
 .types-select{margin-left:0px;margin-right:0px;width:75%}
 .intros-wrap{margin-top: 20px;;position: relative}
 .intros-wrap-index{padding-left:50px}
-.intros-wrap>.intro-wrap{display: inline-block;width:250px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
+.intros-wrap>.intro-wrap{float:left;display: inline-block;width:250px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
 .intros-wrap>.intro-wrap-index{width:230px}
 .intros-wrap>.intro-wrap:hover{box-shadow: 0px 3px 7px 5px rgba(0, 0, 0, 0.1)}
 .intros-wrap>.intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
@@ -286,14 +359,18 @@ nav ul{list-style: none}
 @media(min-width:312px){
     .search-input{display: block}
     .intros-wrap{float: none;text-align: center}
-    .intros-wrap>.intro-wrap{width:250px}
-    .intros-wrap>.intro-wrap-index{width:250px}
+    .intros-wrap>.intro-wrap{width:250px;float:none}
+    .intros-wrap>.intro-wrap-index{width:250px;float:none}
+}
+@media(min-width:620px){
+    .intros-wrap>.intro-wrap{float:left}
+    .intros-wrap>.intro-wrap-index{float:left}
 }
 @media(min-width:768px){
     .search-input{display: inline-block}
     .intros-wrap{float: left;text-align: left}
     .intros-wrap>.intro-wrap{width:45%}
-    .intros-wrap>.intro-wrap-index{width:45%}
+    .intros-wrap>.intro-wrap-index{width:45%;}
 }
 @media(min-width:992px){
     .intros-wrap>.intro-wrap{width:30%;}
@@ -357,7 +434,8 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 /*pensoncenter start*/
 .left-menu{width:25%;list-style: none;margin:0px;padding:0px;text-align: center;z-index:1100}
 .left-menu li{display:inline-block;width: 80%;min-width:150px;padding:10px 20px;background-color: #fff;margin:1px 0px;text-align: center;cursor: pointer;border-radius: 3px;border:1px solid rgba(0, 0, 0, 0.1)}
-.left-menu li:hover{color:#fff;background-color: #333}
+.left-menu li.active{color:#fff;background-color: #333;border: 1px solid #fff}
+.left-menu li:hover{color:#fff;background-color: #333;border: 1px solid #fff}
 .left-side-btn{display: none;;background-color:#e90304;width:30px;padding:5px 7px;color:#fff;position: absolute;cursor: pointer;left:165px;z-index:2100}
 .left-menu:hover{left:0px}
 @media(min-width:318px){
@@ -372,7 +450,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 }
 .common-info{margin-bottom:20px}
 .common-info .btn-list{text-align: center;padding:10px 0px}
-.common-info .btn-list>button{margin:0px 15px}
+.common-info .btn-list button{margin:0px 15px}
 .short-info-wrap{border-bottom:1px solid rgba(0,0,0,0.1);display: inline-block;margin:0px 30px;text-align: center;padding:5px 0px}
 .short-info-wrap img{width:80px;height:80px;border-radius: 100%;}
 .short-info-wrap>.short-info{padding:5px;text-align: center}
@@ -390,7 +468,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 
 /*personinfo start*/
 .achive-list{margin-bottom:30px}
-.achive-list>.select-list{display: inline-block;width: auto}
+.achive-list>.select-list{display: inline-block;width: auto;margin-left:50px;padding:5px 0px}
 .achive-list>.select-list>li{padding:10px 15px}
 .achive-list>.select-list>li:hover{background-color: #fff}
 .achive-list>.select-list>li .el-checkbox-button>span:hover{background-color: #e90304;color:#fff}

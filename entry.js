@@ -13,12 +13,13 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import routerUtil from 'web/common/utils/routerUtil.js'
 import {Notification} from 'element-ui'
-
+import infiniteScroll from 'vue-infinite-scroll'
 
 Vue.use(VueRouter);
 Vue.use(VueResource); 
 Vue.use(Vuex);
 Vue.use(MuseUI);
+Vue.use(infiniteScroll)
 
 var loadingTimer;
 
@@ -104,4 +105,3 @@ function loadEnd(){
 		vue.$data.progress = 100;
 	},0);
 };
-

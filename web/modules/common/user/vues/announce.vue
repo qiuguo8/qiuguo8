@@ -17,14 +17,14 @@
                 <el-table-column prop="registerTime" label="注册时间" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="lastLoginTime" label="最近登录时间" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
-            <div class="block text-right">
+            <div class="page-block text-right">
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
                 :page-size="15"
-                layout=" prev, pager, next, jumper"
+                layout=" prev, pager, next"
                 :total="400">
                 </el-pagination>
             </div>

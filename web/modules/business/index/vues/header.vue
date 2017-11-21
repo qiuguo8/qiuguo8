@@ -16,11 +16,11 @@
                     <router-link tag="li" :to="{name:'person-message'}" class="transition-halfs">我的消息</router-link>
                     <router-link tag="li" :to="{name:'recharge'}" class="transition-halfs">充值</router-link>
                     <router-link tag="li" :to="{name:'withdraw'}"li class="transition-halfs">提现</router-link>
-                    <li class="transition-halfs">退出</li>
+                    <li @click="isLogout()" class="transition-halfs">退出</li>
                 </ul>
             </div>
             <div class="header-menu">
-                <div class="el-icon-menu header-menu-icon" ref="menuicon"></div>
+                <div class="fa fa-bars header-menu-icon" ref="menuicon"></div>
                 <ul class="header-menu-list" ref="menu">
                     <router-link tag="li" :to="{name:'business-index'}" active-class="active" class="transition-halfs">首页</router-link>
                     <router-link tag="li" :to="{name:'buy-recommend'}" active-class="active" class="transition-halfs">买推荐</router-link>
@@ -41,7 +41,9 @@
     </header>
 </template>
 <script>
+import Vue from 'vue'
 import sysUtil from 'web/common/utils/sysUtil.js'
+import { MessageBox } from 'element-ui';
 
 export default {
     data(){
@@ -75,6 +77,16 @@ export default {
         },
         showLogin(){
             sysUtil.showLogin();
+        },
+        isLogout(){
+            MessageBox.confirm('是否退出登录','提示',{
+                confirmButtonText:'确定',
+                cancelButtonText:'取消',
+                type:'warning',
+                center:true
+            }).then(()=>{
+
+            })
         }
     }
 }

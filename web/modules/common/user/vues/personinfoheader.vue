@@ -32,8 +32,8 @@
                     球果余额：16554984.12
                 </div>
                 <div class="btn-list">
-                    <el-button type="primary">充值</el-button>
-                    <el-button type="primary">提现</el-button>
+                    <router-link tag="span" :to="{name:'recharge'}"><el-button type="primary">充值</el-button></router-link>
+                    <router-link tag="span" :to="{name:'withdraw'}"><el-button type="primary">提现</el-button></router-link>
                 </div>
             </div>
         </div>

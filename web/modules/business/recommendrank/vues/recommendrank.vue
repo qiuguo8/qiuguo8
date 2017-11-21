@@ -20,14 +20,14 @@
                     <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="recommend" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
-                <div class="block">
+                <div class="page-block text-center">
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
                     :current-page="currentPage4"
                     :page-sizes="[10, 15, 20, 25]"
                     :page-size="15"
-                    layout=" prev, pager, next, jumper"
+                    layout=" prev, pager, next"
                     :total="400">
                     </el-pagination>
                 </div>

@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var webpack = require('webpack');
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -54,13 +55,20 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
+      // {
+      //   test: /muse-ui.src.*?.\.(js|vue)$/,
+      //   use: [
+      //     {loader:'babel-loader'},
+      //     {loader:'vue-loader',options:vueLoaderConfig}
+      //   ]
+      // },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
         include: [resolve('web')],
-         options: {
+        loader: 'babel-loader',
+        options: {
           //plugins: [require('babel-plugin-transform-vue-jsx'),require("babel-polyfill")]
-          plugins: [require("babel-polyfill")]
+          plugins: [require("babel-polyfill"),require('babel-plugin-transform-runtime')]
         }
       },
       {

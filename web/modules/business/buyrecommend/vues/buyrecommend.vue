@@ -31,50 +31,21 @@
         </div>
         <div class="clear-fix"></div>
         <div class="intros-wrap content-wrap content-75-to-100">
-            <div class="intro-wrap transition-halfs">
-                <div class="match-name">曼城VS曼联</div>
+            <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
+                <div class="match-name">{{item.matchName}}</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
                     <el-button type="success" v-if="false">已关注</el-button>
                     <button class="el-button btn-orange">关注</button>
                 </div>
                 <div class="intro-text">
-                    xxxxxxx
+                    {{item.userInfo}}
                 </div>
                 <el-button type="danger">200</el-button>
             </div>
-            <div class="intro-wrap transition-halfs">
-                <div class="match-name">曼城VS曼联</div>
-                <div class="intro-info">
-                    <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">已关注</el-button>
-                </div>
-                <div class="intro-text">
-                    xxxxxxx
-                </div>
-                <el-button type="danger">200</el-button>
-            </div>
-            <div class="intro-wrap transition-halfs">
-                <div class="match-name">曼城VS曼联</div>
-                <div class="intro-info">
-                    <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">已关注</el-button>
-                </div>
-                <div class="intro-text">
-                    xxxxxxx
-                </div>
-                <el-button type="danger">200</el-button>
-            </div>
-            <div class="intro-wrap transition-halfs">
-                <div class="match-name">曼城VS曼联</div>
-                <div class="intro-info">
-                    <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success">已关注</el-button>
-                </div>
-                <div class="intro-text">
-                    xxxxxxx
-                </div>
-                <el-button type="danger">200</el-button>
+            <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+                <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
+                <span v-show="!busy">加载更多</span>
             </div>
         </div>
         <div class="content-wrap float-left text-center rank-common intro-rank-list content-25-to-100">
@@ -102,7 +73,27 @@ export default {
                         {index:'2',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
                         {index:'3',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
                         {index:'4',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                        {index:'5',userName:'xx',achivement:'7胜3负',winpercent:'80%'}]
+                        {index:'5',userName:'xx',achivement:'7胜3负',winpercent:'80%'}],
+            total:[
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'1'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'2'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'3'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'4'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'5'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'6'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'7'},
+                {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'8'},
+            ],
+            list:[]
+        }
+    },
+    methods:{
+        loadMore(){
+            // console.log('loanMore');
+            if(this.list.length<this.total.length){
+                this.list = this.list.concat(this.total.slice(0,4));
+            }
+            // console.log(this.list);
         }
     }
 }

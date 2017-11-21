@@ -34,14 +34,14 @@
                 <el-table-column prop="money" label="成交金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="status" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
-            <div class="block text-right">
+            <div class="page-block text-right">
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
                 :page-size="15"
-                layout=" prev, pager, next, jumper"
+                layout=" prev, pager, next"
                 :total="400">
                 </el-pagination>
             </div>
