@@ -9,17 +9,25 @@
         </div>
         <div class="select-types types-select float-left content-75-to-100 content-wrap">
             <label class="types-label">类型</label>
-            <ul class="types-list">
+            <!-- <ul class="types-list">
                 <li>亚盘</li>
                 <li>大小球</li>
                 <li>竞彩足球</li>
                 <li>北京单场</li>
-            </ul>
+            </ul> -->
+            <div class="types-list">
+                <el-radio-group v-model="radioVal" class="radio-list">
+                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                    <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                    <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                </el-radio-group>
+            </div>
         </div>
         <br class="clear-fix"/>
         <div class="select-types sort-types">
             <label class="types-label">筛选、排序</label>
-            <ul class="types-list">
+            <!-- <ul class="types-list">
                 <li>综合</li>
                 <li>3天准确率</li>
                 <li>7天准确率</li>
@@ -27,7 +35,17 @@
                 <li>30天盈利率</li>
                 <li>我的关注</li>
                 <li>指定赛事</li>
-            </ul>
+            </ul> -->
+            <div class="types-list">
+                <el-radio-group v-model="radioVal" class="radio-list">
+                    <el-radio-button label="1" class="danger-radio small-checkbox">综合</el-radio-button>
+                    <el-radio-button label="2" class="danger-radio small-checkbox">3天准确率</el-radio-button>
+                    <el-radio-button label="3" class="danger-radio small-checkbox">7天准确率</el-radio-button>
+                    <el-radio-button label="4" class="danger-radio small-checkbox">30天准确率</el-radio-button>
+                    <el-radio-button label="5" class="danger-radio small-checkbox">我的关注</el-radio-button>
+                    <el-radio-button label="6" class="danger-radio small-checkbox">指定赛事</el-radio-button>
+                </el-radio-group>
+            </div>
         </div>
         <div class="clear-fix"></div>
         <div class="intros-wrap content-wrap content-75-to-100">
@@ -61,11 +79,13 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Input,Button,Table,TableColumn} from 'element-ui'
+import {Input,Button,Table,TableColumn,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
+Vue.component(RadioButton.name, RadioButton)
+Vue.component(RadioGroup.name, RadioGroup)
 export default {
     data(){
         return{
@@ -84,7 +104,8 @@ export default {
                 {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'7'},
                 {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'8'},
             ],
-            list:[]
+            list:[],
+            radioVal:'1'
         }
     },
     methods:{

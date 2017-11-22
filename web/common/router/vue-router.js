@@ -2,7 +2,7 @@
 
 const routes = [
     {
-        path:'/',
+        path:'/index.html',
         name:'index',
         components:{
             default:resolve => require(['modules/business/index/vues/index.vue'],resolve),
@@ -66,6 +66,10 @@ const routes = [
             children:[
                 {
                     path:'/',
+                    redirect:'/person-info'
+                },
+                {
+                    path:'/person-info',
                     name:'person-info',
                     meta:{
                         aliasName:'个人中心'
@@ -139,6 +143,10 @@ const routes = [
             ]
         }
         ]
+    },
+    { 
+        path: '*', 
+        redirect:'/index.html'
     }
 ];
 

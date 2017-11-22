@@ -17,13 +17,22 @@
                 </el-radio-group>
             </div> 
             <div class="left-menu-table">
-                <ul>
+                <!-- <ul>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
-                </ul>
+                </ul> -->
+                <div class="left-menus">
+                    <el-radio-group v-model="radioVal" class="radio-list">
+                        <el-radio-button label="1" class="danger-radio small-checkbox">近3天</el-radio-button>
+                        <el-radio-button label="2" class="danger-radio small-checkbox">近7天</el-radio-button>
+                        <el-radio-button label="3" class="danger-radio small-checkbox">近30天</el-radio-button>
+                        <el-radio-button label="4" class="danger-radio small-checkbox">上周</el-radio-button>
+                        <el-radio-button label="5" class="danger-radio small-checkbox">上月</el-radio-button>
+                    </el-radio-group>
+                </div>
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="win" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -49,20 +58,37 @@
         </div>
         <div class="achive-list">
             <p class="select-name"><span>战绩</span></p>
-            <ul class="select-list content-wrap text-center">
+            <!-- <ul class="select-list content-wrap text-center">
                 <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">亚盘</el-checkbox-button></li>
                 <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">大小球</el-checkbox-button></li>
                 <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">竞彩足球</el-checkbox-button></li>
                 <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">北京单场</el-checkbox-button></li>
-            </ul>
+            </ul> -->
+            <div class="select-list content-wrap">
+                <el-radio-group v-model="radioVal" class="radio-list">
+                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                    <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                    <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                </el-radio-group>
+            </div> 
             <div class="left-menu-table">
-                <ul>
+                <!-- <ul>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
                     <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
-                </ul>
+                </ul> -->
+                <div class="left-menus">
+                    <el-radio-group v-model="radioVal" class="radio-list">
+                        <el-radio-button label="1" class="danger-radio small-checkbox">近3天</el-radio-button>
+                        <el-radio-button label="2" class="danger-radio small-checkbox">近7天</el-radio-button>
+                        <el-radio-button label="3" class="danger-radio small-checkbox">近30天</el-radio-button>
+                        <el-radio-button label="4" class="danger-radio small-checkbox">上周</el-radio-button>
+                        <el-radio-button label="5" class="danger-radio small-checkbox">上月</el-radio-button>
+                    </el-radio-group>
+                </div>
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="win" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>

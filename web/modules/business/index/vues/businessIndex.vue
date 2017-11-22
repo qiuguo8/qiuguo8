@@ -10,11 +10,19 @@
         </div>
         <div class="achive-rank rank-common content-wrap">
             <div class="list-name"><span>龙虎榜</span></div>
-            <div class="rank-types">
+            <!-- <div class="rank-types">
                 <span class="transition-halfs">亚盘</span>
                 <span class="transition-halfs">大小球</span>
                 <span class="transition-halfs">竞彩2选1</span>
                 <span class="transition-halfs">北京单场</span>
+            </div> -->
+            <div class="rank-types text-center">
+                <el-radio-group v-model="radioVal" class="radio-list small-radio">
+                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                    <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                    <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                </el-radio-group>
             </div>
             <ul class="achive-rank-list">
                 <li class="content-wrap content-100-to-50">
@@ -234,13 +242,15 @@
 </template>
 <script>
 import Vue from 'vue';
-import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane} from 'element-ui'
+import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Carousel.name, Carousel)
 Vue.component(CarouselItem.name, CarouselItem)
 Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
 Vue.component(Tabs.name, Tabs)
 Vue.component(TabPane.name, TabPane)
+Vue.component(RadioButton.name, RadioButton)
+Vue.component(RadioGroup.name, RadioGroup)
 export default {
     data(){
         return {
@@ -249,8 +259,8 @@ export default {
                         {index:'2',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'3',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'4',userName:'xx',rank:'菜鸟',winpercent:'80%'},
-                        {index:'5',userName:'xx',rank:'菜鸟',winpercent:'80%'}]
-
+                        {index:'5',userName:'xx',rank:'菜鸟',winpercent:'80%'}],
+            radioVal:'1'
         }
     },
 }

@@ -9,6 +9,8 @@ import comVue from 'web/modules/commonVue'
 import jquery from 'jquery'
 window.$ = jquery;
 window.jquery = jquery;
+import 'element-ui/lib/theme-chalk/index.css'
+import 'font-awesome/css/font-awesome.min.css'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import routerUtil from 'web/common/utils/routerUtil.js'
@@ -24,6 +26,7 @@ Vue.use(infiniteScroll)
 var loadingTimer;
 
 var router =  new VueRouter({
+	mode:'history',
 	routes:routes
 });
 routerUtil(router);

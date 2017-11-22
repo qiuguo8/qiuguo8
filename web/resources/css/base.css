@@ -1,7 +1,4 @@
-
-@import url('../../../node_modules/element-ui/lib/theme-chalk/index.css');
-@import url('../../../node_modules/font-awesome/css/font-awesome.min.css');
-
+@charset 'UTF-8';
 html,body{margin:0px;padding:0px;width:100%;}
 #vue-app{margin:0px;padding:0px;width:100%;}
 body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;color:#fff;line-height:1.428571429;color:#222}
@@ -99,7 +96,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .btn-orange:hover{background-color: rgba(255, 102, 51, 0.7);color:#fff}
 .goTop{z-index:1190;position: fixed;right: 40px;bottom:100px;font-size:26px;color:#ccc;background-color:#eee;width:50px;height:50px;opacity: 0.5;cursor: pointer;text-align: center;padding:4px 0px}
 .goTop:hover{opacity: 0.8}
-.left-aside{opacity:0.7;border-radius:3px;position: absolute;top:0px;left:0px;width:40px;text-align: right;font-size: 16px;padding:10px 11px 12px 0px;background-color: #e90304;color:#fff;margin-top:70px}
+.left-aside{opacity:0.7;border-radius:3px;position: absolute;top:0px;left:15px;width:40px;text-align: right;font-size: 16px;padding:10px 11px 12px 0px;background-color: #e90304;color:#fff;margin-top:70px}
 .left-aside:hover{opacity: 0.9}
 .backdrop{position: fixed;width:100%;height: 100%;top:0px;left:0px;background-color: rgba(0, 0, 0, 0.5);z-index:1300}
 /*排行类通用 start*/
@@ -173,15 +170,16 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 
 /*重写ui框架css start*/
 .el-checkbox.is-bordered{padding:1px 20px 1}
-.el-checkbox-button.danger-checkbox>.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent;}
-.danger-checkbox.is-checked>.el-checkbox-button__inner{background-color: rgb(233, 3, 4);color:#fff;border-color:transparent;}
-.danger-checkbox.is-checked.is-focus>.el-checkbox-button__inner{border-color:rgba(233,3,4,0.8)}
+.el-checkbox-button.danger-checkbox>span.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent;}
+.danger-checkbox.is-checked>span.el-checkbox-button__inner{background-color: rgb(233, 3, 4);color:#fff;border-color:transparent;}
+.danger-checkbox.is-checked.is-focus>span.el-checkbox-button__inner{border-color:rgba(233,3,4,0.8)}
 .danger-checkbox:not(.is-checked)>.el-checkbox-button__inner:hover{color:#e90304}
 .el-checkbox-button.small-checkbox>.el-checkbox-button__inner{padding:12px 17px}
 .radio-list>.el-radio-button{margin:5px 20px;box-shadow: none!important}
-.el-radio-button.danger-radio .el-radio-button__inner{border-radius: 0px;border:none}
-.el-radio-button.danger-radio.is-active .el-radio-button__inner{background-color: #e90304;border:none;box-shadow: none!important;-webkit-box-shadow:none!important}
-.el-radio-button.danger-radio:not(.is-active) .el-radio-button__inner:hover{color:#e90304}
+.el-radio-button.danger-radio span.el-radio-button__inner{border-radius: 0px;border:none!important}
+.el-radio-button.danger-radio.is-active span.el-radio-button__inner{border:none;border-radius:0px;background-color: #e90304;border:none;box-shadow: none!important;-webkit-box-shadow:none!important}
+.el-radio-button.danger-radio:not(.is-active) span.el-radio-button__inner:hover{color:#e90304}
+.small-radio>.el-radio-button.danger-radio span.el-radio-button__inner{font-size:12px}
 
 .page-block{padding:10px 0px;position: relative;left:-25px}
 .page-block .el-pager>li{min-width: 30px;height:30px;margin:0px 4px;margin:0px 1px;border-radius:100%;transition: all .5s linear;-webkit-transition: all .5s linear;-o-transition: all .5s linear;-moz-transition: all .5s linear}
@@ -216,6 +214,7 @@ nav ul{list-style: none}
 .user-info>.user-menu-list{box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;padding:5px;z-index:2000;position: absolute;top:60px;right:-30px;margin:0px;background-color:#333;display: none;width:130px}
 .user-info>.user-menu-list>li{float: none;font-size:16px;margin:0px 10px;padding:10px 15px;color:#fff;text-align: center}
 .user-info>.user-menu-list>li:hover{background-color: #e90304;border-radius: 2px}
+.user-info>.user-menu-list>li.active{background-color: #e90304;}
 .user-info>.menu-show{display: block}
 .header-container>nav>.visitor-operation{float: right}
 .header-container>nav>.visitor-operation p{float: left;color:#fff;padding:5px 20px;cursor: pointer;font-size:16px}
@@ -287,9 +286,10 @@ nav ul{list-style: none}
 .normal-news-title span.more-btn{position: absolute;top:5px;right:0px;padding:10px;letter-spacing: 5px;color:#999;cursor: pointer}
 .normal-news-title span.more-btn:hover{color:#333}
 .rank-types{text-align: center;padding:8px;border-bottom: none}
-.rank-types span{padding:3px 10px;;cursor: pointer}
-.rank-types span:hover{background-color: #e90304;color:#fff}
-.achive-rank{padding:0px 10px 10px 30px;margin-left: 640px;text-align: left}
+.rank-types span{padding:10px 15px;cursor: pointer}
+.rank-types .radio-list>.el-radio-button{margin:5px}
+/* .rank-types span:hover{background-color: #e90304;color:#fff} */
+.achive-rank{padding:0px 10px 10px 30px;margin-left: 640px;text-align: left;}
 .achive-rank-list{overflow:auto;list-style: none;margin:0px;padding:0px;width:100%;text-align: center;height:285px}
 .achive-rank-list li{padding:5px;float:left;margin-bottom:3px;margin-top:3px}
 .achive-rank-list li>img{width:40px;height: 40px;border-radius: 100%;}
@@ -337,22 +337,23 @@ nav ul{list-style: none}
 .my-bitcon span{font-size:16px;padding:10px 15px;background-color:#e90304;border-radius: 3px;color:#fff}
 .select-types{margin-bottom:2px;border-bottom:1px solid rgba(255, 102, 51, 1);}
 .sort-types{border-bottom:1px solid rgba(255, 102, 51, 1)}
-.select-types>.types-label{padding:15px;font-size: 14px;display: inline-block;font-weight: bold}
-.select-types>.types-list{list-style: none;margin:0px;display: inline-block;width:80%;padding-left:10px}
+.select-types>.types-label{padding:15px;font-size: 14px;display: inline-block;font-weight: bold;float:left}
+.select-types>.types-list{list-style: none;margin:0px;display: inline-block;width:75%;padding-left:10px}
+.select-types>.types-list .radio-list>.el-radio-button{margin:10px}
 .select-types>.types-list>li{display: inline-block;padding:10px;margin:3px;cursor: pointer}
 .select-types>.types-list>li:hover{background-color:#e90304;color:#fff;border-radius: 3px}
 .search-input{display: inline-block;padding:5px 0px;}
-.types-select{margin-left:0px;margin-right:0px;width:75%}
+.types-select{margin-left:0px;margin-right:0px;}
 .intros-wrap{margin-top: 20px;;position: relative}
-.intros-wrap-index{padding-left:50px}
+.intros-wrap-index{padding-left:65px}
 .intros-wrap>.intro-wrap{float:left;display: inline-block;width:250px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
-.intros-wrap>.intro-wrap-index{width:230px}
+.intros-wrap>.intro-wrap-index{width:230px;margin:10px}
 .intros-wrap>.intro-wrap:hover{box-shadow: 0px 3px 7px 5px rgba(0, 0, 0, 0.1)}
 .intros-wrap>.intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
 .intros-wrap>.intro-wrap>.intro-info{width:48%;position: relative;float: left}
 .intros-wrap>.intro-wrap>.intro-info>img{width:100%;height: 90px}
 .intros-wrap>.intro-wrap>.intro-info>button{width:100%}
-.intros-wrap>.intro-wrap>.intro-text{width:48%;padding:5px;word-break: break-all;display: inline-block;text-align: left;min-height: 150px;}
+.intros-wrap>.intro-wrap>.intro-text{width:48%;padding:5px;word-break: break-all;display: inline-block;text-align: left;height: 150px;;overflow:hidden}
 .intros-wrap>.intro-wrap>button{float: right;width: 50%}
 .intro-rank-list{margin-top:20px;}
 .intro-rank-list>.list-name{border-bottom: 1px solid #e90304}
@@ -391,6 +392,8 @@ nav ul{list-style: none}
 .rank-rule>.rule-text{word-break:break-all;min-height:300px;border-left:1px solid rgba(0, 0, 0, 0.1);border-right:1px solid rgba(0, 0, 0, 0.1);border-bottom:1px solid rgba(0, 0, 0, 0.1);}
 .rank-rule .list-name,.last-rank .list-name{border-bottom: 1px solid #e90304}
 .date-list{width:100%;padding:10px 5px;margin:0px;border-top:1px solid rgba(0, 0, 0, 0.1);border-left:1px solid rgba(0, 0, 0, 0.1);border-right:1px solid rgba(0, 0, 0, 0.1);}
+.date-list .el-radio-button.danger-radio{margin:0px 5px}
+.date-list .el-radio-button.danger-radio span.el-radio-button__inner{padding:10px 20px}
 .type-rank-list{max-width: 98%}
 /*recommendrank end*/
 
@@ -485,8 +488,11 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .achive-list .two-colums-to-one>div{text-align: right}
 .achive-list .two-colums-to-one span{text-align:left;padding:10px 0px}
 .left-menu-table{padding-left:80px;position: relative}
-.left-menu-table>ul{list-style: none;margin:0px;padding:5px 0px;position: absolute;left:0px;top:0px;text-align: center}
-.left-menu-table>ul>li{padding:10px 0px}
+.left-menu-table>.left-menus{width:80px;list-style: none;margin:0px;padding:5px 0px;position: absolute;left:0px;top:0px;text-align: center}
+.left-menu-table>.left-menus>.radio-list{width:80px;text-align: center}
+.left-menu-table>.left-menus>.radio-list>.el-radio-button{margin:5px 0px;}
+.left-menu-table>.left-menus>.radio-list>.el-radio-button>span{padding:10px 12px}
+.left-menu-table>.left-menus>li{padding:10px 0px}
 /*personinfo end*/
 
 /*personfocus start*/

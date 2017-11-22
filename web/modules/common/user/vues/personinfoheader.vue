@@ -2,7 +2,7 @@
     <div class="person-info text-center">
         <div class="common-info row-new">
             <div class="short-info-wrap">
-                <img src="web/resources/img/index/u170.jpg"/>
+                <img src="/web/resources/img/index/u170.jpg"/>
                 <div class="short-info">
                     <span class="name">用户名</span>
                     <i class="fa fa-mars"></i>

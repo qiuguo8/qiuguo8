@@ -1,6 +1,8 @@
 ##ignore this file##
 /node_modules/
-/web/bundle/ 
+/web/bundle/
+/app/
+/config/app/ 
 .classpath
 .project
 .settings      

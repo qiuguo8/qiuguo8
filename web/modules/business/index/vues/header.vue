@@ -11,11 +11,11 @@
                 </div>
                 <ul class="user-menu-list" ref="userlist">
                     <router-link tag="li" :to="{name:'person-info'}" active-class="active" class="transition-halfs">个人中心</router-link>
-                    <router-link tag="li" :to="{name:'person-focus'}" class="transition-halfs">我的关注</router-link>
-                    <router-link tag="li" :to="{name:'recommend-record'}" class="transition-halfs">购买记录</router-link>
-                    <router-link tag="li" :to="{name:'person-message'}" class="transition-halfs">我的消息</router-link>
-                    <router-link tag="li" :to="{name:'recharge'}" class="transition-halfs">充值</router-link>
-                    <router-link tag="li" :to="{name:'withdraw'}"li class="transition-halfs">提现</router-link>
+                    <router-link tag="li" :to="{name:'person-focus'}" active-class="active" class="transition-halfs">我的关注</router-link>
+                    <router-link tag="li" :to="{name:'recommend-record'}" active-class="active" class="transition-halfs">购买记录</router-link>
+                    <router-link tag="li" :to="{name:'person-message'}" active-class="active" class="transition-halfs">我的消息</router-link>
+                    <router-link tag="li" :to="{name:'recharge'}" active-class="active" class="transition-halfs">充值</router-link>
+                    <router-link tag="li" :to="{name:'withdraw'}" active-class="active" class="transition-halfs">提现</router-link>
                     <li @click="isLogout()" class="transition-halfs">退出</li>
                 </ul>
             </div>
