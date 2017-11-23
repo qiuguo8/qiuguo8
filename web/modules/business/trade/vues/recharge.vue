@@ -17,11 +17,10 @@
                         </el-form-item>
                         <el-form-item required label="选择银行" prop="bank">
                             <el-radio-group v-model="chargeForm.bank" size="normal">
-                                <el-radio label="1" border>
+                                <!-- <el-radio label="1" border>
                                     选项1
-                                    <!-- <img src="/web/resources/img/index/user-img.png"/> -->
                                 </el-radio>
-                                <el-radio label="2" border>备选项2</el-radio>
+                                <el-radio label="2" border>备选项2</el-radio> -->
                                 <div class="weixin-pay">
                                     <el-radio label="weixin" border>微信支付</el-radio>
                                 </div>

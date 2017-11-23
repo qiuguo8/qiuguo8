@@ -1,5 +1,13 @@
 <template>
     <div class="person-focus">
+        <div class="select-list content-wrap text-left">
+            <el-radio-group v-model="radioVal" class="radio-list">
+                <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+            </el-radio-group>
+        </div>
         <div class="focus-wrap el-col-24 text-center transition-halfs">
             <div class="short-info-wrap float-left-to-none">
                 <img src="web/resources/img/index/u170.jpg"/>
@@ -105,19 +113,26 @@
                 </ul>
             </div>
         </div>
+        <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="void 0" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+            <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
+            <span v-show="!busy">加载更多</span>
+        </div>
     </div>
 </template>
 <script>
 import Vue from 'vue'
-import {Button,Rate} from 'element-ui'
+import {Button,Rate,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Button.name,Button);
 Vue.component(Rate.name,Rate);
+Vue.component(RadioButton.name,RadioButton);
+Vue.component(RadioGroup.name,RadioGroup);
 import comVue from 'web/modules/commonVue.js'
 
 export default {
     data(){
         return{
-            value5:3.8
+            value5:3.8,
+            radioVal:'1'
         }
     },
     beforeRouteLeave(to,from,next){

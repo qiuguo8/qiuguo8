@@ -20,8 +20,9 @@
                     <el-radio-button label="true">全场</el-radio-button>
                     <el-radio-button label="false">半场</el-radio-button>
                 </el-radio-group>
+                <button class="btn btn-padding btn-orange float-right" @click="showCheckList()"><i :class="isShowCheckList?'fa fa-chevron-circle-down rotate-180 transition-halfs':'transition-halfs fa fa-chevron-circle-down'"></i>赛事选择</button>
             </div>
-            <div class="match-select">
+            <div class="match-select" v-if="isShowCheckList">
                 <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
                     <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
                 </el-checkbox-group>
@@ -109,10 +110,14 @@ export default {
                         {index:'3',reward:'xx'},
                         {index:'4',reward:'xx'},
                         {index:'5',reward:'xx'}],
-            radioVal:'1'
+            radioVal:'1',
+            isShowCheckList:false
         }
     },
     methods: {
+        showCheckList(){
+            this.isShowCheckList = !this.isShowCheckList;
+        },
         handleAlterCheckChange(val){
             var alter = [];
             var tmp = this.checkedCities;

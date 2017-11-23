@@ -20,6 +20,14 @@ const routes = [
             component:resolve => require(['modules/common/user/vues/register.vue'],resolve)
         },
         {
+            path:'/user-guides',
+            name:'user-guides',
+            meta:{
+                aliasName:'使用帮助'
+            },
+            component:resolve => require(['modules/business/common/vues/userguide.vue'],resolve)
+        },
+        {
             path:'/business-index',
             name:'business-index',
             meta:{

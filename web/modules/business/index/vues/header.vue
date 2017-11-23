@@ -28,7 +28,7 @@
                     <router-link tag="li" :to="{name:'send-recommend'}" active-class="active" class="transition-halfs">发推荐</router-link>
                     <router-link tag="li" :to="{name:'in-time-goal'}" active-class="active" class="transition-halfs">即时比分</router-link>
                     <!-- <li>优惠活动</li> -->
-                    <li class="transition-halfs">使用帮助</li>
+                    <router-link tag="li" :to="{name:'user-guides'}" active-class="active" class="transition-halfs">使用帮助</router-link>
                     <li class="transition-halfs" @click="showLogin()">登录</li>
                     <router-link tag="li" :to="{name:'register'}" class="transition-halfs">注册</router-link>
                 </ul>

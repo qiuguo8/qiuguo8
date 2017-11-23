@@ -1,8 +1,8 @@
 <template>
     <div class="register">
-        <div class="register-wrap content-wrap content-60-to-100 float-left">
+        <div class="register-wrap content-wrap content-75-to-100 text-left">
             <div class="label-tip row-new">
-                <h2 class="float-left">欢迎注册FOX推荐账号</h2>
+                <h2 class="float-left">欢迎注册球果吧账号</h2>
                 <p class="float-right" @click="showLogin()">已是用户，马上登录</p>
             </div>
             <div class="clear-fix"></div>
@@ -33,9 +33,9 @@
                 </el-form>
             </div>
         </div>
-        <div class="register-img float-left content-wrap content-40-to-100">
+        <!-- <div class="register-img float-left content-wrap content-40-to-100">
             <img src="/web/resources/img/index/u170.jpg"/>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>

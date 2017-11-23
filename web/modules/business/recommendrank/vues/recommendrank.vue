@@ -35,7 +35,11 @@
                     <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="recommend" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
-                <div class="page-block text-center">
+                <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+                    <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
+                    <span v-show="!busy">加载更多</span>
+                </div>
+                <!-- <div class="page-block text-center">
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
@@ -45,7 +49,7 @@
                     layout=" prev, pager, next"
                     :total="400">
                     </el-pagination>
-                </div>
+                </div> -->
             </div>
             <div class="content-wrap rank-common float-right rank-rule content-25-to-100">
                 <div class="list-name"><span>排行规则</span></div>
@@ -95,13 +99,33 @@ export default {
                         {index:'2',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
                         {index:'3',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
                         {index:'4',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
+                        {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'},
                         {index:'5',recommender:'xx',number:'7胜3负',winpercent:'80%',recommend:'xxxxxx'}],
             tableData4:[{index:'1',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
                         {index:'2',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
                         {index:'3',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
                         {index:'4',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'},
                         {index:'5',userName:'xx',userType:'7胜3负',achivement:'8/0/1',winpercent:'80%'}],
-            radioVal:'1'
+            radioVal:'1',
+            list:[],
+        }
+    },
+    methods:{
+        loadMore(){
+            // console.log('loanMore');
+            if(this.list.length<this.tableData3.length){
+                this.list = this.list.concat(this.tableData3.slice(0,10));
+            }
+            // console.log(this.list);
         }
     }
 }

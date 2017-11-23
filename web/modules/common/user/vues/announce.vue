@@ -3,9 +3,9 @@
         <div class="get-url-wrap">
             <label class="el-col-3" style="min-width:80px">代理链接：</label>
             <span class="el-col-8">
-                <el-input></el-input>
+                <el-input ref="spreadUrl" :disabled="true" v-model="spreadUrl"></el-input>
             </span>
-            <el-button>复制</el-button>
+            <el-button @click="copyUrl()">复制</el-button>
         </div>
         <div class="user-list">
             <div class="label-wrap">
@@ -46,6 +46,16 @@ export default {
                         {userName:'1',money:'xx',registerTime:'7胜3负',lastLoginTime:'80%'},
                         {userName:'1',money:'xx',registerTime:'7胜3负',lastLoginTime:'80%'},
                         {userName:'1',money:'xx',registerTime:'7胜3负',lastLoginTime:'80%'},],
+            spreadUrl:''
+        }
+    },
+    methods:{
+        copyUrl(){
+            // console.log(this.$refs.spreadUrl);
+            var $input = $(this.$refs.spreadUrl.$refs.input);
+            $input.select();
+            document.execCommand('Copy');
+            //window.clipboardData.setData('Text',this.spreadUrl);
         }
     }
 }

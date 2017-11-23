@@ -82,6 +82,7 @@
         <div class="left-aside">
             最热推荐
         </div>
+        <div :style="{width:(270*tableData3.length)+'px',height:'100%'}">
         <div class="intro-wrap intro-wrap-index transition-halfs">
             <div class="match-name">曼城VS曼联</div>
             <div class="intro-info">
@@ -92,7 +93,7 @@
             <div class="intro-text">
                 xxxxxxx
             </div>
-            <el-button type="danger">200</el-button>
+            <el-button type="warning">200</el-button>
         </div>
         <div class="intro-wrap intro-wrap-index transition-halfs">
             <div class="match-name">曼城VS曼联</div>
@@ -103,7 +104,7 @@
             <div class="intro-text">
                 xxxxxxx
             </div>
-            <el-button type="danger">200</el-button>
+            <el-button type="warning">200</el-button>
         </div>
         <div class="intro-wrap intro-wrap-index transition-halfs">
             <div class="match-name">曼城VS曼联</div>
@@ -114,7 +115,7 @@
             <div class="intro-text">
                 xxxxxxx
             </div>
-            <el-button type="danger">200</el-button>
+            <el-button type="warning">200</el-button>
         </div>
         <div class="intro-wrap intro-wrap-index transition-halfs">
             <div class="match-name">曼城VS曼联</div>
@@ -125,7 +126,8 @@
             <div class="intro-text">
                 xxxxxxx
             </div>
-            <el-button type="danger">200</el-button>
+            <el-button type="warning">200</el-button>
+        </div>
         </div>
     </div>
     <div class="el-col-24 content-wrap text-center transition-halfs">

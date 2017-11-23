@@ -24,7 +24,7 @@
                 </el-select>
             </div>   
             <div class="form-control el-col-12">
-                <label class="el-col-8">推荐状态</label>
+                <label class="el-col-8">推荐时间</label>
                 <div class="el-col-16">
                     <mu-date-picker v-model="selectDate" hintText="选择时间"/>
                 </div>

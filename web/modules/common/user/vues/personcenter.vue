@@ -10,6 +10,7 @@
             <router-link tag="li" :to="{name:'withdraw'}" active-class="active" class="transition-halfs">我要提现</router-link>
             <router-link tag="li" :to="{name:'user-announce'}" active-class="active" class="transition-halfs">我要推广</router-link>
             <router-link tag="li" :to="{name:'money-flow-detail'}" active-class="active" class="transition-halfs">资金明细</router-link>
+            <li class="transition-halfs">后台管理</li>
             <div class="left-side-btn hor-ver-mid">个人中心菜单</div>
         </ul>
         <div class="content-wrap content-75-to-100 float-left">

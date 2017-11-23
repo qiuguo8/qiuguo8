@@ -187,6 +187,11 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .page-block .el-pager>li:not(.active):hover{color:#e90304;}
 .page-block>.el-pagination>button{min-width: 30px}
 .page-block>.el-pagination>button:hover{color:#e90304}
+
+.avatar-uploader .el-upload {border: 1px dashed #d9d9d9; border-radius: 6px;cursor: pointer;position: relative;overflow: hidden;}
+.avatar-uploader .el-upload:hover { border-color: #409EFF;}
+.avatar-uploader .avatar-uploader-icon {font-size: 28px;color: #8c939d;width: 178px;height: 178px;line-height: 178px;text-align: center;line-height: 6}
+.avatar {width: 178px; height: 178px; display: block;}
 /*重写ui框架css end*/
 
 /*infinite-scroll start*/
@@ -251,10 +256,10 @@ nav ul{list-style: none}
     .header-container>nav .user-info:hover ul{display: block;}
 }
 @media(min-width:1360px){
-    .header-container>nav .header-menu{padding:0px;box-shadow:initial}
+    .header-container>nav .header-menu{padding:0px;box-shadow:initial;height:70px;position: relative;top:-5px}
     .header-container>nav .header-menu-icon{display: none}
-    .header-container>nav .header-menu-list{width:auto;display:block;position: relative;top:0px;left:0px;box-shadow: none}
-    .header-container>nav .header-menu-list>li{float: left;margin:0px 10px}
+    .header-container>nav .header-menu-list{padding:0px;width:auto;display:block;position: relative;top:-3px;left:0px;box-shadow: none}
+    .header-container>nav .header-menu-list>li{float: left;margin:0px 10px;padding:25px 15px 24px}
     .header-container>nav .header-menu:hover ul{display: block;}
     .header-container>nav .user-info:hover ul{display: block;}
 }
@@ -342,19 +347,24 @@ nav ul{list-style: none}
 .select-types>.types-list .radio-list>.el-radio-button{margin:10px}
 .select-types>.types-list>li{display: inline-block;padding:10px;margin:3px;cursor: pointer}
 .select-types>.types-list>li:hover{background-color:#e90304;color:#fff;border-radius: 3px}
+.types-list>.radio-list>button.select-matches{color:#000;font-size:14px;padding:12px 20px;margin:0px 10px;position:relative;top:5px;background-color: #fff;}
+.types-list>.radio-list>button.select-matches:hover{color:#e90304}
+.types-list>.radio-list>button.select-matches.selected{color:#fff;background-color: #e90304}
 .search-input{display: inline-block;padding:5px 0px;}
 .types-select{margin-left:0px;margin-right:0px;}
 .intros-wrap{margin-top: 20px;;position: relative}
-.intros-wrap-index{padding-left:65px}
-.intros-wrap>.intro-wrap{float:left;display: inline-block;width:250px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
-.intros-wrap>.intro-wrap-index{width:230px;margin:10px}
-.intros-wrap>.intro-wrap:hover{box-shadow: 0px 3px 7px 5px rgba(0, 0, 0, 0.1)}
-.intros-wrap>.intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
-.intros-wrap>.intro-wrap>.intro-info{width:48%;position: relative;float: left}
-.intros-wrap>.intro-wrap>.intro-info>img{width:100%;height: 90px}
-.intros-wrap>.intro-wrap>.intro-info>button{width:100%}
-.intros-wrap>.intro-wrap>.intro-text{width:48%;padding:5px;word-break: break-all;display: inline-block;text-align: left;height: 150px;;overflow:hidden}
-.intros-wrap>.intro-wrap>button{float: right;width: 50%}
+.intros-wrap-index{padding-left:65px;width:100%;height:280px;overflow-y: hidden;overflow-x: auto}
+.intros-wrap .intro-wrap{float:left;display: inline-block;width:250px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
+.intros-wrap .intro-wrap-index{width:230px;margin:10px}
+.intros-wrap .intro-wrap:hover{box-shadow: 0px 3px 7px 5px rgba(0, 0, 0, 0.1)}
+.intros-wrap .intro-wrap>button{background-color: rgba(255, 102, 51, 0.8);border-color:rgba(255, 102, 51, 0.7)}
+.intros-wrap .intro-wrap>button:hover{background-color: rgba(255, 102, 51, 1);}
+.intros-wrap .intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
+.intros-wrap .intro-wrap>.intro-info{width:48%;position: relative;float: left}
+.intros-wrap .intro-wrap>.intro-info>img{width:100%;height: 90px}
+.intros-wrap .intro-wrap>.intro-info>button{width:100%}
+.intros-wrap .intro-wrap>.intro-text{width:48%;padding:5px;word-break: break-all;display: inline-block;text-align: left;height: 150px;;overflow:hidden}
+.intros-wrap .intro-wrap>button{float: right;width: 50%}
 .intro-rank-list{margin-top:20px;}
 .intro-rank-list>.list-name{border-bottom: 1px solid #e90304}
 @media(min-width:312px){
@@ -399,6 +409,9 @@ nav ul{list-style: none}
 
 /*sendrecommend start*/
 .match-time{border: 1px solid rgba(0, 0, 0, 0.1);width: 100%;margin:0px;padding:10px}
+.match-time>button{padding:10px 20px;margin:3px 10px;border-radius:3px}
+.match-time>button>.fa{margin:0px 10px 0px 0px;font-size:19px;position:relative;top:3px;transform: rotateZ(0deg);-webkit-transform: rotateZ(0deg);-moz-transform: rotateZ(0deg);-o-transform: rotateZ(0deg);transform-origin: 50% 50%;-webkit-transform-origin: 50% 50%;-moz-transform-origin: 50% 50%;-o-transform-origin: 50% 50%}
+.match-time>button>.fa.rotate-180{transform: rotateZ(180deg);-webkit-transform: rotateZ(180deg);-moz-transform: rotateZ(180deg);-o-transform: rotateZ(180deg);}
 .match-time>.el-radio-group .el-radio-button__inner{padding:15px 25px;}
 /* .match-time>li>button{width: 120px;height: 50px}
 .match-time>li:hover{background:none;} */
@@ -420,6 +433,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .label-tip h2,.label-tip p{margin:16px 0px}
 .register-img{position: relative;padding:20px 5px}
 .register-img img{width: 100%;position: relative;height: 100%}
+.edit-form>.el-form>div:last-child button:last-child{margin-left:50px}
 /*register end*/
 
 /*login start*/
@@ -453,7 +467,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 }
 .common-info{margin-bottom:20px}
 .common-info .btn-list{text-align: center;padding:10px 0px}
-.common-info .btn-list button{margin:0px 15px}
+.common-info .btn-list button{margin:0px 9px}
 .short-info-wrap{border-bottom:1px solid rgba(0,0,0,0.1);display: inline-block;margin:0px 30px;text-align: center;padding:5px 0px}
 .short-info-wrap img{width:80px;height:80px;border-radius: 100%;}
 .short-info-wrap>.short-info{padding:5px;text-align: center}
@@ -463,10 +477,13 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .short-info-wrap>.short-info>.rank{font-size:12px;background-color:#f66008;color:#fff;padding:2px 3px;border-radius: 3px}
 .short-info-wrap>.other-info{color:#aaa;font-size:12px}
 .short-info-wrap>.other-info>i{padding:2px 0px 2px 3px}
-.short-info-wrap>.status{margin:3px;font-size:12px}
+.bottom-list{padding:10px 5px}
+.bottom-list .info-text{margin:3px;font-size:12px;width:165px;float:left}
 .achive-info{box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.05);padding:5px}
 .achive-info:hover{box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);}
-.two-colums-to-one>div:not(.btn-list){padding:15px 10px;margin:10px 1% 10px;width:48%;background-color: #eee;display: inline-block}
+.two-colums-to-one>div:nth-child(1),.two-colums-to-one>div:nth-child(2),.two-colums-to-one>div:nth-child(3){padding:15px 10px;margin:10px 1% 10px;width:48%;background-color: #eee;display: inline-block}
+.two-colums-to-one>div.btn-list{margin:10px 1% 10px;width:48%;display: inline-block}
+.two-colums-to-one>div.bottom-list>p{margin:0px;padding:3px;width:70%;height:40px;overflow: hidden;word-break: break-all}
 /*pensoncenter end*/
 
 /*personinfo start*/

@@ -43,7 +43,8 @@
                     <el-radio-button label="3" class="danger-radio small-checkbox">7天准确率</el-radio-button>
                     <el-radio-button label="4" class="danger-radio small-checkbox">30天准确率</el-radio-button>
                     <el-radio-button label="5" class="danger-radio small-checkbox">我的关注</el-radio-button>
-                    <el-radio-button label="6" class="danger-radio small-checkbox">指定赛事</el-radio-button>
+                    <!-- <el-radio-button :label="matchesVal" @change="showMatches()" class="danger-radio small-checkbox">指定赛事</el-radio-button> -->
+                    <button :class="radioVal.length>1?'btn select-matches selected':'btn select-matches'"  @click="showMatches()">指定赛事</button>
                 </el-radio-group>
             </div>
         </div>
@@ -75,17 +76,29 @@
                 <el-table-column prop="winpercent" label="胜率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
         </div>
+        <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches">
+            <el-checkbox-group v-model="matchesVal" size="small">
+                <el-checkbox v-for="item in matches" :key="item.val" :label="item.val" border>{{item.matchName}}</el-checkbox>
+            </el-checkbox-group>
+            <div slot="footer">
+                <el-button @click="isShowMatches=false">取消</el-button>
+                <el-button @click="selectedMatch()" type="primary">确定</el-button>
+            </div>
+        </el-dialog>
   </div>
 </template>
 <script>
 import Vue from 'vue'
-import {Input,Button,Table,TableColumn,RadioButton,RadioGroup} from 'element-ui'
+import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
 Vue.component(RadioButton.name, RadioButton)
 Vue.component(RadioGroup.name, RadioGroup)
+Vue.component(Dialog.name, Dialog)
+Vue.component(Checkbox.name, Checkbox)
+Vue.component(CheckboxGroup.name, CheckboxGroup)
 export default {
     data(){
         return{
@@ -105,7 +118,12 @@ export default {
                 {matchName:'曼城VS曼联',userInfo:'aaaaa',index:'8'},
             ],
             list:[],
-            radioVal:'1'
+            radioVal:'1',
+            matches:[
+                {matchName:'曼城VS曼联',val:'11'},{matchName:'曼城V拜仁',val:'22'},{matchName:'曼城VS热刺',val:'33'},{matchName:'利物浦VS曼联',val:'44'}
+            ],
+            matchesVal:[],
+            isShowMatches:false,
         }
     },
     methods:{
@@ -115,6 +133,13 @@ export default {
                 this.list = this.list.concat(this.total.slice(0,4));
             }
             // console.log(this.list);
+        },
+        showMatches(){
+            this.isShowMatches = true;
+        },
+        selectedMatch(){
+            this.isShowMatches = false;
+            this.radioVal = this.matchesVal;
         }
     }
 }
