@@ -24,7 +24,9 @@
                     <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
                 </el-radio-group>
             </div>
-            <ul class="achive-rank-list">
+            <div class="achive-rank-list" ref="achiveRank">
+                <div class="scroll-bar"></div>
+                <ul scroll-content style="position:relative;margin:0px;padding:0px">
                 <li class="content-wrap content-100-to-50">
                     <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
                     <span class="el-col-12 user-name text-elipse">对对对点</span>
@@ -75,59 +77,63 @@
                     <span class="el-col-12 user-name">对对对点</span>
                     <span class="el-col-8 achive">100/110/100</span>
                 </li>
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="intros-wrap intros-wrap-index content-wrap">
         <div class="left-aside">
             最热推荐
         </div>
-        <div :style="{width:(270*tableData3.length)+'px',height:'100%'}">
-        <div class="intro-wrap intro-wrap-index transition-halfs">
-            <div class="match-name">曼城VS曼联</div>
-            <div class="intro-info">
-                <img src="/web/resources/img/index/logo.jpg"/>
-                <el-button type="success" v-if="false">已关注</el-button>
-                <button class="el-button btn-orange">关注</button>
+        <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
+            <div class="scroll-bar"></div>
+            <div scroll-content :style="{width:(270*tableData3.length)+'px',height:'100%',position:'relative'}">
+                <div class="intro-wrap intro-wrap-index transition-halfs">
+                    <div class="match-name">曼城VS曼联</div>
+                    <div class="intro-info">
+                        <img src="/web/resources/img/index/logo.jpg"/>
+                        <el-button type="success" v-if="false">已关注</el-button>
+                        <button class="el-button btn-orange">关注</button>
+                    </div>
+                    <div class="intro-text">
+                        xxxxxxx
+                    </div>
+                    <el-button type="warning">200</el-button>
+                </div>
+                <div class="intro-wrap intro-wrap-index transition-halfs">
+                    <div class="match-name">曼城VS曼联</div>
+                    <div class="intro-info">
+                        <img src="/web/resources/img/index/logo.jpg"/>
+                        <el-button type="success">已关注</el-button>
+                    </div>
+                    <div class="intro-text">
+                        xxxxxxx
+                    </div>
+                    <el-button type="warning">200</el-button>
+                </div>
+                <div class="intro-wrap intro-wrap-index transition-halfs">
+                    <div class="match-name">曼城VS曼联</div>
+                    <div class="intro-info">
+                        <img src="/web/resources/img/index/logo.jpg"/>
+                        <el-button type="success">已关注</el-button>
+                    </div>
+                    <div class="intro-text">
+                        xxxxxxx
+                    </div>
+                    <el-button type="warning">200</el-button>
+                </div>
+                <div class="intro-wrap intro-wrap-index transition-halfs">
+                    <div class="match-name">曼城VS曼联</div>
+                    <div class="intro-info">
+                        <img src="/web/resources/img/index/logo.jpg"/>
+                        <el-button type="success">已关注</el-button>
+                    </div>
+                    <div class="intro-text">
+                        xxxxxxx
+                    </div>
+                    <el-button type="warning">200</el-button>
+                </div>
             </div>
-            <div class="intro-text">
-                xxxxxxx
-            </div>
-            <el-button type="warning">200</el-button>
-        </div>
-        <div class="intro-wrap intro-wrap-index transition-halfs">
-            <div class="match-name">曼城VS曼联</div>
-            <div class="intro-info">
-                <img src="/web/resources/img/index/logo.jpg"/>
-                <el-button type="success">已关注</el-button>
-            </div>
-            <div class="intro-text">
-                xxxxxxx
-            </div>
-            <el-button type="warning">200</el-button>
-        </div>
-        <div class="intro-wrap intro-wrap-index transition-halfs">
-            <div class="match-name">曼城VS曼联</div>
-            <div class="intro-info">
-                <img src="/web/resources/img/index/logo.jpg"/>
-                <el-button type="success">已关注</el-button>
-            </div>
-            <div class="intro-text">
-                xxxxxxx
-            </div>
-            <el-button type="warning">200</el-button>
-        </div>
-        <div class="intro-wrap intro-wrap-index transition-halfs">
-            <div class="match-name">曼城VS曼联</div>
-            <div class="intro-info">
-                <img src="/web/resources/img/index/logo.jpg"/>
-                <el-button type="success">已关注</el-button>
-            </div>
-            <div class="intro-text">
-                xxxxxxx
-            </div>
-            <el-button type="warning">200</el-button>
-        </div>
         </div>
     </div>
     <div class="el-col-24 content-wrap text-center transition-halfs">
@@ -244,6 +250,7 @@
 </template>
 <script>
 import Vue from 'vue';
+import scrollBar from 'web/common/utils/scrollUtil.js';
 import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Carousel.name, Carousel)
 Vue.component(CarouselItem.name, CarouselItem)
@@ -265,5 +272,9 @@ export default {
             radioVal:'1'
         }
     },
+    mounted(){
+        $(this.$refs.achiveRank).scrollBar();
+        $(this.$refs.introWrap).scrollBar({direction:'horizontal'});
+    }
 }
 </script>
