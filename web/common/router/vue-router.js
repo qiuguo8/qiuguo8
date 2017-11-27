@@ -68,6 +68,121 @@ const routes = [
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         },
         {
+            path:'/manager-center',
+            name:'manager-center',
+            component:resolve => require(['modules/manage/managercenter/vues/managercenter.vue'],resolve),
+            children:[
+                {
+                    path:'/',
+                    redirect:'/manager-index'
+                },
+                {
+                    path:'/manager-index',
+                    name:'manager-index',
+                    meta:{
+                        aliasName:'管理员首页'
+                    },
+                    component:resolve => require(['modules/manage/managerIndex/vues/managerIndex.vue'],resolve),
+                },
+                {
+                    path:'/user-manage',
+                    name:'user-manage',
+                    meta:{
+                        aliasName:'用户管理'
+                    },
+                    component:resolve => require(['modules/manage/usermanage/vues/usermanage.vue'],resolve),
+                },
+                {
+                    path:'/account-manage',
+                    name:'account-manage',
+                    meta:{
+                        aliasName:'账号管理'
+                    },
+                    component:resolve => require(['modules/manage/accountmanage/vues/accountmanage.vue'],resolve),
+                },
+                {
+                    path:'/fund-manage',
+                    name:'fund-manage',
+                    meta:{
+                        aliasName:'资金变动管理'
+                    },
+                    component:resolve => require(['modules/manage/fundmanage/vues/fundmanage.vue'],resolve),
+                },
+                {
+                    path:'/freeze-manage',
+                    name:'freeze-manage',
+                    meta:{
+                        aliasName:'冻结管理'
+                    },
+                    //component:resolve => require(['modules/manage/fundmanage/vues/fundmanage.vue'],resolve),
+                },
+                {
+                    path:'/withdraw-manage',
+                    name:'withdraw-manage',
+                    meta:{
+                        aliasName:'提现管理'
+                    },
+                    component:resolve => require(['modules/manage/fundmanage/vues/withdrawmanage.vue'],resolve),
+                },
+                {
+                    path:'/recharge-manage',
+                    name:'recharge-manage',
+                    meta:{
+                        aliasName:'充值管理'
+                    },
+                    component:resolve => require(['modules/manage/fundmanage/vues/rechargemanage.vue'],resolve),
+                },
+                {
+                    path:'/match-manage',
+                    name:'match-manage',
+                    meta:{
+                        aliasName:'比赛管理'
+                    },
+                    component:resolve => require(['modules/manage/matchmanage/vues/matchmanage.vue'],resolve),
+                },
+                {
+                    path:'/recommend-manage',
+                    name:'recommend-manage',
+                    meta:{
+                        aliasName:'推荐管理'
+                    },
+                    component:resolve => require(['modules/manage/recommendmanage/vues/recommendmanage.vue'],resolve),
+                },
+                {
+                    path:'/order-manage',
+                    name:'order-manage',
+                    meta:{
+                        aliasName:'订单管理'
+                    },
+                    component:resolve => require(['modules/manage/ordermanage/vues/ordermanage.vue'],resolve),
+                },
+                {
+                    path:'/advertise-manage',
+                    name:'advertise-manage',
+                    meta:{
+                        aliasName:'广告配置'
+                    },
+                    component:resolve => require(['modules/manage/advertisemanage/vues/advertisemanage.vue'],resolve),
+                },
+                {
+                    path:'/article-manage',
+                    name:'article-manage',
+                    meta:{
+                        aliasName:'文章管理'
+                    },
+                    component:resolve => require(['modules/manage/articlemanage/vues/articlemanage.vue'],resolve),
+                },
+                {
+                    path:'/rules-manage',
+                    name:'rules-manage',
+                    meta:{
+                        aliasName:'规则管理'
+                    },
+                    component:resolve => require(['modules/manage/rulesmanage/vues/rulesmanage.vue'],resolve),
+                },
+            ]
+        },
+        {
             path:'/person-center',
             name:'person-center',
             component:resolve => require(['modules/common/user/vues/personcenter.vue'],resolve),

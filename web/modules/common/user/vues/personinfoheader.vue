@@ -21,13 +21,13 @@
                 </div>
             </div>
             <div class="content-55-to-55 text-left two-colums-to-one achive-info transition-halfs">
-                <div class="float-left">
+                <div class="float-left info-bar">
                     当前级别：专家级
                 </div>
-                <div class="float-left">
+                <div class="float-left info-bar">
                     当前星级：一星
                 </div>
-                <div class="float-left">
+                <div class="float-left info-bar">
                     球果余额：16554984.12
                 </div>
                 <div class="btn-list">

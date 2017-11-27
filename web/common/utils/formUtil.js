@@ -52,6 +52,16 @@ const formUtil = {
             }
             callback();
         }
+    },
+    isMobileNo(mess){
+        return (rule,value,callback)=>{
+            if(!validationUtil.isNull(value)){
+                if(!validationUtil.isMobileNo(value)){
+                    callback(new Error(mess));
+                }
+            }
+            callback();
+        }
     }
 }
 

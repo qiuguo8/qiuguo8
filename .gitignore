@@ -1,7 +1,7 @@
 ##ignore this file##
 /node_modules/
 /web/bundle/
-/app/
+/static/
 /config/app/ 
 .classpath
 .project

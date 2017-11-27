@@ -39,17 +39,20 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 
 @media(min-width:312px){
     .content-wrap{margin:0px 0px 20px;display: inline-block}
-    .content-25-to-50{width:98%;}
-    .content-30-to-50{width:98%;}
-    .content-30-to-100{width:98%;}
-    .content-75-to-100{width:98%;float:none}
-    .content-25-to-100{width:98%;}
-    .content-40-to-100{width:98%;}
-    .content-50-to-100{width:98%;display: block;}
-    .content-60-to-100{width:98%;display: block;}
+    .content-25-to-50{width:100%;}
+    .content-30-to-50{width:100%;}
+    .content-30-to-100{width:100%;}
+    .content-75-to-100{width:100%;float:none}
+    .content-25-to-100{width:100%;}
+    .content-40-to-100{width:100%;}
+    .content-40-to-40{width:98%;}
+    .content-40-to-40-full{width:100%;}
+    .content-50-to-100{width:100%;display: block;}
+    .content-60-to-100{width:100%;display: block;}
     .content-60-to-60{width:98%;display: inline-block}
-    .content-55-to-55{width:98%;display: inline-block}
-    .content-100-to-50{width:98%;display: block;float:none}
+    .content-60-to-60-full{width:100%;display: inline-block}
+    .content-55-to-55{width:100%;display: inline-block}
+    .content-100-to-50{width:100%;display: block;float:none}
     .content-mid-100{width:100%}
     .float-left-to-100{float:none;width: 100%}
     .float-left-to-none{float:none;}
@@ -64,10 +67,13 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-30-to-50{width:48%;}
     .content-30-to-100{width:98%;}
     .content-40-to-100{width:98%;}
+    .content-40-to-40{width:38%;}
+    .content-40-to-40-full{width:40%;}
     .content-75-to-100{width:98%;float:none}
     .content-50-to-100{width:98%;display: block;max-width: 640px}
     .content-60-to-100{width:98%;display: block;}
     .content-60-to-60{width:58%;display: inline-block}
+    .content-60-to-60-full{width:60%;display: inline-block}
     .content-55-to-55{width:55%;display: inline-block}
     .content-100-to-50{width:48%;display: block;max-width: 640px;float:left}
     .content-mid-100{width:40%}
@@ -80,11 +86,14 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-25-to-100{width:23%;}
     .content-30-to-50{width:31%;}
     .content-30-to-100{width:31%;}
+    .content-40-to-40{width:38%;}
     .content-40-to-100{width:38%;}
+    .content-40-to-40-full{width:40%;}
     .content-75-to-100{width:73%;float:left}
     .content-50-to-100{width:48%;display: inline-block}
     .content-60-to-100{width:58%;display: inline-block}
     .content-60-to-60{width:58%;display: inline-block}
+    .content-60-to-60-full{width:60%;display: inline-block}
     .content-100-to-50{width:98%;display: inline-block;float: none}
     .content-mid-100{width:45%}
 }
@@ -103,6 +112,8 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .rank-common,.rank-text{margin-bottom:20px}
 .rank-common>.list-name{padding:10px 0px 9px;letter-spacing: 3px;text-align: center}
 .rank-common>.list-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
+.rank-common>.left-name{padding:10px 0px 9px;letter-spacing: 3px;}
+.rank-common>.left-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
 .rank-text{}
 .rank-text>.list-name{padding:10px 0px;letter-spacing:3px;}
 .rank-text>.list-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
@@ -264,7 +275,7 @@ nav ul{list-style: none}
     .header-container>nav .header-menu{padding:0px;box-shadow:initial;height:70px;position: relative;top:-5px}
     .header-container>nav .header-menu-icon{display: none}
     .header-container>nav .header-menu-list{padding:0px;width:auto;display:block;position: relative;top:-3px;left:0px;box-shadow: none}
-    .header-container>nav .header-menu-list>li{float: left;margin:0px 10px;padding:25px 15px 24px}
+    .header-container>nav .header-menu-list>li{float: left;margin:0px 10px;padding:25px 15px 25px}
     .header-container>nav .header-menu:hover ul{display: block;}
     .header-container>nav .user-info:hover ul{display: block;}
 }
@@ -283,7 +294,7 @@ nav ul{list-style: none}
 /*业务页面脚部菜单 end*/
 
 /*首页 start*/
-.index-container{margin-top:80px;padding:0px 5px;min-height: 500px}
+.index-container{margin-top:80px;padding:0px 5px;min-height: 650px}
 .carousel-wrap{position: absolute;display: inline-block;width:100%;max-width:640px;}
 .carousel-wrap>.el-carousel>.el-carousel__container{height:360px}
 .normal-news{width:100%;padding:0px 10px}
@@ -349,7 +360,7 @@ nav ul{list-style: none}
 .select-types{margin-bottom:2px;border-bottom:1px solid rgba(255, 102, 51, 1);}
 .sort-types{border-bottom:1px solid rgba(255, 102, 51, 1)}
 .select-types>.types-label{padding:15px;font-size: 14px;display: inline-block;font-weight: bold;float:left}
-.select-types>.types-list{list-style: none;margin:0px;display: inline-block;width:75%;padding-left:10px}
+.select-types>.types-list{list-style: none;margin:0px;display: inline-block;width:75%;padding:0px 0px 5px 10px}
 .select-types>.types-list .radio-list>.el-radio-button{margin:10px}
 .select-types>.types-list>li{display: inline-block;padding:10px;margin:3px;cursor: pointer}
 .select-types>.types-list>li:hover{background-color:#e90304;color:#fff;border-radius: 3px}
@@ -487,7 +498,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .bottom-list .info-text{margin:3px;font-size:12px;width:165px;float:left}
 .achive-info{box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.05);padding:5px}
 .achive-info:hover{box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);}
-.two-colums-to-one>div:nth-child(1),.two-colums-to-one>div:nth-child(2),.two-colums-to-one>div:nth-child(3){padding:15px 10px;margin:10px 1% 10px;width:48%;background-color: #eee;display: inline-block}
+.two-colums-to-one>div.info-bar{padding:15px 10px;margin:10px 1% 10px;width:48%;background-color: #eee;display: inline-block}
 .two-colums-to-one>div.btn-list{margin:10px 1% 10px;width:48%;display: inline-block}
 .two-colums-to-one>div.bottom-list>p{margin:0px;padding:3px;width:70%;height:40px;overflow: hidden;word-break: break-all}
 /*pensoncenter end*/
@@ -547,8 +558,10 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 /*recommendrecord start*/
 .recommend-record .hor-ver-mid{position: fixed;z-index:1300}
 .row-new .form-control label{padding:10px;}
+.row-new .form-control .mid-word{padding:10px 5px}
 .row-new .form-control{margin-bottom: 10px}
-.form-control .mu-date-picker,.form-control .mu-date-picker>.mu-text-field{width:100%}
+.form-control .mu-date-picker,.form-control .mu-date-picker>.mu-text-field{width:100%;margin-bottom:0px;min-height:40px}
+.mu-date-picker .mu-text-field-content{padding:0px}
 .mu-date-picker .mu-text-field-content>.mu-text-field-hint{font-size:14px;padding:5px 15px;line-height:30px;color:#d8dce4}
 .mu-date-picker .mu-text-field-content>.mu-text-field-input{border-radius:5px;border:1px solid #d8dce5;height:40px;padding:0px 15px}
 .mu-date-picker .mu-text-field-content>div:last-child>.mu-text-field-line{height: 0px}

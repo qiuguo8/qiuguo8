@@ -47,6 +47,12 @@ function isMoney(val){
     return result;
 }
 
+function isMobileNo(val){
+    var reg = /^1[0-9]{10}$/g;
+    var result = reg.exec(val);
+    return result;
+}
+
 const validationUtil = {
     isNull:isNull,
     isNumber:isNumber,
@@ -54,7 +60,8 @@ const validationUtil = {
     hasLetter:hasLetter,
     hasNumber:hasNumber,
     pwdSafety:pwdSafety,
-    isMoney:isMoney
+    isMoney:isMoney,
+    isMobileNo:isMobileNo
 }
 
 export default validationUtil;
