@@ -28,7 +28,7 @@ var loadingTimer;
 
 var router =  new VueRouter({
 	mode:'history',
-	routes:routes
+	routes:routes,
 });
 routerUtil(router);
 var vue = new Vue({
@@ -47,6 +47,11 @@ var vue = new Vue({
 	},
 	components:{
 		LoadingBar:vueLoadingBar
+	},
+	methods:{
+		goBack(){
+			history.go(-1);
+		}
 	}
 }).$mount("#vue-app");
 // console.log(vue);

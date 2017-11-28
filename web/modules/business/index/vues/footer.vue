@@ -7,13 +7,22 @@
             <div class="footer-menu">
                 <ul class="footer-menu-list">
                     <li class="transition-halfs">关于我们</li>
-                    <li class="transition-halfs">公众号</li>
-                    <li class="transition-halfs">加盟合作</li>
+                    <li class="transition-halfs" @click="showgzh = true">公众号</li>
+                    <li class="transition-halfs" @click="showContacts = true">加盟合作</li>
                     <li class="transition-halfs">网站地图</li>
                     <li class="transition-halfs">友情链接</li>
                     <li class="transition-halfs">网站招聘</li>
                 </ul>
             </div>
+            <el-dialog title="公众号" width="250px" :lock-scroll="false" append-to-body="true" :visible.sync="showgzh">
+                <img/>
+            </el-dialog>
+            <el-dialog title="加盟合作" width="300px" :lock-scroll="false" :visible.sync="showContacts">
+                <p>电子邮箱：</p>
+                <p>QQ：</p>
+                <p>微信：</p>
+                <p>手机号：</p>
+            </el-dialog>
         </div>
         <div class="footer-web-alert">
             <p>深圳市XXXXX网络技术有限公司      版权所有 球果吧Copyright © 2006-2016</p>
@@ -26,9 +35,15 @@
     </footer>
 </template>
 <script>
+import Vue from 'vue'
+import {Dialog} from 'element-ui'
+
 export default {
     data(){
-        return{}
+        return{
+            showgzh:false,
+            showContacts:false
+        }
     }
 }
 </script>

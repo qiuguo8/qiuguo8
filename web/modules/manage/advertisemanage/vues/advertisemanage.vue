@@ -22,7 +22,7 @@
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary">查询</el-button>
                 <el-button >重置</el-button>
-                <el-button type="danger">新增</el-button>
+                <el-button type="danger" @click="add()">新增</el-button>
             </div>  
         </div>
         <div class="el-col-24">
@@ -77,6 +77,14 @@ export default {
                 {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
                 {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'}
             ]
+        }
+    },
+    mounted(){
+        console.log(this);
+    },
+    methods:{
+        add(){
+            this.$router.push({name:'advertise-edit'});
         }
     }
 }

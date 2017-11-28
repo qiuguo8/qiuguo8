@@ -30,6 +30,7 @@ function scrollBar(el,option){
     this.diff = 0;                                              //滚动距离
     this.diffRatio = 0;                                         //滚动内容的长度和滚动条滚动距离的比例
     this.init();
+    this.initEvent();
 }
 
 scrollBar.prototype.init = function(){
@@ -44,6 +45,9 @@ scrollBar.prototype.init = function(){
         this.scrollBar.height(this.option.thickness).css({left:'0px','bottom':'0px'});
     }
     this.diffRatio = this.scrollDiff/this.diff;
+}
+
+scrollBar.prototype.initEvent = function(){
     //监听PC端滚轮事件
     this.$el.on('DOMMouseScroll mousewheel',(e)=>{
         // console.log(e);
@@ -70,6 +74,10 @@ scrollBar.prototype.init = function(){
         delta = delta /2;
         this.scrolling(delta,e);
     });
+    //监听浏览器窗口大小的变化
+    $(window).on('resize',()=>{
+        this.init();
+    })
 }
 
 //判断当前元素是否需要滚动

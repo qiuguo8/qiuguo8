@@ -27,11 +27,11 @@
             <div class="achive-rank-list" ref="achiveRank">
                 <div class="scroll-bar"></div>
                 <ul scroll-content style="position:relative;margin:0px;padding:0px">
-                <li class="content-wrap content-100-to-50">
+                <router-link tag="li" :to="{name:'recommender-info'}" class="content-wrap content-100-to-50">
                     <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
                     <span class="el-col-12 user-name text-elipse">对对对点</span>
                     <span class="el-col-8 achive">100/110/100</span>
-                </li>
+                </router-link>
                 <li class="content-wrap content-100-to-50">
                     <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
                     <span class="el-col-12 user-name">对对对点</span>

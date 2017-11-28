@@ -2,6 +2,7 @@
 /node_modules/
 /web/bundle/
 /static/
+/templates/
 /config/app/ 
 .classpath
 .project

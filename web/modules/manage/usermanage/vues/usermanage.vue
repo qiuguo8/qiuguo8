@@ -4,19 +4,19 @@
             <div class="form-control el-col-12">
                 <label class="el-col-8">用户名</label>
                 <div class="el-col-16">
-                    <el-input v-model="userName" placeholder="请输入用户名"></el-input>
+                    <el-input v-model="userName" maxlength="20" placeholder="请输入用户名"></el-input>
                 </div>
             </div>   
             <div class="form-control el-col-12">
                 <label class="el-col-8">手机号</label>
                 <div class="el-col-16">
-                    <el-input v-model="mobileNo" placeholder="请输入手机号"></el-input>
+                    <el-input v-model="mobileNo"  maxlength="11" placeholder="请输入手机号"></el-input>
                 </div>
             </div>   
             <div class="form-control el-col-12">
                 <label class="el-col-8">邮箱</label>
                 <div class="el-col-16">
-                    <el-input v-model="mail" placeholder="请输入邮箱"></el-input>
+                    <el-input v-model="mail"  maxlength="30" placeholder="请输入邮箱"></el-input>
                 </div>
             </div>   
             <div class="form-control el-col-12">

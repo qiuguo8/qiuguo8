@@ -40,6 +40,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 @media(min-width:312px){
     .content-wrap{margin:0px 0px 20px;display: inline-block}
     .content-25-to-50{width:100%;}
+    .content-25-to-all-50{width:48%;}
     .content-30-to-50{width:100%;}
     .content-30-to-100{width:100%;}
     .content-75-to-100{width:100%;float:none}
@@ -62,6 +63,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 }
 @media(min-width:750px){
     .content-wrap{margin:0px 1% 20px}
+    .content-25-to--all-50{width:48%;}
     .content-25-to-50{width:48%;}
     .content-25-to-100{width:98%;}
     .content-30-to-50{width:48%;}
@@ -82,6 +84,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 }
 @media(min-width:1120px){
     .content-wrap{margin:0px 1% 20px}
+    .content-25-to-all-50{width:23%;}
     .content-25-to-50{width:23%;}
     .content-25-to-100{width:23%;}
     .content-30-to-50{width:31%;}
@@ -114,6 +117,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .rank-common>.list-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
 .rank-common>.left-name{padding:10px 0px 9px;letter-spacing: 3px;}
 .rank-common>.left-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
+.page-header>.rank-common>.left-name{margin:10px 20px 30px}
 .rank-text{}
 .rank-text>.list-name{padding:10px 0px;letter-spacing:3px;}
 .rank-text>.list-name>span{padding:10px 10px 8px;border-bottom:3px solid #e90304}
@@ -313,7 +317,7 @@ nav ul{list-style: none}
 .achive-rank{padding:0px 10px 10px 30px;margin-left: 640px;text-align: left;-moz-appearance: none !important; }
 .achive-rank-list{overflow:auto;list-style: none;margin:0px;padding:0px;width:100%;text-align: center;height:285px;scrollbar-shadow-color: #fff; scrollbar-base-color:#fff;scrollbar-darkshadow-color: #fff;scrollbar-3dlight-color: #fff;scrollbar-arrow-color: #fff;scrollbar-face-color: #fff;scrollbar-highlight-color: #fff;scrollbar-track-color: #fff}
 .achive-rank-list::-webkit-scrollbar{display: none;}
-.achive-rank-list li{padding:5px;float:left;margin-bottom:3px;margin-top:3px}
+.achive-rank-list li{padding:5px;float:left;margin-bottom:3px;margin-top:3px;cursor: pointer}
 .achive-rank-list li>img{width:40px;height: 40px;border-radius: 100%;}
 .achive-rank-list li>span{padding:5px;position:relative;top:6px}
 @media(min-width:318px){
@@ -600,3 +604,25 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .announce .get-url-wrap>label{padding:8px 5px}
 .announce .label-wrap label{padding:10px;border-bottom:3px solid #e90304;display: inline-block;margin-bottom:10px}
 /*announce end*/
+
+/*advertise-edit start*/
+
+/*advertise-edit end*/
+
+/*recommender-info start*/
+.info-list{padding:10px 5px}
+.info-list>div{float:left;height:138px;margin:0px 1% 20px}
+.info-list>div:not(:first-child){padding:10px;background-color: #eee;border-radius: 3px}
+.info-list>div:not(:first-child)>p>span{margin-left:10px;letter-spacing: 1px}
+.info-list>div>img{width:100px;height: 100px;border-radius: 100%}
+.info-list>div>.user-name{font-size:20px;font-weight: bold;margin:5px 0px 0px}
+.match-wrap{padding:5px 20px}
+.match-wrap>.match-type{margin:0px 0px 3px;background-color: #409EFF;color:#fff;padding:3px;font-size:16px;letter-spacing: 3px}
+.match-wrap>.match-date{text-align: left;margin:0px 0px 10px;font-size:15px;letter-spacing: 1px}
+.match-wrap>.match-date~p{font-size:15px;margin:0px 0px 2px;text-align: left}
+.match-wrap>.recommend-time{letter-spacing: 1px}
+.match-wrap>span{width:44%;font-size:18px;text-align: center;display: inline-block}
+.match-wrap>span:nth-child(2){color:#999;min-width:24px;width:7%}
+.match-wrap>.match-predit{text-align: left;font-size:16px;color:#666}
+.match-wrap>.result{font-size:20px}
+/*recommender-info end*/

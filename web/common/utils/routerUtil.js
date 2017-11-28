@@ -9,6 +9,8 @@ function routerUtil(router){
         }else{
             document.title = "球果吧";
         }
+
+        $(window).scrollTop(0);
     })
 }
 

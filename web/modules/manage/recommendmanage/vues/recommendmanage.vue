@@ -57,7 +57,7 @@
                 <el-table-column prop="status" label="客队赔率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="status" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="status" label="购买数量" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column label="操作" min-width="120" align="center" head-align="center" fixed="right">
+                <el-table-column label="操作" min-width="120" align="center" head-align="center" class-name="table-fixed"  fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" size="small">隐藏</el-button>
                         <el-button type="text" size="small">修改</el-button>

@@ -68,6 +68,14 @@ const routes = [
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         },
         {
+            path:'/recommender-info',
+            name:'recommender-info',
+            meta:{
+                aliasName:'推荐师主页'
+            },
+            component:resolve => require(['modules/common/user/vues/recommender-info.vue'],resolve)
+        },
+        {
             path:'/manager-center',
             name:'manager-center',
             component:resolve => require(['modules/manage/managercenter/vues/managercenter.vue'],resolve),
@@ -165,12 +173,28 @@ const routes = [
                     component:resolve => require(['modules/manage/advertisemanage/vues/advertisemanage.vue'],resolve),
                 },
                 {
+                    path:'/advertise-edit',
+                    name:'advertise-edit',
+                    meta:{
+                        aliasName:'广告编辑'
+                    },
+                    component:resolve => require(['modules/manage/advertisemanage/vues/advertise-edit.vue'],resolve),
+                },
+                {
                     path:'/article-manage',
                     name:'article-manage',
                     meta:{
                         aliasName:'文章管理'
                     },
                     component:resolve => require(['modules/manage/articlemanage/vues/articlemanage.vue'],resolve),
+                },
+                {
+                    path:'/article-edit',
+                    name:'article-edit',
+                    meta:{
+                        aliasName:'文章编辑'
+                    },
+                    component:resolve => require(['modules/manage/articlemanage/vues/article-edit.vue'],resolve),
                 },
                 {
                     path:'/rules-manage',
