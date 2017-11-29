@@ -1,5 +1,5 @@
 <template>
-    <el-dialog @open="commonLogin()" title="用户登录" custom-class="login-dialog" :visible.sync="dialogFormVisible">
+    <el-dialog @open="commonLogin()" title="用户登录" :lock-scroll="false" custom-class="login-dialog" :visible.sync="dialogFormVisible">
         <div class="login-form" v-show="isCommon">
             <el-form :model="loginForm" status-icon :rules="rules" ref="form">
                 <el-form-item label="用户名" prop="loginName" label-width="80px">

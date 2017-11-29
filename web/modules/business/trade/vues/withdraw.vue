@@ -8,7 +8,7 @@
                         <span style="color:#e90304">0</span>元
                     </el-form-item>
                     <el-form-item required label="充值金额:" prop="money" label-width="110px">
-                        <div class="el-col-8" style="min-width:160px">
+                        <div class="el-col-8" style="min-width:160px;">
                             <el-input type="primary" v-model="withDrawForm.money" auto-complete="off">
                                 <label slot="append">
                                     元
@@ -30,7 +30,7 @@
                         <span class="fill-tip">（首次绑定真实姓名后不能更改）</span>
                     </el-form-item>
                     <el-form-item required label="短信验证码:" prop="code" label-width="110px">
-                        <div class="el-col-8" style="min-width:160px;margin-right:10px">
+                        <div class="el-col-8" style="min-width:160px;margin-right:10px;margin-bottom:5px">
                             <el-input type="primary" v-model="withDrawForm.code" auto-complete="off">
                             </el-input>
                         </div>
@@ -65,6 +65,7 @@ export default {
                 realName:'',
                 code:''
             },
+            isFull:false,
             rules:{
                 money:[
                     {required:true,message:'金额不能为空',trigger:'change blur'},

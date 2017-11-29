@@ -56,10 +56,20 @@ scrollBar.prototype.initEvent = function(){
         this.scrolling(delta,e);
         e.preventDefault();
     });
+
+    this.$el.on('mouseover',(e)=>{
+        e.preventDefault();
+        this.scrollBar.css('opacity','1');
+    });
+    this.$el.on('mouseleave',(e=>{
+        e.preventDefault();
+        this.scrollBar.css('opacity','0');
+    }))
     //监听移动端触摸事件
     this.$el.on('touchstart',(e)=>{
-        e.preventDefault();
+        e.stopPropagation();
         touches = e.touches[0];
+        this.scrollBar.css('opacity','1');
         // console.log(e);
     });
     this.$el.on('touchmove',(e)=>{
@@ -74,6 +84,9 @@ scrollBar.prototype.initEvent = function(){
         delta = delta /2;
         this.scrolling(delta,e);
     });
+    this.$el.on('touchend',(e)=>{
+        this.scrollBar.css('opacity','0');
+    })
     //监听浏览器窗口大小的变化
     $(window).on('resize',()=>{
         this.init();

@@ -184,7 +184,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 /*animate start*/
 
 /*重写ui框架css start*/
-.el-checkbox.is-bordered{padding:1px 20px 1}
+.el-checkbox.is-bordered{padding:1px 20px 1px;margin-top:3px}
 .el-checkbox-button.danger-checkbox>span.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent;}
 .danger-checkbox.is-checked>span.el-checkbox-button__inner{background-color: rgb(233, 3, 4);color:#fff;border-color:transparent;}
 .danger-checkbox.is-checked.is-focus>span.el-checkbox-button__inner{border-color:rgba(233,3,4,0.8)}
@@ -216,7 +216,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 /*infinite-scroll end*/
 
 /*scrollbar start*/
-.scroll-bar{position: absolute;background-color: rgba(200,200,200,0.3);border-radius: 10px;}
+.scroll-bar{position: absolute;background-color: rgba(200,200,200,0.3);border-radius: 10px;opacity: 0}
 .scroll-bar:hover{background-color: rgba(200,200,200,0.7)}
 /*scrollbar end*/
 
@@ -523,7 +523,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
     .achive-list .two-colums-to-one>div{width:48%}
     .achive-list>.select-name{width: auto;border-bottom: none}
 }
-.achive-list .two-colums-to-one>div{text-align: right}
+.achive-list .two-colums-to-one>div{text-align: right;background-color: #eee;margin:5px;padding:5px;display: inline-block}
 .achive-list .two-colums-to-one span{text-align:left;padding:10px 0px}
 .left-menu-table{padding-left:80px;position: relative}
 .left-menu-table>.left-menus{width:80px;list-style: none;margin:0px;padding:5px 0px;position: absolute;left:0px;top:0px;text-align: center}

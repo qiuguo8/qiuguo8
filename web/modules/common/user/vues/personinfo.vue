@@ -109,6 +109,29 @@
                 </div>
             </div>
         </div>
+        <div class="el-col-24">
+                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
+                    <el-table-column prop="count" label="比赛类型" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="win" label="联赛类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                    <el-table-column prop="lose" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="right" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="profit" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="profit" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="profit" label="成交总价" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                </el-table>
+                <div class="page-block text-center">
+                    <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage4"
+                    :page-sizes="[10, 15, 20, 25]"
+                    :page-size="15"
+                    layout=" prev, pager, next"
+                    :total="400">
+                    </el-pagination>
+                </div>
+            </div>
         <div class="achive-list">
             <p class="select-name"><span>账户安全</span></p>
             <div class="text-left two-colums-to-one transition-halfs">
