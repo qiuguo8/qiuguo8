@@ -49,7 +49,7 @@ var vue = new Vue({
 		LoadingBar:vueLoadingBar
 	},
 	methods:{
-		goBack(){
+		goBack:function(){
 			history.go(-1);
 		}
 	}
