@@ -4,7 +4,7 @@ const HORIZONTAL = 'horizontal';
 const VERTICAL = 'vertical';
 const events = ['onmouse'];
 var touches;    //缓存touchstart的touches对象
-
+var mousemove;  //缓存mousemove的滑动位置
 
 const scrollBarDefaults = {
     direction:VERTICAL,     //滚动方向
@@ -86,7 +86,27 @@ scrollBar.prototype.initEvent = function(){
     });
     this.$el.on('touchend',(e)=>{
         this.scrollBar.css('opacity','0');
+    });
+    //当鼠标在滚动条内按下时监听鼠标移动事件
+    this.scrollBar.on('mousedown',(e)=>{
+        e.preventDefault();
+        this.scrollBar.on('mousemove',(e)=>{
+            e.preventDefault();
+            var delta = 0;
+            if(mousemove!=null){
+                delta = (this.isVertical ? e.pageY : e.pageX)-mousemove;
+                this.scrolling(-delta,e);
+            }
+            mousemove = this.isVertical ? e.pageY : e.pageX;
+        });
+    });
+    //当鼠标放松时或鼠标离开滚动条时解除鼠标移动监听。
+    this.scrollBar.on('mouseup mouseleave',(e)=>{
+        //防止下次点击滑动时的突然跳跃。
+        mousemove = null;
+        this.scrollBar.off('mousemove');
     })
+
     //监听浏览器窗口大小的变化
     $(window).on('resize',()=>{
         this.init();
@@ -154,6 +174,9 @@ scrollBar.prototype.scrolling = function(delta,e){
         if(e.type == 'touchmove'){
             offset += delta;
             barOffset -= (delta*this.diffRatio);
+        }else if(e.type == 'mousemove'){
+            offset += (delta/this.diffRatio);
+            barOffset -= delta;
         }else{
             offset -= this.option.parentDelta;
             barOffset += this.option.scrollDelta;
@@ -166,6 +189,9 @@ scrollBar.prototype.scrolling = function(delta,e){
         if(e.type == 'touchmove'){
             offset += delta;
             barOffset -= (delta*this.diffRatio);
+        }else if(e.type == 'mousemove'){
+            offset += (delta/this.diffRatio);
+            barOffset -= delta;
         }else{
             offset += this.option.parentDelta;
             barOffset -= this.option.scrollDelta;
@@ -175,7 +201,7 @@ scrollBar.prototype.scrolling = function(delta,e){
             barOffset = 0;
         }
     }
-
+    
     if(Math.abs(offset)<=this.diff&&offset<=0){
         if(!this.isVertical){
             this.scrollDiv.css({left:offset});
