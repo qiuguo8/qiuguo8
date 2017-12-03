@@ -1,7 +1,10 @@
 <template>
     <div class="withdraw">
         <div class="withdraw-wrap el-col-24">
-            <div class="head"><span>提款</span><span>收支明细</span><span>提款记录</span><span>充值退回记录</span></div>
+            <div class="head">
+                <span>提款</span>
+                <!-- <span>收支明细</span><span>提款记录</span><span>充值退回记录</span> -->
+            </div>
             <div class="form-wrap">
                 <el-form :model="withDrawForm" :rules="rules" ref="withDrawForm" label-width="110px">
                     <el-form-item label="可提金额:">

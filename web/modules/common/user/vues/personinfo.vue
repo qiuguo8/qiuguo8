@@ -10,21 +10,13 @@
             </ul> -->
             <div class="select-list content-wrap">
                 <el-radio-group v-model="radioVal" class="radio-list">
-                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
-                    <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
                     <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                     <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
                 </el-radio-group>
             </div> 
             <div class="left-menu-table">
-                <!-- <ul>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
-                </ul> -->
-                <div class="left-menus">
+                <!-- <div class="left-menus">
                     <el-radio-group v-model="radioVal" class="radio-list">
                         <el-radio-button label="1" class="danger-radio small-checkbox">近3天</el-radio-button>
                         <el-radio-button label="2" class="danger-radio small-checkbox">近7天</el-radio-button>
@@ -32,7 +24,7 @@
                         <el-radio-button label="4" class="danger-radio small-checkbox">上周</el-radio-button>
                         <el-radio-button label="5" class="danger-radio small-checkbox">上月</el-radio-button>
                     </el-radio-group>
-                </div>
+                </div> -->
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="win" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -58,29 +50,15 @@
         </div>
         <div class="achive-list">
             <p class="select-name"><span>战绩</span></p>
-            <!-- <ul class="select-list content-wrap text-center">
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">亚盘</el-checkbox-button></li>
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">大小球</el-checkbox-button></li>
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">竞彩足球</el-checkbox-button></li>
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">北京单场</el-checkbox-button></li>
-            </ul> -->
             <div class="select-list content-wrap">
                 <el-radio-group v-model="radioVal" class="radio-list">
-                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
-                    <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="1" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
                     <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                     <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
                 </el-radio-group>
             </div> 
             <div class="left-menu-table">
-                <!-- <ul>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
-                </ul> -->
-                <div class="left-menus">
+                <!-- <div class="left-menus">
                     <el-radio-group v-model="radioVal" class="radio-list">
                         <el-radio-button label="1" class="danger-radio small-checkbox">近3天</el-radio-button>
                         <el-radio-button label="2" class="danger-radio small-checkbox">近7天</el-radio-button>
@@ -88,7 +66,7 @@
                         <el-radio-button label="4" class="danger-radio small-checkbox">上周</el-radio-button>
                         <el-radio-button label="5" class="danger-radio small-checkbox">上月</el-radio-button>
                     </el-radio-group>
-                </div>
+                </div> -->
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="win" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -109,29 +87,30 @@
                 </div>
             </div>
         </div>
-        <div class="el-col-24">
-                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
-                    <el-table-column prop="count" label="比赛类型" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="win" label="联赛类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                    <el-table-column prop="lose" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="right" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="profit" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="profit" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="profit" label="成交总价" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                </el-table>
-                <div class="page-block text-center">
-                    <el-pagination
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page="currentPage4"
-                    :page-sizes="[10, 15, 20, 25]"
-                    :page-size="15"
-                    layout=" prev, pager, next"
-                    :total="400">
-                    </el-pagination>
-                </div>
+        <div class="el-col-24 achive-list">
+            <p class="select-name"><span>当前推荐</span></p>
+            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
+                <el-table-column prop="count" label="比赛类型" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="win" label="联赛类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="lose" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="right" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="profit" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="profit" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="profit" label="成交总价" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+            </el-table>
+            <div class="page-block text-center">
+                <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[10, 15, 20, 25]"
+                :page-size="15"
+                layout=" prev, pager, next"
+                :total="400">
+                </el-pagination>
             </div>
+        </div>
         <div class="achive-list">
             <p class="select-name"><span>账户安全</span></p>
             <div class="text-left two-colums-to-one transition-halfs">

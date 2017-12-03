@@ -1,7 +1,10 @@
 <template>
     <div class="recharge">
         <div class="charge-wrap el-col-24">
-            <div class="head"><span>账户充值</span><span>收支明细</span></div>
+            <div class="head">
+                <span>账户充值</span>
+                <span></span>
+            </div>
             <div class="type-list">
                 <p class="user-name">用户名：<span>百万财神</span><span>（充值满百即送100%积分）</span></p>
                 <p class="charge-tip">请输入充值金额及选择网上银行进行充值（注：资金一经充值成功，则充值部分资金将不能体现。）</p>

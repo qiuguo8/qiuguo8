@@ -6,8 +6,8 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 
 .table-fixed{table-layout:fixed}
 .hor-ver-mid{top:50%;left:50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%)}
-.transition-ones{transition: all 1s ease;-webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;}
-.transition-halfs{transition: all .5s ease;-webkit-transition: all .5s ease;-moz-transition: all .5s ease;-o-transition: all .5s ease;}
+.transition-ones{transition: all 1s linear;-webkit-transition: all 1s linear;-moz-transition: all 1s linear;-o-transition: all 1s linear;}
+.transition-halfs{transition: all .5s linear;-webkit-transition: all .5s linear;-moz-transition: all .5s linear;-o-transition: all .5s linear;}
 .float-left{float: left}
 .float-right{float: right}
 .text-center{text-align: center}
@@ -184,6 +184,8 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 /*animate start*/
 
 /*重写ui框架css start*/
+#loading-bar{height:2px;background-color: #e90304;z-index:9999;position: fixed;top:0px;left:0px;transition: all .25s linear;-webkit-transition: all .25s linear;-moz-transition: all .25s linear;-o-transition: all .25s linear;}
+
 .el-checkbox.is-bordered{padding:1px 20px 1px;margin-top:3px}
 .el-checkbox-button.danger-checkbox>span.el-checkbox-button__inner{padding:8px 15px;border-radius: 0px;border:1px solid transparent;}
 .danger-checkbox.is-checked>span.el-checkbox-button__inner{background-color: rgb(233, 3, 4);color:#fff;border-color:transparent;}
@@ -525,7 +527,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 }
 .achive-list .two-colums-to-one>div{text-align: right;background-color: #eee;margin:5px;padding:5px;display: inline-block}
 .achive-list .two-colums-to-one span{text-align:left;padding:10px 0px}
-.left-menu-table{padding-left:80px;position: relative}
+.left-menu-table{position: relative}
 .left-menu-table>.left-menus{width:80px;list-style: none;margin:0px;padding:5px 0px;position: absolute;left:0px;top:0px;text-align: center}
 .left-menu-table>.left-menus>.radio-list{width:80px;text-align: center}
 .left-menu-table>.left-menus>.radio-list>.el-radio-button{margin:5px 0px;}
@@ -626,3 +628,16 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .match-wrap>.match-predit{text-align: left;font-size:16px;color:#666}
 .match-wrap>.result{font-size:20px}
 /*recommender-info end*/
+
+/*order-detail start*/
+.order-detail-info{margin:15px 0px}
+.order-detail-info>div:not(.left-name){border:1px solid #eee}
+.order-detail-info>div:not(.left-name)>div{float: left;text-align: center}
+.order-detail-info>div:not(.left-name)>div:first-child>p:first-child{margin:0px;padding:10px}
+.order-detail-info>div:not(.left-name)>div:first-child>p:last-child{font-size:18px;font-weight:bold;margin:0px;padding:20px;border-top:1px solid #eee}
+.order-detail-info>div:not(.left-name)>div:nth-child(2){padding:41.5px;font-size:16px;border-left:1px solid #eee}
+.order-detail-info>div:not(.left-name)>div:nth-child(3){padding:41.5px;font-size:16px;border-left:1px solid #eee}
+.order-detail-info>div:not(.left-name)>div:nth-child(4){padding:15px;font-size:24px;font-weight: bold;border-top:1px solid #eee}
+.order-result>div:last-child{border:1px solid #eee;text-align: center}
+.order-result>div:last-child>span{padding:10px;width:30%;font-size:18px;margin:10px 15px;background-color: #eee;display: inline-block}
+/*order-detail end*/

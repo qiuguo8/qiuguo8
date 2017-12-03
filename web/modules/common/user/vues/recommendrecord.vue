@@ -1,9 +1,9 @@
 <template>
     <div class="recomment-record">
         <div class="row-new">
-            <div class="form-control el-col-12">
-                <label class="el-col-8">推荐状态</label>
-                <el-select class="el-col-16" v-model="value7" filterable placeholder="请选择">
+            <div class="form-control el-col-12 text-center">
+                <label class="el-col-9">推荐状态</label>
+                <el-select class="el-col-15" v-model="value7" filterable placeholder="请选择">
                     <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -12,9 +12,9 @@
                     </el-option>
                 </el-select>
             </div>   
-            <div class="form-control el-col-12">
-                <label class="el-col-8">推荐状态</label>
-                <el-select class="el-col-16" v-model="value7" filterable placeholder="请选择">
+            <div class="form-control el-col-12 text-center">
+                <label class="el-col-9">推荐类型</label>
+                <el-select class="el-col-15" v-model="value7" filterable placeholder="请选择">
                     <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -23,13 +23,19 @@
                     </el-option>
                 </el-select>
             </div>   
-            <div class="form-control el-col-12">
-                <label class="el-col-8">推荐时间</label>
-                <div class="el-col-16">
-                    <mu-date-picker v-model="selectDate" hintText="选择时间"/>
+            <div class="form-control el-col-18 text-center">
+                <label class="el-col-6">注册时间</label>
+                <div class="el-col-18">
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                    </span>
+                    <span class="el-col-2 mid-word">至</span>
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                    </span>
                 </div>
             </div>  
-            <div class="form-control el-col-12 text-center">
+            <div class="form-control el-col-6 text-center">
                 <el-button type="primary">查询</el-button>
             </div>    
         </div>
