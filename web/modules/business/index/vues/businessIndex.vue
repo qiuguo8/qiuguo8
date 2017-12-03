@@ -86,8 +86,7 @@
             最热推荐
         </div>
         <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
-            <div class="scroll-bar"></div>
-            <div scroll-content :style="{width:(270*tableData3.length)+'px',height:'100%',position:'relative'}">
+            <div class="transition-ones" v-slipping :style="{width:(270*tableData3.length)+'px',height:'100%',position:'relative'}">
                 <div class="intro-wrap intro-wrap-index transition-halfs">
                     <div class="match-name">曼城VS曼联</div>
                     <div class="intro-info">
@@ -131,7 +130,7 @@
                     <div class="intro-text">
                         xxxxxxx
                     </div>
-                    <el-button type="warning">200</el-button>
+                    <el-button type="warning" @click="showOrderDetail()">200</el-button>
                 </div>
             </div>
         </div>
@@ -174,84 +173,15 @@
             </ul>
         </div>
     </div>
-    <!-- <div class="el-col-24 index-center content-wrap">
-        <div class="min-max-640 text-center">
-            <div class="content-wrap rank-list rank-common content-25-to-50">
-                <div class="list-name"><span>七天胜率排行</span></div>
-                <ul class="list-detail">
-                    <li>亚盘</li>
-                    <li>大小球</li>
-                    <li>竞彩足球</li>
-                    <li>北单</li>
-                </ul>
-                <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                    <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                    <el-table-column prop="rank" label="级别" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                </el-table>
-            </div>
-            <div class="content-wrap other-thing rank-common content-25-to-50">
-                <div class="list-name"><span>名家专访</span></div>
-                <div class="thing-btn text-left">
-                    <button class="el-button el-button--primary">发布推荐</button>
-                    <button class="el-button el-button--danger float-right">有奖投稿</button>
-                </div>
-                <div class="good-interview">
-                    <div class="img-wrap text-center">
-                        <img src="/web/resources/img/index/user-img.png"/>
-                    </div>
-                    <div class="interview-content">
-                        xxxxxxxxxxxxxxxx<br/>
-                        xxxxxxxxxxxxxxxxxxxxx<br/>
-                    </div>
-                </div>
-            </div>
-            <div class="content-wrap types-news content-50-to-100" style="display:inline-block">
-                <el-tabs :tab-position="tabPosition">
-                    <el-tab-pane label="新闻">
-                        <ul class="normal-news-list">
-                            <li class="transition-halfs">xxxxxxxyyxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                        </ul>
-                    </el-tab-pane>
-                    <el-tab-pane label="行业">
-                        <ul class="normal-news-list">
-                            <li class="transition-halfs">xxxxxxxxggxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                        </ul>
-                    </el-tab-pane>
-                    <el-tab-pane label="活动">
-                        <ul class="normal-news-list">
-                            <li class="transition-halfs">xxxxxxxxxuuuxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
-                        </ul>
-                    </el-tab-pane>
-                </el-tabs>
-            </div>
-        </div>
-    </div> -->
+    <order-buy-tip ref="orderDetail"></order-buy-tip>
 </div>
 </template>
 <script>
 import Vue from 'vue';
 import scrollBar from 'web/common/utils/scrollUtil.js';
 import indexService from 'web/modules/business/index/services/indexService.js'
+import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
+import 'web/common/directives/uiDirective.js'
 import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Carousel.name, Carousel)
 Vue.component(CarouselItem.name, CarouselItem)
@@ -274,8 +204,19 @@ export default {
         }
     },
     mounted(){
+        indexService.getRankList({categoryCode:'01'}).then((ret)=>{
+            console.log(ret);
+        });
         $(this.$refs.achiveRank).scrollBar();
         $(this.$refs.introWrap).scrollBar({direction:'horizontal'});
+    },
+    components:{
+        orderBuyTip:orderBuyTip
+    },
+    methods:{
+        showOrderDetail(){
+            this.$refs.orderDetail.show();;
+        }
     }
 }
 </script>

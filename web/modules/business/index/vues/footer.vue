@@ -6,12 +6,12 @@
             </div>
             <div class="footer-menu">
                 <ul class="footer-menu-list">
-                    <li class="transition-halfs">关于我们</li>
+                    <router-link :to="{name:'about-us'}" tag="li" class="transition-halfs">关于我们</router-link>
                     <li class="transition-halfs" @click="showgzh = true">公众号</li>
                     <li class="transition-halfs" @click="showContacts = true">加盟合作</li>
-                    <li class="transition-halfs">网站地图</li>
-                    <li class="transition-halfs">友情链接</li>
-                    <li class="transition-halfs">网站招聘</li>
+                    <!-- <li class="transition-halfs">网站地图</li> -->
+                    <!-- <li class="transition-halfs">友情链接</li> -->
+                    <router-link :to="{name:'recruit'}" tag="li" class="transition-halfs">网站招聘</router-link>
                 </ul>
             </div>
             <el-dialog title="公众号" width="250px" :lock-scroll="false" append-to-body="true" :visible.sync="showgzh">

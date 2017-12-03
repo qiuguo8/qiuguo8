@@ -1,10 +1,16 @@
 <template>
     <div class="in-time-goal">
         <div class="row-new">
-            <div class="form-control el-col-12">
-                <label class="el-col-8">推荐时间</label>
-                <div class="el-col-16">
-                    <mu-date-picker v-model="selectDate" hintText="选择时间"/>
+            <div class="form-control el-col-19 text-center">
+                <label class="el-col-6">注册时间</label>
+                <div class="el-col-18">
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                    </span>
+                    <span class="el-col-2 mid-word">至</span>
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                    </span>
                 </div>
             </div>  
             <div class="form-control el-col-24 text-center">

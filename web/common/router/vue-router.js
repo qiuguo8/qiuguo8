@@ -83,6 +83,14 @@ const routes = [
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         },
         {
+            path:'/order-detail',
+            name:'order-detail',
+            meta:{
+                aliasName:'订单详情'
+            },
+            component:resolve => require(['modules/business/trade/vues/order-detail.vue'],resolve)
+        },
+        {
             path:'/recommender-info',
             name:'recommender-info',
             meta:{
