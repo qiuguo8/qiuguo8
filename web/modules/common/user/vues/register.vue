@@ -17,11 +17,14 @@
                     <el-form-item label="确认密码" prop="checkPass">
                         <el-input type="password" v-model="regisForm.checkPass" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="验证码" prop="checkCode">
+                    <el-form-item label="手机号码" prop="loginName">
+                        <el-input type="primary" v-model="regisForm.mobileNo" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="短信验证码" prop="mobileCode" label-width="100px">
                         <div class="el-col-12">
-                            <el-input v-model.number="regisForm.checkCode" auto-complete="off"></el-input>
+                            <el-input type="text" v-model="regisForm.mobileCode" auto-complete="off"></el-input>
                         </div>
-                        <div id="vPic" style="float:left;width:80px;height:40px;margin-left:10px"></div>
+                        <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
                     <el-form-item prop="isSigned">
                         <el-checkbox v-model="regisForm.isSigned">我已满18岁并同意《球果吧服务条款》</el-checkbox>
@@ -95,13 +98,24 @@ export default {
                 pass:'',
                 checkPass:'',
                 checkCode:'',
-                isSigned:''
+                isSigned:'',
+                mobileNo:'',
+                mobileCode:''
             },
             rules:{
                 loginName:[
                     {required:true,message:'请输入用户名',trigger:'blur'},
                     {max:20,message:'长度不能超过20个字符',trigger:'blur'},
                     {validator:formUtil.isLegalName('用户名只能由英文、数字和中文组成'),trigger:'change'}
+                ],
+                mobileNo:[
+                    {required:true,message:'手机号码不能为空',trigger:'change blur'},
+                    {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'}
+                ],
+                mobileCode:[
+                    {required:true,message:'短信验证码不能为空',trigger:'change blur'},
+                    {validator:formUtil.isNumber('验证码必须为数字'),trigger:'change blur'},
+                    {type:'number',validator:formUtil.maxSize(6,'验证码长度不大于6'),trigger:'blur change'}
                 ],
                 pass:[
                     {required:true,message:'请输入密码',trigger:'blur'},
@@ -139,11 +153,14 @@ export default {
                         return this.verify.validate(this.verifyCode);
                     }
                 }
-            }
+            },
+            countSec:60,
+            counter:null,
+            countTxt:'发送短信验证码',
+            isCountOver:true
         }
     },
     mounted(){
-        this.picVerifyObj.createVPic();
     },
     methods:{
         submitForm(){

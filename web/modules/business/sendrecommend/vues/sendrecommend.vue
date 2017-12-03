@@ -7,11 +7,10 @@
             <li>北京单场</li>
         </ul> -->
         <div class="select-list content-wrap">
-            <el-radio-group v-model="radioVal" class="radio-list">
-                <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
-                <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
-                <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+            <el-radio-group v-model="productCode" class="radio-list" @change="productChange">
+                <el-radio-button label="01" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
+                <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
             </el-radio-group>
         </div>
         <div class="match-list content-wrap content-75-to-100">
@@ -23,26 +22,26 @@
                 <button class="btn btn-padding btn-orange float-right" @click="showCheckList()"><i :class="isShowCheckList?'fa fa-chevron-circle-down rotate-180 transition-halfs':'transition-halfs fa fa-chevron-circle-down'"></i>赛事选择</button>
             </div>
             <div class="match-select" v-if="isShowCheckList">
-                <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-                    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+                <el-checkbox-group v-model="checkedLeague" @change="handleCheckedLeaguesChange">
+                    <el-checkbox v-for="league in leagues" :label="league.leagueId" :key="league.leagueId">{{league.leagueName}}</el-checkbox>
                 </el-checkbox-group>
                 <div class="check-all-btn text-center">
                     <el-checkbox-button v-model="checkAll" @change="handleCheckAllChange" >全选</el-checkbox-button>
                     <el-checkbox-button @change="handleAlterCheckChange">反选</el-checkbox-button>
                 </div>
             </div>
-            <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                <el-table-column prop="match" label="比赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column  prop="matchTime" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="hostTeam" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="customTeam" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="wholeGoal" label="全场让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
+            <el-table :default-sort="{prop:'index',order:'ascending'}" :data="matchsTable" border style="width: 100%">
+                <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column  prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="fullLetBall" label="全场让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                             <el-checkbox-button border="true" v-model="scope.row.host" @change="handleOpposit(scope.row.host,'custom',scope)">主11.11</el-checkbox-button>
                             <el-checkbox-button border="true" v-model="scope.row.custom" @change="handleOpposit(scope.row.custom,'host',scope)">客11.11</el-checkbox-button>
                     </template>
                 </el-table-column>
-                <el-table-column prop="wholeSize" label="全场大小" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="fullSizeBall" label="全场大小" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <el-checkbox-button border="true" v-model="scope.row.big" @change="handleOpposit(scope.row.big,'small',scope)">大11.11</el-checkbox-button>
                         <el-checkbox-button border="true" v-model="scope.row.small" @change="handleOpposit(scope.row.small,'big',scope)">小11.11</el-checkbox-button>
@@ -82,6 +81,7 @@
 <script>
 import Vue from 'vue'
 import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton} from 'element-ui'
+import service from 'web/modules/business/sendrecommend/service/sendrecommendService'
 Vue.component(Checkbox.name,Checkbox);
 Vue.component(CheckboxGroup.name,CheckboxGroup);
 Vue.component(Button.name,Button);
@@ -91,28 +91,29 @@ Vue.component(CheckboxButton.name,CheckboxButton);
 Vue.component(RadioGroup.name,RadioGroup);
 Vue.component(RadioButton.name,RadioButton);
 
-const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
+
 export default {
     data(){
         return{
             alterCheck:false,
             checkAll: false,
             isWhole:true,
-            checkedCities: ['Shanghai', 'Beijing'],
-            cities: cityOptions,
-            tableData3:[{match:'1',matchTime:'10-26 23:00',hostTeam:'7胜3负',customTeam:'80%',wholeGoal:'',wholeSize:'',host:false,custom:false,big:false,small:false},
-                        {match:'2',matchTime:'xx',hostTeam:'7胜3负',customTeam:'80%',wholeGoal:'',wholeSize:'',host:false,custom:false,big:false,small:false},
-                        {match:'3',matchTime:'xx',hostTeam:'7胜3负',customTeam:'80%',wholeGoal:'',wholeSize:'',host:false,custom:false,big:false,small:false},
-                        {match:'4',matchTime:'xx',hostTeam:'7胜3负',customTeam:'80%',wholeGoal:'',wholeSize:'',host:false,custom:false,big:false,small:false},
-                        {match:'5',matchTime:'xx',hostTeam:'7胜3负',customTeam:'80%',wholeGoal:'',wholeSize:'',host:false,custom:false,big:false,small:false}],
+            checkedLeague: [],
+            leagues: [],
+            matchsTable:[],
             tableData4:[{index:'1',reward:'xx'},
                         {index:'2',reward:'xx'},
                         {index:'3',reward:'xx'},
                         {index:'4',reward:'xx'},
                         {index:'5',reward:'xx'}],
-            radioVal:'1',
+            productCode:'01',
             isShowCheckList:false
         }
+    },
+    created:function () {
+        let param = {'productCode':this.productCode};
+        this.getLeagueInfo(param);
+        this.getMatchesInfo(param);
     },
     methods: {
         showCheckList(){
@@ -120,48 +121,83 @@ export default {
         },
         handleAlterCheckChange(val){
             var alter = [];
-            var tmp = this.checkedCities;
-            if(tmp && tmp.length==0){
-                this.checkedCities = cityOptions;
+            var tmp = this.checkedLeague;
+            if(tmp && tmp.length==0){//如果本来为空，反选之后就变成全选
+                for(let i=0;i<this.leagues.length;i++){
+                    let item = this.leagues[i]
+                    this.checkedLeague.push(item.leagueId)
+                }
                 this.checkAll = true;
                 return;
             }
-            if(tmp && tmp.length==cityOptions.length){
-                this.checkedCities = [];
+            if(tmp && tmp.length==this.leagues.length){//如果本来为全选，反选之后就变成0选
+                this.checkedLeague = [];
                 this.checkAll = false;
                 return;
             }
-            for(var i = 0,len=cityOptions.length;i<len;i++){
-                if(tmp.indexOf(cityOptions[i])<0){
-                    alter.push(cityOptions[i]);
+            for(let i = 0,len=this.leagues.length;i<len;i++){
+                if(tmp.indexOf(this.leagues[i].leagueId)<0){
+                    alter.push(this.leagues[i].leagueId);
                 }
             }
-            // console.log(alter);
-            this.checkedCities = alter;
+            this.checkedLeague = alter;
+            console.log(this.checkedLeague)
+            let param = {'productCode':this.productCode,'leagueIds':this.checkedLeague.join(",")};
+            this.getMatchesInfo(param);
+
         },
         handleCheckAllChange(val) {
-            console.log(val);
-            this.checkedCities = val ? cityOptions : [];
+            if(val){//点击全选之后将leagues里面的id属性加到选中数组中
+                for(let i=0;i<this.leagues.length;i++){
+                    let item = this.leagues[i]
+                    this.checkedLeague.push(item.leagueId)
+                }
+            }else{
+                this.checkedLeague = [];//取消选中则清空
+            }
             this.isIndeterminate = false;
+            let param = {'productCode':this.productCode,'leagueIds':this.checkedLeague.join(",")};
+            this.getMatchesInfo(param);
         },
-        handleCheckedCitiesChange(value) {
-            console.log(value);
+        handleCheckedLeaguesChange(value) {
+            console.log(this.checkedLeague);
             let checkedCount = value.length;
-            this.checkAll = checkedCount === this.cities.length;
-            this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+            this.checkAll = checkedCount === this.leagues.length;
+            this.isIndeterminate = checkedCount > 0 && checkedCount < this.leagues.length;
+            let param = {'productCode':this.productCode,'leagueIds':value.join(",")};
+            this.getMatchesInfo(param);
         },
         handleOpposit(val,oppo,scope){
             console.log(oppo,val,scope);
             if(val){
-                for(var i=0,len=this.tableData3;len=this.tableData3.length;i++){
-                    if(scope.row.match == this.tableData3[i].match){
-                        this.tableData3[i][oppo] = false;
+                for(var i=0,len=this.matchsTable;len=this.matchsTable.length;i++){
+                    if(scope.row.matchId == this.matchsTable[i].matchId){
+                        this.matchsTable[i][oppo] = false;
                         break;
                     }
                 }
                 //scope.row[oppo] = false;
             }
             //console.log(scope.row[oppo],val);
+        },
+        productChange(){
+            let param = {'productCode':this.productCode};
+            this.getLeagueInfo(param);
+            this.getMatchesInfo(param);
+        },
+        getLeagueInfo(param){
+            service.getLeagueInfo(param).then((ret)=>{ //查询相关的联赛信息
+                if(ret.body.status == 'success'){
+                    this.leagues = ret.body.list
+                }
+            })
+        },
+        getMatchesInfo(param){
+            service.getMatchesInfo(param).then((ret)=>{ //查询相关的比赛信息
+                if(ret.body.status == 'success'){
+                    this.matchsTable = ret.body.list
+                }
+            })
         }
     }
 }

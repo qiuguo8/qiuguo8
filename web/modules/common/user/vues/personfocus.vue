@@ -2,8 +2,7 @@
     <div class="person-focus">
         <div class="select-list content-wrap text-left">
             <el-radio-group v-model="radioVal" class="radio-list">
-                <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
-                <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
+                <el-radio-button label="1" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
                 <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                 <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
             </el-radio-group>
