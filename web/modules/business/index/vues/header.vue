@@ -22,13 +22,13 @@
             <div class="header-menu">
                 <div class="fa fa-bars header-menu-icon" ref="menuicon"></div>
                 <ul class="header-menu-list" ref="menu">
-                    <router-link tag="li" :to="{name:'business-index'}" active-class="active" class="transition-halfs">首页</router-link>
-                    <router-link tag="li" :to="{name:'buy-recommend'}" active-class="active" class="transition-halfs">买推荐</router-link>
-                    <router-link tag="li" :to="{name:'recommend-rank'}" active-class="active" class="transition-halfs">排行榜</router-link>
-                    <router-link tag="li" :to="{name:'send-recommend'}" active-class="active" class="transition-halfs">发推荐</router-link>
-                    <router-link tag="li" :to="{name:'in-time-goal'}" active-class="active" class="transition-halfs">即时比分</router-link>
+                    <router-link tag="li" :to="{name:'index'}" active-class="active" class="transition-halfs">首页</router-link>
+                    <router-link tag="li" :to="{name:'buy'}" active-class="active" class="transition-halfs">买推荐</router-link>
+                    <router-link tag="li" :to="{name:'rank'}" active-class="active" class="transition-halfs">排行榜</router-link>
+                    <router-link tag="li" :to="{name:'publish'}" active-class="active" class="transition-halfs">发推荐</router-link>
+                    <router-link tag="li" :to="{name:'score'}" active-class="active" class="transition-halfs">即时比分</router-link>
                     <!-- <li>优惠活动</li> -->
-                    <router-link tag="li" :to="{name:'user-guides'}" active-class="active" class="transition-halfs">使用帮助</router-link>
+                    <router-link tag="li" :to="{name:'help'}" active-class="active" class="transition-halfs">使用帮助</router-link>
                     <li class="transition-halfs" @click="showLogin()">登录</li>
                     <router-link tag="li" :to="{name:'register'}" class="transition-halfs">注册</router-link>
                 </ul>

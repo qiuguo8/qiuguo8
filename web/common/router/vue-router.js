@@ -11,8 +11,7 @@ const routes = [
         },
         children:[{
             path:'/',
-            name:'visitor-index',
-            redirect:'/business-index'
+            redirect:'/index'
         },
         {
             path:'/register',
@@ -20,48 +19,64 @@ const routes = [
             component:resolve => require(['modules/common/user/vues/register.vue'],resolve)
         },
         {
-            path:'/user-guides',
-            name:'user-guides',
+            path:'/help',
+            name:'help',
             meta:{
                 aliasName:'使用帮助'
             },
             component:resolve => require(['modules/business/common/vues/userguide.vue'],resolve)
         },
         {
-            path:'/business-index',
-            name:'business-index',
+            path:'/about-us',
+            name:'about-us',
+            meta:{
+                aliasName:'关于我们'
+            },
+            component:resolve => require(['modules/business/common/vues/about-us.vue'],resolve)
+        },
+        {
+            path:'/recruit',
+            name:'recruit',
+            meta:{
+                aliasName:'网站招聘'
+            },
+            component:resolve => require(['modules/business/common/vues/recruit.vue'],resolve)
+        },
+        {
+            path:'/index',
+            name:'index',
             meta:{
                 aliasName:'首页'
             },
             component:resolve => require(['modules/business/index/vues/businessIndex.vue'],resolve)
         },
         {
-            path:'/buy-recommend',
-            name:'buy-recommend',
+            path:'/buy',
+            name:'buy',
             meta:{
                 aliasName:'买推荐'
             },
             component:resolve => require(['modules/business/buyrecommend/vues/buyrecommend.vue'],resolve)
         },
         {
-            path:'/recommend-rank',
-            name:'recommend-rank',
+            path:'/rank',
+            name:'rank',
             meta:{
                 aliasName:'排行榜'
             },
             component:resolve => require(['modules/business/recommendrank/vues/recommendrank.vue'],resolve)
         },
         {
-            path:'/send-recommend',
-            name:'send-recommend',
+            path:'/publish',
+            name:'publish',
             meta:{
                 aliasName:'发推荐'
             },
             component:resolve => require(['modules/business/sendrecommend/vues/sendrecommend.vue'],resolve)
         },
         {
-            path:'/in-time-goal',
-            name:'in-time-goal',
+            path:'/score',
+            name:'score',
             meta:{
                 aliasName:'即时比分'
             },
