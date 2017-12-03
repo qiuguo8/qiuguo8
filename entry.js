@@ -62,9 +62,9 @@ comVue.$on("on-progress-start",function(data){
 comVue.$on("on-progress-end",function(data){
 	loadEnd();
 });
-
 Vue.http.interceptors.push(function(request, next){
 	if(request){
+		request.emulateJSON = true;
 		vue.$data.progress = 0;
 		startLoad();
 	}
