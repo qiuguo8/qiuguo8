@@ -216,7 +216,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 /*infinite-scroll end*/
 
 /*scrollbar start*/
-.scroll-bar{position: absolute;background-color: rgba(200,200,200,0.3);border-radius: 10px;opacity: 0}
+.scroll-bar{z-index:1100;position: absolute;background-color: rgba(200,200,200,0.3);border-radius: 10px;opacity: 0}
 .scroll-bar:hover{background-color: rgba(200,200,200,0.7)}
 /*scrollbar end*/
 

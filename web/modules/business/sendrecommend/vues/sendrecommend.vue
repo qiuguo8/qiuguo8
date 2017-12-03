@@ -15,11 +15,11 @@
             </el-radio-group>
         </div>
         <div class="match-list content-wrap content-75-to-100">
-            <div class="match-time select-list">
-               <el-radio-group v-model="isWhole">
+            <div class="match-time select-list" style="height:70px">
+                <!-- <el-radio-group v-model="isWhole" v-show="false">
                     <el-radio-button label="true">全场</el-radio-button>
                     <el-radio-button label="false">半场</el-radio-button>
-                </el-radio-group>
+                </el-radio-group> -->
                 <button class="btn btn-padding btn-orange float-right" @click="showCheckList()"><i :class="isShowCheckList?'fa fa-chevron-circle-down rotate-180 transition-halfs':'transition-halfs fa fa-chevron-circle-down'"></i>赛事选择</button>
             </div>
             <div class="match-select" v-if="isShowCheckList">

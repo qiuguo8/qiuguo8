@@ -4,9 +4,9 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../templates/index.html'),
+    index: path.resolve(__dirname, '../static/index.html'),
     assetsRoot: path.resolve(__dirname, '../'),
-    assetsSubDirectory: 'templates',
+    assetsSubDirectory: 'static',
     assetsPublicPath: '../',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '',
     proxyTable: {
       '/qiuguo8': {
-          target: 'http://localhost:3000',
+          target: 'http://10.0.19.37:6060',
           changeOrigin: true,
           pathRewrite:{"^/qiuguo8":""},
           onProxyReq (proxyReq, req, res) {

@@ -251,6 +251,7 @@
 <script>
 import Vue from 'vue';
 import scrollBar from 'web/common/utils/scrollUtil.js';
+import indexService from 'web/modules/business/index/services/indexService.js'
 import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane,RadioButton,RadioGroup} from 'element-ui'
 Vue.component(Carousel.name, Carousel)
 Vue.component(CarouselItem.name, CarouselItem)
