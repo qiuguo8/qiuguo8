@@ -22,6 +22,9 @@
                         <el-radio label="0">否</el-radio>
                     </el-radio-group>
                 </el-form-item>
+                <el-form-item label="文章内容" prop="isUsed">
+                    <umeditor></umeditor>
+                </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm()">提交</el-button>
                     <el-button @click="resetForm()">重置</el-button>
@@ -44,6 +47,9 @@ Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Radio.name,Radio);
 Vue.component(RadioGroup.name,RadioGroup);
+Vue.component(Select.name,Select);
+Vue.component(Option.name,Option);
+import umeditor from 'web/common/components/umeditor.vue'
 
 export default {
     data(){
@@ -54,6 +60,7 @@ export default {
                 img:'',
                 isUsed:'1',
             },
+            options:[1,5,10],
             rules:{
                 title:[
                     {required:true,message:'请输入标题',trigger:'blur'},
@@ -69,6 +76,9 @@ export default {
         }
     },
     methods:{
+    },
+    components:{
+        umeditor:umeditor
     }
 }
 </script>

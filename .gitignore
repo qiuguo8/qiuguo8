@@ -10,7 +10,8 @@
  ##filter databfile��sln file##
 *.mdb  
 *.ldb  
-*.sln    
+*.sln
+*.docx  
 ##class file##
 *.com  
 *.class  

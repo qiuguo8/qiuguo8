@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '',
     proxyTable: {
       '/qiuguo8': {
-          target: 'http://localhost:6060',
+          target: 'http://10.0.19.37:6060',
           changeOrigin: true,
           pathRewrite:{"^/qiuguo8":""},
           onProxyReq (proxyReq, req, res) {

@@ -34,6 +34,9 @@ const sysUtil = {
         var reg = new RegExp(regTmp,'g');
         var result = reg.exec(document.cookie);
         return result[2];
+    },
+    param(){
+        
     }
 }
 
