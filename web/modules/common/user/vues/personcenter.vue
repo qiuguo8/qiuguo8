@@ -1,6 +1,6 @@
 <template>
     <div class="person-center">
-        <ul class="left-menu transition-halfs float-left">
+        <ul class="left-menu float-left" v-spin>
             <router-link tag="li" :to="{name:'person-info'}" active-class="active" class="transition-halfs">个人主页</router-link>
             <router-link tag="li" :to="{name:'person-focus'}" active-class="active" class="transition-halfs">我的关注</router-link>
             <router-link tag="li" :to="{name:'person-message'}" active-class="active" class="transition-halfs">我的消息</router-link>
@@ -25,6 +25,7 @@ import {Button} from 'element-ui'
 import comVue from 'web/modules/commonVue.js'
 Vue.component(Button.name,Button);
 import personInfoHeader from 'web/modules/common/user/vues/personinfoheader.vue'
+import 'web/common/directives/uiDirective.js'
 
 export default {
     data(){
@@ -36,6 +37,8 @@ export default {
         comVue.$on('is-show-header',(data)=>{
             this.showHeader = data;
         })
+    },
+    mounted(){
     },
     components:{
         personInfoHeader:personInfoHeader

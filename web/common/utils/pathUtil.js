@@ -2,7 +2,8 @@ const PRODUCTION = 'production';
 const DEVELOPMENT = 'development';
 
 var curEnv = DEVELOPMENT;
-var basePath = location.origin;
+var origin = location.origin;
+var basePath = origin;
 
 if(curEnv === DEVELOPMENT){
     basePath += '/qiuguo8'; 
@@ -11,5 +12,8 @@ if(curEnv === DEVELOPMENT){
 export default {
     getBasePath(){
         return basePath;
+    },
+    getOriginPath(){
+        return origin;
     }
 };

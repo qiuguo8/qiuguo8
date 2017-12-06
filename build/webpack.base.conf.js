@@ -74,10 +74,10 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
         loader: [
-                    'url-loader?limit=10000&'+utils.assetsPath('img/[name].[hash:7].[ext]'),
-                    'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-                    'image-webpack-loader?{pngquant:{quality: 65, speed: 4}, mozjpeg: {quality: 65},svgo:{quality:65},gifsicle:{quality:65}}'
-                    ]
+                  'url-loader?limit=10&name=[path][name].[ext]'+(process.env.NODE_ENV === 'production'?'&outputPath='+utils.assetsPath('img/'):''),
+                  //'file-loader?limit=1000&shash=sha512&digest=hex&name=[hash].[ext]',
+                  'image-webpack-loader?{pngquant:{quality: 65, speed: 4}, mozjpeg: {quality: 65},svgo:{quality:65},gifsicle:{quality:65}}'
+                ]
        /* query: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')

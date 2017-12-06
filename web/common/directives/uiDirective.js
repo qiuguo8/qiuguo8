@@ -1,8 +1,16 @@
 import Vue from 'vue';
 
+//左右滑动播放指令
 Vue.directive('slipping',{
-    inserted(el,binding){
-        slipping(el,{});
+    inserted(el,binding,VNode){
+        var attrs = VNode.data.attrs,option={};
+        if(attrs){
+            option = {
+                interval:attrs.interval&&parseInt(attrs.interval),
+                speed:attrs.speed&&parseInt(attrs.speed)
+            }
+        }
+        slipping(el,option);
     }
 })
 
@@ -13,7 +21,7 @@ slipping.default = {
 
 function slipping(el,option){
     if(this instanceof slipping !==true){
-        return new slipping(el,Option);
+        return new slipping(el,option);
     }
     this.$el = $(el);
     this.option = $.extend({},slipping.default,option);
@@ -55,4 +63,67 @@ slipping.prototype.run = function(){
         left -= this.option.speed;
     }
     this.$el.css('left',left); 
+}
+
+//左边菜单随滚动条滚动，直到达到右边内容底部
+Vue.directive('spin',{
+    inserted(el,binding,VNode){
+        spin(el);
+    },
+    unbind(){
+        $(window).off('scroll');
+    }
+});
+
+function spin(el){
+    if(this instanceof spin !== true){
+        return new spin(el);
+    }
+    this.$el = $(el);
+    this.lastTop = 0;
+    this.$sibling = this.$el.siblings();
+    this.$window = $(window);
+    this.init();
+}
+
+spin.prototype = {
+    init(){
+        if(!this.$el)return;
+        this.scroll();
+        this.$window.on('scroll',(e)=>{
+            this.scroll(e);
+        });
+        window.onresize = (e)=>{
+            this.scroll(e);
+            if(window.innerWidth<1120){
+                this.$window.off('scroll');
+            }else{
+                this.$window.on('scroll',(e)=>{
+                    this.scroll(e);
+                })
+            }
+        }
+    },
+    scroll(e){
+        var scrollTop = this.$window.scrollTop();
+        var scrollHeight = this.$sibling[0].scrollHeight;
+        var elHeight = this.$el.innerHeight();
+        if(window.innerWidth<1120){
+            this.$el.css('top',70);
+            this.lastTop = scrollTop;
+            return;
+        };
+        if(!this.lastTop){
+            this.$el.css('top',0);
+            this.lastTop = scrollTop;
+            return;
+        }
+        var top = parseInt(this.$el.css('top'));
+        top = scrollTop;
+        if(top+elHeight>=scrollHeight){
+            scrollTop = top = scrollHeight - elHeight;
+        }
+        this.lastTop = scrollTop;
+        this.$el.css('top',top);
+    }
 }

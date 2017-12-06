@@ -30,21 +30,21 @@
                     <el-checkbox-button @change="handleAlterCheckChange">反选</el-checkbox-button>
                 </div>
             </div>
-            <el-table :default-sort="{prop:'index',order:'ascending'}" :data="matchsTable" border style="width: 100%">
+            <el-table :data="matchsTable" border style="width: 100%">
                 <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column  prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="fullLetBall" label="全场让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                            <el-checkbox-button border="true" v-model="scope.row.host" @change="handleOpposit(scope.row.host,'custom',scope)">主11.11</el-checkbox-button>
-                            <el-checkbox-button border="true" v-model="scope.row.custom" @change="handleOpposit(scope.row.custom,'host',scope)">客11.11</el-checkbox-button>
+                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">主11.11</el-button>
+                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">客11.11</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column prop="fullSizeBall" label="全场大小" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <el-checkbox-button border="true" v-model="scope.row.big" @change="handleOpposit(scope.row.big,'small',scope)">大11.11</el-checkbox-button>
-                        <el-checkbox-button border="true" v-model="scope.row.small" @change="handleOpposit(scope.row.small,'big',scope)">小11.11</el-checkbox-button>
+                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">主11.11</el-button>
+                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">客11.11</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -54,7 +54,7 @@
                 <div class="list-name text-center"><span>推荐规则</span></div>
                 <div class="rule-text">
                     <p>推荐模式</p>
-                    <p>xxxxx</p>
+                    <p>xxx</p>
                 </div>
                 <div class="rule-text">
                     <p>擂台规则</p>
@@ -76,11 +76,28 @@
                 </el-table>
             </div>
         </div>
+        <el-dialog title="发布推荐" :visible.sync="showInfo" width="360px" :lock-scroll="false">
+            <div class="commend-info">
+                <p class="row-new"><span class="el-col-8">赛事：</span><span class="el-col-16">xx</span></p>
+                <p class="row-new"><span class="el-col-8">推荐：</span><span class="el-col-16">xx</span></p>
+                <p class="row-new"><span class="el-col-8">价格：</span><span class="el-col-16">xx</span></p>
+                <div class="form-control row-new">
+                    <label class="el-col-8 text-center">推荐分析：</label>
+                    <div class="el-col-16">
+                        <el-input type="textarea" v-model="analyic"  rows="4"></el-input>
+                    </div>
+                </div>
+            </div>
+            <div slot="footer">
+                <el-button type="primary">发布推荐</el-button>
+                <el-button @click="close()">取消</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
 import Vue from 'vue'
-import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton} from 'element-ui'
+import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton,Dialog,Input} from 'element-ui'
 import service from 'web/modules/business/sendrecommend/service/sendrecommendService'
 Vue.component(Checkbox.name,Checkbox);
 Vue.component(CheckboxGroup.name,CheckboxGroup);
@@ -90,6 +107,8 @@ Vue.component(TableColumn.name,TableColumn);
 Vue.component(CheckboxButton.name,CheckboxButton);
 Vue.component(RadioGroup.name,RadioGroup);
 Vue.component(RadioButton.name,RadioButton);
+Vue.component(Dialog.name,Dialog);
+Vue.component(Input.name,Input);
 
 
 export default {
@@ -107,7 +126,9 @@ export default {
                         {index:'4',reward:'xx'},
                         {index:'5',reward:'xx'}],
             productCode:'01',
-            isShowCheckList:false
+            isShowCheckList:false,
+            showInfo:false,
+            infoObj:null
         }
     },
     created:function () {
@@ -116,6 +137,16 @@ export default {
         this.getMatchesInfo(param);
     },
     methods: {
+        showInfoDialog(obj){
+            this.infoObj = obj,
+            this.open();
+        },
+        open(){
+            this.showInfo = true;
+        },
+        close(){
+            this.showInfo = false;
+        },
         showCheckList(){
             this.isShowCheckList = !this.isShowCheckList;
         },
@@ -195,7 +226,7 @@ export default {
         getMatchesInfo(param){
             service.getMatchesInfo(param).then((ret)=>{ //查询相关的比赛信息
                 if(ret.body.status == 'success'){
-                    this.matchsTable = ret.body.list
+                    this.matchsTable = ret.body.list;
                 }
             })
         }

@@ -9,6 +9,7 @@ import comVue from 'web/modules/commonVue'
 import jquery from 'jquery'
 window.$ = jquery;
 window.jquery = jquery;
+window.jQuery = jquery;
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import MuseUI from 'muse-ui'
@@ -17,6 +18,7 @@ import 'web/resources/css/base.css'
 import routerUtil from 'web/common/utils/routerUtil.js'
 import {Notification} from 'element-ui'
 import infiniteScroll from 'vue-infinite-scroll'
+import 'web/common/filters/numberFilter.js'
 
 Vue.use(VueRouter);
 Vue.use(VueResource); 
