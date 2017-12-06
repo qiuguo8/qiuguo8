@@ -1,12 +1,12 @@
 <template>
     <el-dialog @open="commonLogin()" title="用户登录" :lock-scroll="false" custom-class="login-dialog" :visible.sync="dialogFormVisible">
         <div class="login-form" v-show="isCommon">
-            <el-form :model="loginForm" status-icon :rules="rules" ref="form">
-                <el-form-item label="用户名" prop="loginName" label-width="80px">
-                    <el-input v-model="loginForm.loginName" auto-complete="off"></el-input>
+            <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm">
+                <el-form-item label="用户名" prop="userName" label-width="80px">
+                    <el-input v-model="loginForm.userName" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="pass" label-width="80px">
-                    <el-input type="password" v-model="loginForm.pass" auto-complete="off"></el-input>
+                <el-form-item label="密码" prop="password" label-width="80px">
+                    <el-input type="password" v-model="loginForm.password" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="验证码" prop="checkCode" label-width="80px">
                     <div class="el-col-12">
@@ -19,19 +19,27 @@
                     <a class="miss-pass">忘记密码?</a>
                 </el-form-item>
             </el-form>
+            <div class="btn-login">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="loginByUserName()">确 定</el-button>
+            </div>
         </div>
         <div class="login-form" v-show="isMobile">
-            <el-form :model="mloginForm" status-icon :rules="rules" ref="form">
-                <el-form-item label="手机号码" prop="mobileNo" label-width="100px">
-                    <el-input v-model="mloginForm.mobileNo" auto-complete="off"></el-input>
+            <el-form :model="mloginForm" status-icon :rules="rules2" ref="mloginForm">
+                <el-form-item label="手机号码" prop="phone" label-width="100px">
+                    <el-input v-model="mloginForm.phone" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="短信验证码" prop="mobileCode" label-width="100px">
+                <el-form-item label="短信验证码" prop="phoneCode" label-width="100px">
                     <div class="el-col-12">
-                        <el-input type="text" v-model="mloginForm.mobileCode" auto-complete="off"></el-input>
+                        <el-input type="text" v-model="mloginForm.phoneCode" auto-complete="off"></el-input>
                     </div>
                     <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                 </el-form-item>
             </el-form>
+            <div class="btn-login">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="loginByPhone()">确 定</el-button>
+            </div>
         </div>
         <div class="qq-login-code login-img" v-if="isQQlogin">
             <img src=""/>
@@ -55,10 +63,6 @@
                     <span v-show="!isCommon" @click="commonLogin()"><i class="fa fa-edit"></i></span>
                 </el-tooltip>
             </div>
-            <div class="btn-login" v-if="isCommon||isMobile">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="login()">确 定</el-button>
-            </div>
         </div>
     </el-dialog>
 </template>
@@ -69,6 +73,8 @@ import {Dialog,Form,Input,FormItem,Button,Checkbox,Tooltip} from 'element-ui'
 import formUtil from 'web/common/utils/formUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
 import comVue from 'web/modules/commonVue.js'
+import loginService from 'web/modules/common/user/service/loginService'
+import messCodeUtil from 'web/common/utils/messCodeUtil'
 Vue.component(Dialog.name,Dialog);
 Vue.component(Form.name,Form);
 Vue.component(Input.name,Input);
@@ -85,38 +91,40 @@ export default {
             isWXlogin:false,
             isMobile:false,
             loginForm:{
-                loginName:'',
-                pass:'',
+                userName:'',
+                password:'',
                 checkCode:'',
                 isAuto:false,
             },
             mloginForm:{
-                mobileCode:'',
-                mobileNo:''
+                phoneCode:'',
+                phone:''
             },
-            rules:{
-                loginName:[
-                    {required:true,message:'用户名不能为空',trigger:'blur change'},
-                    {validator:formUtil.maxSize(20,'用户名长度不能超过20'),trigger:'blur change'},
-                    {validator:formUtil.isLegalName('用户名只能由英文、数字和中文组成'),trigger:'blur change'}
+            rules: {
+                userName: [
+                    {required: true, message: '用户名不能为空', trigger: 'blur change'},
+                    {validator: formUtil.maxSize(20, '用户名长度不能超过20'), trigger: 'blur change'},
+                    {validator: formUtil.isLegalName('用户名只能由英文、数字和中文组成'), trigger: 'blur change'}
                 ],
-                pass:[
-                    {required:true,message:'密码不能为空',trigger:'change blur'},
-                    {min:6,max:20,message:'密码长度要在6～20个之间',trigger:'change blur'}
+                password: [
+                    {required: true, message: '密码不能为空', trigger: 'change blur'},
+                    {min: 6, max: 20, message: '密码长度要在6～20个之间', trigger: 'change blur'}
                 ],
-                checkCode:[
-                    {required:true,message:'验证码不能为空',trigger:'change blur'},
-                    {validator:formUtil.isNumber('验证码必须为数字'),trigger:'change blur'},
-                    {type:'number',validator:formUtil.maxSize(6,'验证码长度不大于6'),trigger:'blur change'}
+                checkCode: [
+                    {required: true, message: '验证码不能为空', trigger: 'change blur'},
+                    {validator: formUtil.isNumber('验证码必须为数字'), trigger: 'change blur'},
+                    {type: 'number', validator: formUtil.maxSize(6, '验证码长度不大于6'), trigger: 'blur change'}
                 ],
-                isAuto:[
-                    {type:'boolean', trigger:'change'}
-                ],
-                mobileNo:[
+                isAuto: [
+                    {type: 'boolean', trigger: 'change'}
+                ]
+            },
+            rules2:{
+                phone:[
                     {required:true,message:'手机号码不能为空',trigger:'change blur'},
                     {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'}
                 ],
-                mobileCode:[
+                phoneCode:[
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
                     {validator:formUtil.isNumber('验证码必须为数字'),trigger:'change blur'},
                     {type:'number',validator:formUtil.maxSize(6,'验证码长度不大于6'),trigger:'blur change'}
@@ -153,13 +161,28 @@ export default {
         });
     },
     methods:{
-        login(){
-            this.$refs.form.validate((valid)=>{
-                console.log(valid,this.loginForm);
+        loginByUserName(){
+            this.$refs.loginForm.validate((valid)=>{
                 if(valid){
+                    loginService.loginByUserName(this.loginForm).then((ret)=>{
+                        console.log(ret.body.status)
+                        console.log(ret.body.info)
+                    })
                     if(this.loginForm.isAuto){
                         sysUtil.saveCookie('loginName',this.loginForm.loginName);
                     }
+                    return true;
+                }else{
+                    return false;
+                }
+            })
+        },
+        loginByPhone(){
+            this.$refs.mloginForm.validate((valid)=>{
+                if(valid){
+                    loginService.loginByPhone(this.mloginForm).then((ret)=>{
+                        console.log(ret.body.loginInfo)
+                    })
                     return true;
                 }else{
                     return false;
@@ -186,6 +209,11 @@ export default {
             this.isQQlogin = this.isWXlogin = this.isCommon = false;
         },
         getMessCode(){
+            let info = {'phone':this.mloginForm.phone,'type':'LOGIN'}
+            messCodeUtil.createPhoneCode(info)
+            this.countSeconds();
+        },
+        countSeconds(){
             var counter = this.counter;
             if(counter){
                 clearTimeout(counter);
@@ -200,13 +228,13 @@ export default {
                 this.isCountOver = false;
                 this.countSec--;
                 this.countTxt = this.countSec+'秒后重新获取验证码';
-                this.getMessCode();
+                this.countSeconds();
                 return;
             }
             this.counter = setTimeout(()=>{
                 this.countSec--;
                 this.countTxt = this.countSec+'秒后重新获取验证码';
-                this.getMessCode();
+                this.countSeconds();
             },1000)
         }
     }
