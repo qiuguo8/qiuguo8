@@ -1,5 +1,5 @@
 import Vue from "vue";
-import pathUtil from "web/common/utils/pathUtil.js";
+import pathUtil from "web/common/utils/pathUtil";
 
 
 export default {

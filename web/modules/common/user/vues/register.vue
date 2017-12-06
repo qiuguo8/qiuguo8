@@ -8,21 +8,21 @@
             <div class="clear-fix"></div>
             <div class="edit-form">
                 <el-form :model="regisForm" status-icon :rules="rules" ref="regisForm" label-width="100px">
-                    <el-form-item label="用户名" prop="loginName">
-                        <el-input type="primary" v-model="regisForm.loginName" auto-complete="off"></el-input>
+                    <el-form-item label="用户名" prop="userName">
+                        <el-input type="primary" v-model="regisForm.userName" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码" prop="pass">
-                        <el-input type="password" v-model="regisForm.pass" auto-complete="off"></el-input>
+                    <el-form-item label="密码" prop="password">
+                        <el-input type="password" v-model="regisForm.password" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="确认密码" prop="checkPass">
                         <el-input type="password" v-model="regisForm.checkPass" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="手机号码" prop="loginName">
-                        <el-input type="primary" v-model="regisForm.mobileNo" auto-complete="off"></el-input>
+                    <el-form-item label="手机号码" prop="phone">
+                        <el-input type="primary" v-model="regisForm.phone" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="短信验证码" prop="mobileCode" label-width="100px">
+                    <el-form-item label="短信验证码" prop="phoneCode" label-width="100px">
                         <div class="el-col-12">
-                            <el-input type="text" v-model="regisForm.mobileCode" auto-complete="off"></el-input>
+                            <el-input type="text" v-model="regisForm.phoneCode" auto-complete="off"></el-input>
                         </div>
                         <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
@@ -48,6 +48,8 @@ import validationUtil from 'web/common/utils/validationUtil.js'
 import formUtil from 'web/common/utils/formUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
 import 'web/common/utils/pVerify.js'
+import messCodeUtil from 'web/common/utils/messCodeUtil'
+import registerService from 'web/modules/common/user/service/registerService'
 Vue.component(Form.name,Form);
 Vue.component(FormItem.name,FormItem);
 Vue.component(Input.name,Input);
@@ -57,15 +59,15 @@ Vue.component(Checkbox.name,Checkbox);
 export default {
     data(){
         var SamePass = (rule,value,callback)=>{
-            var pass = this.regisForm.pass;
-            if(!validationUtil.isNull(pass)){
-                if(pass!=value){
+            var password = this.regisForm.password;
+            if(!validationUtil.isNull(password)){
+                if(password!=value){
                     this.isCheckPassValid = false;
                     callback(new Error('两次输入的密码不正确'));
                 }else{
                     if(!this.isCheckPassValid){
                         this.isCheckPassValid = true;
-                        this.$refs.regisForm.validateField('pass');
+                        this.$refs.regisForm.validateField('password');
                     }
                     callback();
                 }
@@ -94,30 +96,30 @@ export default {
             isPassValid:true,
             isCheckPassValid:true,
             regisForm:{
-                loginName:'',
-                pass:'',
+                userName:'',
+                password:'',
                 checkPass:'',
                 checkCode:'',
                 isSigned:'',
-                mobileNo:'',
-                mobileCode:''
+                phone:'',
+                phoneCode:''
             },
             rules:{
-                loginName:[
+                userName:[
                     {required:true,message:'请输入用户名',trigger:'blur'},
                     {max:20,message:'长度不能超过20个字符',trigger:'blur'},
                     {validator:formUtil.isLegalName('用户名只能由英文、数字和中文组成'),trigger:'change'}
                 ],
-                mobileNo:[
+                phone:[
                     {required:true,message:'手机号码不能为空',trigger:'change blur'},
                     {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'}
                 ],
-                mobileCode:[
+                phoneCode:[
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
                     {validator:formUtil.isNumber('验证码必须为数字'),trigger:'change blur'},
                     {type:'number',validator:formUtil.maxSize(6,'验证码长度不大于6'),trigger:'blur change'}
                 ],
-                pass:[
+                password:[
                     {required:true,message:'请输入密码',trigger:'blur'},
                     {min:6,max:20,message:'密码长度在6～20个字符之间',trigger:'blur'},
                     {validator:SameCheckPass,trigger:'blur'}
@@ -166,7 +168,7 @@ export default {
         submitForm(){
             this.$refs.regisForm.validate((valid)=>{
                 if(valid){
-                    console.log(valid);
+                    registerService.register(this.regisForm)
                     return true;
                 }else{
                     return false;
@@ -178,6 +180,35 @@ export default {
         },
         showLogin(){
             sysUtil.showLogin();
+        },
+        getMessCode(){
+            let info = {'phone':this.regisForm.phone,'type':'REGISTER'}
+            messCodeUtil.createPhoneCode(info)
+            this.countSeconds();
+        },
+        countSeconds(){
+            var counter = this.counter;
+            if(counter){
+                clearTimeout(counter);
+            }
+            if(this.countSec==0){
+                this.isCountOver = true;
+                this.countTxt = '发送短信验证码';
+                this.countSec = 60;
+                return;
+            }
+            if(this.isCountOver){
+                this.isCountOver = false;
+                this.countSec--;
+                this.countTxt = this.countSec+'秒后重新获取验证码';
+                this.countSeconds();
+                return;
+            }
+            this.counter = setTimeout(()=>{
+                this.countSec--;
+                this.countTxt = this.countSec+'秒后重新获取验证码';
+                this.countSeconds();
+            },1000)
         }
     }
 }
