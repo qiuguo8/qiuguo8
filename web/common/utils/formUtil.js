@@ -1,5 +1,5 @@
 import validationUtil from './validationUtil'
-
+import registerService from 'web/modules/common/user/service/registerService'
 
 const formUtil = {
     isChecked(mess){
@@ -61,6 +61,32 @@ const formUtil = {
                 }
             }
             callback();
+        }
+    },
+    checkUserNameRepeat(mess){
+        return (rule,value,callback)=>{
+            if(!validationUtil.isNull(value)){
+                var param = {'userName':value};
+                registerService.userNameRepeat(param).then((ret)=>{
+                    if(ret.body.result){
+                        callback(new Error(mess));
+                    }
+                    callback();
+                })
+            }
+        }
+    },
+    checkPhoneRepeat(mess){
+        return (rule,value,callback)=>{
+            if(!validationUtil.isNull(value)){
+                var param = {'phone':value};
+                registerService.phoneRepeat(param).then((ret)=>{
+                    if(ret.body.result){
+                        callback(new Error(mess));
+                    }
+                    callback();
+                })
+            }
         }
     }
 }

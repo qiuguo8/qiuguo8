@@ -26,8 +26,8 @@
                         </div>
                         <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
-                    <el-form-item prop="isSigned">
-                        <el-checkbox v-model="regisForm.isSigned">我已满18岁并同意《球果吧服务条款》</el-checkbox>
+                    <el-form-item prop="signed">
+                        <el-checkbox v-model="regisForm.signed">我已满18岁并同意《球果吧服务条款》</el-checkbox>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="submitForm()">提交</el-button>
@@ -100,7 +100,7 @@ export default {
                 password:'',
                 checkPass:'',
                 checkCode:'',
-                isSigned:'',
+                signed:'',
                 phone:'',
                 phoneCode:''
             },
@@ -108,11 +108,13 @@ export default {
                 userName:[
                     {required:true,message:'请输入用户名',trigger:'blur'},
                     {max:20,message:'长度不能超过20个字符',trigger:'blur'},
-                    {validator:formUtil.isLegalName('用户名只能由英文、数字和中文组成'),trigger:'change'}
+                    {validator:formUtil.isLegalName('用户名只能由英文、数字和中文组成'),trigger:'change'},
+                    {validator:formUtil.checkUserNameRepeat('用户名已被注册'),trigger:'change blur'}
                 ],
                 phone:[
                     {required:true,message:'手机号码不能为空',trigger:'change blur'},
-                    {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'}
+                    {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'},
+                    {validator:formUtil.checkPhoneRepeat('手机号码已被注册'),trigger:'change blur'}
                 ],
                 phoneCode:[
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
@@ -134,7 +136,7 @@ export default {
                     {validator:formUtil.maxSize(6,'长度不能超过6个字符'),trigger:'blur'},
                     {type:'number',message:'验证码必须是数字'},
                 ],
-                isSigned:[
+                signed:[
                     {type:'boolean',validator:formUtil.isChecked('请勾选协议'),trigger:'change'},
                 ],
             },
@@ -168,7 +170,10 @@ export default {
         submitForm(){
             this.$refs.regisForm.validate((valid)=>{
                 if(valid){
-                    registerService.register(this.regisForm)
+                    registerService.register(this.regisForm).then((ret)=>{
+                        console.log(ret.body.status)
+                        console.log(ret.body.info)
+                    })
                     return true;
                 }else{
                     return false;
