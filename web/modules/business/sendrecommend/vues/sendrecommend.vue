@@ -37,14 +37,14 @@
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="fullLetBall" label="全场让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">主11.11</el-button>
-                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">客11.11</el-button>
+                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0101','home')">主11.11</el-button>
+                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0101','visit')">客11.11</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column prop="fullSizeBall" label="全场大小" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">主11.11</el-button>
-                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row)">客11.11</el-button>
+                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0201','home')">主11.11</el-button>
+                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0201','visit')">客11.11</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -78,18 +78,24 @@
         </div>
         <el-dialog title="发布推荐" :visible.sync="showInfo" width="360px" :lock-scroll="false">
             <div class="commend-info">
-                <p class="row-new"><span class="el-col-8">赛事：</span><span class="el-col-16">xx</span></p>
-                <p class="row-new"><span class="el-col-8">推荐：</span><span class="el-col-16">xx</span></p>
-                <p class="row-new"><span class="el-col-8">价格：</span><span class="el-col-16">xx</span></p>
+                <p class="row-new"><span class="el-col-8">赛事：</span><span class="el-col-16">{{infoObj.homeTeamName}}-{{infoObj.visitTeamName}}</span></p>
+                <p class="row-new"><span class="el-col-8">推荐：</span><span class="el-col-16">{{recommendInfo.recommendTeamName}}</span></p>
                 <div class="form-control row-new">
+                    <label class="el-col-8 text-center">价格：</label>
+                    <div class="el-col-16">
+                        <el-input type="primary" v-model="price" ></el-input>
+                    </div>
+                </div>
+                <div class="form-control row-new">
+
                     <label class="el-col-8 text-center">推荐分析：</label>
                     <div class="el-col-16">
-                        <el-input type="textarea" v-model="analyic"  rows="4"></el-input>
+                        <el-input type="textarea" v-model="recommendContent"  rows="4"></el-input>
                     </div>
                 </div>
             </div>
             <div slot="footer">
-                <el-button type="primary">发布推荐</el-button>
+                <el-button type="primary"  @click="publishRecom()">发布推荐</el-button>
                 <el-button @click="close()">取消</el-button>
             </div>
         </el-dialog>
@@ -128,7 +134,11 @@ export default {
             productCode:'01',
             isShowCheckList:false,
             showInfo:false,
-            infoObj:null
+            infoObj:{homeTeamName:null,visitTeamName:null},
+            priceRange:{lowestPrice:null, highestPrice:null},
+            recommendInfo:{recommendTeamId:null, recommendTeamName:null, categoryCode:null, productCode:null},
+            recommendContent:null,
+            price:null,
         }
     },
     created:function () {
@@ -137,9 +147,31 @@ export default {
         this.getMatchesInfo(param);
     },
     methods: {
-        showInfoDialog(obj){
-            this.infoObj = obj,
-            this.open();
+        showInfoDialog(obj,category,team){
+            obj.productCode=category.substring(0,2);
+            service.goPublishRecommend(obj).then((ret)=>{
+                if(ret.body.status == 'success'){
+                    this.infoObj = obj;
+                    let recommendTeamId;
+                    let recommendTeamName;
+                    if(team == 'home'){
+                        recommendTeamId = obj.homeTeamId;
+                        recommendTeamName = obj.homeTeamName;
+                    }else if (team == 'visit'){
+                        recommendTeamId = obj.visitTeamId;
+                        recommendTeamName = obj.visitTeamName;
+                    }
+                    this.recommendInfo = {
+                        'recommendTeamId':recommendTeamId,
+                        'recommendTeamName':recommendTeamName,
+                        'categoryCode':category,
+                        'productCode':category.substring(0,2)}
+                    this.priceRange = ret.body.priceRange;
+                    this.open();
+                }else{
+                    alert(ret.body.info);
+                }
+            })
         },
         open(){
             this.showInfo = true;
@@ -172,7 +204,6 @@ export default {
                 }
             }
             this.checkedLeague = alter;
-            console.log(this.checkedLeague)
             let param = {'productCode':this.productCode,'leagueIds':this.checkedLeague.join(",")};
             this.getMatchesInfo(param);
 
@@ -228,6 +259,19 @@ export default {
                 if(ret.body.status == 'success'){
                     this.matchsTable = ret.body.list;
                 }
+            })
+        },
+        publishRecom(){
+            let recommendDetails = this.infoObj;
+            recommendDetails.handicap = this.infoObj.handiCap;
+            recommendDetails.productCode = this.recommendInfo.productCode;
+            recommendDetails.categoryCode = this.recommendInfo.categoryCode;
+            recommendDetails.recommendTeamId = this.recommendInfo.recommendTeamId;
+            recommendDetails.recommendContent = this.recommendContent;
+            recommendDetails.price = this.price;
+
+            service.publishRecommend(recommendDetails).then((ret)=>{
+                alert(ret.body.status)
             })
         }
     }

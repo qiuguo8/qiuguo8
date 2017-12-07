@@ -171,8 +171,7 @@ export default {
             this.$refs.regisForm.validate((valid)=>{
                 if(valid){
                     registerService.register(this.regisForm).then((ret)=>{
-                        console.log(ret.body.status)
-                        console.log(ret.body.info)
+                        alert('注册结果:'+ret.body.status+'<br/>提示信息:'+ret.body.info)
                     })
                     return true;
                 }else{

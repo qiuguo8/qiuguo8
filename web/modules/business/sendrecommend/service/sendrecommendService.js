@@ -8,6 +8,11 @@ export default {
     },
     getMatchesInfo(match){
         return Vue.http.post(pathUtil.getBasePath()+'/publishRecomm/listMatchInfo',match);
+    },
+    goPublishRecommend(match){
+        return Vue.http.post(pathUtil.getBasePath()+'/publishRecomm/goPublishRecommend',match);
+    },
+    publishRecommend(recomm){
+        return Vue.http.post(pathUtil.getBasePath()+'/publishRecomm/publishRecommend',recomm);
     }
-
 }

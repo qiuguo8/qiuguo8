@@ -166,8 +166,7 @@ export default {
             this.$refs.loginForm.validate((valid)=>{
                 if(valid){
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
-                        console.log(ret.body.status)
-                        console.log(ret.body.info)
+                        alert(ret.body.status);
                     })
                     if(this.loginForm.isAuto){
                         sysUtil.saveCookie('loginName',this.loginForm.loginName);
@@ -182,7 +181,7 @@ export default {
             this.$refs.mloginForm.validate((valid)=>{
                 if(valid){
                     loginService.loginByPhone(this.mloginForm).then((ret)=>{
-                        console.log(ret.body.loginInfo)
+                        alert(ret.body.loginInfo);
                     })
                     return true;
                 }else{
