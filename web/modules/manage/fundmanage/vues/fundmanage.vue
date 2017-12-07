@@ -6,13 +6,27 @@
                 <div class="el-col-16">
                     <el-input v-model="userName" placeholder="请输入用户名"></el-input>
                 </div>
-            </div>   
+            </div> 
             <div class="form-control el-col-12">
-                <label class="el-col-8">手机号</label>
-                <div class="el-col-16">
+                <label class="el-col-9">冻结编号</label>
+                <div class="el-col-15">
                     <el-input v-model="account" placeholder="请输入帐号"></el-input>
                 </div>
-            </div>   
+            </div>
+            <div class="row-new">  
+                <div class="form-control el-col-19">
+                    <label class="el-col-5">冻结时间</label>
+                    <div class="el-col-19">
+                        <span class="el-col-11">
+                            <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        </span>
+                        <span class="el-col-2 mid-word">至</span>
+                        <span class="el-col-11">
+                            <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        </span>
+                    </div>
+                </div>   
+            </div>
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary">查询</el-button>
                 <el-button >重置</el-button>
@@ -21,12 +35,18 @@
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
                 <el-table-column prop="index" label="序号" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="冻结编号" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="account" label="账号" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="mobileNo" label="可用现金余额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="mail" label="可用球果余额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="registerDate" label="冻结现金余额" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="status" label="冻结球果余额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="冻结状态" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="冻结时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="冻结原因" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="操作员" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="index" label="操作原因" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" size="small">锁定</el-button>

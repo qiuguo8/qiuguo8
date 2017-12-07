@@ -41,6 +41,7 @@ slipping.prototype.init = function(){
 
 slipping.prototype.runInterval = function(){
     this.diff = this.$el[0].scrollWidth-this.$el.parent()[0].clientWidth;
+    if(this.diff<=0)return;
     if(this.timer){
         clearInterval(this.timer);
     }

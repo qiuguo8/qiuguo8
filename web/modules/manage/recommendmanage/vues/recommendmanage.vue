@@ -42,25 +42,25 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="index" label="发单日期" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="userName" label="推荐编号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="realName" label="推荐用户" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="mobileNo" label="赛事" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="mail" label="比赛时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="registerDate" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="产品类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="盘口" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="主队赔率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="平局赔率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="客队赔率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="购买数量" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column label="操作" min-width="120" align="center" head-align="center" class-name="table-fixed"  fixed="right">
+                <el-table-column prop="index" label="发单日期" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="userName" label="推荐编号" min-width="80" align="center" head-align="center" > </el-table-column>
+                <el-table-column prop="realName" label="推荐用户" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="mobileNo" label="赛事" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="mail" label="比赛时间" min-width="80" align="center" head-align="center"></el-table-column>
+                <el-table-column prop="registerDate" label="主队" min-width="70" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="客队" min-width="60" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="产品类型" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="推荐类型" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="盘口" min-width="60" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="主队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="平局赔率" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="客队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="status" label="价格" min-width="80" align="center" head-align="center"></el-table-column>
+                <el-table-column prop="status" label="购买数量" min-width="80" align="center" head-align="center"></el-table-column>
+                <el-table-column label="操作" min-width="120" align="center" head-align="center"  fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small">隐藏</el-button>
                         <el-button type="text" size="small">修改</el-button>
+                        <el-button type="text" size="small">隐藏</el-button>
                     </template>
                 </el-table-column>
             </el-table>

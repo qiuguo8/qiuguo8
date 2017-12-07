@@ -86,7 +86,7 @@
             最热推荐
         </div>
         <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
-            <div class="transition-ones" v-slipping :style="{width:(270*tableData3.length)+'px',height:'100%',position:'relative'}">
+            <div class="transition-ones" v-slipping :style="{width:(250*tableData3.length)+'px',height:'100%',position:'relative'}">
                 <div class="intro-wrap intro-wrap-index transition-halfs">
                     <div class="match-name">曼城VS曼联</div>
                     <div class="intro-info">
@@ -198,7 +198,7 @@ export default {
             tableData3:[{index:'1',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'2',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'3',userName:'xx',rank:'菜鸟',winpercent:'80%'},
-                        {index:'4',userName:'xx',rank:'菜鸟',winpercent:'80%'},
+                        {index:'3',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'5',userName:'xx',rank:'菜鸟',winpercent:'80%'}],
             radioVal:'1'
         }

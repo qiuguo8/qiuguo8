@@ -145,7 +145,7 @@ const routes = [
                     meta:{
                         aliasName:'冻结管理'
                     },
-                    //component:resolve => require(['modules/manage/fundmanage/vues/fundmanage.vue'],resolve),
+                    component:resolve => require(['modules/manage/fundmanage/vues/fundmanage.vue'],resolve),
                 },
                 {
                     path:'/withdraw-manage',

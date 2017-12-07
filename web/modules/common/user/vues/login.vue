@@ -19,7 +19,7 @@
                     <a class="miss-pass">忘记密码?</a>
                 </el-form-item>
             </el-form>
-            <div class="btn-login">
+            <div class="btn-login text-right">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="loginByUserName()">确 定</el-button>
             </div>
@@ -36,7 +36,7 @@
                     <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                 </el-form-item>
             </el-form>
-            <div class="btn-login">
+            <div class="btn-login text-right">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="loginByPhone()">确 定</el-button>
             </div>
@@ -82,6 +82,7 @@ Vue.component(FormItem.name,FormItem);
 Vue.component(Button.name,Button);
 Vue.component(Checkbox.name,Checkbox);
 Vue.component(Tooltip.name,Tooltip);
+
 export default {
     data(){
         return {
