@@ -173,7 +173,7 @@
             </ul>
         </div>
     </div>
-    <order-buy-tip ref="orderDetail"></order-buy-tip>
+    <order-buy-tip ref="orderDetail" :order-data="data"></order-buy-tip>
 </div>
 </template>
 <script>
@@ -200,7 +200,8 @@ export default {
                         {index:'3',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'3',userName:'xx',rank:'菜鸟',winpercent:'80%'},
                         {index:'5',userName:'xx',rank:'菜鸟',winpercent:'80%'}],
-            radioVal:'1'
+            radioVal:'1',
+            data:null
         }
     },
     mounted(){
