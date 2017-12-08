@@ -127,7 +127,7 @@ const routes = [
                     path:'/account-manage',
                     name:'account-manage',
                     meta:{
-                        aliasName:'账号管理'
+                        aliasName:'账户管理'
                     },
                     component:resolve => require(['modules/manage/accountmanage/vues/accountmanage.vue'],resolve),
                 },
@@ -145,7 +145,7 @@ const routes = [
                     meta:{
                         aliasName:'冻结管理'
                     },
-                    component:resolve => require(['modules/manage/fundmanage/vues/fundmanage.vue'],resolve),
+                    component:resolve => require(['modules/manage/fundmanage/vues/freezemanage.vue'],resolve),
                 },
                 {
                     path:'/withdraw-manage',

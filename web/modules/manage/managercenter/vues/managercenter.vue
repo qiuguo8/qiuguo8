@@ -3,7 +3,7 @@
         <ul class="left-menu transition-halfs float-left">
             <router-link tag="li" :to="{name:'manager-index'}" active-class="active" class="transition-halfs">管理员首页</router-link>
             <router-link tag="li" :to="{name:'user-manage'}" active-class="active" class="transition-halfs">用户管理</router-link>
-            <router-link tag="li" :to="{name:'account-manage'}" active-class="active" class="transition-halfs">账号管理</router-link>
+            <router-link tag="li" :to="{name:'account-manage'}" active-class="active" class="transition-halfs">账户管理</router-link>
             <router-link tag="li" :to="{name:'fund-manage'}" active-class="active" class="transition-halfs">资金变动管理</router-link>
             <router-link tag="li" :to="{name:'freeze-manage'}" active-class="active" class="transition-halfs">冻结管理</router-link>
             <router-link tag="li" :to="{name:'recharge-manage'}" active-class="active" class="transition-halfs">充值管理</router-link>
