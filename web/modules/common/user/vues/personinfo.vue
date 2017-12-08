@@ -3,14 +3,9 @@
        
         <div class="achive-list">
             <p class="select-name"><span>战绩</span></p>
-            <!-- <ul class="select-list content-wrap text-center">
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">亚盘</el-checkbox-button></li>
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">大小球</el-checkbox-button></li>
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">竞彩足球</el-checkbox-button></li>
-                <li><el-checkbox-button v-model="testVal" class="danger-checkbox small-checkbox">北京单场</el-checkbox-button></li>
-            </ul> -->
+            
             <div class="select-list content-wrap">
-                <el-radio-group v-model="radioVal" class="radio-list">
+                <el-radio-group v-model="productCode" class="radio-list">
                     <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
                     <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
                     <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
@@ -18,23 +13,9 @@
                 </el-radio-group>
             </div> 
             <div class="left-menu-table">
-                <!-- <ul>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近3天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近7天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">近30天</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上周</el-checkbox-button></li>
-                    <li><el-checkbox-button v-model="testVal" class="danger-checkbox">上月</el-checkbox-button></li>
-                </ul> -->
-                <div class="left-menus">
-                    <el-radio-group v-model="radioVal" class="radio-list">
-                        <el-radio-button label="1" class="danger-radio small-checkbox">近3天</el-radio-button>
-                        <el-radio-button label="2" class="danger-radio small-checkbox">近7天</el-radio-button>
-                        <el-radio-button label="3" class="danger-radio small-checkbox">近30天</el-radio-button>
-                        <el-radio-button label="4" class="danger-radio small-checkbox">上周</el-radio-button>
-                        <el-radio-button label="5" class="danger-radio small-checkbox">上月</el-radio-button>
-                    </el-radio-group>
-                </div>
-                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
+               
+                
+                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
                     <el-table-column prop="count" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="win" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                     <el-table-column prop="lose" label="输" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -108,6 +89,7 @@
 <script>
 import Vue from 'vue'
 import {Input,Button,Table,TableColumn,Pagination,CheckboxButton,RadioButton,RadioGroup} from 'element-ui'
+import userService from "web/modules/common/user/service/userService.js"
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
@@ -119,19 +101,18 @@ Vue.component(RadioGroup.name, RadioGroup)
 export default {
     data(){
         return {
-            tableData3:[{count:'1',win:'xx',winhalf:'7胜3负',water:'80%',losehalf:'xxxxxx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',winhalf:'7胜3负',water:'80%',losehalf:'xxxxxx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',winhalf:'7胜3负',water:'80%',losehalf:'xxxxxx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',winhalf:'7胜3负',water:'80%',losehalf:'xxxxxx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',winhalf:'7胜3负',water:'80%',losehalf:'xxxxxx',lose:'xxx',right:'70%',profit:'50%'},],
-            tableData4:[{count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},
-                        {count:'1',win:'xx',lose:'xxx',right:'70%',profit:'50%'},],
+            tableData3:[],
+            tableData4:[],
             testVal:false,
-            radioVal:'1'
+            productCode:'1'
         }
-    }
+    },
+     mounted(){
+         userService.getRecordList({productCode:this.productCode}).then((ret)=>{
+            console.log(ret);
+            this.tableData3 = ret.list.list;
+         })
+     }
 }
+
 </script>
