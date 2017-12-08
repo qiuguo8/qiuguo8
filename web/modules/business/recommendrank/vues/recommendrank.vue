@@ -6,12 +6,12 @@
             <li>竞彩足球</li>
             <li>北京单场</li>
         </ul> -->
-        <div class="select-list content-wrap text-center" @change = "changeCategory()">
-            <el-radio-group v-model="category" class="radio-list" >
-                <el-radio-button label="0101"  class="danger-radio small-checkbox">亚盘全场</el-radio-button>
-                <el-radio-button label="0201"  class="danger-radio small-checkbox">大小球全场</el-radio-button>
-                <el-radio-button label="0301"  class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                <el-radio-button label="0401"  class="danger-radio small-checkbox">北京单场</el-radio-button>
+        <div class="select-list content-wrap text-center" @change = "changeProductCode()">
+            <el-radio-group v-model="productCode" class="radio-list" >
+                <el-radio-button label="01"  class="danger-radio small-checkbox">亚盘全场</el-radio-button>
+                <el-radio-button label="02"  class="danger-radio small-checkbox">大小球全场</el-radio-button>
+                <el-radio-button label="03"  class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                <el-radio-button label="04"  class="danger-radio small-checkbox">北京单场</el-radio-button>
             </el-radio-group>
         </div>
         <div class="">
@@ -100,20 +100,20 @@ export default {
             tableData4:[],
             tableData5:[],
             days:'3',
-            category:'0101',
+            productCode:'01',
             list:[],
         }
     },
     mounted(){
-        recommendrankService.getLastThreeDayRankList({categoryCode:this.category}).then((ret)=>{
+        recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
             console.log(ret);
             this.tableData3 = ret.list.list;
         }),
-        recommendrankService.getLastWeekRankList({categoryCode:this.category,pageNum:'5'}).then((ret)=>{
+        recommendrankService.getLastWeekRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
             console.log(ret);
             this.tableData4 = ret.list.list;
         }),
-           recommendrankService.getLastMonthRankList({categoryCode:this.category,pageNum:'5'}).then((ret)=>{
+           recommendrankService.getLastMonthRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
             console.log(ret);
             this.tableData4 = ret.list.list;
         })
@@ -128,28 +128,28 @@ export default {
         },
         changeDays(){
             if(this.days == '3'){
-                recommendrankService.getLastThreeDayRankList({categoryCode:this.category}).then((ret)=>{
+                recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
                 console.log(ret);
                 this.tableData3 = ret.list.list;
             })}
             else if(this.days == '7'){
-                recommendrankService.lastSevenDayRankList({categoryCode:this.category}).then((ret)=>{
+                recommendrankService.lastSevenDayRankList({productCode:this.productCode}).then((ret)=>{
                 console.log(ret);
                 this.tableData3 = ret.list.list;
             })}
             else if(this.days == '30'){
-                recommendrankService.lastThirtyDayRankList({categoryCode:this.category}).then((ret)=>{
+                recommendrankService.lastThirtyDayRankList({productCode:this.productCode}).then((ret)=>{
                 console.log(ret);
                 this.tableData3 = ret.list.list;
             })};
                      
         },
-        changeCategory(){
-            recommendrankService.getLastWeekRankList({categoryCode:this.category,pageNum:'5'}).then((ret)=>{
+        changeProductCode(){
+            recommendrankService.getLastWeekRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
             console.log(ret);
             this.tableData4 = ret.list.list;
         }),
-            recommendrankService.getLastMonthRankList({categoryCode:this.category,pageNum:'5'}).then((ret)=>{
+            recommendrankService.getLastMonthRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
             console.log(ret);
             this.tableData5 = ret.list.list;
         }),
