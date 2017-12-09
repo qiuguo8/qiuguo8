@@ -2,7 +2,7 @@
     <header class="header-container">
         <nav class="el-col el-col-18 el-col-offset-3">
             <div class="header-logo-wrap">
-                <img src="/web/resources/img/index/logo.jpg"/>
+                <router-link tag="a" :to="{name:'index'}"><img src="/web/resources/img/index/logo.jpg"/></router-link>
             </div>
             <div class="user-info" v-if="true">
                 <span class="msg-tip">11</span>

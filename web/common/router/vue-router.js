@@ -83,6 +83,22 @@ const routes = [
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         },
         {
+            path:'/news-list',
+            name:'news-list',
+            meta:{
+                aliasName:'新闻列表'
+            },
+            component:resolve => require(['modules/business/news/vues/news-list.vue'],resolve)
+        },
+        {
+            path:'/news-detail',
+            name:'news-detail',
+            meta:{
+                aliasName:'新闻详情'
+            },
+            component:resolve => require(['modules/business/news/vues/news-detail.vue'],resolve)
+        },
+        {
             path:'/order-detail',
             name:'order-detail',
             meta:{
