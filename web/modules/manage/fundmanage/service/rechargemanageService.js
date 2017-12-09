@@ -3,8 +3,8 @@ import pathUtil from "web/common/utils/pathUtil";
 
 
 export default {
-    queryChangeDetail(detail){
-        return Vue.http.post(pathUtil.getBasePath()+'/admin/queryChangeDetail',detail);
+    queryAllRechargeDetails(detail){
+        return Vue.http.post(pathUtil.getBasePath()+'/admin/queryAllRechargeDetail',detail);
     }
 
 }
