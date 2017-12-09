@@ -13,7 +13,19 @@
                     <el-input v-model="phone" placeholder="请输入手机号"></el-input>
                 </div>
             </div>
-             <div class="form-control el-col-12">
+            <div class="form-control content-60-to-60-all float-left">
+                <label class="el-col-6">充值时间</label>
+                <div class="el-col-18">
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="startRechargeDate" hintText="选择时间"/>
+                    </span>
+                    <span class="el-col-2 mid-word">至</span>
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="endRechargeDate" hintText="选择时间"/>
+                    </span>
+                </div>
+            </div>  
+            <div class="form-control content-40-to-40-all float-left">
                 <label class="el-col-9 text-center">支付状态</label>
                 <el-select class="el-col-15" v-model="paymentStatus" filterable placeholder="请选择">
                     <el-option
@@ -23,19 +35,7 @@
                     :value="item.value">
                     </el-option>
                 </el-select>
-            </div>   
-            <div class="form-control el-col-19">
-                <label class="el-col-5">充值时间</label>
-                <div class="el-col-19">
-                    <span class="el-col-11">
-                        <mu-date-picker v-model="startRechargeDate" hintText="选择时间"/>
-                    </span>
-                    <span class="el-col-2 mid-word">至</span>
-                    <span class="el-col-11">
-                        <mu-date-picker v-model="endRechargeDate" hintText="选择时间"/>
-                    </span>
-                </div>
-            </div>   
+            </div>    
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary">查询</el-button>
                 <el-button >重置</el-button>

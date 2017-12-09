@@ -54,7 +54,7 @@
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success" v-if="item.subscribeStatus=='1'">已关注</el-button>
+                    <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button>
                 </div>
                 <div class="intro-text">

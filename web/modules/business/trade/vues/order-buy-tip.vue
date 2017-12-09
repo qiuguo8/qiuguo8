@@ -1,6 +1,6 @@
 <template>
     <el-dialog title="确定要购买该推荐吗？" :lock-scroll="false" width="400px" :visible.sync="showDialog" :close-on-click-modal="false">
-        <div class="order-buy-tip">
+        <div class="order-buy-tip" v-if="orderData">
             <p class="row-new"><span class="el-col-8">赛事：</span><span class="el-col-16">{{orderData.homeTeamName}}VS{{orderData.visitTeamName}}</span></p>
             <p class="row-new"><span class="el-col-8">分析师：</span><span class="el-col-16">{{orderData.userName}}</span></p>
             <p class="row-new"><span class="el-col-8">价格：</span><span class="el-col-16">{{orderData.price}}</span></p>
@@ -12,9 +12,15 @@
     </el-dialog>
 </template>
 <script>
-    import service from 'web/modules/business/trade/service/orderService'
+import service from 'web/modules/business/trade/service/orderService'
+
 export default {
-    props:['orderData'],
+    props:{
+        orderData:{
+            type:'Object',
+            default:{}
+        }
+    },
     data(){
         return {
             showDialog:false,
@@ -32,7 +38,7 @@ export default {
                 if(ret.body.status == 'success'){
                     this.$router.push({name:'order-detail'})
                 }else{
-                    alert(ret.body.errInfo)
+                    alert(ret.body.errInfo);
                 }
             })
         }

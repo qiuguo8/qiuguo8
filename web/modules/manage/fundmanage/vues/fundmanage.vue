@@ -1,7 +1,7 @@
 <template>
     <div class="fund-manage">
-        <div class="row-new">
-             <div class="form-control el-col-12">
+        <div class="row-new text-center">
+            <div class="form-control el-col-12">
                 <label class="el-col-8">用户名</label>
                 <div class="el-col-16">
                     <el-input v-model="userName" placeholder="请输入用户名"></el-input>
@@ -13,7 +13,7 @@
                     <el-input v-model="phone" placeholder="请输入手机号"></el-input>
                 </div>
             </div> 
-            <div class="form-control el-col-18 text-center">
+            <div class="form-control content-60-to-60-all text-center float-left">
                 <label class="el-col-6">交易时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
@@ -25,7 +25,7 @@
                     </span>
                 </div>
             </div>  
-            <div class="form-control el-col-12">
+            <div class="form-control content-40-to-40-all float-left">
                 <label class="el-col-9 text-center">交易类型</label>
                 <el-select class="el-col-15" v-model="changeType" filterable placeholder="请选择">
                     <el-option
@@ -35,11 +35,11 @@
                     :value="item.value">
                     </el-option>
                 </el-select>
-            </div>   
-        </div>
-        <div class="form-control el-col-12 text-center">
+            </div>
+            <div class="form-control el-col-24 text-center">
                 <el-button type="primary" @click="submitForm()">查询</el-button>
-            </div> 
+            </div>    
+        </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
                 <el-table-column prop="changeTime" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
