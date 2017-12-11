@@ -3,7 +3,7 @@
         <div class="row-new text-center">
             <div class="form-control el-col-12">
                 <label class="el-col-8">订单状态</label>
-                <el-select class="el-col-16" v-model="status" filterable placeholder="请选择">
+                <el-select class="el-col-16" v-model="query.orderStatus" filterable placeholder="请选择">
                     <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -13,53 +13,53 @@
                 </el-select>
             </div> 
             <div class="form-control el-col-12">
-                <label class="el-col-8">推荐类型</label>
+                <label class="el-col-8">订单编号</label>
                 <div class="el-col-16">
-                    <el-input v-model="orderNo" placeholeder="请输入商品编号"></el-input>
+                    <el-input v-model="query.orderId" placeholeder="请输入订单编号"></el-input>
                 </div>
             </div> 
             <div class="form-control content-60-to-60-full float-left">
                 <label class="el-col-6">创建时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="query.createTimeStart" hintText="选择时间"/>
                     </span>
                     <span class="el-col-2 mid-word">至</span>
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="query.createTimeEnd" hintText="选择时间"/>
                     </span>
                 </div>
             </div> 
             <div class="form-control content-40-to-40-full float-left">
                 <label class="el-col-8">冻结流水号</label>
                 <div class="el-col-16">
-                    <el-input v-model="orderNo" placeholeder="请输入冻结流水号"></el-input>
+                    <el-input v-model="query.freezeId" placeholeder="请输入冻结流水号"></el-input>
                 </div>
             </div> 
             <div class="form-control el-col-24 text-center">
-                <el-button type="primary">查询</el-button>
-                <el-button >重置</el-button>
+                <el-button type="primary" @click="getList">查询</el-button>
+                <el-button @click="clearQuery">重置</el-button>
             </div>  
         </div>
         <div class="el-col-24">
-            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="index" label="订单编号" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="userName" label="订单时间" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="account" label="商品编号" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="mobileNo" label="购买用户" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="mail" label="订单金额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="registerDate" label="支付冻结ID" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="订单状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="list" border>
+                <el-table-column prop="orderId" label="订单编号" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="createTime" label="订单时间" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="goodsId" label="商品编号" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="userName" label="购买用户" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="payAmt" label="订单金额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="freezeId" label="支付冻结ID" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="orderStatus" label="订单状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
-                layout=" prev, pager, next"
-                :total="400">
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 15, 20, 25]"
+                    :page-size="pagesize"
+                    layout=" prev, pager, next"
+                    :total="totalCount">
                 </el-pagination>
             </div>
         </div>
@@ -68,6 +68,7 @@
 <script>
 import Vue from 'vue'
 import {Input,Button,Select,Option,Table,TableColumn,Pagination} from 'element-ui'
+import service from 'web/modules/manage/ordermanage/service/orderManageService'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Select.name,Select);
@@ -82,19 +83,61 @@ export default {
         return {
             query:{
                 orderStatus:'',
-                recommendType:"",
-                startDate:'',
-                endDate:'',
-                orderNo:''
+                createTimeStart:'',
+                createTimeEnd:'',
+                orderId:'',
+                freezeId:'',
             },
-            tableData3:[
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'}
-            ]
+            list:[],
+            options:[
+                {value: '', label: '全部' },
+                {value: '01', label: '已支付' },
+                {value: '02',label: '已成功'},
+                {value: '03', label: '已退款' },
+                {value: '04',label: '订单无效'},
+            ],
+            list:[],
+            //当前页码
+            currentPage: 1,
+            //默认每页数据量
+            pagesize: 10,
+            //默认数据总数
+            totalCount: 0,
         }
+    },
+    created:function () {
+        this.getList();
+    },
+    methods:{
+        getList(){
+            let orderInfo = this.query;
+            orderInfo.pageNum = this.currentPage;
+            orderInfo.pageSize = this.pagesize;
+            service.listAllOrderInfo(orderInfo).then((ret)=>{
+                if(ret.body.status == 'success'){
+                    this.list = ret.body.list;
+                    this.totalCount = ret.body.total;
+                }
+            })
+        },
+        clearQuery(){
+            this.query = {
+                orderStatus:'',
+                createTimeStart:'',
+                createTimeEnd:'',
+                orderId:'',
+                freezeId:'',
+            }
+        },
+        handleSizeChange(val){
+            this.pagesize = val;
+            this.getList();
+        },
+        //页码变更
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+            this.getList();
+        },
     }
 }
 </script>

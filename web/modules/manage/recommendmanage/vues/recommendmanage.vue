@@ -3,9 +3,9 @@
         <div class="row-new text-center">
             <div class="form-control el-col-12">
                 <label class="el-col-9">产品类型</label>
-                <el-select class="el-col-15" v-model="status" filterable placeholder="请选择">
+                <el-select class="el-col-15" v-model="query.productCode" filterable placeholder="请选择">
                     <el-option
-                    v-for="item in options"
+                    v-for="item in productOptions"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -14,9 +14,9 @@
             </div> 
             <div class="form-control el-col-12">
                 <label class="el-col-9">推荐类型</label>
-                <el-select class="el-col-15" v-model="status" filterable placeholder="请选择">
+                <el-select class="el-col-15" v-model="query.categoryCode" filterable placeholder="请选择">
                     <el-option
-                    v-for="item in options"
+                    v-for="item in categoryOptions"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -27,36 +27,36 @@
                 <label class="el-col-6">推荐时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="query.publishTimeStart" hintText="选择时间"/>
                     </span>
                     <span class="el-col-2 mid-word">至</span>
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="query.publishTimeEnd" hintText="选择时间"/>
                     </span>
                 </div>
             </div> 
             <div class="form-control el-col-24 text-center">
-                <el-button type="primary">查询</el-button>
-                <el-button >重置</el-button>
+                <el-button type="primary" @click="getList">查询</el-button>
+                <el-button @click="clearQuery">重置</el-button>
             </div>  
         </div>
         <div class="el-col-24">
-            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="index" label="发单日期" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="userName" label="推荐编号" min-width="80" align="center" head-align="center" > </el-table-column>
-                <el-table-column prop="realName" label="推荐用户" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="mobileNo" label="赛事" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="mail" label="比赛时间" min-width="80" align="center" head-align="center"></el-table-column>
-                <el-table-column prop="registerDate" label="主队" min-width="70" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="客队" min-width="60" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="产品类型" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="推荐类型" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="盘口" min-width="60" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="主队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="平局赔率" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="客队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="status" label="价格" min-width="80" align="center" head-align="center"></el-table-column>
-                <el-table-column prop="status" label="购买数量" min-width="80" align="center" head-align="center"></el-table-column>
+            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="list" border>
+                <el-table-column prop="publishTime" label="发单日期" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="recommendNo" label="推荐编号" min-width="80" align="center" head-align="center" > </el-table-column>
+                <el-table-column prop="userName" label="推荐用户" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="leageName" label="赛事" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="matchStartTime" label="比赛时间" min-width="80" align="center" head-align="center"></el-table-column>
+                <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="productCode" label="产品类型" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="categoryCode" label="推荐类型" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="handicap" label="盘口" min-width="60" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="homeTeamSp" label="主队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="tieSp" label="平局赔率" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="visitTeamSp" label="客队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="price" label="价格" min-width="80" align="center" head-align="center"></el-table-column>
+                <el-table-column prop="viewTimes" label="购买数量" min-width="80" align="center" head-align="center"></el-table-column>
                 <el-table-column label="操作" min-width="120" align="center" head-align="center"  fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" size="small">修改</el-button>
@@ -66,13 +66,13 @@
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
-                layout=" prev, pager, next"
-                :total="400">
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 15, 20, 25]"
+                    :page-size="pagesize"
+                    layout=" prev, pager, next"
+                    :total="totalCount">
                 </el-pagination>
             </div>
         </div>
@@ -81,6 +81,7 @@
 <script>
 import Vue from 'vue'
 import {Input,Button,Select,Option,Table,TableColumn,Pagination} from 'element-ui'
+import service from 'web/modules/manage/recommendmanage/service/recommManageService'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Select.name,Select);
@@ -93,19 +94,68 @@ export default {
     data(){
         return {
             query:{
-                startDate:'',
-                endDate:'',
-                protype:"",
-                recommendtype:''
+                publishTimeStart:'',
+                publishTimeEnd:'',
+                productCode:"",
+                categoryCode:''
             },
-            tableData3:[
-                {index:'1',userName:'xx',realName:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',realName:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',realName:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',realName:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',realName:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'}
-            ]
+            productOptions:[
+                {value: '', label: '全部' },
+                {value: '01', label: '亚盘' },
+                {value: '02',label: '大小球'},
+                {value: '03', label: '竞彩' },
+                {value: '04',label: '北单'},
+            ],
+            categoryOptions:[
+                {value: '', label: '全部' },
+                {value: '0101', label: '亚盘全场' },
+                {value: '0102',label: '亚盘半场'},
+                {value: '0201', label: '大小球全场' },
+                {value: '0202',label: '大小球半场'},
+                {value: '0301', label: '竞彩混合' },
+                {value: '0401',label: '北京单场'},
+            ],
+            list:[],
+            //当前页码
+            currentPage: 1,
+            //默认每页数据量
+            pagesize: 10,
+            //默认数据总数
+            totalCount: 0,
         }
+    },
+    created:function () {
+        this.getList();
+    },
+    methods:{
+        getList(){
+            let recomInfo = this.query;
+            recomInfo.pageNum = this.currentPage;
+            recomInfo.pageSize = this.pagesize;
+            service.listAllRecomm(recomInfo).then((ret)=>{
+                if(ret.body.status == 'success'){
+                    this.list = ret.body.list;
+                    this.totalCount = ret.body.total;
+                }
+            })
+        },
+        clearQuery(){
+            this.query = {
+                publishTimeStart:'',
+                publishTimeEnd:'',
+                productCode:'',
+                categoryCode:''
+            }
+        },
+        handleSizeChange(val){
+            this.pagesize = val;
+            this.getList();
+        },
+        //页码变更
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+            this.getList();
+        },
     }
 }
 </script>
