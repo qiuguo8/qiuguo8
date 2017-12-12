@@ -59,8 +59,7 @@
                 <el-table-column prop="viewTimes" label="购买数量" min-width="80" align="center" head-align="center"></el-table-column>
                 <el-table-column label="操作" min-width="120" align="center" head-align="center"  fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small">修改</el-button>
-                        <el-button type="text" size="small">隐藏</el-button>
+                         <el-button type="text" v-show="scope.row.recommendStatus=='01'" size="small" @click="updateRecommByAdmin(scope.row.recommendNo,'03')">不合法</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -155,6 +154,14 @@ export default {
         handleCurrentChange: function(val) {
             this.currentPage = val;
             this.getList();
+        },
+        updateRecommByAdmin(id,status){
+            let item = {'recommendNo':id,'recommendStatus':status}
+            service.updateRecommByAdmin(item).then((ret)=>{
+                if(ret.body.status == 'success'){
+                    this.getList();
+                }
+            })
         },
     }
 }

@@ -41,8 +41,7 @@
                 <el-table-column prop="disabled" label="是否隐藏" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="updateMatch(scope.row.matchId,'1')">隐藏</el-button>
-                        <el-button type="text" size="small" @click="updateMatch(scope.row.matchId,'0')">显示</el-button>
+                        <el-button type="text" size="small" @click="updateMatch(scope.row)">修改</el-button>
                     </template>
                 </el-table-column>
             </el-table>

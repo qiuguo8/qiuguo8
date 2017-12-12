@@ -57,8 +57,8 @@
                 <el-table-column prop="status" label="状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="updateUserInfo(scope.row.userId,'02')">锁定</el-button>
-                        <el-button type="text" size="small" @click="updateUserInfo(scope.row.userId,'03')">注销</el-button>
+                        <el-button type="text" v-show="scope.row.status=='01'" size="small" @click="updateUserInfo(scope.row.userId,'02')">锁定</el-button>
+                        <el-button type="text" v-show="scope.row.status=='02'" size="small" @click="updateUserInfo(scope.row.userId,'01')">解锁</el-button>
                     </template>
                 </el-table-column>
             </el-table>

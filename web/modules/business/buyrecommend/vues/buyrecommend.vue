@@ -144,8 +144,6 @@ export default {
             this.listRecomm();
         },
         listRecomm() {
-            console.log(this.radioVal)
-            console.log(this.matchesVal)
             let buyRecommInfo = {
                 'productCode': this.productCode,
                 'userName': this.sendName,

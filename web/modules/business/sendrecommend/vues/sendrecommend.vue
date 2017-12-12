@@ -8,7 +8,7 @@
         </ul> -->
         <div class="select-list content-wrap">
             <el-radio-group v-model="productCode" class="radio-list" @change="productChange">
-                <el-radio-button label="01" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
+                <el-radio-button label="02" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
                 <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                 <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
             </el-radio-group>
@@ -131,7 +131,7 @@ export default {
                         {index:'3',reward:'xx'},
                         {index:'4',reward:'xx'},
                         {index:'5',reward:'xx'}],
-            productCode:'01',
+            productCode:'02',
             isShowCheckList:false,
             showInfo:false,
             infoObj:{homeTeamName:null,visitTeamName:null},
