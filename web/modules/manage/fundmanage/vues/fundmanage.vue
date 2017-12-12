@@ -43,10 +43,10 @@
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
                 <el-table-column prop="changeTime" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="changeId" label="资金流水号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="changeId" label="资金流水号" min-width="100" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="totalAmount" label="金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="changeType" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="changeType" :formatter="changeTypeFormat" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
@@ -115,6 +115,14 @@ export default {
             this.currentPage = val;
             this.query();
         }, 
+        changeTypeFormat(row,column){
+            switch (row.changeType) {
+                case '01':return '充值';break;
+                case '02':return '提现';break;
+                case '03':return '消费';break;
+                case '04':return '佣金';break;
+            };
+        },    
     
 
                    

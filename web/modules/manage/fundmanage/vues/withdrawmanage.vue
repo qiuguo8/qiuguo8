@@ -49,12 +49,11 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
-                <el-table-column prop="index" label="序号" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="withdrawId" label="提现编号" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="withdrawAmount" label="提现金额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="withdrawTime" label="提现时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="withdrawStatus" label="提现状态" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="withdrawStatus" :formatter="withdrawStatusFormat" label="提现状态" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="operTime" label="审核时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="operUserName" label="审核人员" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="withdrawRecvNo" label="收款卡号" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -141,7 +140,14 @@ export default {
             withdrawmanageService.approve(obj).then((ret)=>{
                         alert( ret.body.status);
                     })
-        },                
+        },
+        withdrawStatusFormat(row,column){
+            switch (row.withdrawStatus) {
+                case '01':return '提现成功';break;
+                case '02':return '提现失败';break;
+                case '03':return '审核中';break;
+            };
+        },               
     },
    created:function () {
         this.query();

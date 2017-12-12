@@ -46,9 +46,9 @@
                  <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="freezeTime" label="冻结时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="freezeAmount" label="冻结金额" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="freezeQgAmount" label="冻结球果金额" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="freezeStatus" label="冻结状态" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="freezeType" label="冻结类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>               
+                <el-table-column prop="freezeQgAmount" label="冻结球果金额" min-width="60" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="freezeStatus" :formatter="freezeStatusFormat" label="冻结状态" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="freezeType" label="冻结类型" :formatter="freezeTypeFormat" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>               
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" v-show="scope.row.freezeStatus=='01'" size="small" @click="unFreeze(scope.row)">解冻</el-button>
@@ -124,7 +124,21 @@ export default {
             freezemanageService.unFreeze(obj).then((ret)=>{
                         alert( ret.body.status);
                     })
-        },                
+        }, 
+        freezeTypeFormat(row,column){
+            switch (row.freezeType) {
+                case '01':return '提现冻结';break;
+                case '02':return '支付冻结';break;
+            };
+        },
+        freezeStatusFormat(row,column){
+            switch (row.freezeStatus) {
+                case '01':return '成功';break;
+                case '02':return '失败';break;
+                case '03':return '已解冻';break;
+                case '04':return '已结算';break;
+            };
+        },                 
     },
    created:function () {
         this.query();

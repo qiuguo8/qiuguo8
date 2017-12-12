@@ -29,7 +29,7 @@
                 <el-table-column prop="contentTitle" label="标题" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="createUsername" label="发布人" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="contentType" label="文章类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="enabled" label="是否启用" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="enabled" :formatter="enabledFormat" label="是否启用" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="createTime" label="创建时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
@@ -111,7 +111,13 @@ export default {
             articlemanageService.updateContent(obj).then((ret)=>{
                         alert( ret.body.status);
                     })
-        },             
+        }, 
+        enabledFormat(row,column){
+            switch (row.enabled) {
+                case '1':return '是';break;
+                case '0':return '否';break;
+            };
+        },              
 
     },
     created:function () {

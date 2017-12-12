@@ -30,7 +30,7 @@
                 <el-table-column prop="bannerName" label="标题" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="bannerUrl" label="图片URL" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="bannerLinkUrl" label="正文链接" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="enabled" label="是否启用" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="enabled" :formatter="enabledFormat" label="是否启用" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="createTime" label="创建时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="userName" label="创建人" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
@@ -85,9 +85,6 @@ export default {
             totalCount: 0,
         }
     },
-    mounted(){
-        console.log(this);
-    },
     methods:{
         add(){
             this.$router.push({name:'advertise-edit'});
@@ -116,7 +113,13 @@ export default {
             advertisemanageService.updateBanner(obj).then((ret)=>{
                         alert( ret.body.status);
                     })
-        },             
+        },
+        enabledFormat(row,column){
+            switch (row.enabled) {
+                case '1':return '是';break;
+                case '0':return '否';break;
+            };
+        },               
 
     },
     created:function () {

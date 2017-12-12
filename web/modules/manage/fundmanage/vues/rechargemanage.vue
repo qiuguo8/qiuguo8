@@ -43,14 +43,12 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
-                <el-table-column prop="index" label="序号" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="rechargeId" label="充值流水号" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="rechargeAmount" label="充值金额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="rechargeType" label="充值类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="rechargeTime" label="充值时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="paymentType" label="支付类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="paymentStatus" label="支付状态" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="paymentType" :formatter="paymentTypeFormat" label="支付类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="paymentStatus" :formatter="paymentStatusFormat" label="支付状态" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
@@ -119,7 +117,20 @@ export default {
         handleCurrentChange: function(val) {
             this.currentPage = val;
             this.query();
-        },                
+        },
+        paymentTypeFormat(row,column){
+            switch (row.paymentType) {
+                case '01':return '微信支付';break;
+                case '02':return '支付宝支付';break;
+            };
+        },   
+        paymentStatusFormat(row,column){
+            switch (row.paymentStatus) {
+                case '01':return '支付成功';break;
+                case '02':return '支付失败';break;
+				case '03':return '支付已发起';break;
+            };
+        },                   
     },
    created:function () {
         this.query();
