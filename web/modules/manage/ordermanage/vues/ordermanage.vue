@@ -49,7 +49,7 @@
                 <el-table-column prop="userName" label="购买用户" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="payAmt" label="订单金额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="freezeId" label="支付冻结ID" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="orderStatus" label="订单状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="orderStatus" :formatter="orderStatusForma" label="订单状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
@@ -137,6 +137,14 @@ export default {
         handleCurrentChange: function(val) {
             this.currentPage = val;
             this.getList();
+        },
+        orderStatusForma(row,column){
+            switch (row.orderStatus) {
+                case '01':return '已支付';break;
+                case '02':return '已成功';break;
+                case '03':return '已退款';break;
+                case '04':return '订单无效';break;
+            };
         },
     }
 }
