@@ -31,14 +31,14 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="matchList" border>
-                <el-table-column prop="productCode" label="产品类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="productCode" label="产品类型" :formatter="productCodeForma" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="leagueName" label="联赛" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="matchStartTime" label="比赛时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="overFlag" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="overFlag" label="开奖状态" :formatter="overFlagForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="handiCap" label="盘口" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="disabled" label="是否隐藏" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="disabled" label="是否隐藏":formatter="disabledForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" size="small" @click="updateMatch(scope.row)">修改</el-button>
@@ -130,6 +130,26 @@ export default {
                     this.getMatchList();
                 }
             })
+        },
+        overFlagForma(row,column){
+            switch (row.overFlag) {
+                case '0':return '比赛未结束';break;
+                case '1':return '比赛已结束';break;
+            };
+        },
+        disabledForma(row,column){
+            switch (row.disabled) {
+                case '0':return '比赛正常';break;
+                case '1':return '比赛隐藏';break;
+            };
+        },
+        productCodeForma(row,column){
+            switch (row.productCode) {
+                case '01':return '亚盘/大小球';break;
+                case '02':return '亚盘/大小球';break;
+                case '03':return '竞彩足球';break;
+                case '04':return '北京单场';break;
+            };
         },
     }
 }

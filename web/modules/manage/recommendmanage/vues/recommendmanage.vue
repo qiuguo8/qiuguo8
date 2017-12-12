@@ -49,8 +49,8 @@
                 <el-table-column prop="matchStartTime" label="比赛时间" min-width="80" align="center" head-align="center"></el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="productCode" label="产品类型" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="categoryCode" label="推荐类型" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="productCode" label="产品类型" :formatter="productCodeForma" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="categoryCode" label="推荐类型" :formatter="categoryCodeForma" min-width="80" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="handicap" label="盘口" min-width="60" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="homeTeamSp" label="主队赔率" min-width="80" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="tieSp" label="平局赔率" min-width="80" align="center" head-align="center" ></el-table-column>
@@ -162,6 +162,24 @@ export default {
                     this.getList();
                 }
             })
+        },
+        productCodeForma(row,column){
+            switch (row.productCode) {
+                case '01':return '亚盘/大小球';break;
+                case '02':return '亚盘/大小球';break;
+                case '03':return '竞彩足球';break;
+                case '04':return '北京单场';break;
+            };
+        },
+        categoryCodeForma(row,column){
+            switch (row.categoryCode) {
+                case '0101':return '亚盘全场';break;
+                case '0102':return '亚盘半场';break;
+                case '0201':return '大小球全场';break;
+                case '0202':return '大小球半场';break;
+                case '0301':return '竞彩混合';break;
+                case '0401':return '北京单场';break;
+            };
         },
     }
 }
