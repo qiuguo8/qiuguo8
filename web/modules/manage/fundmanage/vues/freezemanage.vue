@@ -51,7 +51,7 @@
                 <el-table-column prop="freezeType" label="冻结类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>               
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="unFreeze(scope.row)">解冻</el-button>
+                        <el-button type="text" v-show="scope.row.freezeStatus=='01'" size="small" @click="unFreeze(scope.row)">解冻</el-button>
                     </template>
                 </el-table-column>
             </el-table>

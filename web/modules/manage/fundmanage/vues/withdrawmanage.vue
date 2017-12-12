@@ -62,8 +62,8 @@
                   <el-table-column prop="" label="收款卡号" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small"  @click="approve(scope.row,'01')">通过</el-button>
-                        <el-button type="text" size="small" @click="approve(scope.row,'02')">不通过</el-button>
+                        <el-button type="text" size="small"  v-show="scope.row.withdrawStatus=='03'" @click="approve(scope.row,'01')">通过</el-button>
+                        <el-button type="text" size="small"  v-show="scope.row.withdrawStatus=='03'" @click="approve(scope.row,'02')">不通过</el-button>
                     </template>
                 </el-table-column>
             </el-table>

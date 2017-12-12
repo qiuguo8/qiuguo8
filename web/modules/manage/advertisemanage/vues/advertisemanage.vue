@@ -35,9 +35,9 @@
                 <el-table-column prop="userName" label="创建人" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="updateBanner(scope.row,'1')">启用</el-button>
-                        <el-button type="text" size="small" @click="updateBanner(scope.row,'0')">禁用</el-button>
-                        <el-button type="text" size="small" @click="toUpdate(scope.row)">修改</el-button>
+                        <el-button type="text" size="small" v-show="scope.row.enabled=='0'" @click="updateBanner(scope.row,'1')">启用</el-button>
+                        <el-button type="text" size="small" v-show="scope.row.enabled=='1'" @click="updateBanner(scope.row,'0')">禁用</el-button>
+                        <el-button type="text" size="small" v-show="scope.row.enabled=='0'" @click="toUpdate(scope.row)">修改</el-button>
                     </template>
                 </el-table-column>
             </el-table>
