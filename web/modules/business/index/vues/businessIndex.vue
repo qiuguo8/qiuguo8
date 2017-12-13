@@ -205,11 +205,7 @@ export default {
         }
     },
     mounted(){
-        indexService.getRankList({categoryCode:'01'}).then((ret)=>{
-            console.log(ret);
-        });
         $(this.$refs.achiveRank).scrollBar();
-        $(this.$refs.introWrap).scrollBar({direction:'horizontal'});
     },
     components:{
         orderBuyTip:orderBuyTip
