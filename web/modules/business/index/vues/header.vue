@@ -100,6 +100,7 @@ export default {
                     comVue.$data.userInfo = null;
                     this.isLogined = false;
                     comVue.$emit('is-manage-for-menu');
+                    this.$router.push({name:'index'});
                 }else{
                     alert("退出登录失败！")
                 }

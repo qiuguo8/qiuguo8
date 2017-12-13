@@ -129,13 +129,6 @@ export default {
         orderBuyTip:orderBuyTip
     },
     methods: {
-        loadMore() {
-            // console.log('loanMore');
-            if (this.list.length < this.total.length) {
-                this.list = this.list.concat(this.total.slice(0, 4));
-            }
-            // console.log(this.list);
-        },
         showMatches() {
             this.isShowMatches = true;
         },

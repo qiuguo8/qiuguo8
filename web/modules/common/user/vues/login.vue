@@ -187,10 +187,9 @@ export default {
                 if(valid){
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
                         alert(ret.body.status);
-                        // console.log(ret);
                         if(ret.body.status=='success'){
                             comVue.$emit('login-for-menu',true); 
-                            comVue.$data.userInfo = ret.user;
+                            comVue.$data.userInfo = ret.body.user;
                             this.close();
                         }else{
                             this.picVerifyObj.refresh();
