@@ -30,10 +30,10 @@ const sysUtil = {
     },
     getCookie(name){
         name = name || '';
-        var regTmp = '(\\\s)?'+'pass'+'\={1}([^;]*)(\\\s|;)?';;
+        var regTmp = '(\\\s)?'+name+'\={1}([^;]*)(\\\s|;)?';
         var reg = new RegExp(regTmp,'g');
         var result = reg.exec(document.cookie);
-        return result[2];
+        return result && result[2];
     },
     param(){
         

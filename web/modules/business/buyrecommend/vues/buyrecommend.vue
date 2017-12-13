@@ -77,7 +77,7 @@
                 <el-table-column prop="winpercent" label="胜率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
         </div>
-        <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches">
+        <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches" :lock-scroll="false">
             <el-checkbox-group v-model="matchesVal" size="small">
                 <el-checkbox v-for="item in matches" :key="item.matchId" :label="item.matchId" border>{{item.homeTeamName}}VS{{item.visitTeamName}}</el-checkbox>
             </el-checkbox-group>

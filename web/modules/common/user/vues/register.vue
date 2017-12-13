@@ -3,7 +3,7 @@
         <div class="register-wrap content-wrap content-75-to-100 text-left">
             <div class="label-tip row-new">
                 <h2 class="float-left">欢迎注册球果吧账号</h2>
-                <p class="float-right" @click="showLogin()">已是用户，马上登录</p>
+                <p class="float-right" @click="showLogin()" style="cursor:pointer">已是用户，马上登录</p>
             </div>
             <div class="clear-fix"></div>
             <div class="edit-form">

@@ -9,5 +9,9 @@ export default {
     loginByPhone(param){
         return Vue.http.post(pathUtil.getBasePath()+'/login/loginByPhone',param);
     },
-
+    isLogined(){
+        return Vue.http.post(pathUtil.getBasePath()+'/login/checkLogin').then(function(ret){
+            return ret.data;
+        });
+    }
 }
