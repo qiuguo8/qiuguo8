@@ -78,7 +78,7 @@ const routes = [
             path:'/score',
             name:'score',
             meta:{
-                aliasName:'即时比分'
+                aliasName:'比分'
             },
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
         },

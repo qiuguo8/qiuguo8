@@ -26,7 +26,7 @@
                     <router-link tag="li" :to="{name:'buy'}" active-class="active" class="transition-halfs">买推荐</router-link>
                     <router-link tag="li" :to="{name:'rank'}" active-class="active" class="transition-halfs">排行榜</router-link>
                     <router-link tag="li" :to="{name:'publish'}" active-class="active" class="transition-halfs">发推荐</router-link>
-                    <router-link tag="li" :to="{name:'score'}" active-class="active" class="transition-halfs">即时比分</router-link>
+                    <router-link tag="li" :to="{name:'score'}" active-class="active" class="transition-halfs">比分</router-link>
                     <!-- <li>优惠活动</li> -->
                     <router-link tag="li" :to="{name:'help'}" active-class="active" class="transition-halfs">使用帮助</router-link>
                     <li class="transition-halfs" @click="showLogin()">登录</li>
