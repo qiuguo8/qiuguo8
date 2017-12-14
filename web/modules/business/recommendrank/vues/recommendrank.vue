@@ -29,11 +29,11 @@
                     </el-radio-group>
                 </div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                    <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="recommender" label="推荐师" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                    <el-table-column prop="number" label="场次" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="winpercent" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="recommend" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="productCode" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="userName" label="推荐师" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                    <el-table-column prop="recommTotal" label="场次" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="accuracyRate" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="TIE_TOTAL" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
                 <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
                     <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
@@ -59,23 +59,51 @@
             </div>
             <div class="content-wrap float-left last-rank content-25-to-100 text-center">
                 <div class="content-wrap rank-common content-100-to-50">
-                    <div class="list-name"><span>上周周榜</span></div>
+                    <div class="list-name"><span>第{{week}}周 周榜</span></div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
                         <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                        <el-table-column prop="userType" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column prop="achivement" label="胜/负/平" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column prop="winpercent" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column  prop="userName" label="用户名" min-width="120" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                        <el-table-column prop="starLevel" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column prop="win" label="胜" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{parseFloat(scope.row.winTotal)+parseFloat(scope.row.halfWinTotal)}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="tie" label="平" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{parseFloat(scope.row.tieTotal)}}</span>
+                            </template>
+                        </el-table-column>
+                         <el-table-column prop="tie" label="负" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{parseFloat(scope.row.loseTotal)+parseFloat(scope.row.halfLoseTotal)}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="accuracyRate" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     </el-table>
                 </div>
                 <div class="content-wrap rank-common content-100-to-50 text-center">
-                    <div class="list-name"><span>9月月榜</span></div>
-                    <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border style="width: 100%">
+                    <div class="list-name"><span>{{month}}月 月榜</span></div>
+                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border style="width: 100%">
                         <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                        <el-table-column prop="userType" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column prop="achivement" label="胜/负/平" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column prop="winpercent" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column  prop="userName" label="用户名" min-width="120" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                        <el-table-column prop="assessLevel" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column prop="win" label="胜" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{parseFloat(scope.row.winTotal)+parseFloat(scope.row.halfWinTotal)}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="tie" label="平" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{parseFloat(scope.row.tieTotal)}}</span>
+                            </template>
+                        </el-table-column>
+                         <el-table-column prop="tie" label="负" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{parseFloat(scope.row.loseTotal)+parseFloat(scope.row.halfLoseTotal)}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="accuracyRate" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     </el-table>
                 </div>
             </div>
@@ -101,21 +129,23 @@ export default {
             tableData5:[],
             days:'3',
             productCode:'01',
+            week:'',
+            month:'',
             list:[],
         }
     },
     mounted(){
         recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
-            console.log(ret);
             this.tableData3 = ret.list.list;
         }),
-        recommendrankService.getLastWeekRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
-            console.log(ret);
+        recommendrankService.getLastWeekRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
             this.tableData4 = ret.list.list;
+            this.week = ret.week;
         }),
-           recommendrankService.getLastMonthRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
+           recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
+            this.tableData5 = ret.list.list;
             console.log(ret);
-            this.tableData4 = ret.list.list;
+            this.month = ret.month;
         })
     },
     methods:{
@@ -124,7 +154,6 @@ export default {
             if(this.list.length<this.tableData3.length){
                 this.list = this.list.concat(this.tableData3.slice(0,10));
             }
-            // console.log(this.list);
         },
         changeDays(){
             if(this.days == '3'){
@@ -145,15 +174,15 @@ export default {
                      
         },
         changeProductCode(){
-            recommendrankService.getLastWeekRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
+            recommendrankService.getLastWeekRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
             console.log(ret);
             this.tableData4 = ret.list.list;
         }),
-            recommendrankService.getLastMonthRankList({productCode:this.productCode,pageNum:'5'}).then((ret)=>{
+            recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
             console.log(ret);
             this.tableData5 = ret.list.list;
         }),
-        this.changeDays();
+             this.changeDays();
         }
 
     }

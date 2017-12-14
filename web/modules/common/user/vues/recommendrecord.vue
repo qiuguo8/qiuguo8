@@ -41,20 +41,24 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="date" label="推荐时间" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="code" label="推荐单号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="type" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="matchType" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="title" label="标题" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="publishTime" label="推荐时间" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="recommendNo" label="推荐单号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="productCode" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="leagueNameCn" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="recommendContent" label="标题" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="buynumber" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="money" label="成交金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="profit" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="money" label="成交金额" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
+                            </template>
+                        </el-table-column>
+                <el-table-column prop="recommendStatus" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
-                @size-change="handleSizeChange"
+                @size-change="handleSizeChange()"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
@@ -69,6 +73,7 @@
 <script>
 import Vue from 'vue'
 import {Table,TableColumn,Pagination,Select,Option} from 'element-ui'
+import recommendService from "web/modules/common/user/service/recommendrecord.js"
 Vue.component(Table.name,Table);
 Vue.component(TableColumn.name,TableColumn);
 Vue.component(Pagination.name,Pagination);
@@ -77,11 +82,7 @@ Vue.component(Option.name,Option);
 export default {
     data(){
         return {
-            tableData3:[{date:'1',code:'xx',type:'7胜3负',matchType:'80%',title:'xxxxxx',price:'xxx',buynumber:'70%',money:'50%',status:'xx',profit:'112'},
-                        {date:'1',code:'xx',type:'7胜3负',matchType:'80%',title:'xxxxxx',price:'xxx',buynumber:'70%',money:'50%',status:'xx',profit:'112'},
-                        {date:'1',code:'xx',type:'7胜3负',matchType:'80%',title:'xxxxxx',price:'xxx',buynumber:'70%',money:'50%',status:'xx',profit:'112'},
-                        {date:'1',code:'xx',type:'7胜3负',matchType:'80%',title:'xxxxxx',price:'xxx',buynumber:'70%',money:'50%',status:'xx',profit:'112'},
-                        {date:'1',code:'xx',type:'7胜3负',matchType:'80%',title:'xxxxxx',price:'xxx',buynumber:'70%',money:'50%',status:'xx',profit:'112'},],
+            tableData3:[],
             options:[
                 {value: '选项1', label: '黄金糕' }, 
                 {value: '选项2', label: '双皮奶' }, 
@@ -91,9 +92,21 @@ export default {
             value8:'2017-11-15'
         }
     },
+    mounted(){
+        recommendService.getRecommendList({userId:'20171206201103946446'}).then((data)=>{
+            console.log(data);
+            this.tableData3 = data.list.list;
+        })
+    },
     methods:{
         valChange(val){
             console.log(val);
+        },
+        handleSizeChange(){
+            recommendService.getRecommendList({userId:'20171206201103946446'}).then((data)=>{
+            console.log(data);
+            this.tableData3 = data.list.list;
+            })
         }
     },
     components:{
