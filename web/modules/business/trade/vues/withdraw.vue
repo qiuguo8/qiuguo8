@@ -3,14 +3,13 @@
         <div class="withdraw-wrap el-col-24">
             <div class="head">
                 <span>提款</span>
-                <!-- <span>收支明细</span><span>提款记录</span><span>充值退回记录</span> -->
             </div>
             <div class="form-wrap">
                 <el-form :model="withDrawForm" :rules="rules" ref="withDrawForm" label-width="110px">
                     <el-form-item label="可提金额:">
-                        <span style="color:#e90304">0</span>元
+                        <span style="color:#e90304">{{withDrawForm.availableBalance}}</span>元
                     </el-form-item>
-                    <el-form-item required label="充值金额:" prop="money" label-width="110px">
+                    <el-form-item required label="提现金额:" prop="money" label-width="110px">
                         <div class="el-col-8" style="min-width:160px;">
                             <el-input type="primary" v-model="withDrawForm.money" auto-complete="off">
                                 <label slot="append">
@@ -19,11 +18,12 @@
                             </el-input>
                         </div>
                         <span class="fill-tip">（提现金额至少100元）</span>
-                        <el-checkbox border v-model="isFull">可提金额</el-checkbox>
                     </el-form-item>
-                    <el-form-item required label="提款银行:" prop="bank" label-width="110px">
-                        <span style="margin-right:10px">中国工商银行</span>
-                        <el-button type="warning" size="small">更改提款账号</el-button>
+                    <el-form-item required label="支付宝账号:" prop="alipayNo" label-width="110px">
+                       <div class="el-col-8" style="min-width:160px">
+                            <el-input type="primary" v-model="withDrawForm.alipayNo" auto-complete="off">
+                            </el-input>
+                        </div>
                     </el-form-item>
                     <el-form-item required label="核对真实姓名:" prop="realName" label-width="110px">
                         <div class="el-col-8" style="min-width:160px">
@@ -40,7 +40,7 @@
                         <el-button :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="danger">立即提现</el-button>
+                        <el-button type="danger" @click="initWithdraw()">立即提现</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -51,6 +51,7 @@
 import Vue from 'vue'
 import formUtil from 'web/common/utils/formUtil.js'
 import {Dialog,Form,FormItem,Input,Button,Checkbox} from 'element-ui'
+import withdrawService from 'web/modules/business/trade/service/withdrawService.js'
 Vue.component(Dialog.name,Dialog);
 Vue.component(Form.name,Form);
 Vue.component(FormItem.name,FormItem);
@@ -64,15 +65,19 @@ export default {
             dialogFormVisible:false,
             withDrawForm:{
                 money:'0',
-                bank:'',
+                alipayNo:'',
                 realName:'',
-                code:''
+                code:'',
+                availableBalance:0
             },
             isFull:false,
             rules:{
                 money:[
                     {required:true,message:'金额不能为空',trigger:'change blur'},
                     {validator:formUtil.isMoney('输入的金额格式不正确'),trigger:'change blur'}
+                ],
+                alipayNo:[
+                    {required:true,message:'支付宝账号不能为空',trigger:'change blur'}
                 ],
                 realName:[
                     {required:true,message:'真实姓名不能为空',trigger:'change blur'},
@@ -115,7 +120,21 @@ export default {
                 this.countTxt = this.countSec+'秒后重新获取验证码';
                 this.getMessCode();
             },1000)
-        }
-    }
+        },
+        queryAccount(){
+            withdrawService.queryAccount().then((ret)=>{
+                        this.withDrawForm.availableBalance = ret.body.account.availableBalance;
+                    })
+        },
+        initWithdraw(){
+            var sform= {'withdrawAmount':this.withDrawForm.money,'withdrawRecvNo':this.withDrawForm.recvNo}
+            withdrawService.initWithdraw(sform).then((ret)=>{
+                        alert( ret.body.msg);
+                    })
+        },
+    },
+    created:function () {
+        this.queryAccount();
+    },
 }
 </script>
