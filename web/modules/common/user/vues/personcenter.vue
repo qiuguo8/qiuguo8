@@ -10,7 +10,7 @@
             <router-link tag="li" :to="{name:'withdraw'}" active-class="active" class="transition-halfs">我要提现</router-link>
             <router-link tag="li" :to="{name:'user-announce'}" active-class="active" class="transition-halfs">我要推广</router-link>
             <router-link tag="li" :to="{name:'money-flow-detail'}" active-class="active" class="transition-halfs">资金明细</router-link>
-            <router-link tag="li" :to="{name:'manager-index'}" active-class="active" class="transition-halfs">后台管理</router-link>
+            <router-link tag="li" :to="{name:'manager-index'}" active-class="active" class="transition-halfs" v-if="isManager">后台管理</router-link>
             <div class="left-side-btn hor-ver-mid">个人中心菜单</div>
         </ul>
         <div class="content-wrap content-75-to-100 float-left">
@@ -30,13 +30,21 @@ import 'web/common/directives/uiDirective.js'
 export default {
     data(){
         return {
-            showHeader:true
+            showHeader:true,
+            isManager:false
         }
     },
     created(){
         comVue.$on('is-show-header',(data)=>{
             this.showHeader = data;
-        })
+        });
+        //监听是否具有管理员权限从而是否显示管理入口
+        comVue.$on('is-manage-for-menu',(data)=>{
+            this.isManager = comVue.$data.userInfo&&comVue.$data.userInfo.userJurisdictionType == '02';
+        });
+        if(comVue.$data.userInfo){
+            this.isManager = comVue.$data.userInfo.userJurisdictionType == '02';
+        }
     },
     mounted(){
     },

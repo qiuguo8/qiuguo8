@@ -54,7 +54,7 @@
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
-                    <el-button type="success" v-if="item.subscribeStatus=='1'">已关注</el-button>
+                    <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button>
                 </div>
                 <div class="intro-text">
@@ -77,7 +77,7 @@
                 <el-table-column prop="winpercent" label="胜率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
         </div>
-        <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches">
+        <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches" :lock-scroll="false">
             <el-checkbox-group v-model="matchesVal" size="small">
                 <el-checkbox v-for="item in matches" :key="item.matchId" :label="item.matchId" border>{{item.homeTeamName}}VS{{item.visitTeamName}}</el-checkbox>
             </el-checkbox-group>
@@ -129,13 +129,6 @@ export default {
         orderBuyTip:orderBuyTip
     },
     methods: {
-        loadMore() {
-            // console.log('loanMore');
-            if (this.list.length < this.total.length) {
-                this.list = this.list.concat(this.total.slice(0, 4));
-            }
-            // console.log(this.list);
-        },
         showMatches() {
             this.isShowMatches = true;
         },
@@ -144,8 +137,6 @@ export default {
             this.listRecomm();
         },
         listRecomm() {
-            console.log(this.radioVal)
-            console.log(this.matchesVal)
             let buyRecommInfo = {
                 'productCode': this.productCode,
                 'userName': this.sendName,

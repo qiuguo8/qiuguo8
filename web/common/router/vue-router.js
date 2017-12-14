@@ -78,9 +78,25 @@ const routes = [
             path:'/score',
             name:'score',
             meta:{
-                aliasName:'即时比分'
+                aliasName:'比分'
             },
             component:resolve => require(['modules/business/intimegoal/vues/intimegoal.vue'],resolve)
+        },
+        {
+            path:'/news-list',
+            name:'news-list',
+            meta:{
+                aliasName:'新闻列表'
+            },
+            component:resolve => require(['modules/business/news/vues/news-list.vue'],resolve)
+        },
+        {
+            path:'/news-detail',
+            name:'news-detail',
+            meta:{
+                aliasName:'新闻详情'
+            },
+            component:resolve => require(['modules/business/news/vues/news-detail.vue'],resolve)
         },
         {
             path:'/order-detail',
@@ -127,7 +143,7 @@ const routes = [
                     path:'/account-manage',
                     name:'account-manage',
                     meta:{
-                        aliasName:'账号管理'
+                        aliasName:'账户管理'
                     },
                     component:resolve => require(['modules/manage/accountmanage/vues/accountmanage.vue'],resolve),
                 },
@@ -145,7 +161,7 @@ const routes = [
                     meta:{
                         aliasName:'冻结管理'
                     },
-                    component:resolve => require(['modules/manage/fundmanage/vues/fundmanage.vue'],resolve),
+                    component:resolve => require(['modules/manage/fundmanage/vues/freezemanage.vue'],resolve),
                 },
                 {
                     path:'/withdraw-manage',

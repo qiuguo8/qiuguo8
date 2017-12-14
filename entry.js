@@ -74,6 +74,10 @@ Vue.http.interceptors.push(function(request, next){
 		if(res){
 			loadEnd();
 		}
+		//把返回字符串的内容做成对象放到body的status属性中
+		if(!res.body&&res.bodyText!==undefined){
+			res.body = {status:res.bodyText}
+		}
 		if(!res || !res.ok){
 
 		}else{

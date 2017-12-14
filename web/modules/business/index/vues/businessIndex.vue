@@ -86,7 +86,7 @@
             最热推荐
         </div>
         <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
-            <div class="transition-ones" v-slipping :style="{width:(250*tableData3.length)+'px',height:'100%',position:'relative'}">
+            <div class="transition-ones" v-slipping :style="{width:(250*tableData3.length)+'px',height:'100%',position:'relative',left:'0px'}">
                 <div class="intro-wrap intro-wrap-index transition-halfs">
                     <div class="match-name">曼城VS曼联</div>
                     <div class="intro-info">
@@ -137,9 +137,9 @@
     </div>
     <div class="el-col-24 content-wrap text-center transition-halfs">
         <div class="text-left min-max-640 content-wrap content-30-to-100">
-            <div class="normal-news-title"><span class="list-name">头条</span><span class="more-btn">更多</span></div>
+            <div class="normal-news-title"><span class="list-name">头条</span><router-link tag="span" :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
             <ul class="normal-news-list">
-                <li class="transition-halfs">xxxxxxxxxxxxxx</li>
+                <router-link tag="li" :to="{name:'news-detail'}" class="transition-halfs">xxxxxxxxxxxxxx</router-link>
                 <li class="transition-halfs">xxxxxxxxxxxxxxxx</li>
                 <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
                 <li class="transition-halfs">xxxxxxxxxxxxxxxxxxxxx</li>
@@ -205,11 +205,7 @@ export default {
         }
     },
     mounted(){
-        indexService.getRankList({categoryCode:'01'}).then((ret)=>{
-            console.log(ret);
-        });
         $(this.$refs.achiveRank).scrollBar();
-        $(this.$refs.introWrap).scrollBar({direction:'horizontal'});
     },
     components:{
         orderBuyTip:orderBuyTip

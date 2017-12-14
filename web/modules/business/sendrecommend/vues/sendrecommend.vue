@@ -35,16 +35,39 @@
                 <el-table-column  prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="fullLetBall" label="全场让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="fullLetBall" :label="productCode=='01'?'亚盘':(productCode=='03'?'不让球':'赔率')" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0101','home')">主11.11</el-button>
-                            <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0101','visit')">客11.11</el-button>
+                        <div v-if="productCode=='01'">
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
+                            <span class="table-span">+0.25</span>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
+                        </div>
+                        <div v-if="productCode=='03'">
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">1.5</el-button>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">3.5</el-button>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">4.8</el-button>
+                        </div>
+                        <div v-if="productCode=='04'">
+                            <span class="table-span">+1</span>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">1.5</el-button>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">3.5</el-button>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">4.8</el-button>
+                        </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="fullSizeBall" label="全场大小" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="fullSizeBall" v-if="productCode!='04'" :label="productCode=='01'?'大小球':'让球'" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0201','home')">主11.11</el-button>
-                        <el-button class="table-btn" type="primary" @click="showInfoDialog(scope.row,'0201','visit')">客11.11</el-button>
+                        <div v-if="productCode=='01'">
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
+                            <span class="table-span">3</span>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
+                        </div>
+                        <div v-if="productCode=='03'">
+                            <span class="table-span">+1</span>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">1.5</el-button>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">3.5</el-button>
+                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">4.8</el-button>
+                        </div>
                     </template>
                 </el-table-column>
             </el-table>

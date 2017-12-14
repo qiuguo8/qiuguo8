@@ -1,68 +1,62 @@
 <template>
-    <div class="account-manage">
+    <div class="fund-manage">
         <div class="row-new text-center">
             <div class="form-control el-col-12">
                 <label class="el-col-8">用户名</label>
                 <div class="el-col-16">
                     <el-input v-model="userName" placeholder="请输入用户名"></el-input>
                 </div>
-            </div> 
+            </div>   
             <div class="form-control el-col-12">
-                <label class="el-col-9">冻结编号</label>
-                <div class="el-col-15">
-                    <el-input v-model="account" placeholder="请输入帐号"></el-input>
+                <label class="el-col-8">手机号</label>
+                <div class="el-col-16">
+                    <el-input v-model="phone" placeholder="请输入手机号"></el-input>
                 </div>
-            </div>
-            <div class="row-new">  
-                <div class="form-control el-col-19">
-                    <label class="el-col-5">冻结时间</label>
-                    <div class="el-col-19">
-                        <span class="el-col-11">
-                            <mu-date-picker v-model="registerDate" hintText="选择时间"/>
-                        </span>
-                        <span class="el-col-2 mid-word">至</span>
-                        <span class="el-col-11">
-                            <mu-date-picker v-model="registerDate" hintText="选择时间"/>
-                        </span>
-                    </div>
-                </div>   
+            </div> 
+            <div class="form-control content-60-to-60-all text-center float-left">
+                <label class="el-col-6">交易时间</label>
+                <div class="el-col-18">
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="startChangeTime" hintText="开始时间"/>
+                    </span>
+                    <span class="el-col-2 mid-word">至</span>
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="endChangeTime" hintText="结束时间"/>
+                    </span>
+                </div>
+            </div>  
+            <div class="form-control content-40-to-40-all float-left">
+                <label class="el-col-9 text-center">交易类型</label>
+                <el-select class="el-col-15" v-model="changeType" filterable placeholder="请选择">
+                    <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                </el-select>
             </div>
             <div class="form-control el-col-24 text-center">
-                <el-button type="primary">查询</el-button>
-                <el-button >重置</el-button>
-            </div>
+                <el-button type="primary" @click="submitForm()">查询</el-button>
+            </div>    
         </div>
         <div class="el-col-24">
-            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="index" label="序号" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="index" label="冻结编号" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
+                <el-table-column prop="changeTime" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="changeId" label="资金流水号" min-width="100" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="account" label="账号" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="mobileNo" label="可用现金余额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="mail" label="可用球果余额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="registerDate" label="冻结现金余额" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="冻结球果余额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="index" label="冻结状态" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="index" label="冻结时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="index" label="冻结原因" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="index" label="操作员" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="index" label="操作原因" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
-                     <template slot-scope="scope">
-                        <el-button type="text" size="small">锁定</el-button>
-                        <el-button type="text" size="small">删除</el-button>
-                    </template>
-                </el-table-column>
+                <el-table-column prop="totalAmount" label="金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="changeType" :formatter="changeTypeFormat" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
+                :current-page="currentPage"
                 :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
+                :page-size="pagesize"
                 layout=" prev, pager, next"
-                :total="400">
+                :total="totalCount">
                 </el-pagination>
             </div>
         </div>
@@ -70,30 +64,73 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Input,Button,Select,Option,Table,TableColumn,Pagination} from 'element-ui'
-Vue.component(Input.name,Input);
-Vue.component(Button.name,Button);
-Vue.component(Select.name,Select);
-Vue.component(Option.name,Option);
+import {Table,TableColumn,Pagination,Select,Option} from 'element-ui'
+import fundmanageService from 'web/modules/manage/fundmanage/service/fundmanageService'
 Vue.component(Table.name,Table);
 Vue.component(TableColumn.name,TableColumn);
 Vue.component(Pagination.name,Pagination);
+Vue.component(Select.name,Select);
+Vue.component(Option.name,Option);
 
 export default {
     data(){
         return {
-            query:{
-                userName:'',
-                account:"",
-            },
-            tableData3:[
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'},
-                {index:'1',userName:'xx',account:'ddd',mobileNo:'1123456',mail:'xx@dd.com',registerDate:'2017-10-25',status:'xxx'}
-            ]
+            datatable:[],
+            options:[
+                {value: '', label: '全部' }, 
+                {value: '01', label: '充值' }, 
+                {value: '02',label: '提现'}, 
+                {value: '03',label: '消费'}, 
+                {value: '04',label: '佣金'}],
+            startChangeTime:null,
+            endChangeTime:null,
+            changeType:null,
+            userName:null,
+            phone:null,
+            //当前页码
+            currentPage: 1,
+            //默认每页数据量
+            pagesize: 10,
+            //默认数据总数
+            totalCount: 0,
         }
-    }
+    },
+    methods:{
+        submitForm(){
+            this.query();
+        },
+        query(){
+            var sform= {'userName':this.userName,'phone':this.phone,'startChangeTime':this.startChangeTime,'endChangeTime':this.endChangeTime,'changeType':this.changeType,'pageNum':this.currentPage,'pageSize':this.pagesize}
+            fundmanageService.queryChangeDetail(sform).then((ret)=>{
+                        this.datatable = ret.body.list;
+                        this.totalCount = ret.body.total;
+                    })
+        },
+        handleSizeChange(val){
+            this.pagesize = val;
+            this.query();
+        },
+        //页码变更
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+            this.query();
+        }, 
+        changeTypeFormat(row,column){
+            switch (row.changeType) {
+                case '01':return '充值';break;
+                case '02':return '提现';break;
+                case '03':return '消费';break;
+                case '04':return '佣金';break;
+            };
+        },    
+    
+
+                   
+    },
+   created:function () {
+        this.query();
+    },
+    
+  
 }
 </script>

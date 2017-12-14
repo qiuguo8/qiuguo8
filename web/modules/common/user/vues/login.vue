@@ -30,7 +30,7 @@
                     <el-input v-model="mloginForm.phone" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="短信验证码" prop="phoneCode" label-width="100px">
-                    <div class="el-col-12">
+                    <div class="content-40-to-40 content-wrap">
                         <el-input type="text" v-model="mloginForm.phoneCode" auto-complete="off"></el-input>
                     </div>
                     <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
@@ -156,20 +156,48 @@ export default {
             isCountOver:true
         }
     },
+    created(){
+        loginService.isLogined().then((ret)=>{
+            console.log(ret);
+            comVue.$emit('login-for-menu',ret.status=='success');
+            comVue.$data.userInfo = ret.user;
+            comVue.$emit('is-manage-for-menu');
+        })
+    },
     mounted(){
         comVue.$on('show-login-form',(data)=>{
-            this.dialogFormVisible=true;
+            this.open();
         });
+        this.getCookie();
     },
     methods:{
+        open(){
+            this.dialogFormVisible = true;
+        },
+        close(){
+            this.$refs.loginForm.resetFields();
+            this.$refs.mloginForm.resetFields();
+            this.dialogFormVisible = false;
+        },
+        getCookie(){
+            this.loginForm.userName = sysUtil.getCookie('loginName');
+        },
         loginByUserName(){
             this.$refs.loginForm.validate((valid)=>{
                 if(valid){
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
                         alert(ret.body.status);
+                        if(ret.body.status=='success'){
+                            comVue.$emit('login-for-menu',true); 
+                            comVue.$data.userInfo = ret.body.user;
+                            this.close();
+                        }else{
+                            this.picVerifyObj.refresh();
+                        }
                     })
                     if(this.loginForm.isAuto){
-                        sysUtil.saveCookie('loginName',this.loginForm.loginName);
+                        sysUtil.saveCookie('loginName',this.loginForm.userName);
+                        sysUtil.saveCookie('autotLogin',true);
                     }
                     return true;
                 }else{

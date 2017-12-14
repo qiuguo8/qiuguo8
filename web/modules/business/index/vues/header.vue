@@ -2,9 +2,9 @@
     <header class="header-container">
         <nav class="el-col el-col-18 el-col-offset-3">
             <div class="header-logo-wrap">
-                <img src="/web/resources/img/index/logo.jpg"/>
+                <router-link tag="a" :to="{name:'index'}"><img src="/web/resources/img/index/logo.jpg"/></router-link>
             </div>
-            <div class="user-info" v-if="true">
+            <div class="user-info" v-if="isLogined">
                 <span class="msg-tip">11</span>
                 <div class="user-img-wrap" ref="usericon">
                     <img src="/web/resources/img/index/user-img.png">
@@ -26,11 +26,11 @@
                     <router-link tag="li" :to="{name:'buy'}" active-class="active" class="transition-halfs">买推荐</router-link>
                     <router-link tag="li" :to="{name:'rank'}" active-class="active" class="transition-halfs">排行榜</router-link>
                     <router-link tag="li" :to="{name:'publish'}" active-class="active" class="transition-halfs">发推荐</router-link>
-                    <router-link tag="li" :to="{name:'score'}" active-class="active" class="transition-halfs">即时比分</router-link>
+                    <router-link tag="li" :to="{name:'score'}" active-class="active" class="transition-halfs">比分</router-link>
                     <!-- <li>优惠活动</li> -->
                     <router-link tag="li" :to="{name:'help'}" active-class="active" class="transition-halfs">使用帮助</router-link>
-                    <li class="transition-halfs" @click="showLogin()">登录</li>
-                    <router-link tag="li" :to="{name:'register'}" class="transition-halfs">注册</router-link>
+                    <li class="transition-halfs" @click="showLogin()" v-if="!isLogined">登录</li>
+                    <router-link tag="li" :to="{name:'register'}" class="transition-halfs" v-if="!isLogined">注册</router-link>
                 </ul>
             </div>
             <!-- <div class="visitor-operation">
@@ -44,10 +44,13 @@
 import Vue from 'vue'
 import sysUtil from 'web/common/utils/sysUtil.js'
 import { MessageBox } from 'element-ui';
+import comVue from 'web/modules/commonVue.js'
+import service from 'web/modules/business/index/services/indexService.js'
 
 export default {
     data(){
         return {
+            isLogined:false
         }
     },
     mounted(){
@@ -56,6 +59,10 @@ export default {
             that.showMenu(e,that.$refs.menuicon,that.$refs.menu);
             that.showMenu(e,that.$refs.usericon,that.$refs.userlist);
         });
+        //监听是否已登录
+        comVue.$on('login-for-menu',(data)=>{
+            this.isLogined = data;
+        })
     },
     methods:{
         showMenu(e,clickObj,showObj){
@@ -86,8 +93,18 @@ export default {
                 center:true,
                 lockScroll:false
             }).then(()=>{
-
-            })
+                return service.logout();
+            }).then((ret)=>{
+                // console.log(ret);
+                if(ret.status=='success'){
+                    comVue.$data.userInfo = null;
+                    this.isLogined = false;
+                    comVue.$emit('is-manage-for-menu');
+                    this.$router.push({name:'index'});
+                }else{
+                    alert("退出登录失败！")
+                }
+            }).catch(()=>{});
         }
     }
 }

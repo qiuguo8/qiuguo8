@@ -2,20 +2,20 @@
     <div class="money-flow-detail">
         <div class="row-new">
             <div class="form-control el-col-18 text-center">
-                <label class="el-col-6">注册时间</label>
+                <label class="el-col-6">交易时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="startChangeTime" hintText="开始时间"/>
                     </span>
                     <span class="el-col-2 mid-word">至</span>
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="endChangeTime" hintText="结束时间"/>
                     </span>
                 </div>
             </div>  
             <div class="form-control el-col-12">
-                <label class="el-col-9 text-center">类型</label>
-                <el-select class="el-col-15" v-model="value7" filterable placeholder="请选择">
+                <label class="el-col-9 text-center">交易类型</label>
+                <el-select class="el-col-15" v-model="changeType" filterable placeholder="请选择">
                     <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -25,27 +25,26 @@
                 </el-select>
             </div>   
             <div class="form-control el-col-12 text-center">
-                <el-button type="primary">查询</el-button>
+                <el-button type="primary" @click="submitForm()">查询</el-button>
             </div>    
         </div>
         <div class="el-col-24">
-            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="date" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="code" label="资金流水号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="type" label="类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="bizCode" label="业务流水号" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="money" label="金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+            <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
+                <el-table-column type="index" label="序号" width="50"  align="center" head-align="center"></el-table-column>
+                <el-table-column prop="changeTime" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="changeId" label="资金流水号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="totalAmount" label="金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="changeType" :formatter="changeTypeFormat" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
+                :current-page="currentPage"
                 :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
+                :page-size="pagesize"
                 layout=" prev, pager, next"
-                :total="400">
+                :total="totalCount">
                 </el-pagination>
             </div>
         </div>
@@ -54,6 +53,7 @@
 <script>
 import Vue from 'vue'
 import {Table,TableColumn,Pagination,Select,Option} from 'element-ui'
+import moneyflowService from 'web/modules/common/user/service/moneyflowService'
 Vue.component(Table.name,Table);
 Vue.component(TableColumn.name,TableColumn);
 Vue.component(Pagination.name,Pagination);
@@ -63,20 +63,57 @@ Vue.component(Option.name,Option);
 export default {
     data(){
         return {
-            tableData3:[{date:'1',code:'xx',type:'7胜3负',bizCode:'xxx',money:'50%',status:'xx',},
-                        {date:'1',code:'xx',type:'7胜3负',bizCode:'xxx',money:'50%',status:'xx'},
-                        {date:'1',code:'xx',type:'7胜3负',bizCode:'xxx',money:'50%',status:'xx'},
-                        {date:'1',code:'xx',type:'7胜3负',bizCode:'xxx',money:'50%',status:'xx'},
-                        {date:'1',code:'xx',type:'7胜3负',bizCode:'xxx',money:'50%',status:'xx'},],
+            datatable:[],
             options:[
-                {value: '选项1', label: '黄金糕' }, 
-                {value: '选项2', label: '双皮奶' }, 
-                {value: '选项3',label: '蚵仔煎'}, 
-                {value: '选项4',label: '龙须面'}, 
-                {value: '选项5',label: '北京烤鸭'}],
-            value8:'2017-11-15'
+                {value: '', label: '全部' }, 
+                {value: '01', label: '充值' }, 
+                {value: '02',label: '提现'}, 
+                {value: '03',label: '消费'}, 
+                {value: '04',label: '佣金'}],
+            startChangeTime:null,
+            endChangeTime:null,
+            changeType:null,
+            //当前页码
+            currentPage: 1,
+            //默认每页数据量
+            pagesize: 10,
+            //默认数据总数
+            totalCount: 0,
         }
-    }
+    },
+    methods:{
+        submitForm(){
+            this.query();
+        },
+        query(){
+            var sform= {'startChangeTime':this.startChangeTime,'endChangeTime':this.endChangeTime,'changeType':this.changeType,'pageNum':this.currentPage,'pageSize':this.pagesize}
+            moneyflowService.queryChangeDetails(sform).then((ret)=>{
+                        this.datatable = ret.body.list;
+                        this.totalCount = ret.body.total;
+                    })
+        },
+        handleSizeChange(val){
+            this.pagesize = val;
+            this.query();
+        },
+        //页码变更
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+            this.query();
+        }, 
+        changeTypeFormat(row,column){
+            switch (row.changeType) {
+                case '01':return '充值';break;
+                case '02':return '提现';break;
+                case '03':return '消费';break;
+                case '04':return '佣金';break;
+            };
+        },           
+    },
+   created:function () {
+        this.query();
+    },
+    
   
 }
 </script>
