@@ -6,5 +6,8 @@ export default {
     orderUnder(buyRecommInfo){
         return Vue.http.post(pathUtil.getBasePath()+'/order/orderUnder',buyRecommInfo);
     },
+    pageRecentRecomm(item){
+        return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/pageRecentRecomm',item);
+    }
 
 }

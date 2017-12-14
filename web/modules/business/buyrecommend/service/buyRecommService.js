@@ -11,6 +11,12 @@ export default {
     },
     addUserSubscribe(item){
         return Vue.http.post(pathUtil.getBasePath()+'/userInfo/addUserSubscribe',item);
-    }
+    },
+    buyRecommDetails(item){
+        return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/buyRecommDetails',item);
+    },
+    pageRecentRecomm(item){
+        return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/pageRecentRecomm',item);
+    },
 
 }

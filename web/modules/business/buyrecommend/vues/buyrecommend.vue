@@ -58,9 +58,9 @@
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button>
                 </div>
                 <div class="intro-text">
-                    {{item.assessLevel}}{{item.starLevel}}{{item.recordsValue}}{{item.recommendContent}}
+                   {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}<br>{{item.recommendContent}}
                 </div>
-                <el-button type="success" v-if="item.buyStatus=='1' || item.price == '0'" @click="showOrderDetail(item)">查看</el-button>
+                <el-button type="success" v-if="item.buyStatus=='1' || item.price == '0'" @click="forFree(item)">查看</el-button>
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' " @click="showOrderDetail(item)">{{item.price}}</el-button>
             </div>
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
@@ -86,14 +86,15 @@
                 <el-button @click="selectedMatch()" type="primary">确定</el-button>
             </div>
         </el-dialog>
-        <order-buy-tip ref="orderDetail" :order-data="orderData"></order-buy-tip>
+        <order-buy-tip ref="orderBuy" :order-data="orderData"></order-buy-tip>
   </div>
 </template>
 <script>
 import Vue from 'vue'
 import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
 import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
-import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue';
+import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
+import orderDetail from 'web/modules/business/trade/vues/order-detail.vue'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
@@ -119,7 +120,7 @@ export default {
             matchesVal:[],
             isShowMatches:false,
             sendName:null,
-            orderData:null
+            orderData:null,
         }
     },
     created:function(){
@@ -169,7 +170,14 @@ export default {
         },
         showOrderDetail(item) {
             this.orderData = item;
-            this.$refs.orderDetail.show();
+            this.$refs.orderBuy.show();
+        },
+        forFree(item){
+            buyService.buyRecommDetails(item).then((ret) => {
+                if(ret.body.status=='success'){
+                    this.$router.push({name:'order-detail',params: {'detail':ret.body.details}})
+                };
+            })
         }
     }
 }

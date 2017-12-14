@@ -36,7 +36,7 @@ export default {
         confirm(){
             service.orderUnder(this.orderData).then((ret) => {
                 if(ret.body.status == 'success'){
-                    this.$router.push({name:'order-detail'})
+                    this.$router.push({name:'order-detail',params:this.orderData})
                 }else{
                     alert(ret.body.errInfo);
                 }
