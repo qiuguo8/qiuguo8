@@ -145,8 +145,8 @@ export default {
         },
         productCodeForma(row,column){
             switch (row.productCode) {
-                case '01':return '亚盘/大小球';break;
-                case '02':return '亚盘/大小球';break;
+                case '01':return '亚盘';break;
+                case '02':return '大小球';break;
                 case '03':return '竞彩足球';break;
                 case '04':return '北京单场';break;
             };

@@ -32,34 +32,39 @@
                     <p>30天准确率:<span>{{recommDetail.accuracyRate30}}</span></p>
                 </div>
                 <div class="content-25-to-all-50 content-wrap">
-                    <p>3天战绩:<span>000</span></p>
-                    <p>7天战绩:<span>000</span></p>
-                    <p>30天战绩:<span>000</span></p>
+                    <p>3天战绩:<span>{{recommDetail.gainsRate3}}</span></p>
+                    <p>7天战绩:<span>{{recommDetail.gainsRate7}}</span></p>
+                    <p>30天战绩:<span>{{recommDetail.gainsRate30}}</span></p>
                 </div>
             </div>
             <div class="order-detail-info el-col-24 rank-common row-new">
                 <div class="left-name" style="margin-bottom:10px"><span>推荐内容</span></div>
                 <div class="el-col-24">
                     <div class="el-col-8">
-                        <p>{{recommDetail.leageName}}{{recommDetail.matchStartTime}}</p>
-                        <p>{{recommDetail.homeTeamName}} VS {{recommDetail.visitTeamName}}</p>
+                        <p>{{rDetails.leagueName}}{{rDetails.matchStartTime}}</p>
+                        <p>{{rDetails.homeTeamName}} VS {{rDetails.visitTeamName}}</p>
                     </div>
                     <div class="el-col-8">
-                        <span>盘口：000</span>
+                        <span>盘口：{{rDetails.handicap}}</span>
                     </div>
                     <div class="el-col-8">
-                        <span>价格：{{recommDetail.price}}</span>
+                        <span>价格：{{rDetails.price}}</span>
                     </div>
                     <div class="el-col-24">
-                        推荐：000
+                        推荐：{{null==rDetails.recommendTeamName?'平局':rDetails.recommendTeamName}}
+                    </div>
+                    <div class="el-col-24">
+                        <span>推荐说明：{{rDetails.recommendContent}}</span>
                     </div>
                 </div>
             </div>
             <div class="order-result el-col-24 rank-common row-new">
                 <div class="left-name" style="margin-bottom:10px"><span>开奖结果</span></div>
                 <div class="el-col-24">
-                    <span>比分：000</span>
-                    <span>结果：000</span>
+                    <span v-if="rDetails.homeScore">比分：{{rDetails.homeScore}}-{{rDetails.homeScore}}</span>
+                    <span v-if="!rDetails.homeScore">比分：暂无</span>
+                    <span v-if="rDetails.hitResult">结果：{{rDetails.hitResult}}</span>
+                    <span v-if="!rDetails.hitResult">结果：暂无</span>
                     <p class="el-col-24">本推介仅代表作者观点，不代表球果吧立场。信息仅供竞彩参考，请勿用于非法博彩</p>
                 </div>
             </div>
@@ -70,8 +75,8 @@
                         <el-table-column label="赛事" min-width="160" align="center" head-align="center" class-name="table-fixed">
                             <template slot-scope="scope">
                                 <div class="match-wrap">
-                                    <p class="match-type">{{scope.row.productCode}}</p>
-                                    <p class="match-date">{{scope.row.matchStartTime}}</p>
+                                    <p class="match-type">{{scope.row.leageName}}</p>
+                                    <p class="match-date">{{scope.row.matchStartTimeToStr}}</p>
                                     <p>推荐时间：</p>
                                     <p class="recommend-time">{{scope.row.publishTime}}</p>
                                 </div>
@@ -89,9 +94,10 @@
                         </el-table-column>
                         <el-table-column label="盘口" min-width="120" align="center" head-align="center" class-name="table-fixed">
                             <template slot-scope="scope">
-                                {{scope.row.handicap}}
-                                <el-button type="warning">免费查看</el-button>
-                                <el-button type="warning">购买</el-button>
+                                玩法：{{product[scope.row.productCode]}}<br>
+                                盘口：{{scope.row.handicap}}
+                                <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus!='01'" type="warning" @click="forFree(scope.row)">免费查看</el-button>
+                                <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">购买</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column label="结果" min-width="120" align="center" head-align="center" class-name="table-fixed">
@@ -116,12 +122,14 @@
                 </div>
             </div>
         </div>
+        <order-buy-tip ref="orderBuy" :order-data="orderData"></order-buy-tip>
     </div>
 </template>
 <script>
 import Vue from 'vue'
 import {RadioButton,RadioGroup,Rate,Table,TableColumn,Pagination} from 'element-ui'
 import service from 'web/modules/business/trade/service/orderService'
+import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
 Vue.component(RadioButton.name,RadioButton);
 Vue.component(RadioGroup.name,RadioGroup);
 Vue.component(Rate.name,Rate);
@@ -133,7 +141,7 @@ export default {
     data(){
         return {
             radioVal:'1',
-            starLevel:this.$route.params.detail.starLevel,
+            starLevel:this.$route.params.buyDetail.starLevel,
             recentRecommList:[],
             //当前页码
             currentPage: 1,
@@ -141,12 +149,15 @@ export default {
             pagesize: 10,
             //默认数据总数
             totalCount: 0,
-            recommDetail:this.$route.params.detail
+            recommDetail:this.$route.params.buyDetail,
+            rDetails:this.$route.params.recommDetail,
+            product:{'01':'亚盘','02':'大小球','03':'竞彩足球','04':'北京单场'},
+            orderData:''
         }
     },
     methods:{
         listRecentRecomm(){
-            let recomm = {pageNum:this.currentPage,pageSize:this.pagesize};
+            let recomm = {pageNum:this.currentPage,pageSize:this.pagesize,userId:this.recommDetail.userId};
             service.pageRecentRecomm(recomm).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.recentRecommList = ret.body.list;
@@ -164,10 +175,27 @@ export default {
             this.currentPage = val;
             this.listRecentRecomm();
         },
+        forFree(item){
+            service.buyRecommDetails(item).then((ret) => {
+                if(ret.body.status=='success'){
+                    this.recommDetail = ret.body.details;
+                    this.rDetails = ret.body.rdetails;
+                };
+            })
+        },
+        showOrderDetail(item) {
+            this.orderData = item;
+            console.log(item);
+            this.$refs.orderBuy.show();
+        },
     },
     mounted:function () {
         this.listRecentRecomm();
         console.log(this.buyRecommInfo)
-    }
+    },
+    components:{
+        orderBuyTip:orderBuyTip
+    },
+
 }
 </script>
