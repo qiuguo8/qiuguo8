@@ -15,8 +15,5 @@ export default {
     buyRecommDetails(item){
         return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/buyRecommDetails',item);
     },
-    pageRecentRecomm(item){
-        return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/pageRecentRecomm',item);
-    },
 
 }

@@ -36,10 +36,18 @@ export default {
         confirm(){
             service.orderUnder(this.orderData).then((ret) => {
                 if(ret.body.status == 'success'){
-                    this.$router.push({name:'order-detail',params:this.orderData})
+                    this.gotoDetail();
+
                 }else{
                     alert(ret.body.errInfo);
                 }
+            })
+        },
+        gotoDetail(){
+            service.buyRecommDetails(this.orderData).then((ret) => {
+                if(ret.body.status=='success'){
+                    this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
+                };
             })
         }
     }

@@ -94,7 +94,6 @@ import Vue from 'vue'
 import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
 import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
 import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
-import orderDetail from 'web/modules/business/trade/vues/order-detail.vue'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Table.name, Table)
@@ -175,7 +174,7 @@ export default {
         forFree(item){
             buyService.buyRecommDetails(item).then((ret) => {
                 if(ret.body.status=='success'){
-                    this.$router.push({name:'order-detail',params: {'detail':ret.body.details}})
+                    this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
                 };
             })
         }
