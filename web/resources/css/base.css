@@ -426,8 +426,8 @@ nav ul{list-style: none}
     .intros-wrap>.intro-wrap{width:250px;float:none}
     .intros-wrap>.intro-wrap-index{width:250px;float:none}
 }
-@media(min-width:620px){
-    .intros-wrap>.intro-wrap{float:left}
+@media(min-width:540px){
+    .intros-wrap>.intro-wrap{float:left;width:45%}
     .intros-wrap>.intro-wrap-index{float:left}
 }
 @media(min-width:768px){

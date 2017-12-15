@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="clear-fix"></div>
-        <div class="intros-wrap content-wrap content-75-to-100">
+        <div class="intros-wrap content-wrap el-col-24">
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
@@ -68,7 +68,7 @@
                 <span v-show="!busy">加载更多</span>
             </div>
         </div>
-        <div class="content-wrap float-left text-center rank-common intro-rank-list content-25-to-100">
+        <!-- <div class="content-wrap float-left text-center rank-common intro-rank-list content-25-to-100">
             <div class="list-name"><span>七天胜率排行</span></div>
             <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
                 <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -76,7 +76,7 @@
                 <el-table-column prop="achivement" label="当周成绩" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="winpercent" label="胜率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
-        </div>
+        </div> -->
         <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches" :lock-scroll="false">
             <el-checkbox-group v-model="matchesVal" size="small">
                 <el-checkbox v-for="item in matches" :key="item.matchId" :label="item.matchId" border>{{item.homeTeamName}}VS{{item.visitTeamName}}</el-checkbox>
