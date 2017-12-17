@@ -3,13 +3,13 @@
         <div class="rank-common intro-rank-list content-25-to-100 content-wrap">
             <div class="list-name"><span>同场推荐</span></div>
             <div class="el-col-24">
-                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                    <el-table-column prop="date" label="推荐人" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="code" label="类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                    <el-table-column prop="recommender" label="金币" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="type" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="matchType" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="sameFieldList" border>
+                    <el-table-column prop="userName" label="推荐人" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="categoryCode" label="类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                    <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="price" label="查看" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="price" label="购买" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
             </div>
         </div>
@@ -152,12 +152,13 @@ export default {
             recommDetail:this.$route.params.buyDetail,
             rDetails:this.$route.params.recommDetail,
             product:{'01':'亚盘','02':'大小球','03':'竞彩足球','04':'北京单场'},
-            orderData:''
+            orderData:'',
+            sameFieldList:''
         }
     },
     methods:{
         listRecentRecomm(){
-            let recomm = {pageNum:this.currentPage,pageSize:this.pagesize,userId:this.recommDetail.userId};
+            let recomm = {pageNum:this.currentPage,pageSize:this.pagesize,userId:this.recommDetail.userId,recommendNo:this.recommDetail.recommendNo};
             service.pageRecentRecomm(recomm).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.recentRecommList = ret.body.list;
@@ -165,7 +166,14 @@ export default {
                 }
             })
         },
-
+        listSameFieldRecomm(){
+            let recomm = {recommendNo:this.recommDetail.recommendNo,matchId:this.recommDetail.matchId};
+            service.listSameFieldRecomm(recomm).then((ret)=>{
+                if(ret.body.status == 'success'){
+                    this.sameFieldList = ret.body.list;
+                }
+            })
+        },
         handleSizeChange(val){
             this.pagesize = val;
             this.listRecentRecomm();
@@ -185,13 +193,12 @@ export default {
         },
         showOrderDetail(item) {
             this.orderData = item;
-            console.log(item);
             this.$refs.orderBuy.show();
         },
     },
     mounted:function () {
         this.listRecentRecomm();
-        console.log(this.buyRecommInfo)
+        this.listSameFieldRecomm();
     },
     components:{
         orderBuyTip:orderBuyTip
