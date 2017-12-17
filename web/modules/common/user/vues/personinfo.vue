@@ -45,7 +45,7 @@
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange4()"
-                :current-page="currentPage4"
+                :current-page.sync="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
                 :page-size="15"
                 layout=" prev, pager, next"
@@ -57,23 +57,23 @@
             <p class="select-name"><span>账户安全</span></p>
             <div class="text-left two-colums-to-one transition-halfs">
                 <div class="float-left">
-                    <span class="el-col-14">登录密码：已完成</span>
+                    <span class="el-col-14">登录密码：<span v-if="securityInformation.password == '1'">已设置</span><span v-if="securityInformation.password == '0'">未设置</span></span>
                     <el-button type="primary">修改</el-button>
                 </div>
                 <div class="float-left">
-                    <span class="el-col-14">手机认证：已完成</span>
+                    <span class="el-col-14">手机认证：<span v-if="securityInformation.mobilePhone == '1'">已设置</span><span v-if="securityInformation.mobilePhone == '0'">未设置</span></span>
                     <el-button type="primary">修改</el-button>
                 </div>
                 <div class="float-left">
-                    <span class="el-col-14">交易密码：已完成</span>
+                    <span class="el-col-14">交易密码：<span v-if="securityInformation.tradePassword == '1'">已设置</span><span v-if="securityInformation.tradePassword == '0'">未设置</span></span>
                     <el-button type="primary">修改/去设置</el-button>
                 </div>
                 <div class="">
-                    <span class="el-col-14">身份认证：已完成</span>
+                    <span class="el-col-14">身份认证：<span v-if="securityInformation.userCertificate == '1'">已设置</span><span v-if="securityInformation.userCertificate == '0'">未设置</span></span>
                     <el-button type="primary">修改</el-button>
                 </div>
                 <div class="">
-                    <span class="el-col-14">银行卡绑定：未完成</span>
+                    <span class="el-col-14">银行卡绑定：<span v-if="securityInformation.userAuthCard == '1'">已设置</span><span v-if="securityInformation.userAuthCard == '0'">未设置</span></span>
                     <el-button type="primary">去绑定</el-button>
                 </div>
             </div>
@@ -81,73 +81,100 @@
     </div>
 </template>
 <script>
-import Vue from 'vue'
-import {Input,Button,Table,TableColumn,Pagination,CheckboxButton,RadioButton,RadioGroup} from 'element-ui'
-import personinfoService from "web/modules/common/user/service/personinService.js"
-Vue.component(Input.name,Input);
-Vue.component(Button.name,Button);
-Vue.component(Table.name, Table)
-Vue.component(TableColumn.name, TableColumn)
-Vue.component(Pagination.name, Pagination)
-Vue.component(CheckboxButton.name, CheckboxButton)
-Vue.component(RadioButton.name, RadioButton)
-Vue.component(RadioGroup.name, RadioGroup)
+import Vue from "vue";
+import {
+  Input,
+  Button,
+  Table,
+  TableColumn,
+  Pagination,
+  CheckboxButton,
+  RadioButton,
+  RadioGroup
+} from "element-ui";
+import personinfoService from "web/modules/common/user/service/personinfoService.js";
+Vue.component(Input.name, Input);
+Vue.component(Button.name, Button);
+Vue.component(Table.name, Table);
+Vue.component(TableColumn.name, TableColumn);
+Vue.component(Pagination.name, Pagination);
+Vue.component(CheckboxButton.name, CheckboxButton);
+Vue.component(RadioButton.name, RadioButton);
+Vue.component(RadioGroup.name, RadioGroup);
 export default {
-    data(){
-        return {
-            tableData3:[],
-            tableData4:[],
-            testVal:false,
-            productCode3:'01',
-            currentPage4:1
-        }
+  data() {
+    return {
+      tableData3: [],
+      tableData4: [],
+      securityInformation:[],
+      testVal: false,
+      productCode3: "01",
+      currentPage4: 1
+    };
+  },
+  mounted() {
+    personinfoService
+      .getRecordList({
+        userId: "20171207401163948706",
+        productCode: this.productCode3
+      })
+      .then(data => {
+        this.tableData3 = [];
+        data.map.lastThreeDayList.title = "3天战绩";
+        this.tableData3.push(data.map.lastThreeDayList);
+        data.map.lastSevenDayList.title = "7天战绩";
+        this.tableData3.push(data.map.lastSevenDayList);
+        data.map.lastThirtyDayList.title = "30天战绩";
+        this.tableData3.push(data.map.lastThirtyDayList);
+        data.map.lastWeekList.title = "上周战绩";
+        this.tableData3.push(data.map.lastWeekList);
+        data.map.lastMonthList.title = "上月战绩";
+        this.tableData3.push(data.map.lastMonthList);
+      }),
+      personinfoService
+        .getRecommendRecord({ userId: "20171207401163948706" })
+        .then(data => {
+          console.log(data);
+          this.tableData4 = data.list.list;
+        }),
+      personinfoService
+        .getSecurityInformation({ userId: "20171207401163948706" })
+        .then(data => {
+          console.log(data);
+          this.securityInformation = data;
+        });
+  },
+  methods: {
+    changeProductCode3() {
+      this.tableData3 = [];
+      personinfoService
+        .getRecordList({
+          userId: "20171207401163948706",
+          productCode: this.productCode3
+        })
+        .then(data => {
+          data.map.lastThreeDayList.title = "3天战绩";
+          this.tableData3.push(data.map.lastThreeDayList);
+          data.map.lastSevenDayList.title = "7天战绩";
+          this.tableData3.push(data.map.lastSevenDayList);
+          data.map.lastThirtyDayList.title = "30天战绩";
+          this.tableData3.push(data.map.lastThirtyDayList);
+          data.map.lastWeekList.title = "上周战绩";
+          this.tableData3.push(data.map.lastWeekList);
+          data.map.lastMonthList.title = "上月战绩";
+          this.tableData3.push(data.map.lastMonthList);
+        });
     },
-     mounted(){
-         personinfoService.getRecordList({userId:"20171207401163948706",productCode:this.productCode3}).then((data)=>{
-            this.tableData3 = [];
-            data.map.lastThreeDayList.title = "3天战绩";
-            this.tableData3.push(data.map.lastThreeDayList);
-            data.map.lastSevenDayList.title = "7天战绩";
-            this.tableData3.push(data.map.lastSevenDayList);
-            data.map.lastThirtyDayList.title = "30天战绩";
-            this.tableData3.push(data.map.lastThirtyDayList);
-            data.map.lastWeekList.title = "上周战绩";
-            this.tableData3.push(data.map.lastWeekList);
-            data.map.lastMonthList.title = "上月战绩";
-            this.tableData3.push(data.map.lastMonthList);
-          
-        }),
-        personinfoService.getRecommendRecord({userId:"20171207401163948706"}).then((data)=>{
-            console.log(data);
-            this.tableData4 = data.list.list;
-        }),
-        personinfoService.getSecurityInformation({userId:"20171207401163948706"}).then((data)=>{
-            console.log(data);
+    handleCurrentChange4() {
+      personinfoService.getRecommendRecord({
+          userId: "20171207401163948706",
+          pageNum: this.currentPage4
         })
-     },
-     methods:{
-         changeProductCode3(){
-            this.tableData3 = [];
-            personinfoService.getRecordList({userId:"20171207401163948706",productCode:this.productCode3}).then((data)=>{
-            data.map.lastThreeDayList.title = "3天战绩";
-            this.tableData3.push(data.map.lastThreeDayList);
-            data.map.lastSevenDayList.title = "7天战绩";
-            this.tableData3.push(data.map.lastSevenDayList);
-            data.map.lastThirtyDayList.title = "30天战绩";
-            this.tableData3.push(data.map.lastThirtyDayList);
-            data.map.lastWeekList.title = "上周战绩";
-            this.tableData3.push(data.map.lastWeekList);
-            data.map.lastMonthList.title = "上月战绩";
-            this.tableData3.push(data.map.lastMonthList);
-            })
-         },
-         handleCurrentChange4(){
-            personinfoService.getRecommendRecord({userId:"20171207401163948706",pageNum:this.currentPage4}).then((data)=>{
-            console.log(data);
-            this.tableData4 = data.list.list;
-        })
-         }
-     }
-}
-
+        .then(data => {
+          console.log(data);
+          this.tableData4 = data.list.list;
+        });
+    }
+  }
+};
 </script>

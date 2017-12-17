@@ -37,7 +37,7 @@
                 </el-table>
                 <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
                     <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
-                    <span v-show="!busy">加载更多</span>
+                    <span v-show="!busy" @click="loadMore()">加载更多</span>
                 </div>
                 <!-- <div class="page-block text-center">
                     <el-pagination
@@ -132,6 +132,7 @@ export default {
             week:'',
             month:'',
             list:[],
+            currentPage:1
         }
     },
     mounted(){
@@ -150,9 +151,9 @@ export default {
     },
     methods:{
         loadMore(){
-            // console.log('loanMore');
-            if(this.list.length<this.tableData3.length){
-                this.list = this.list.concat(this.tableData3.slice(0,10));
+            console.log('loanMore');
+            if(this.list.length<this.tableData4.length){
+                this.list = this.list.concat(this.tableData4.slice(0,10));
             }
         },
         changeDays(){

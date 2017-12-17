@@ -3,17 +3,17 @@ import pathUtil from "web/common/utils/pathUtil";
 
 
 export default {
-    getUnReadMessageList(obj){
-        return Vue.http.post(pathUtil.getBasePath()+'/userCenter/myFollows',obj)
+    getQgAvailableBalance(obj){
+        return Vue.http.post(pathUtil.getBasePath()+'/userCenter/qgAvailableBalance',obj)
                 .then((ret)=>{
                 return ret.data;
                 });
                 },
-    cancleFocus(obj){
-        return Vue.http.post(pathUtil.getBasePath()+'/userInfo/cancelUserSubscribe',obj)
+    submitPersonalSign(obj){
+        return Vue.http.post(pathUtil.getBasePath()+'/userCenter/changePersonSign',obj)
                 .then((ret)=>{
                 return ret.data;
                 });
-                },
+    }
 
 }

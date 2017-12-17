@@ -2,22 +2,22 @@
     <div class="buy-records">
         <div class="row-new">
             <div class="form-control el-col-18 text-center">
-                <label class="el-col-6">注册时间</label>
+                <label class="el-col-6">购买时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="buyTimeStart" hintText="选择时间"/>
                     </span>
                     <span class="el-col-2 mid-word">至</span>
                     <span class="el-col-11">
-                        <mu-date-picker v-model="registerDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="buyTimeEnd" hintText="选择时间"/>
                     </span>
                 </div>
             </div>  
             <div class="form-control el-col-12 text-center">
                 <label class="el-col-9">购买类型</label>
-                <el-select class="el-col-15" v-model="value7" filterable placeholder="请选择">
+                <el-select class="el-col-15" v-model="productValue" filterable placeholder="请选择">
                     <el-option
-                    v-for="item in options"
+                    v-for="item in Product"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -25,7 +25,7 @@
                 </el-select>
             </div>   
             <div class="form-control el-col-12 text-center">
-                <el-button type="primary">查询</el-button>
+                <el-button type="primary" @click="query()">查询</el-button>
             </div>    
         </div>
         <div class="el-col-24">
@@ -47,8 +47,8 @@
             <div class="page-block text-right">
                 <el-pagination
                 @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
+                @current-change="handleCurrentChange()"
+                :current-page.sync="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
                 :page-size="15"
                 layout=" prev, pager, next"
@@ -72,13 +72,18 @@ export default {
     data(){
         return {
             tableData3:[],
-            options:[
-                {value: '选项1', label: '黄金糕' }, 
-                {value: '选项2', label: '双皮奶' }, 
-                {value: '选项3',label: '蚵仔煎'}, 
-                {value: '选项4',label: '龙须面'}, 
-                {value: '选项5',label: '北京烤鸭'}],
-            value8:'2017-11-15'
+             Product:[
+                {value: '01', label: '亚盘' }, 
+                {value: '02', label: '大小球' }, 
+                {value: '03',label: '竞彩'}, 
+                {value: '04',label: '北单'}, 
+                {value: '',label: '全部'}, 
+            ],
+            buyTimeStart:"",
+            buyTimeEnd:"",
+            productValue:"",
+            value8:'2017-11-15',
+            currentPage4:1
         }
     },
     mounted(){
@@ -86,6 +91,20 @@ export default {
              console.log(data);
             this.tableData3 = data.list.list;
         });
+    },
+    methods:{
+        handleCurrentChange(){
+            buyRecordService.getBuyRecordList({userId:"20171206201103946446",pageNum:this.currentPage4}).then((data)=>{
+             console.log(data);
+            this.tableData3 = data.list.list;
+        });
+        },
+        query(){
+             buyRecordService.getBuyRecordList({userId:"20171206201103946446",productValue:this.productValue,buyTimeStart:this.buyTimeStart,buyTimeEnd:this.buyTimeEnd}).then((data)=>{
+             console.log(data);
+            this.tableData3 = data.list.list;
+        });
+        }
     }
   
 }

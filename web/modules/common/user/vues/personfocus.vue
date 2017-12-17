@@ -1,7 +1,7 @@
 <template>
     <div class="person-focus">
         <div class="select-list content-wrap text-left">
-            <el-radio-group v-model="productCode" class="radio-list">
+            <el-radio-group v-model="productCode" class="radio-list" @change="changeProduct()">
                 <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                 <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
                 <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
@@ -22,7 +22,7 @@
                         <p>关注：{{data.followNum}}</p>
                         <p>{{data.createdTime}}加入</p>
                     </div>
-                    <el-button type="warning">取消关注</el-button>
+                    <el-button type="warning" @click="cancleFocus(data.userId)">取消关注</el-button>
                 </div>
             </div>
             <div class="achive-text text-left float-left-to-100">
@@ -43,7 +43,8 @@
         </div>
         <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="void 0" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
-            <span v-show="!busy">加载更多</span>
+            <span v-show="!busy && list.length != 0">加载更多</span>
+            <span v-show="!busy && list.length == 0">暂无</span>
         </div>
     </div>
 </template>
@@ -66,7 +67,7 @@ export default {
         }
     },
     mounted(){
-        personForcusService.getUnReadMessageList({userId:"20171206201103946446",productCode:this.productCode}).then((data)=>{
+        personForcusService.getUnReadMessageList({productCode:this.productCode}).then((data)=>{
             console.log(data);
             this.list = data.list.list;
         })
@@ -77,6 +78,27 @@ export default {
     },
     created(){
         comVue.$emit('is-show-header',false);
+    },
+    methods:{
+        changeProduct(){
+            personForcusService.getUnReadMessageList({productCode:this.productCode}).then((data)=>{
+            console.log(data);
+            this.list = data.list.list;
+        })
+        },
+        cancleFocus(temp){
+            console.log(temp)
+            personForcusService.cancleFocus({subscribeUserId:temp}).then((data)=>{
+            if(data){
+                 personForcusService.getUnReadMessageList({productCode:this.productCode}).then((data)=>{
+                console.log(data);
+                this.list = data.list.list;
+        })
+            }
+            
+        })
+        }
+      
     }
   
 }
