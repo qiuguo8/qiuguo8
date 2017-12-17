@@ -38,35 +38,40 @@
                 <el-table-column prop="fullLetBall" :label="productCode=='01'?'亚盘':(productCode=='03'?'不让球':'赔率')" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <div v-if="productCode=='01'">
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
-                            <span class="table-span">+0.25</span>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
+                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
+                            <span class="table-span">{{scope.row.handiCap}}</span>
+                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
+                            <el-button v-if="!scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small">暂未出售</el-button>
                         </div>
                         <div v-if="productCode=='03'">
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">1.5</el-button>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">3.5</el-button>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">4.8</el-button>
+                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','home')">{{scope.row.win}}</el-button>
+                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','draw')">{{scope.row.draw}}</el-button>
+                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','visit')">{{scope.row.lost}}</el-button>
+                            <el-button v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " class="table-btn" type="primary" size="small">暂未出售</el-button>
                         </div>
                         <div v-if="productCode=='04'">
-                            <span class="table-span">+1</span>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">1.5</el-button>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">3.5</el-button>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">4.8</el-button>
+                            <span class="table-span"></span>
+                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','home')">{{scope.row.win}}</el-button>
+                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','draw')">{{scope.row.draw}}</el-button>
+                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','visit')">{{scope.row.lost}}</el-button>
+                            <el-button v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " class="table-btn" type="primary" size="small">暂未出售</el-button>
                         </div>
                     </template>
                 </el-table-column>
                 <el-table-column prop="fullSizeBall" v-if="productCode!='04'" :label="productCode=='01'?'大小球':'让球'" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <div v-if="productCode=='01'">
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
-                            <span class="table-span">3</span>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
+                            <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
+                            <span class="table-span">{{scope.row.fullSizeBall}}</span>
+                            <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
+                            <el-button v-if="!scope.row.fullSizeBall" class="table-btn" type="primary" size="small">暂未出售</el-button>
                         </div>
                         <div v-if="productCode=='03'">
-                            <span class="table-span">+1</span>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">1.5</el-button>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">3.5</el-button>
-                            <el-button class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">4.8</el-button>
+                            <span class="table-span">{{scope.row.handiCap}}</span>
+                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','home')">{{scope.row.letBallWin}}</el-button>
+                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','draw')">{{scope.row.letBallDraw}}</el-button>
+                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','visit')">{{scope.row.letBallLost}}</el-button>
+                            <el-button v-if="!scope.row.handiCap" class="table-btn" type="primary" size="small">暂未出售</el-button>
                         </div>
                     </template>
                 </el-table-column>
@@ -106,7 +111,7 @@
                 <div class="form-control row-new">
                     <label class="el-col-8 text-center">价格：</label>
                     <div class="el-col-16">
-                        <el-input type="primary" v-model="price" ></el-input>
+                        <el-input type="primary" :placeholder="priceRange.lowestPrice+'-'+ priceRange.highestPrice" v-model="price" ></el-input>
                     </div>
                 </div>
                 <div class="form-control row-new">
@@ -183,7 +188,11 @@ export default {
                     }else if (team == 'visit'){
                         recommendTeamId = obj.visitTeamId;
                         recommendTeamName = obj.visitTeamName;
+                    }else {
+                        recommendTeamId = 0;
+                        recommendTeamName = "平局";
                     }
+
                     this.recommendInfo = {
                         'recommendTeamId':recommendTeamId,
                         'recommendTeamName':recommendTeamName,
@@ -286,7 +295,31 @@ export default {
         },
         publishRecom(){
             let recommendDetails = this.infoObj;
-            recommendDetails.handicap = this.infoObj.handiCap;
+            if(this.recommendInfo.categoryCode == '0101'){
+                recommendDetails.handicap = this.infoObj.handiCap;
+                recommendDetails.homeTeamSp = this.infoObj.win;
+                recommendDetails.tieSp = this.infoObj.draw;
+                recommendDetails.visitTeamSp = this.infoObj.lost;
+            }
+            if(this.recommendInfo.categoryCode == '0201'){
+                recommendDetails.handicap = this.infoObj.fullSizeBall;
+                recommendDetails.homeTeamSp = this.infoObj.daXiaoWin;
+                recommendDetails.tieSp = this.infoObj.daXiaoDraw;
+                recommendDetails.visitTeamSp = this.infoObj.daXiaoLost;
+            }
+            if(this.recommendInfo.categoryCode == '0301' || this.recommendInfo.categoryCode == '0401'){
+                recommendDetails.handicap = '0';
+                recommendDetails.homeTeamSp = this.infoObj.win;
+                recommendDetails.tieSp = this.infoObj.draw;
+                recommendDetails.visitTeamSp = this.infoObj.lost;
+            }
+            if(this.recommendInfo.categoryCode == '0302'){
+                recommendDetails.handicap = this.infoObj.handiCap;
+                recommendDetails.homeTeamSp = this.infoObj.letBallWin;
+                recommendDetails.tieSp = this.infoObj.letBallDraw;
+                recommendDetails.visitTeamSp = this.infoObj.letBallLost;
+            }
+
             recommendDetails.productCode = this.recommendInfo.productCode;
             recommendDetails.categoryCode = this.recommendInfo.categoryCode;
             recommendDetails.recommendTeamId = this.recommendInfo.recommendTeamId;
@@ -294,7 +327,15 @@ export default {
             recommendDetails.price = this.price;
 
             service.publishRecommend(recommendDetails).then((ret)=>{
-                alert(ret.body.status)
+                if(ret.body.status == 'failure'){
+                    alert(ret.body.info)
+                }else{
+                    alert(ret.body.status)
+                    let param = {'productCode':this.productCode};
+                    this.getLeagueInfo(param);
+                    this.getMatchesInfo(param);
+                }
+                this.showInfo = false;//关闭弹层
             })
         }
     }

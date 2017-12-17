@@ -45,7 +45,7 @@
                 <el-table-column prop="publishTime" label="发单日期" min-width="80" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="recommendNo" label="推荐编号" min-width="80" align="center" head-align="center" > </el-table-column>
                 <el-table-column prop="userName" label="推荐用户" min-width="80" align="center" head-align="center" ></el-table-column>
-                <el-table-column prop="leageName" label="赛事" min-width="80" align="center" head-align="center" ></el-table-column>
+                <el-table-column prop="leagueName" label="赛事" min-width="80" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="matchStartTime" label="比赛时间" min-width="80" align="center" head-align="center"></el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" ></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" ></el-table-column>
@@ -165,8 +165,8 @@ export default {
         },
         productCodeForma(row,column){
             switch (row.productCode) {
-                case '01':return '亚盘/大小球';break;
-                case '02':return '亚盘/大小球';break;
+                case '01':return '亚盘';break;
+                case '02':return '大小球';break;
                 case '03':return '竞彩足球';break;
                 case '04':return '北京单场';break;
             };
@@ -178,6 +178,7 @@ export default {
                 case '0201':return '大小球全场';break;
                 case '0202':return '大小球半场';break;
                 case '0301':return '竞彩混合';break;
+                case '0303':return '竞彩混合(让球)';break;
                 case '0401':return '北京单场';break;
             };
         },
