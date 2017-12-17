@@ -141,7 +141,7 @@ export default {
                 'productCode': this.productCode,
                 'userName': this.sendName,
                 'matchIds': this.matchesVal.join(','),
-                'sortRule': this.radioVal,
+                'orderType': this.radioVal,
             }
             if (this.radioVal == '5') {
                 buyService.listMyAttion(buyRecommInfo).then((ret) => {
