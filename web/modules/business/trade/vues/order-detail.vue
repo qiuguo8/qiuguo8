@@ -5,11 +5,13 @@
             <div class="el-col-24">
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="sameFieldList" border>
                     <el-table-column prop="userName" label="推荐人" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="categoryCode" label="类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                    <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="price" label="查看" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="price" label="购买" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column label="查看" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                        <template slot-scope="scope">
+                            <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">查看</el-button>
+                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
             </div>
         </div>
@@ -45,6 +47,7 @@
                         <p>{{rDetails.homeTeamName}} VS {{rDetails.visitTeamName}}</p>
                     </div>
                     <div class="el-col-8">
+                        <span> 玩法：{{product[rDetails.productCode]}}</span><br>
                         <span>盘口：{{rDetails.handicap}}</span>
                     </div>
                     <div class="el-col-8">
@@ -96,8 +99,8 @@
                             <template slot-scope="scope">
                                 玩法：{{product[scope.row.productCode]}}<br>
                                 盘口：{{scope.row.handicap}}
-                                <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus!='01'" type="warning" @click="forFree(scope.row)">免费查看</el-button>
-                                <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">购买</el-button>
+                                <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button>
+                                <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column label="结果" min-width="120" align="center" head-align="center" class-name="table-fixed">
@@ -167,7 +170,7 @@ export default {
             })
         },
         listSameFieldRecomm(){
-            let recomm = {recommendNo:this.recommDetail.recommendNo,matchId:this.recommDetail.matchId};
+            let recomm = {recommendNo:this.recommDetail.recommendNo,matchId:this.recommDetail.matchId,productCode:this.recommDetail.productCode};
             service.listSameFieldRecomm(recomm).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.sameFieldList = ret.body.list;
@@ -188,6 +191,8 @@ export default {
                 if(ret.body.status=='success'){
                     this.recommDetail = ret.body.details;
                     this.rDetails = ret.body.rdetails;
+                    this.listRecentRecomm();
+                    this.listSameFieldRecomm();
                 };
             })
         },
