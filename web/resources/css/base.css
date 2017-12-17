@@ -17,7 +17,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .text-elipse{text-overflow: ellipsis;white-space: nowrap;overflow: hidden}
 .clear-fix{clear:both}
 .hide{display: none}
-.common-container{margin:20px 0px;padding:10px}
+.common-container{margin:0px 0px;padding:10px}
 .row-new,.container{margin-left: auto;margin-right: auto;min-height: 100%}
 .row-new:before,.row-new:after,.container:before,.container:after{content: "";display: table;box-sizing: border-box;clear:both}
 @media(min-width:320px){
