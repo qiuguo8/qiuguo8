@@ -54,11 +54,14 @@
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
-                    <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
-                    <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button>
+                    <!-- <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
+                    <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button> -->
                 </div>
                 <div class="intro-text">
-                    {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}<br>{{item.recommendContent}}
+                    {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}
+                </div>
+                <div class="recomd-info text-elipse">
+                    <span>{{item.recommendContent}}</span>
                 </div>
                 <el-button type="success" v-if="item.buyStatus=='1' || item.price == '0'" @click="forFree(item)">查看</el-button>
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' " @click="showOrderDetail(item)">{{item.price}}</el-button>
