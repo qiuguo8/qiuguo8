@@ -13,7 +13,7 @@
             </div>
 
         </div>
-        <div class="el-col-24">
+        <div class="el-col-24 common-container">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
                 <el-table-column prop="leagueName" label="赛事" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="matchStartTime" label="比赛时间" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>

@@ -3,7 +3,6 @@ import Vue from 'vue';
 //左右滑动播放指令
 Vue.directive('slipping',{
     inserted(el,binding,VNode){
-        console.log(el,VNode);
         var attrs = VNode.data.attrs,option={};
         if(attrs){
             option = {
@@ -52,7 +51,6 @@ slipping.prototype.init = function(){
 
 slipping.prototype.runInterval = function(){
     this.diff = this.$el[0].scrollWidth-this.$el.parent()[0].clientWidth;
-    console.log(this.diff);
     if(this.diff<=0)return;
     if(this.timer){
         clearInterval(this.timer);
