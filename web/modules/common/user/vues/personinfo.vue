@@ -28,7 +28,11 @@
         <div class="el-col-24 rank-common">
             <div class="left-name" style="margin-bottom:10px"><span>近期推荐</span></div>
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
-                <el-table-column prop="productCode" label="比赛类型" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column label="比赛类型" min-width="50" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <span v-constant-tranlate="scope.row.productCode" constant-type="Product"></span>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="leagueName" label="联赛类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -36,8 +40,8 @@
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="profit" label="成交总价" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                                <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
-                            </template>
+                        <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
+                    </template>
                 </el-table-column>
                 <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>

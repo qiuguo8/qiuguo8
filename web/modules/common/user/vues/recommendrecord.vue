@@ -43,17 +43,25 @@
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
                 <el-table-column prop="publishTime" label="推荐时间" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="recommendNo" label="推荐单号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="productCode" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="productCode" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <span v-constant-tranlate="scope.row.productCode" constant-type="Product"></span>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="leagueNameCn" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="recommendContent" label="标题" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="money" label="成交金额" min-width="80" align="center" head-align="center" class-name="table-fixed">
-                            <template slot-scope="scope">
-                                <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
-                            </template>
-                        </el-table-column>
-                <el-table-column prop="recommendStatus" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <template slot-scope="scope">
+                        <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <span v-constant-tranlate="scope.row.recommendStatus" constant-type="RecommendStatus"></span>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">

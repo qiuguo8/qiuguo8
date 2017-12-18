@@ -320,10 +320,10 @@ nav ul{list-style: none}
 
 /*业务页面脚部菜单 start*/
 .footer-container{position: relative;background-color: #333;padding:0px;margin:0px;min-height: 70px;font-size:12px;text-align: center}
-.footer-container>.foot-content{position: relative;margin-left:10%;margin-bottom:10px}
+.footer-container>.foot-content{position: relative;margin-bottom:10px}
 .footer-container>div>.footer-logo-wrap{position: relative;height:50px;display: inline-block;z-index:990;position: absolute;top:5px;left:0px}
 .footer-container>div>.footer-logo-wrap>img{position: relative;height: 100%;width:133px;}
-.footer-container .footer-menu{padding:5px;height: auto;position: relative;list-style: none;margin-left:170px}
+.footer-container .footer-menu{padding:5px;height: auto;position: relative;list-style: none;}
 .footer-container .footer-menu-list{padding:0px;margin:5px 0px;border-radius: 5px}
 .footer-container .footer-menu-list>li{display: inline-block;color:#fff;font-size:16px;padding:5px 5px;margin:0px 10px;cursor:pointer;text-align: center}
 .footer-container .footer-web-alert{width:85%;display: inline-block;}

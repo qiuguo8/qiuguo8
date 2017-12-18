@@ -54,7 +54,11 @@
                 <el-table-column prop="phone" label="手机号" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="email" label="邮箱" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="registTime" label="注册时间" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="status" label="状态" :formatter="statusForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="status" label="状态" :formatter="statusForma" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <span v-constant-tranlate="scope.row.status" constant-type="UserStatus"></span>
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" v-show="scope.row.status=='01'" size="small" @click="updateUserInfo(scope.row.userId,'02')">锁定</el-button>

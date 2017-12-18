@@ -3,7 +3,7 @@
         <div class="el-col-24 index-center content-wrap">
             <div class="carousel-wrap content-wrap">
                 <el-carousel :interval="5000" arrow="always">
-                    <el-carousel-item v-for="item in bannerList" :key="bannerId">
+                    <el-carousel-item v-for="item in bannerList" :key="item.bannerId">
                         <img style="width:100%;height:100%" :src="item.bannerUrl"/>
                     </el-carousel-item>
                 </el-carousel>
@@ -35,7 +35,7 @@
                 最热推荐
             </div>
             <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
-                <div class="transition-ones"  v-slipping :style="{width:(250*hotList.length)+'px',height:'100%',position:'relative',left:'0px'}">
+                <div class="transition-ones"  v-slipping v-if="hotList.length>0" :style="{width:(250*hotList.length)+'px',height:'100%',position:'relative',left:'0px'}">
                     <div class="intro-wrap intro-wrap-index transition-halfs" v-for="item in hotList" :key="item.recommendNo">
                         <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
@@ -65,7 +65,7 @@
             <div class="text-left min-max-640 content-wrap content-30-to-100">
                 <div class="normal-news-title"><span class="list-name">足球预测</span><span class="more-btn">更多</span></div>
                 <ul class="normal-news-list">
-                    <router-link tag="li" v-for="ycItem in ycList" :key="contentId" :to="{name:'news-detail'}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
+                    <router-link tag="li" v-for="ycItem in ycList" :key="ycItem.contentId" :to="{name:'news-detail'}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
                 </ul>
             </div>
         </div>

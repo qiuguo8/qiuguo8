@@ -1,9 +1,9 @@
 <template>
     <footer class="footer-container">
         <div class="foot-content">
-            <div class="footer-logo-wrap">
+            <!-- <div class="footer-logo-wrap">
                 <img src="/web/resources/img/index/logo.jpg"/>
-            </div>
+            </div> -->
             <div class="footer-menu">
                 <ul class="footer-menu-list">
                     <router-link :to="{name:'about-us'}" tag="li" class="transition-halfs">关于我们</router-link>
