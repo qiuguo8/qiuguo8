@@ -29,7 +29,7 @@
                     </el-radio-group>
                 </div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                    <el-table-column prop="productCode" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column type="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="userName" label="推荐师" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                     <el-table-column prop="recommTotal" label="场次" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="accuracyRate" label="胜率" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -60,50 +60,32 @@
             <div class="content-wrap float-left last-rank content-40-to-100 text-center">
                 <div class="content-wrap rank-common content-100-to-50">
                     <div class="list-name"><span>第{{week}}周 周榜</span></div>
-                    <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border>
-                        <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column  prop="userName" label="用户名" min-width="70" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                        <el-table-column prop="starLevel" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column prop="win" label="胜" min-width="45" align="center" head-align="center" class-name="table-fixed">
+                    <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
+                        <el-table-column type="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column  prop="userName" label="用户名" min-width="100" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                        <el-table-column  prop="zj" label="战绩" min-width="140" align="center" head-align="center" class-name="table-fixed">
                             <template slot-scope="scope">
-                                <span>{{parseFloat(scope.row.winTotal)+parseFloat(scope.row.halfWinTotal)}}</span>
+                                <span>{{scope.row.winCount}}胜{{scope.row.tieTotal}}平{{scope.row.loseCount}}负</span>
                             </template>
-                        </el-table-column>
-                        <el-table-column prop="tie" label="平" min-width="45" align="center" head-align="center" class-name="table-fixed">
-                            <template slot-scope="scope">
-                                <span>{{parseFloat(scope.row.tieTotal)}}</span>
-                            </template>
-                        </el-table-column>
-                         <el-table-column prop="tie" label="负" min-width="45" align="center" head-align="center" class-name="table-fixed">
-                            <template slot-scope="scope">
-                                <span>{{parseFloat(scope.row.loseTotal)+parseFloat(scope.row.halfLoseTotal)}}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column prop="accuracyRate" label="准确率" min-width="65" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                         </el-table-column>
+                        <el-table-column prop="accuracyRate" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     </el-table>
                 </div>
                 <div class="content-wrap rank-common content-100-to-50 text-center">
                     <div class="list-name"><span>{{month}}月 月榜</span></div>
-                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border>
-                        <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column  prop="userName" label="用户名" min-width="70" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                        <el-table-column prop="assessLevel" label="用户类型" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                        <el-table-column prop="win" label="胜" min-width="45" align="center" head-align="center" class-name="table-fixed">
+                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border style="width: 100%">
+                        <el-table-column type="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                        <el-table-column  prop="userName" label="用户名" min-width="120" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                        <el-table-column  prop="zj" label="战绩" min-width="120" align="center" head-align="center" class-name="table-fixed">
                             <template slot-scope="scope">
-                                <span>{{parseFloat(scope.row.winTotal)+parseFloat(scope.row.halfWinTotal)}}</span>
+                                <span>{{scope.row.winCount}}胜{{scope.row.tieTotal}}平{{scope.row.loseCount}}负</span>
+                            </template>
+                         </el-table-column>
+                        <el-table-column prop="zql" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{(scope.row.accuracyRate*100).toFixed(2)}}</span>%
                             </template>
                         </el-table-column>
-                        <el-table-column prop="tie" label="平" min-width="45" align="center" head-align="center" class-name="table-fixed">
-                            <template slot-scope="scope">
-                                <span>{{parseFloat(scope.row.tieTotal)}}</span>
-                            </template>
-                        </el-table-column>
-                         <el-table-column prop="tie" label="负" min-width="45" align="center" head-align="center" class-name="table-fixed">
-                            <template slot-scope="scope">
-                                <span>{{parseFloat(scope.row.loseTotal)+parseFloat(scope.row.halfLoseTotal)}}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column prop="accuracyRate" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     </el-table>
                 </div>
             </div>
@@ -151,6 +133,7 @@ export default {
     },
     methods:{
         loadMore(){
+            console.log('loanMore');
             if(this.list.length<this.tableData4.length){
                 this.list = this.list.concat(this.tableData4.slice(0,10));
             }
