@@ -37,7 +37,7 @@
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="fullLetBall" :label="productCode=='01'?'亚盘':(productCode=='03'?'不让球':'赔率')" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <div v-if="productCode=='01'">
+                        <div v-if="productCode=='01'" class="two-one">
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
                             <span class="table-span">{{scope.row.handiCap}}</span>
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
@@ -58,9 +58,9 @@
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="fullSizeBall" v-if="productCode!='04'" :label="productCode=='01'?'大小球':'让球'" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="fullSizeBall" v-if="productCode!='04'" :label="productCode=='01'?'大小球':'让球'" min-width="190" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <div v-if="productCode=='01'">
+                        <div v-if="productCode=='01'" class="two-one">
                             <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
                             <span class="table-span">{{scope.row.fullSizeBall}}</span>
                             <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
@@ -82,23 +82,23 @@
                 <div class="list-name text-center"><span>推荐规则</span></div>
                 <div class="rule-text">
                     <p>推荐模式</p>
-                    <p>xxx</p>
+                    <p>准确率计算：准确率 = [胜*1+胜半*0.5] / [胜*1+胜半*0.5+负*1+负半*0.5]*100% </p>
                 </div>
                 <div class="rule-text">
-                    <p>擂台规则</p>
-                    <p>xxxxx</p>
+                    <p>排行榜规则</p>
+                    <p>周榜：每周一12：00时统计前一个自然周成绩；<br>月榜：每月1号12：00时统计前一个自然月成绩。</p>
                 </div>
             </div>
             <div class="rank-common content-wrap content-100-to-50">
-                <div class="list-name text-center" style="margin-bottom:10px"><span>擂台周榜奖励</span></div>
+                <div class="list-name text-center" style="margin-bottom:10px"><span>周榜奖励</span></div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
                     <el-table-column prop="index" label="名次" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column  prop="reward" label="奖励" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 </el-table>
             </div>
             <div class="rank-common content-100-to-50 content-wrap">
-                <div class="list-name text-center" style="margin-bottom:10px"><span>擂台月榜奖励</span></div>
-                <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
+                <div class="list-name text-center" style="margin-bottom:10px"><span>月榜奖励</span></div>
+                <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border style="width: 100%">
                     <el-table-column prop="index" label="名次" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column  prop="reward" label="奖励" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 </el-table>
@@ -154,11 +154,18 @@ export default {
             checkedLeague: [],
             leagues: [],
             matchsTable:[],
-            tableData4:[{index:'1',reward:'xx'},
-                        {index:'2',reward:'xx'},
-                        {index:'3',reward:'xx'},
-                        {index:'4',reward:'xx'},
-                        {index:'5',reward:'xx'}],
+            tableData4:[{index:'1',reward:'200球果'},
+                        {index:'2',reward:'150球果'},
+                        {index:'3',reward:'100球果'},
+                        {index:'4',reward:'88球果'},
+                        {index:'5',reward:'66球果'}],
+            tableData5:[{index:'1',reward:'800球果'},
+                        {index:'2',reward:'600球果'},
+                        {index:'3',reward:'400球果'},
+                        {index:'4',reward:'200球果'},
+                        {index:'5',reward:'100球果'},
+                        {index:'6-10',reward:'88球果'},
+                        ],
             productCode:'01',
             isShowCheckList:false,
             showInfo:false,

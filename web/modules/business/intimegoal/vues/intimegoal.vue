@@ -5,9 +5,9 @@
                 <label class="el-col-6">比赛时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
-                        <mu-date-picker v-model="matchDate" hintText="选择时间"/>
+                        <mu-date-picker v-model="matchDate" @change="submitForm()" hintText="选择时间"/>
                     </span>
-                    <el-button type="primary" @click="submitForm()">查询</el-button>
+                    <!-- <el-button type="primary" @click="submitForm()">查询</el-button> -->
                 </div>
 
             </div>
