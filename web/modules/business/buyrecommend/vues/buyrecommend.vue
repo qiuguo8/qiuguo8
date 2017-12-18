@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="clear-fix"></div>
-        <div class="intros-wrap content-wrap el-col-24">
+        <div class="intros-wrap content-wrap content-75-to-100">
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
@@ -58,7 +58,7 @@
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button>
                 </div>
                 <div class="intro-text">
-                   {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}<br>{{item.recommendContent}}
+                    {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}<br>{{item.recommendContent}}
                 </div>
                 <el-button type="success" v-if="item.buyStatus=='1' || item.price == '0'" @click="forFree(item)">查看</el-button>
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' " @click="showOrderDetail(item)">{{item.price}}</el-button>
@@ -68,15 +68,7 @@
                 <span v-show="!busy">加载更多</span>
             </div>
         </div>
-        <!-- <div class="content-wrap float-left text-center rank-common intro-rank-list content-25-to-100">
-            <div class="list-name"><span>七天胜率排行</span></div>
-            <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
-                <el-table-column prop="index" label="排行" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column  prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="achivement" label="当周成绩" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="winpercent" label="胜率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-            </el-table>
-        </div> -->
+
         <el-dialog ref="matchTable" title="指定赛事选择" :visible.sync="isShowMatches" :lock-scroll="false">
             <el-checkbox-group v-model="matchesVal" size="small">
                 <el-checkbox v-for="item in matches" :key="item.matchId" :label="item.matchId" border>{{item.homeTeamName}}VS{{item.visitTeamName}}</el-checkbox>
@@ -87,97 +79,98 @@
             </div>
         </el-dialog>
         <order-buy-tip ref="orderBuy" :order-data="orderData"></order-buy-tip>
-  </div>
+    </div>
 </template>
 <script>
-import Vue from 'vue'
-import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
-import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
-import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
-Vue.component(Input.name,Input);
-Vue.component(Button.name,Button);
-Vue.component(Table.name, Table)
-Vue.component(TableColumn.name, TableColumn)
-Vue.component(RadioButton.name, RadioButton)
-Vue.component(RadioGroup.name, RadioGroup)
-Vue.component(Dialog.name, Dialog)
-Vue.component(Checkbox.name, Checkbox)
-Vue.component(CheckboxGroup.name, CheckboxGroup)
-export default {
-    data(){
-        return{
-            tableData3:[{index:'1',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                        {index:'2',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                        {index:'3',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                        {index:'4',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                        {index:'5',userName:'xx',achivement:'7胜3负',winpercent:'80%'}],
-            total:[],
-            list:[],
-            radioVal:'1',
-            productCode:'01',
-            matches:[],
-            matchesVal:[],
-            isShowMatches:false,
-            sendName:null,
-            orderData:null,
-        }
-    },
-    created:function(){
-        this.listRecomm();
-    },
-    components:{
-        orderBuyTip:orderBuyTip
-    },
-    methods: {
-        showMatches() {
-            this.isShowMatches = true;
+    import Vue from 'vue'
+    import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
+    import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
+    import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
+    import orderDetail from 'web/modules/business/trade/vues/order-detail.vue'
+    Vue.component(Input.name,Input);
+    Vue.component(Button.name,Button);
+    Vue.component(Table.name, Table)
+    Vue.component(TableColumn.name, TableColumn)
+    Vue.component(RadioButton.name, RadioButton)
+    Vue.component(RadioGroup.name, RadioGroup)
+    Vue.component(Dialog.name, Dialog)
+    Vue.component(Checkbox.name, Checkbox)
+    Vue.component(CheckboxGroup.name, CheckboxGroup)
+    export default {
+        data(){
+            return{
+                tableData3:[{index:'1',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
+                    {index:'2',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
+                    {index:'3',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
+                    {index:'4',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
+                    {index:'5',userName:'xx',achivement:'7胜3负',winpercent:'80%'}],
+                total:[],
+                list:[],
+                radioVal:'1',
+                productCode:'01',
+                matches:[],
+                matchesVal:[],
+                isShowMatches:false,
+                sendName:null,
+                orderData:null,
+            }
         },
-        selectedMatch() {
-            this.isShowMatches = false;
+        created:function(){
             this.listRecomm();
         },
-        listRecomm() {
-            let buyRecommInfo = {
-                'productCode': this.productCode,
-                'userName': this.sendName,
-                'matchIds': this.matchesVal.join(','),
-                'orderType': this.radioVal,
-            }
-            if (this.radioVal == '5') {
-                buyService.listMyAttion(buyRecommInfo).then((ret) => {
-                    if (ret.body.status == 'success') {
-                        this.list = ret.body.list;
-                        this.matches = ret.body.listMatch
-                    }
-                })
-            } else {
-                buyService.listRecom(buyRecommInfo).then((ret) => {
-                    if (ret.body.status == 'success') {
-                        this.list = ret.body.list;
-                        this.matches = ret.body.listMatch
-                    }
-                })
-            }
-
+        components:{
+            orderBuyTip:orderBuyTip
         },
-        addUserSubscribe(item) {
-            let subsc = {'subscribeUserId': item.userId}
-            buyService.addUserSubscribe(subsc).then((ret) => {
-                alert(ret.bodyText);
+        methods: {
+            showMatches() {
+                this.isShowMatches = true;
+            },
+            selectedMatch() {
+                this.isShowMatches = false;
                 this.listRecomm();
-            })
-        },
-        showOrderDetail(item) {
-            this.orderData = item;
-            this.$refs.orderBuy.show();
-        },
-        forFree(item){
-            buyService.buyRecommDetails(item).then((ret) => {
-                if(ret.body.status=='success'){
-                    this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
-                };
-            })
+            },
+            listRecomm() {
+                let buyRecommInfo = {
+                    'productCode': this.productCode,
+                    'userName': this.sendName,
+                    'matchIds': this.matchesVal.join(','),
+                    'sortRule': this.radioVal,
+                }
+                if (this.radioVal == '5') {
+                    buyService.listMyAttion(buyRecommInfo).then((ret) => {
+                        if (ret.body.status == 'success') {
+                            this.list = ret.body.list;
+                            this.matches = ret.body.listMatch
+                        }
+                    })
+                } else {
+                    buyService.listRecom(buyRecommInfo).then((ret) => {
+                        if (ret.body.status == 'success') {
+                            this.list = ret.body.list;
+                            this.matches = ret.body.listMatch
+                        }
+                    })
+                }
+
+            },
+            addUserSubscribe(item) {
+                let subsc = {'subscribeUserId': item.userId}
+                buyService.addUserSubscribe(subsc).then((ret) => {
+                    alert(ret.bodyText);
+                    this.listRecomm();
+                })
+            },
+            showOrderDetail(item) {
+                this.orderData = item;
+                this.$refs.orderBuy.show();
+            },
+            forFree(item){
+                buyService.buyRecommDetails(item).then((ret) => {
+                    if(ret.body.status=='success'){
+                        this.$router.push({name:'order-detail',params: {'detail':ret.body.details}})
+                    };
+                })
+            }
         }
     }
-}
 </script>
