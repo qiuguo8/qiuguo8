@@ -23,6 +23,10 @@ function routerUtil(router){
             service.isLogined().then(function(ret){
                 isMatch(ret.user,to,next);
                 isloaded = true;
+            //用于请求超时或服务器异常情况，默认未登录
+            }).catch((error)=>{
+                isMatch(null,to,next);
+                isloaded = true;
             })
         }
     })

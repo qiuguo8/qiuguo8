@@ -19,6 +19,7 @@ import routerUtil from 'web/common/utils/routerUtil.js'
 import {Notification} from 'element-ui'
 import infiniteScroll from 'vue-infinite-scroll'
 import 'web/common/filters/numberFilter.js'
+import 'web/common/directives/ConstantDirective.js'
 
 Vue.use(VueRouter);
 Vue.use(VueResource); 

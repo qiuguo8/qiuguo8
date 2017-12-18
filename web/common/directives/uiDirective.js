@@ -114,7 +114,7 @@ spin.prototype = {
             this.lastTop = scrollTop;
             return;
         };
-        if(!this.lastTop){
+        if(!this.lastTop || scrollTop == 0){
             this.$el.css('top',0);
             this.lastTop = scrollTop;
             return;

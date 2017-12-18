@@ -34,7 +34,11 @@
                 <el-table-column prop="changeTime" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="changeId" label="资金流水号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="totalAmount" label="金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="changeType" :formatter="changeTypeFormat" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="changeType" :formatter="changeTypeFormat" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <span v-constant-tranlate="scope.row.changeType" constant-type="changeType"></span>
+                    </template>
+                </el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
