@@ -170,7 +170,7 @@
             forFree(item){
                 buyService.buyRecommDetails(item).then((ret) => {
                     if(ret.body.status=='success'){
-                        this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
+                        this.$router.push({name:'order-detail',query: {buyDetail:JSON.stringify(ret.body.details),recommDetail:JSON.stringify(ret.body.rdetails)}})
                     };
                 })
             }

@@ -102,7 +102,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-100-to-50{width:98%;display: inline-block;float: none}
     .content-mid-100{width:45%}
 }
-.btn{outline: none;border-style: none;cursor: pointer}
+.btn{outline: none;border-style: none;cursor: pointer;display: inline-block}
 .btn-padding{padding:5px 20px}
 .btn-danger{color:#fff;background-color: rgb(233, 3, 4);opacity: 0.8;border:1px solid rgba(233,3,4,0.8)}
 .btn:hover{opacity: 1}
