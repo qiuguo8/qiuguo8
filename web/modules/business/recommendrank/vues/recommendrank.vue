@@ -21,7 +21,7 @@
                     <li>7天</li>
                     <li>30天</li>
                 </ul> -->
-                <div class="select-list date-list text-left" @change = "changeDays()">
+                <div class="select-list date-list text-left" style="border:none" @change = "changeDays()">
                     <el-radio-group v-model="days" class="radio-list" >
                         <el-radio-button label="3" class="danger-radio small-checkbox">3天</el-radio-button>
                         <el-radio-button label="7" class="danger-radio small-checkbox">7天</el-radio-button>
@@ -57,7 +57,7 @@
 
                 </div>
             </div> -->
-            <div class="content-wrap float-left last-rank content-40-to-100 text-center">
+            <div class="content-wrap float-left last-rank content-40-to-100 text-center" style="margin-top:15px">
                 <div class="content-wrap rank-common content-100-to-50">
                     <div class="list-name"><span>第{{week}}周 周榜</span></div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">

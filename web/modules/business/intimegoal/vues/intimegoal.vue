@@ -5,7 +5,7 @@
                 <label class="el-col-6">比赛时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
-                        <mu-date-picker v-model="matchDate" @change="submitForm()" hintText="选择时间"/>
+                        <mu-date-picker v-model="matchDate" @input="submitForm()" hintText="选择时间"/>
                     </span>
                     <!-- <el-button type="primary" @click="submitForm()">查询</el-button> -->
                 </div>
@@ -30,6 +30,7 @@
     import Vue from 'vue'
     import {Table,TableColumn,Select,Option} from 'element-ui'
     import intimegoalService from 'web/modules/business/intimegoal/service/intimegoalService'
+    import DateUtil from 'web/common/utils/DateUtil.js'
     Vue.component(Table.name,Table);
     Vue.component(TableColumn.name,TableColumn);
     Vue.component(Select.name,Select);
@@ -38,7 +39,7 @@
         data(){
             return {
                 datatable:[],
-                matchDate:null,
+                matchDate:DateUtil(new Date()).format('YYYY-MM-DD'),
             }
         },
         methods:{
@@ -49,7 +50,6 @@
                 var sform= {'matchDate':this.matchDate}
                 intimegoalService.queryMatch(sform).then((ret)=>{
                     this.datatable = ret.body.list;
-                    this.matchDate = ret.body.matchDate;
                 })
             },
             matchStatusFormat(row,column){

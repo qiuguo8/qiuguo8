@@ -10,16 +10,16 @@
                     昨日新增用户数：{{yesUserTotal}}
                 </div>
                  <div class="float-left info-bar">
-                    当前充值总金额：{{rechargeTotal}}
+                    当前充值总金额：{{rechargeTotal | currency}}
                 </div>
                 <div class="float-left info-bar">
-                    昨日充值金额：{{yesRechargeTotal}}
+                    昨日充值金额：{{yesRechargeTotal | currency}}
                 </div>
                 <div class="float-left info-bar">
-                    当前提现金额：{{withdrawTotal}}
+                    当前提现金额：{{withdrawTotal | currency}}
                 </div>
                 <div class="float-left info-bar">
-                    昨日提现金额：{{yesWithdrawTotal}}
+                    昨日提现金额：{{yesWithdrawTotal | currency}}
                 </div>
                 
             </div>

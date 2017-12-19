@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="clear-fix"></div>
-        <div class="intros-wrap content-wrap content-75-to-100">
+        <div class="intros-wrap content-wrap">
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
