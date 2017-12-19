@@ -2,21 +2,19 @@
     <div class="person-info text-center">
         <div class="common-info row-new">
             <div class="short-info-wrap">
-                <img src="/web/resources/img/index/u170.jpg"/>
+                <img :src="avatarUrl"/>
                 <div class="short-info">
                     <span class="name">{{base.baseInfo.userName}}</span>
                     <i class="fa fa-mars" v-if="base.baseInfo.sex == '1'"></i>
                     <i class="fa fa-venus" v-if="base.baseInfo.sex == '0'"></i>
-                    <span class="rank">VIP3</span>
+                   <!-- <span class="rank">VIP3</span>-->
                 </div>
                 <div class="other-info">
                     <i class="fa fa-clock-o"></i>
                     <span>{{base.baseInfo.registTime}}</span>
-                    <i class="fa fa-map-marker"></i>
-                    <span>来自{{base.baseInfo.registIp}}</span>
+                    
                 </div>
                 <div class="bottom-list">
-                    <p class="info-text">{{base.baseInfo.personalSign}}</p>
                     <el-button type="primary" size="small" @click="isShowImgMd=true">修改头像</el-button>
                 </div>
             </div>
@@ -69,6 +67,7 @@
 import Vue from 'vue'
 import {Button,Dialog,Input,Upload} from 'element-ui'
 import personInfoHeaderService from "web/modules/common/user/service/personInfoHeaderService.js"
+import pathUtil from 'web/common/utils/pathUtil.js'
 Vue.component(Button.name,Button);
 Vue.component(Dialog.name,Dialog);
 Vue.component(Input.name,Input);
@@ -79,15 +78,19 @@ export default {
             isShowDeclare:false,
             isShowImgMd:false,
             base:{baseInfo:''},
-            tempSign:''
+            tempSign:'',
+            avatarUrl:'',
 
         }
     },
     mounted(){
         personInfoHeaderService.getQgAvailableBalance().then((data)=>{
-            console.log(data);
             this.base = data;
             this.base.baseInfo.registTime = this.base.baseInfo.registTime.substr(0,10);
+            if(this.base.baseInfo.faceUrl == null){
+                this.base.baseInfo.faceUrl="avatar/default.jpg"
+            };
+            this.avatarUrl=pathUtil.getStaticPath()+this.base.baseInfo.faceUrl;
         })
     },
     methods:{
