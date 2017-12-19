@@ -28,7 +28,7 @@
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
                 <el-table-column prop="contentTitle" label="标题" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="createUsername" label="发布人" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="contentType" label="文章类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="contentType" label="文章类型" :formatter="contentTypeFormat" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="enabled" :formatter="enabledFormat" label="是否启用" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="createTime" label="创建时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
@@ -117,7 +117,14 @@ export default {
                 case '1':return '是';break;
                 case '0':return '否';break;
             };
-        },              
+        },
+        contentTypeFormat(row,column){
+            switch (row.contentType) {
+                case '01':return '头条';break;
+                case '02':return '新闻';break;
+                case '03':return '预测';break;
+            };
+        },            
 
     },
     created:function () {
