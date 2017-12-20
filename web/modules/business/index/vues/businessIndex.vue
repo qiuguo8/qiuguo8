@@ -45,7 +45,7 @@
                         <div class="intro-text">
                             {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}<br>{{item.recommendContent}}
                         </div>
-                        <el-button type="warning"  @click="showOrderDetail()">{{item.price}}球果</el-button>
+                        <el-button type="warning"  @click="showOrderDetail(item)">{{item.price}}球果</el-button>
                     </div>
                 </div>
             </div>
@@ -69,6 +69,7 @@
                     <router-link tag="li" v-for="ycItem in ycList" :key="ycItem.contentId" :to="{name:'news-detail'}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
                 </ul>
             </div>
+             <order-buy-tip ref="orderBuy" :order-data="orderData"></order-buy-tip>
         </div>
     </div>
 </template>
@@ -98,6 +99,7 @@
                 ttList:[],
                 xwList:[],
                 ycList:[],
+                orderData:null,
                 staticPath:pathUtil.getStaticPath(),
             }
         },
@@ -105,11 +107,12 @@
             $(this.$refs.achiveRank).scrollBar();
         },
         components:{
-            orderBuyTip:orderBuyTip
+            orderBuyTip:orderBuyTip,
         },
         methods:{
-            showOrderDetail(){
-                this.$refs.orderDetail.show();;
+            showOrderDetail(item) {
+                this.orderData = item;
+                this.$refs.orderBuy.show();
             },
             rankQuery(){
                 var sform= {'productType':this.productType}
