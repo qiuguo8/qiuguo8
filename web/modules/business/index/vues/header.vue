@@ -63,7 +63,8 @@ export default {
         });
         //监听是否已登录
         comVue.$on('login-for-menu',(data)=>{
-            this.isLogined = data;
+            this.isLogined = !!data;
+            console.log(data)
         })
     },
     methods:{
@@ -111,6 +112,3 @@ export default {
     }
 }
 </script>
-<style lang="stylus" scoped>
-
-</style>
