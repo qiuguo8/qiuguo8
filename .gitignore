@@ -2,6 +2,7 @@
 /node_modules/
 /web/bundle/
 /static/
+/fonts/
 /templates/
 /config/app/ 
 .classpath
