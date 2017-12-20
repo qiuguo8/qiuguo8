@@ -58,7 +58,7 @@
 <script>
 import Vue from 'vue'
 import {Input,Button,Select,Option,Table,TableColumn,Pagination} from 'element-ui'
-import advertisemanageService from 'web/modules/manage/advertisemanage/service/advertisemanageService'
+import advertisemanageService from 'web/modules/manage/advertisemanage/service/advertisemanageService.js'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Select.name,Select);

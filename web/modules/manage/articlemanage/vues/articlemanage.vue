@@ -56,7 +56,7 @@
 <script>
 import Vue from 'vue'
 import {Input,Button,Select,Option,Table,TableColumn,Pagination} from 'element-ui'
-import articlemanageService from 'web/modules/manage/articlemanage/service/articlemanageService'
+import articlemanageService from 'web/modules/manage/articlemanage/service/articlemanageService.js'
 Vue.component(Input.name,Input);
 Vue.component(Button.name,Button);
 Vue.component(Select.name,Select);

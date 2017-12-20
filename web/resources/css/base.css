@@ -411,20 +411,21 @@ nav ul{list-style: none}
 .types-list>.radio-list>button.select-matches.selected{color:#fff;background-color: #e90304}
 .search-input{display: inline-block;padding:5px 0px;}
 .types-select{margin-left:0px;margin-right:0px;}
-.intros-wrap{margin-top: 20px;;position: relative}
-.intros-wrap-index{padding-left:65px;width:100%;height:280px;overflow-y: hidden;overflow-x: auto}
-.intros-wrap .intro-wrap{float:left;display: inline-block;width:250px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
-.intros-wrap .intro-wrap-index{width:230px;margin:10px}
+.intros-wrap{margin-top: 20px;position: relative}
+.intros-wrap-index{padding-left:65px;width:100%;height:260px;overflow-y: hidden;overflow-x: auto}
+.intros-wrap .intro-wrap{float:left;display: inline-block;width:250px;height:253px;text-align: left;padding:5px;margin:10px 5px;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)}
+.intros-wrap .intro-wrap-index{width:230px;margin:5px 10px;}
 .intros-wrap .intro-wrap:hover{box-shadow: 0px 3px 7px 5px rgba(0, 0, 0, 0.1)}
 .intros-wrap .intro-wrap>button{background-color: rgba(255, 102, 51, 0.8);border-color:rgba(255, 102, 51, 0.7)}
 .intros-wrap .intro-wrap>button:hover{background-color: rgba(255, 102, 51, 1);}
 .intros-wrap .intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
-.intros-wrap .intro-wrap>.intro-info{width:48%;position: relative;float: left}
+.intros-wrap .intro-wrap>.intro-info{height:100px;width:48%;position: relative;float: left;}
 .intros-wrap .intro-wrap>.intro-info>img{width:100%;height: 90px}
 .intros-wrap .intro-wrap>.intro-info>button{width:100%}
-.intros-wrap .intro-wrap>.intro-text{width:48%;padding:5px;word-break: break-all;display: inline-block;text-align: left;height: 150px;;overflow:hidden}
+.intros-wrap .intro-wrap>.intro-text{height:100px;width:48%;padding:5px;word-break: break-all;display: inline-block;text-align: left;overflow:hidden}
+.intros-wrap .intro-wrap>.intro-text>p{margin:2px;}
 .intros-wrap .intro-wrap>button{float: right;width: 50%}
-.intros-wrap .intro-wrap>.recomd-info{padding:8px 5px;}
+.intros-wrap .intro-wrap>.recomd-info{padding:8px 5px;height:54px;word-break: break-all;overflow: hidden}
 .intro-rank-list{margin-top:20px;}
 .intro-rank-list>.list-name{border-bottom: 1px solid #e90304}
 @media(min-width:312px){

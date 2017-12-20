@@ -95,7 +95,7 @@
 <script>
 import Vue from 'vue'
 import {Input,Button,Select,Option,Table,TableColumn,Pagination} from 'element-ui'
-import rulesmanageService from 'web/modules/manage/rulesmanage/service/rulesmanageService'
+import rulesmanageService from 'web/modules/manage/rulesmanage/service/rulesmanageService.js'
 Vue.component(Button.name,Button);
 Vue.component(Table.name,Table);
 Vue.component(TableColumn.name,TableColumn);
