@@ -4,7 +4,7 @@
             <div class="carousel-wrap content-wrap">
                 <el-carousel :interval="5000" arrow="always">
                     <el-carousel-item v-for="item in bannerList" :key="item.bannerId">
-                        <img style="width:100%;height:100%" :src="item.bannerUrl"/>
+                        <img style="width:100%;height:100%" :src="staticPath+item.bannerUrl"/>
                     </el-carousel-item>
                 </el-carousel>
             </div>
