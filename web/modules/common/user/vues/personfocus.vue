@@ -43,7 +43,7 @@
         </div>
         <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="void 0" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
             <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
-            <span v-show="!busy && list.length != 0">加载更多</span>
+            <span v-show="!busy && list.length != 0" @click="loadMore()">加载更多</span>
             <span v-show="!busy && list.length == 0">暂无</span>
         </div>
     </div>
@@ -63,7 +63,8 @@ export default {
         return{
             value5:3.8,
             productCode:'01',
-            list:[]
+            list:[],
+            currentPage:1
         }
     },
     mounted(){
@@ -97,9 +98,18 @@ export default {
             }
             
         })
+        },
+        loadMore(){
+        this.currentPage += 1;
+         personForcusService.getUnReadMessageList({productCode:this.productCode,pageNum:this.currentPage}).then((data)=>{
+            console.log(data);
+            if(data.status == "success" && (data.list.size >0)){
+                    this.list = this.list.concat(data.list.list);
+                }else{
+                   this.currentPage -= 1; 
+                }
+        })
         }
-      
     }
-  
 }
 </script>

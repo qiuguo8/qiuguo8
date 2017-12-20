@@ -133,10 +133,32 @@ export default {
     },
     methods:{
         loadMore(){
-            console.log('loanMore');
-            if(this.list.length<this.tableData4.length){
-                this.list = this.list.concat(this.tableData4.slice(0,10));
-            }
+            debugger;
+                this.currentPage += 1;
+               if(this.days == '3'){
+                recommendrankService.getLastThreeDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
+                if(ret.status == "success" && (ret.list.size >0)){
+                    this.tableData3 = this.tableData3.concat(ret.list.list);
+                }else{
+                   this.currentPage -= 1; 
+                }
+            })}
+            else if(this.days == '7'){
+                recommendrankService.lastSevenDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
+                  if(ret.status == "success" && (ret.list.size >0)){
+                    this.tableData3 = this.tableData3.concat(ret.list.list);
+                }else{
+                   this.currentPage -= 1; 
+                }
+            })}
+            else if(this.days == '30'){
+                recommendrankService.lastThirtyDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
+                  if(ret.status == "success" && (ret.list.size >0)){
+                    this.tableData3 = this.tableData3.concat(ret.list.list);
+                }else{
+                   this.currentPage -= 1; 
+                }
+            })};
         },
         changeDays(){
             if(this.days == '3'){
