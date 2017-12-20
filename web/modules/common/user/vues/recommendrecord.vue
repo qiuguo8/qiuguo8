@@ -70,9 +70,9 @@
                 @current-change="handleCurrentChange()"
                 :current-page.sync="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
+                :page-size="10"
                 layout=" prev, pager, next"
-                :total="400">
+                :total="tableData3Total">
                 </el-pagination>
             </div>
         </div>
@@ -109,13 +109,15 @@ export default {
             RecommendStatusValue:'',
             ProductValue:'',
             recommendTimeStart:'',
-            recommendTimeEnd:''
+            recommendTimeEnd:'',
+            tableData3Total:0
         }
     },
     mounted(){
-        recommendService.getRecommendList({userId:'20171206201103946446'}).then((data)=>{
+        recommendService.getRecommendList().then((data)=>{
             console.log(data);
             this.tableData3 = data.list.list;
+            this.tableData3Total = data.list.total;
         })
     },
     methods:{
@@ -123,15 +125,17 @@ export default {
             console.log(val);
         },
         handleCurrentChange(){
-            recommendService.getRecommendList({userId:'20171206201103946446',pageNum:this.currentPage4}).then((data)=>{
+            recommendService.getRecommendList({pageNum:this.currentPage4}).then((data)=>{
             console.log(data);
             this.tableData3 = data.list.list;
+            this.tableData3Total = data.list.total;
             })
         },
         query(){
-            recommendService.getRecommendList({userId:'20171206201103946446',productCode:this.ProductValue,recommendStatus:this.RecommendStatusValue,recommendTimeStart:this.recommendTimeStart,recommendTimeEnd:this.recommendTimeEnd}).then((data)=>{
+            recommendService.getRecommendList({productCode:this.ProductValue,recommendStatus:this.RecommendStatusValue,recommendTimeStart:this.recommendTimeStart,recommendTimeEnd:this.recommendTimeEnd}).then((data)=>{
             console.log(data);
             this.tableData3 = data.list.list;
+            this.tableData3Total = data.list.total;
         })
         }
     },

@@ -51,9 +51,9 @@
                 @current-change="handleCurrentChange4()"
                 :current-page.sync="currentPage4"
                 :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
+                :page-size="10"
                 layout=" prev, pager, next"
-                :total="400">
+                :total="tableData4Total">
                 </el-pagination>
             </div>
         </div>
@@ -113,13 +113,13 @@ export default {
       securityInformation:[],
       testVal: false,
       productCode3: "01",
-      currentPage4: 1
+      currentPage4: 1,
+      tableData4Total:0
     };
   },
   mounted() {
     personinfoService
       .getRecordList({
-        userId: "20171207401163948706",
         productCode: this.productCode3
       })
       .then(data => {
@@ -136,13 +136,14 @@ export default {
         this.tableData3.push(data.map.lastMonthList);
       }),
       personinfoService
-        .getRecommendRecord({ userId: "20171207401163948706" })
+        .getRecommendRecord()
         .then(data => {
           console.log(data);
           this.tableData4 = data.list.list;
+          this.tableData4Total = data.list.total;
         }),
       personinfoService
-        .getSecurityInformation({ userId: "20171207401163948706" })
+        .getSecurityInformation()
         .then(data => {
           console.log(data);
           this.securityInformation = data;
@@ -153,7 +154,6 @@ export default {
       this.tableData3 = [];
       personinfoService
         .getRecordList({
-          userId: "20171207401163948706",
           productCode: this.productCode3
         })
         .then(data => {
@@ -171,12 +171,12 @@ export default {
     },
     handleCurrentChange4() {
       personinfoService.getRecommendRecord({
-          userId: "20171207401163948706",
           pageNum: this.currentPage4
         })
         .then(data => {
           console.log(data);
           this.tableData4 = data.list.list;
+          this.tableData4Total = data.list.total;
         });
     }
   }
