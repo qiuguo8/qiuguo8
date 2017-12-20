@@ -53,7 +53,8 @@
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
-                    <img src="/web/resources/img/index/logo.jpg"/>
+                    <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
+                     <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
                     <!-- <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button> -->
                 </div>
@@ -88,6 +89,7 @@
     import Vue from 'vue'
     import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
     import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
+    import pathUtil from 'web/common/utils/pathUtil.js'
     import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
     import orderDetail from 'web/modules/business/trade/vues/order-detail.vue'
     Vue.component(Input.name,Input);
@@ -102,11 +104,6 @@
     export default {
         data(){
             return{
-                tableData3:[{index:'1',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                    {index:'2',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                    {index:'3',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                    {index:'4',userName:'xx',achivement:'7胜3负',winpercent:'80%'},
-                    {index:'5',userName:'xx',achivement:'7胜3负',winpercent:'80%'}],
                 total:[],
                 list:[],
                 radioVal:'1',
@@ -116,6 +113,7 @@
                 isShowMatches:false,
                 sendName:null,
                 orderData:null,
+                staticPath:pathUtil.getStaticPath(),
             }
         },
         created:function(){

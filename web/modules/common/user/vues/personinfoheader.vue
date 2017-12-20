@@ -87,7 +87,7 @@ export default {
         personInfoHeaderService.getQgAvailableBalance().then((data)=>{
             this.base = data;
             this.base.baseInfo.registTime = this.base.baseInfo.registTime.substr(0,10);
-            if(this.base.baseInfo.faceUrl == null){
+            if(!this.base.baseInfo.faceUrl){
                 this.base.baseInfo.faceUrl="avatar/default.jpg"
             };
             this.avatarUrl=pathUtil.getStaticPath()+this.base.baseInfo.faceUrl;
