@@ -65,13 +65,11 @@ export default {
         //监听是否已登录
         comVue.$on('login-for-menu',(data)=>{
             this.isLogined = data;
-            alert(this.isLogined);
-            console.log(comVue.$data);
             if(this.isLogined){
-                //  if( comVue.$data.userInfo.faceUrl == null){
-                //      comVue.$data.userInfo.faceUrl="avatar/default.jpg"
-                //      }
-                //  this.avatarUrl=pathUtil.getStaticPath()+comVue.$data.userInfo.faceUrl;
+                if( !data.faceUrl ){
+                    data.faceUrl="avatar/default.jpg";
+                }
+                this.avatarUrl=pathUtil.getStaticPath()+data.faceUrl;
             };
         })
     },

@@ -274,9 +274,9 @@ nav ul{list-style: none}
 .header-container>nav .header-menu-list>li:hover{background-color: #e90304;}
 .header-container>nav .header-menu-list>li.active{background-color: #e90304}
 .header-container>nav>.user-info{float: right;cursor: pointer;margin-left: 20px}
-.header-container>nav>.user-info>.msg-tip{position: absolute;right: 3px;color:#fff;background-color: #e90304;padding:3px 4px;font-size: 12px;border-radius: 100%}
-.user-info>.user-img-wrap{padding:5px 6px;border-radius: 100%;overflow: hidden;margin:3px 5px 5px;background-color:#eee}
-.user-info>.user-img-wrap>img{height: 40px;width: 40px;}
+.header-container>nav>.user-info>.msg-tip{z-index:1000;position: absolute;right: 3px;color:#fff;background-color: #e90304;padding:3px 4px;font-size: 12px;border-radius: 100%}
+.user-info>.user-img-wrap{border-radius: 100%;overflow: hidden;margin:3px 5px 5px;background-color:#eee}
+.user-info>.user-img-wrap>img{height: 100%;width: 100%;}
 .user-info>.user-menu-list{box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;padding:5px;z-index:2000;position: absolute;top:60px;right:-30px;margin:0px;background-color:#333;display: none;width:130px}
 .user-info>.user-menu-list>li{float: none;font-size:16px;margin:0px 10px;padding:10px 15px;color:#fff;text-align: center}
 .user-info>.user-menu-list>li:hover{background-color: #e90304;border-radius: 2px}
@@ -296,8 +296,7 @@ nav ul{list-style: none}
     .header-container>nav .header-menu-icon{width:30px;height: 30px;display: block;font-size:30px;color:#fff;margin:0px}
     .header-container>nav .header-menu-list{padding:5px;z-index:2000;position: absolute;top:60px;right:-5px;margin:0px;background-color:#333;display: none;width:70px;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);}
     .header-container>nav .header-menu-list>li{float: none;font-size:12px;padding:5px;margin:5px 0px}
-    .user-info>.user-img-wrap{margin:8px 5px 5px;}
-    .user-info>.user-img-wrap>img{height: 30px;width: 30px;}
+    .user-info>.user-img-wrap{margin:8px 5px 5px;width:45px;height:45px}
     .header-container>nav>.user-info>.msg-tip{padding:2px 3px;font-size:10px;right:2px;top:3px}
     .user-info>.user-menu-list{right:-13px;width:80px}
     .user-info>.user-menu-list>li{float: none;font-size:12px;margin:5px;padding:5px;color:#fff;text-align: center}
@@ -308,8 +307,7 @@ nav ul{list-style: none}
     .header-container>nav>.header-logo-wrap{height: 100%;margin:0px}
     .header-container>nav .header-menu-list{padding:10px 0px;right:-30px;width:130px}
     .header-container>nav .header-menu-list>li{font-size:16px;padding:10px 15px;margin:5px 10px}
-    .user-info>.user-img-wrap{margin:3px 5px 5px}
-    .user-info>.user-img-wrap>img{height: 40px;width: 40px;}
+    .user-info>.user-img-wrap{margin:3px 5px 5px;width:55px;height:55px}
     .header-container>nav>.user-info>.msg-tip{padding:3px 4px;font-size:12px;right:3px;top:0px}
     .user-info>.user-menu-list{padding:5px;right:-30px;margin:0px;width:130px}
     .user-info>.user-menu-list>li{float: none;font-size:16px;padding:10px 15px;margin:5px;color:#fff;text-align: center}
@@ -533,7 +531,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .common-info{margin-bottom:20px}
 .common-info .btn-list{text-align: center;padding:10px 0px}
 .common-info .btn-list button{margin:0px 9px}
-.short-info-wrap{border-bottom:1px solid rgba(0,0,0,0.1);display: inline-block;margin:0px 30px;text-align: center;padding:5px 0px}
+.short-info-wrap{border-bottom:1px solid rgba(0,0,0,0.1);display: inline-block;margin:0px 30px;text-align: center;padding:5px 0px;min-width:250px}
 .short-info-wrap img{width:80px;height:80px;border-radius: 100%;}
 .short-info-wrap>.short-info{padding:5px;text-align: center}
 .short-info-wrap>.short-info>.name{font-size:18px;font-weight:bold;padding:0px 2px}

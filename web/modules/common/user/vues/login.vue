@@ -158,8 +158,7 @@ export default {
     },
     created(){
         loginService.isLogined().then((ret)=>{
-            console.log(ret);
-            comVue.$emit('login-for-menu',ret.status=='success');
+            comVue.$emit('login-for-menu',ret.status=='success' && ret.user);
             comVue.$data.userInfo = ret.user;
             comVue.$emit('is-manage-for-menu');
         })
@@ -188,7 +187,7 @@ export default {
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
                         alert(ret.body.status);
                         if(ret.body.status=='success'){
-                            comVue.$emit('login-for-menu',true); 
+                            comVue.$emit('login-for-menu',ret.body.user); 
                             comVue.$data.userInfo = ret.body.user;
                             this.close();
                         }else{
