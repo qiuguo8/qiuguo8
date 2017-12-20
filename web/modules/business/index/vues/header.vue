@@ -7,7 +7,7 @@
             <div class="user-info" v-if="isLogined">
                 <span class="msg-tip">11</span>
                 <div class="user-img-wrap" ref="usericon">
-                    <img src="/web/resources/img/index/user-img.png">
+                     <img :src="avatarUrl"/>
                 </div>
                 <ul class="user-menu-list" ref="userlist">
                     <router-link tag="li" :to="{name:'person-info'}" active-class="active" class="transition-halfs">个人中心</router-link>
@@ -53,6 +53,7 @@ export default {
         return {
             isLogined:false,
             logoUrl:pathUtil.getStaticPath()+"system/logo.jpg",
+            avatarUrl:'',
         }
     },
     mounted(){
@@ -64,6 +65,14 @@ export default {
         //监听是否已登录
         comVue.$on('login-for-menu',(data)=>{
             this.isLogined = data;
+            alert(this.isLogined);
+            console.log(comVue.$data);
+            if(this.isLogined){
+                //  if( comVue.$data.userInfo.faceUrl == null){
+                //      comVue.$data.userInfo.faceUrl="avatar/default.jpg"
+                //      }
+                //  this.avatarUrl=pathUtil.getStaticPath()+comVue.$data.userInfo.faceUrl;
+            };
         })
     },
     methods:{
