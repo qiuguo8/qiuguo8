@@ -39,7 +39,8 @@
                     <div class="intro-wrap intro-wrap-index transition-halfs" v-for="item in hotList" :key="item.recommendNo">
                         <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
-                            <img src="/web/resources/img/index/logo.jpg"/>
+                            <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
+                            <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
                         </div>
                         <div class="intro-text">
                             <p class="text-elipse">{{item.userName}}</p>
@@ -81,6 +82,7 @@
     import Vue from 'vue';
     import scrollBar from 'web/common/utils/scrollUtil.js';
     import indexService from 'web/modules/business/index/services/indexService.js'
+    import pathUtil from 'web/common/utils/pathUtil.js'
     import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
     import 'web/common/directives/uiDirective.js'
     import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane,RadioButton,RadioGroup} from 'element-ui'
@@ -102,6 +104,7 @@
                 ttList:[],
                 xwList:[],
                 ycList:[],
+                staticPath:pathUtil.getStaticPath(),
             }
         },
         mounted(){
