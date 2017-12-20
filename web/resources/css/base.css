@@ -102,7 +102,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-100-to-50{width:98%;display: inline-block;float: none}
     .content-mid-100{width:45%}
 }
-.btn{outline: none;border-style: none;cursor: pointer}
+.btn{outline: none;border-style: none;cursor: pointer;display: inline-block}
 .btn-padding{padding:5px 20px}
 .btn-danger{color:#fff;background-color: rgb(233, 3, 4);opacity: 0.8;border:1px solid rgba(233,3,4,0.8)}
 .btn:hover{opacity: 1}
@@ -308,7 +308,7 @@ nav ul{list-style: none}
     .header-container>nav .header-menu-list{padding:10px 0px;right:-30px;width:130px}
     .header-container>nav .header-menu-list>li{font-size:16px;padding:10px 15px;margin:5px 10px}
     .user-info>.user-img-wrap{margin:3px 5px 5px;width:55px;height:55px}
-    .header-container>nav>.user-info>.msg-tip{padding:3px 4px;font-size:12px;right:3px;top:0px}
+    .header-container>nav>.user-info>.msg-tip{padding:3px 4px;font-size:12px;right:-2px;top:0px;min-width:22px;text-align: center}
     .user-info>.user-menu-list{padding:5px;right:-30px;margin:0px;width:130px}
     .user-info>.user-menu-list>li{float: none;font-size:16px;padding:10px 15px;margin:5px;color:#fff;text-align: center}
     .header-container>nav .header-menu:hover ul{display: block;}
@@ -484,6 +484,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .send-rule>.list-name{border-bottom:1px solid #e90304}
 .match-list table .cell label.el-checkbox-button{display:inline-block;margin:2px 3px}
 .commend-info>p{text-align: center;margin:10px 0px;}
+.commend-info>div{margin:10px 0px}
 .commend-info>p>span{padding:5px 0px;}
 .commend-info>p>span:last-child{background-color: #eee}
 /*sendrecommend end*/
@@ -617,6 +618,8 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container .mu-day-button>.mu-day-button-bg{background-color: #e90304}
 .mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container .mu-calendar-actions>button{color:#e90304}
 .mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container>.mu-calendar-year-container .selected>.mu-year-button-text{color:#e90304}
+.mu-day-button.now .mu-day-button-text{color:#e90304}
+.mu-day-button.selected .mu-day-button-text{color:#fff}
 .mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container>.mu-calendar-year-container .mu-year-button.hover>.mu-year-button-text{color:#e90304}
 /*recommendrecord end*/
 

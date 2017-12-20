@@ -5,7 +5,7 @@
                 <router-link tag="a" :to="{name:'index'}"><img :src="logoUrl"/></router-link>
             </div>
             <div class="user-info" v-if="isLogined">
-                <span class="msg-tip">11</span>
+                <span class="msg-tip">1</span>
                 <div class="user-img-wrap" ref="usericon">
                      <img :src="avatarUrl"/>
                 </div>

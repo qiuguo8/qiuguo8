@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="clear-fix"></div>
-        <div class="intros-wrap content-wrap">
+        <div class="intros-wrap content-wrap el-col-24">
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
@@ -171,7 +171,7 @@
             forFree(item){
                 buyService.buyRecommDetails(item).then((ret) => {
                     if(ret.body.status=='success'){
-                        this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
+                        this.$router.push({name:'order-detail',query: {buyDetail:JSON.stringify(ret.body.details),recommDetail:JSON.stringify(ret.body.rdetails)}})
                     };
                 })
             }

@@ -99,7 +99,8 @@
                             <template slot-scope="scope">
                                 玩法：{{product[scope.row.productCode]}}<br>
                                 盘口：{{scope.row.handicap}}
-                                <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button>
+                                <router-link style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{buyDetail:JSON.stringify(recommDetail),recommDetail:JSON.stringify(scope.row)}}">免费查看</router-link>
+                                <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
                                 <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
                             </template>
                         </el-table-column>
@@ -142,9 +143,10 @@ Vue.component(Pagination.name,Pagination);
 
 export default {
     data(){
+        var buyDetail = JSON.parse(this.$route.query.buyDetail);
         return {
             radioVal:'1',
-            starLevel:this.$route.params.buyDetail.starLevel,
+            starLevel:buyDetail.starLevel,
             recentRecommList:[],
             //当前页码
             currentPage: 1,
@@ -152,8 +154,8 @@ export default {
             pagesize: 10,
             //默认数据总数
             totalCount: 0,
-            recommDetail:this.$route.params.buyDetail,
-            rDetails:this.$route.params.recommDetail,
+            recommDetail:buyDetail,
+            rDetails:JSON.parse(this.$route.query.recommDetail),
             product:{'01':'亚盘','02':'大小球','03':'竞彩足球','04':'北京单场'},
             orderData:'',
             sameFieldList:''
