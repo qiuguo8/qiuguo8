@@ -37,12 +37,18 @@
             <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
                 <div class="transition-ones"  v-slipping v-if="hotList.length>0" :style="{width:(250*hotList.length)+'px',height:'100%',position:'relative',left:'0px'}">
                     <div class="intro-wrap intro-wrap-index transition-halfs" v-for="item in hotList" :key="item.recommendNo">
-                        <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
                             <img src="/web/resources/img/index/logo.jpg"/>
                         </div>
                         <div class="intro-text">
-                            {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}<br>{{item.recommendContent}}
+                            <p class="text-elipse">{{item.userName}}</p>
+                            <p class="text-elipse">{{item.assessLevel}}</p>
+                            <p class="text-elipse">{{item.starLevel}}</p>
+                            <p class="text-elipse">{{item.recordsValue}}</p>
+                        </div>
+                        <div class="recomd-info text-elipse">
+                            <span>{{item.recommendContent}}</span>
                         </div>
                         <el-button type="warning"  @click="showOrderDetail()">{{item.price}}球果</el-button>
                     </div>

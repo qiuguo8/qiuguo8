@@ -51,14 +51,17 @@
         <div class="clear-fix"></div>
         <div class="intros-wrap content-wrap">
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
-                <div class="match-name">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
                     <img src="/web/resources/img/index/logo.jpg"/>
                     <!-- <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button> -->
                 </div>
                 <div class="intro-text">
-                    {{item.userName}}<br>{{item.assessLevel}}<br>{{item.starLevel}}<br>{{item.recordsValue}}
+                    <p class="text-elipse">{{item.userName}}</p>
+                    <p class="text-elipse">{{item.assessLevel}}</p>
+                    <p class="text-elipse">{{item.starLevel}}</p>
+                    <p class="text-elipse">{{item.recordsValue}}</p>
                 </div>
                 <div class="recomd-info text-elipse">
                     <span>{{item.recommendContent}}</span>

@@ -36,8 +36,9 @@
                     <el-table-column prop="TIE_TOTAL" label="正在推荐" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 </el-table>
                 <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-                    <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
-                    <span v-show="!busy" @click="loadMore()">加载更多</span>
+                    <span v-show="!isFull&&busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
+                    <span v-show="!isFull&&!busy" @click="loadMore()">加载更多</span>
+                    <span v-show="isFull" style="color:#ccc;cursor:no-drop">没有更多</span>
                 </div>
                 <!-- <div class="page-block text-center">
                     <el-pagination
@@ -114,31 +115,35 @@ export default {
             week:'',
             month:'',
             list:[],
-            currentPage:1
+            currentPage:1,
+            isFull:false
         }
     },
     mounted(){
-        recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
-            this.tableData3 = ret.list.list;
-        }),
         recommendrankService.getLastWeekRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
             this.tableData4 = ret.list.list;
             this.week = ret.week;
+            this.checkIsFull(ret.list.total);
         }),
            recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
             this.tableData5 = ret.list.list;
-            console.log(ret);
             this.month = ret.month;
+            this.checkIsFull(ret.list.total);
         })
     },
     methods:{
+        //检查是否已经查询完全
+        checkIsFull(total){
+            this.isFull = total <= this.tableData3.length;
+        },
         loadMore(){
-            debugger;
+            if(this.isFull)return;
                 this.currentPage += 1;
                if(this.days == '3'){
                 recommendrankService.getLastThreeDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
                 if(ret.status == "success" && (ret.list.size >0)){
                     this.tableData3 = this.tableData3.concat(ret.list.list);
+                    this.checkIsFull(ret.list.total);
                 }else{
                    this.currentPage -= 1; 
                 }
@@ -147,6 +152,7 @@ export default {
                 recommendrankService.lastSevenDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
                   if(ret.status == "success" && (ret.list.size >0)){
                     this.tableData3 = this.tableData3.concat(ret.list.list);
+                    this.checkIsFull(ret.list.total);
                 }else{
                    this.currentPage -= 1; 
                 }
@@ -155,38 +161,38 @@ export default {
                 recommendrankService.lastThirtyDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
                   if(ret.status == "success" && (ret.list.size >0)){
                     this.tableData3 = this.tableData3.concat(ret.list.list);
+                    this.checkIsFull(ret.list.total);
                 }else{
                    this.currentPage -= 1; 
                 }
             })};
         },
         changeDays(){
+            this.isFull = false;
             if(this.days == '3'){
                 recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
-                console.log(ret);
                 this.tableData3 = ret.list.list;
+                this.checkIsFull(ret.list.total);
             })}
             else if(this.days == '7'){
                 recommendrankService.lastSevenDayRankList({productCode:this.productCode}).then((ret)=>{
-                console.log(ret);
                 this.tableData3 = ret.list.list;
+                this.checkIsFull(ret.list.total);
             })}
             else if(this.days == '30'){
                 recommendrankService.lastThirtyDayRankList({productCode:this.productCode}).then((ret)=>{
-                console.log(ret);
                 this.tableData3 = ret.list.list;
+                this.checkIsFull(ret.list.total);
             })};
                      
         },
         changeProductCode(){
             recommendrankService.getLastWeekRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
-            console.log(ret);
-            this.tableData4 = ret.list.list;
-        }),
+                this.tableData4 = ret.list.list;
+            }),
             recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
-            console.log(ret);
-            this.tableData5 = ret.list.list;
-        }),
+                this.tableData5 = ret.list.list;
+            }),
              this.changeDays();
         }
 
