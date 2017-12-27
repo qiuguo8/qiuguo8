@@ -81,6 +81,7 @@
 </template>
 <script>
     import Vue from 'vue';
+    import comVue from 'web/modules/commonVue.js'
     import scrollBar from 'web/common/utils/scrollUtil.js';
     import indexService from 'web/modules/business/index/services/indexService.js'
     import pathUtil from 'web/common/utils/pathUtil.js'
@@ -117,6 +118,11 @@
         },
         methods:{
             showOrderDetail(item) {
+                //检查是否登录
+                if(!comVue.$data.userInfo){
+                    comVue.$emit('show-login-form');
+                    return;
+                }
                 this.orderData = item;
                 this.$refs.orderBuy.show();
             },
