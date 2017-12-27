@@ -4,12 +4,13 @@
             <div class="list-name"><span>同场推荐</span></div>
             <div class="el-col-24">
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="sameFieldList" border>
-                    <el-table-column prop="userName" label="推荐人" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="userName" label="推荐人" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column label="查看" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <el-table-column label="查看" min-width="80" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
-                            <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">查看</el-button>
-                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
+                            <router-link  v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId" style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">查看</router-link>
+                            <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
+                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -22,9 +23,9 @@
                     <p class="user-name">{{recommDetail.userName}}</p>
                 </div>
                 <div class="content-25-to-all-50 content-wrap">
-                    <p>等级:<span>{{recommDetail.assessLevel}}</span></p>
+                    <p>等级:<span>{{assessLevelForm[recommDetail.assessLevel]}}</span></p>
                     <p>星级:
-                        <el-rate style="display:inline-block" v-model="starLevel" disabled show-score text-color="#ff9900" score-template="{value}"></el-rate>
+                        <el-rate style="display:inline-block" v-model="recommDetail.starLevel" disabled show-score text-color="#ff9900" score-template=""></el-rate>
                     </p>
                     <p>关注人数:<span>{{recommDetail.attentionNum}}</span></p>
                 </div>
@@ -99,9 +100,11 @@
                             <template slot-scope="scope">
                                 玩法：{{product[scope.row.productCode]}}<br>
                                 盘口：{{scope.row.handicap}}
-                                <router-link style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{buyDetail:JSON.stringify(recommDetail),recommDetail:JSON.stringify(scope.row)}}">免费查看</router-link>
+                                <p v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId">
+                                <router-link  style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">免费查看</router-link>
+                                </p>
                                 <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
-                                <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01'" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
+                                <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column label="结果" min-width="120" align="center" head-align="center" class-name="table-fixed">
@@ -143,10 +146,10 @@ Vue.component(Pagination.name,Pagination);
 
 export default {
     data(){
-        var buyDetail = JSON.parse(this.$route.query.buyDetail);
+
         return {
+            recommendNo: this.$route.query.recommendNo,
             radioVal:'1',
-            starLevel:buyDetail.starLevel,
             recentRecommList:[],
             //当前页码
             currentPage: 1,
@@ -154,11 +157,12 @@ export default {
             pagesize: 10,
             //默认数据总数
             totalCount: 0,
-            recommDetail:buyDetail,
-            rDetails:JSON.parse(this.$route.query.recommDetail),
+            recommDetail:{},
+            rDetails:{},
             product:{'01':'亚盘','02':'大小球','03':'竞彩足球','04':'北京单场'},
             orderData:'',
-            sameFieldList:''
+            sameFieldList:'',
+            assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
         }
     },
     methods:{
@@ -168,6 +172,7 @@ export default {
                 if(ret.body.status == 'success'){
                     this.recentRecommList = ret.body.list;
                     this.totalCount = ret.body.total;
+                    console.log(this.recentRecommList);
                 }
             })
         },
@@ -202,10 +207,20 @@ export default {
             this.orderData = item;
             this.$refs.orderBuy.show();
         },
+        buyRecommDetails(){
+            let item = {recommendNo:this.recommendNo}
+            service.buyRecommDetails(item).then((ret) => {
+                if(ret.body.status=='success'){
+                    this.recommDetail = ret.body.details;
+                    this.rDetails = ret.body.rdetails;
+                    this.listRecentRecomm();
+                    this.listSameFieldRecomm();
+                };
+            })
+        },
     },
     mounted:function () {
-        this.listRecentRecomm();
-        this.listSameFieldRecomm();
+        this.buyRecommDetails();
     },
     components:{
         orderBuyTip:orderBuyTip

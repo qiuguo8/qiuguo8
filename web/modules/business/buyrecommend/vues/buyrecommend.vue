@@ -60,15 +60,15 @@
                 </div>
                 <div class="intro-text">
                     <p class="text-elipse">{{item.userName}}</p>
-                    <p class="text-elipse">{{item.assessLevel}}</p>
-                    <p class="text-elipse">{{item.starLevel}}</p>
+                    <p class="text-elipse">{{assessLevelForm[item.assessLevel]}}</p>
+                    <el-rate style="display:inline-block" v-model="item.starLevel" disabled show-score text-color="#ff9900" score-template=""></el-rate>
                     <p class="text-elipse">{{item.recordsValue}}</p>
                 </div>
                 <div class="recomd-info text-elipse">
                     <span>{{item.recommendContent}}</span>
                 </div>
-                <el-button type="success" v-if="item.buyStatus=='1' || item.price == '0'" @click="forFree(item)">免费</el-button>
-                <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
+                <el-button type="success" v-if="item.buyStatus=='1' || item.price == '0' || item.userId==item.lookerId" @click="forFree(item)">免费</el-button>
+                <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
             </div>
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
                 <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
@@ -118,6 +118,7 @@
                 sendName:null,
                 orderData:null,
                 staticPath:pathUtil.getStaticPath(),
+                assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
             }
         },
         created:function(){
@@ -173,11 +174,8 @@
                 sysUtil.checkLoginForBiz(this.forFreeFn.bind(this,item));
             },
             forFreeFn(item){
-                return buyService.buyRecommDetails(item).then((ret) => {
-                    if(ret.body.status=='success'){
-                        this.$router.push({name:'order-detail',query: {buyDetail:JSON.stringify(ret.body.details),recommDetail:JSON.stringify(ret.body.rdetails)}})
-                    };
-                })
+                this.$router.push({name:'order-detail',query: {recommendNo:item.recommendNo}})
+
             }
         }
     }

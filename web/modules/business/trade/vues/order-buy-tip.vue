@@ -44,11 +44,12 @@ export default {
             })
         },
         gotoDetail(){
-            service.buyRecommDetails(this.orderData).then((ret) => {
+            /*service.buyRecommDetails(this.orderData).then((ret) => {
                 if(ret.body.status=='success'){
                     this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
                 };
-            })
+            })*/
+            this.$router.push({name:'order-detail',query: {recommendNo:this.orderData.recommendNo}})
         }
     }
 }
