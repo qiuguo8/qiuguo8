@@ -90,7 +90,7 @@
 </template>
 <script>
     import Vue from 'vue'
-    import comVue from 'web/modules/commonVue.js'
+    import sysUtil from 'web/common/utils/sysUtil.js'
     import {Input,Button,Table,TableColumn,RadioButton,RadioGroup,Dialog,Checkbox,CheckboxGroup} from 'element-ui'
     import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
     import pathUtil from 'web/common/utils/pathUtil.js'
@@ -170,12 +170,10 @@
                 this.$refs.orderBuy.show();
             },
             forFree(item){
-                //检查是否登录
-                if(!comVue.$data.userInfo){
-                    comVue.$emit('show-login-form');
-                    return;
-                }
-                buyService.buyRecommDetails(item).then((ret) => {
+                sysUtil.checkLoginForBiz(this.forFreeFn.bind(this,item));
+            },
+            forFreeFn(item){
+                return buyService.buyRecommDetails(item).then((ret) => {
                     if(ret.body.status=='success'){
                         this.$router.push({name:'order-detail',query: {buyDetail:JSON.stringify(ret.body.details),recommDetail:JSON.stringify(ret.body.rdetails)}})
                     };

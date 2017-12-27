@@ -85,6 +85,7 @@
     import scrollBar from 'web/common/utils/scrollUtil.js';
     import indexService from 'web/modules/business/index/services/indexService.js'
     import pathUtil from 'web/common/utils/pathUtil.js'
+    import sysUtil from 'web/common/utils/sysUtil.js'
     import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
     import 'web/common/directives/uiDirective.js'
     import {Carousel,CarouselItem,Table,TableColumn,Tabs,TabPane,RadioButton,RadioGroup} from 'element-ui'
@@ -117,12 +118,10 @@
             orderBuyTip:orderBuyTip,
         },
         methods:{
-            showOrderDetail(item) {
-                //检查是否登录
-                if(!comVue.$data.userInfo){
-                    comVue.$emit('show-login-form');
-                    return;
-                }
+            showOrderDetail(item){
+                sysUtil.checkLoginForBiz(this.showOrderDetailFn.bind(this,item));
+            },
+            showOrderDetailFn(item) {
                 this.orderData = item;
                 this.$refs.orderBuy.show();
             },
