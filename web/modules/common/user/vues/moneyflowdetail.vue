@@ -76,7 +76,7 @@ export default {
                 {value: '04',label: '佣金'}],
             startChangeTime:null,
             endChangeTime:null,
-            changeType:null,
+            changeType:'',
             //当前页码
             currentPage: 1,
             //默认每页数据量
