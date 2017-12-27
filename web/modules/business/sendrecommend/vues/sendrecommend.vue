@@ -131,7 +131,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import comVue from 'web/modules/commonVue.js'
+import sysUtil from 'web/common/utils/sysUtil.js'
 import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton,Dialog,Input} from 'element-ui'
 import service from 'web/modules/business/sendrecommend/service/sendrecommendService'
 Vue.component(Checkbox.name,Checkbox);
@@ -184,13 +184,11 @@ export default {
     },
     methods: {
         showInfoDialog(obj,category,team){
-            //检查是否登录
-            if(!comVue.$data.userInfo){
-                comVue.$emit('show-login-form');
-                return;
-            }
+            sysUtil.checkLoginForBiz(this.showInfoDialogFn.bind(this,obj,category,team));
+        },
+        showInfoDialogFn(obj,category,team){
             obj.productCode=category.substring(0,2);
-            service.goPublishRecommend(obj).then((ret)=>{
+            return service.goPublishRecommend(obj).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.infoObj = obj;
                     let recommendTeamId;
