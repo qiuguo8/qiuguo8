@@ -60,7 +60,9 @@
             <div class="text-left min-max-640 content-wrap content-30-to-100">
                 <div class="normal-news-title"><span class="list-name">头条</span><router-link tag="span" :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
                 <ul class="normal-news-list">
-                    <router-link tag="li" v-for="ttItem in ttList" :key="ttItem.contentId"  :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs">{{ttItem.contentTitle}}</router-link>
+                    <li class="transition-halfs"  v-for="ttItem in ttList" :key="ttItem.contentId" >
+                        <router-link target="_blank" :to="{name:'news-detail',query:{contentId:ttItem.contentId}}">{{ttItem.contentTitle}}</router-link>
+                    </li>
                 </ul>
 
                <!-- @click="contentDetail(ttItem)"-->
@@ -68,13 +70,17 @@
             <div class="text-left min-max-640 content-wrap content-30-to-100">
                 <div class="normal-news-title"><span class="list-name">新闻</span><span class="more-btn">更多</span></div>
                 <ul class="normal-news-list">
-                    <router-link tag="li" v-for="xwItem in xwList" :key="xwItem.contentId" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs">{{xwItem.contentTitle}}</router-link>
+                    <li class="transition-halfs"  v-for="xwItem in xwList" :key="xwItem.contentId">
+                        <router-link target="_blank" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs">{{xwItem.contentTitle}}</router-link>
+                    </li>
                 </ul>
             </div>
             <div class="text-left min-max-640 content-wrap content-30-to-100">
                 <div class="normal-news-title"><span class="list-name">足球预测</span><span class="more-btn">更多</span></div>
                 <ul class="normal-news-list">
-                    <router-link tag="li" v-for="ycItem in ycList" :key="ycItem.contentId" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
+                    <li class="transition-halfs"  v-for="ycItem in ycList" :key="ycItem.contentId">
+                        <router-link target="_blank" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
+                    </li>
                 </ul>
             </div>
              <order-buy-tip ref="orderBuy" :order-data="orderData"></order-buy-tip>

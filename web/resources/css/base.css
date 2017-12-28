@@ -343,8 +343,10 @@ nav ul{list-style: none}
 .normal-news{width:100%;padding:0px 10px}
 .normal-news:hover{box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1)}
 .normal-news-list{list-style: none;padding:15px 0px;margin:0px;text-align: left;}
-.normal-news-list li{padding:5px;cursor: pointer;opacity: 0.8;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:100%}
+.normal-news-list li{padding:5px;cursor: pointer;opacity: 0.8;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:100%;margin:3px 0px}
 .normal-news-list li:hover{opacity: 1;background-color: rgba(255, 102, 51, 0.7);color:#eee}
+.normal-news-list li a{color:#000;display: inline-block;width:100%}
+.normal-news-list li:hover a{color:#eee}
 .normal-news-title{position: relative} 
 .normal-news-title span.list-name{font-size:18px;border-bottom:3px solid #e90304;padding:10px;display: inline-block}
 .normal-news-title span.more-btn{position: absolute;top:5px;right:0px;padding:10px;letter-spacing: 5px;color:#999;cursor: pointer}
