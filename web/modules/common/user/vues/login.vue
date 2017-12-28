@@ -69,7 +69,7 @@
 <script>
 import Vue from 'vue'
 import 'web/common/utils/pVerify.js'
-import {Dialog,Form,Input,FormItem,Button,Checkbox,Tooltip} from 'element-ui'
+import {Dialog,Form,Input,FormItem,Button,Checkbox,Tooltip,Message} from 'element-ui'
 import formUtil from 'web/common/utils/formUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
 import comVue from 'web/modules/commonVue.js'
@@ -185,7 +185,10 @@ export default {
             this.$refs.loginForm.validate((valid)=>{
                 if(valid){
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
-                        alert(ret.body.status);
+                        Message({
+                            message:ret.body.status,
+                            type:ret.body.status || 'info'
+                        })
                         if(ret.body.status=='success'){
                             comVue.$emit('login-for-menu',ret.body.user); 
                             comVue.$data.userInfo = ret.body.user;
@@ -208,7 +211,11 @@ export default {
             this.$refs.mloginForm.validate((valid)=>{
                 if(valid){
                     loginService.loginByPhone(this.mloginForm).then((ret)=>{
-                        alert(ret.body.loginInfo);
+                        Message({
+                            message:ret.body.loginInfo,
+                            type:ret.body.status || 'info'
+                        })
+                        // alert(ret.body.loginInfo);
                     })
                     return true;
                 }else{

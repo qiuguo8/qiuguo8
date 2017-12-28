@@ -5,7 +5,9 @@
                 <span>头条</span>
             </div>
             <ul class="normal-news-list">
-                    <router-link tag="li" v-for="ttItem in ttList" :key="ttItem.contentId"  :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs">{{ttItem.contentTitle}}</router-link>
+                <li class="transition-halfs" v-for="ttItem in ttList" :key="ttItem.contentId">
+                    <router-link target="_blank"  :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs">{{ttItem.contentTitle}}</router-link>
+                </li>
             </ul>
             <div class="page-block text-center">
                 <el-pagination
@@ -22,7 +24,9 @@
                 <span>新闻</span>
             </div>
             <ul class="normal-news-list">
-                <router-link tag="li" v-for="xwItem in xwList" :key="xwItem.contentId" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs">{{xwItem.contentTitle}}</router-link>
+                <li class="transition-halfs" v-for="xwItem in xwList" :key="xwItem.contentId">
+                    <router-link target="_blank" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs">{{xwItem.contentTitle}}</router-link>
+                </li>
             </ul>
             <div class="page-block text-center">
                  <el-pagination
@@ -40,7 +44,9 @@
                 <span>足球预测</span>
             </div>
             <ul class="normal-news-list">
-                <router-link tag="li" v-for="ycItem in ycList" :key="ycItem.contentId" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
+                <li class="transition-halfs" v-for="ycItem in ycList" :key="ycItem.contentId">
+                    <router-link target="_blank" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
+                </li>
             </ul>
             <div class="page-block text-center">
                 <el-pagination

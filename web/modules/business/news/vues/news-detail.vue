@@ -9,7 +9,9 @@
              <div  v-if="this.contentType=='02'" class="list-name"><span>新闻</span></div>
               <div  v-if="this.contentType=='03'" class="list-name"><span>足彩预测</span></div>
             <ul class="normal-news-list">
-                <router-link tag="li" v-for="item in contentList" :key="item.contentId" :to="{name:'news-detail',query:{contentId:item.contentId}}" class="transition-halfs">{{item.contentTitle}}</router-link>
+                <li class="transition-halfs" v-for="item in contentList" :key="item.contentId">
+                    <router-link target="_blank" :to="{name:'news-detail',query:{contentId:item.contentId}}" class="transition-halfs">{{item.contentTitle}}</router-link>
+                </li>
             </ul>
         </div>
     </div>

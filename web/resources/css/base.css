@@ -349,8 +349,8 @@ nav ul{list-style: none}
 .normal-news-list li:hover a{color:#eee}
 .normal-news-title{position: relative} 
 .normal-news-title span.list-name{font-size:18px;border-bottom:3px solid #e90304;padding:10px;display: inline-block}
-.normal-news-title span.more-btn{position: absolute;top:5px;right:0px;padding:10px;letter-spacing: 5px;color:#999;cursor: pointer}
-.normal-news-title span.more-btn:hover{color:#333}
+.normal-news-title a.more-btn{position: absolute;top:5px;right:0px;padding:10px;letter-spacing: 5px;color:#999;cursor: pointer}
+.normal-news-title a.more-btn:hover{color:#333}
 .rank-types{text-align: center;padding:8px;border-bottom: none}
 .rank-types span{padding:10px 15px;cursor: pointer}
 .rank-types .radio-list>.el-radio-button{margin:5px}

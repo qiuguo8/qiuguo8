@@ -13,7 +13,7 @@
 </template>
 <script>
 import service from 'web/modules/business/trade/service/orderService'
-
+import {Message} from 'element-ui';
 export default {
     props:{
         orderData:{
@@ -39,7 +39,11 @@ export default {
                     this.gotoDetail();
 
                 }else{
-                    alert(ret.body.errInfo);
+                    Message({
+                        message:ret.body.errInfo,
+                        type:'error'
+                    })
+                    // alert(ret.body.errInfo);
                 }
             })
         },

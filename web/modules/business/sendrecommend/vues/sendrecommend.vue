@@ -132,7 +132,7 @@
 <script>
 import Vue from 'vue'
 import sysUtil from 'web/common/utils/sysUtil.js'
-import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton,Dialog,Input} from 'element-ui'
+import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton,Dialog,Input,Message} from 'element-ui'
 import service from 'web/modules/business/sendrecommend/service/sendrecommendService'
 Vue.component(Checkbox.name,Checkbox);
 Vue.component(CheckboxGroup.name,CheckboxGroup);
@@ -212,7 +212,10 @@ export default {
                     this.priceRange = ret.body.priceRange;
                     this.open();
                 }else{
-                    alert(ret.body.info);
+                    Message({
+                        message:ret.body.info,
+                        type:ret.body.status || 'info'
+                    })
                 }
             })
         },
@@ -273,7 +276,7 @@ export default {
             this.getMatchesInfo(param);
         },
         handleOpposit(val,oppo,scope){
-            console.log(oppo,val,scope);
+            // console.log(oppo,val,scope);
             if(val){
                 for(var i=0,len=this.matchsTable;len=this.matchsTable.length;i++){
                     if(scope.row.matchId == this.matchsTable[i].matchId){
@@ -339,9 +342,15 @@ export default {
 
             service.publishRecommend(recommendDetails).then((ret)=>{
                 if(ret.body.status == 'failure'){
-                    alert(ret.body.info)
+                    Message({
+                        message:ret.body.info,
+                        type:ret.body.status || 'info'
+                    })
                 }else{
-                    alert(ret.body.status)
+                    Message({
+                        message:"发布成功！",
+                        type:ret.body.status || 'info'
+                    })
                     let param = {'productCode':this.productCode};
                     this.getLeagueInfo(param);
                     this.getMatchesInfo(param);
