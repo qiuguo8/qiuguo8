@@ -2,8 +2,7 @@
     <div class="register">
         <div class="register-wrap content-wrap content-75-to-100 text-left">
             <div class="label-tip row-new">
-                <h2 class="float-left">欢迎注册球果吧账号</h2>
-                <p class="float-right" @click="showLogin()" style="cursor:pointer">已是用户，马上登录</p>
+                <h2 class="text-center">欢迎注册球果吧账号</h2>
             </div>
             <div class="clear-fix"></div>
             <div class="edit-form">
@@ -21,17 +20,18 @@
                         <el-input type="primary" v-model="regisForm.phone" auto-complete="off"></el-input>
                     </el-form-item>
                     <el-form-item label="短信验证码" prop="phoneCode" label-width="100px">
-                        <div class="el-col-12">
+                        <div class="el-col-12" style="margin-bottom:5px;margin-right:10px">
                             <el-input type="text" v-model="regisForm.phoneCode" auto-complete="off"></el-input>
                         </div>
-                        <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
+                        <el-button  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
                     <el-form-item prop="signed">
                         <el-checkbox v-model="regisForm.signed">我已满18岁并同意《球果吧服务条款》</el-checkbox>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="submitForm()">提交</el-button>
-                        <el-button @click="resetForm()">重置</el-button>
+                        <el-button @click="resetForm()" style="margin-left:50px;margin-bottom:10px">重置</el-button>
+                        <span @click="showLogin()" style="cursor:pointer;margin-left:50px;color:#e90304">已是用户，马上登录</span>
                     </el-form-item>
                 </el-form>
             </div>
@@ -43,7 +43,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Form,FormItem,Input,Button,Checkbox} from 'element-ui'
+import {Form,FormItem,Input,Button,Checkbox,Message} from 'element-ui'
 import validationUtil from 'web/common/utils/validationUtil.js'
 import formUtil from 'web/common/utils/formUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
@@ -171,7 +171,13 @@ export default {
             this.$refs.regisForm.validate((valid)=>{
                 if(valid){
                     registerService.register(this.regisForm).then((ret)=>{
-                        alert('注册结果:'+ret.body.status+'<br/>提示信息:'+ret.body.info)
+                        Message({
+                            message:ret.body.info,
+                            type:ret.body.status || 'info'
+                        });
+                        if(ret.body.status == 'success'){
+                            this.$router.push({'name':'index'});
+                        }
                     })
                     return true;
                 }else{
