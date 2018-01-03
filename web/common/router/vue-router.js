@@ -19,6 +19,11 @@ const routes = [
             component:resolve => require(['modules/common/user/vues/register.vue'],resolve)
         },
         {
+            path:'/register-protocol',
+            name:'register=protocol',
+            component:resolve => require(['modules/common/protocol/vues/register-protocol.vue'],resolve)
+        },
+        {
             path:'/help',
             name:'help',
             meta:{

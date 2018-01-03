@@ -26,7 +26,7 @@
                         <el-button  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
                     <el-form-item prop="signed">
-                        <el-checkbox v-model="regisForm.signed">我已满18岁并同意《球果吧服务条款》</el-checkbox>
+                        <el-checkbox v-model="regisForm.signed">我已满18岁并同意<router-link target="_blank" style="color:#387EF5" :to="{name:'register=protocol'}">《球果吧服务条款》</router-link></el-checkbox>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="submitForm()">提交</el-button>
