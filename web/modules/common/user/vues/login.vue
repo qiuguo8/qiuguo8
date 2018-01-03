@@ -1,5 +1,5 @@
 <template>
-    <el-dialog @open="commonLogin()" title="用户登录" :lock-scroll="false" custom-class="login-dialog" :visible.sync="dialogFormVisible">
+    <el-dialog @open="commonLogin()" @close="close()" title="用户登录" :lock-scroll="false" custom-class="login-dialog" :visible.sync="dialogFormVisible" width="340px">
         <div class="login-form" v-show="isCommon">
             <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm">
                 <el-form-item label="用户名" prop="userName" label-width="80px">
@@ -20,7 +20,7 @@
                 </el-form-item>
             </el-form>
             <div class="btn-login text-right">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button @click="dialogFormVisible = false" style="margin-right:30px">取 消</el-button>
                 <el-button type="primary" @click="loginByUserName()">确 定</el-button>
             </div>
         </div>
@@ -30,14 +30,14 @@
                     <el-input v-model="mloginForm.phone" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="短信验证码" prop="phoneCode" label-width="100px">
-                    <div class="content-40-to-40 content-wrap">
+                    <div>
                         <el-input type="text" v-model="mloginForm.phoneCode" auto-complete="off"></el-input>
                     </div>
-                    <el-button style="margin-left:10px"  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
+                    <el-button style="margin-top:10px"  :disabled="!isCountOver||!isMobileValid" @click="getMessCode()">{{countTxt}}</el-button>
                 </el-form-item>
             </el-form>
             <div class="btn-login text-right">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button @click="dialogFormVisible = false" style="margin-right:5px">取 消</el-button>
                 <el-button type="primary" @click="loginByPhone()">确 定</el-button>
             </div>
         </div>
@@ -123,7 +123,7 @@ export default {
             rules2:{
                 phone:[
                     {required:true,message:'手机号码不能为空',trigger:'change blur'},
-                    {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'}
+                    {validator:formUtil.isMobileNo("手机号码格式不正确",this.canClickSend),trigger:'change blur'}
                 ],
                 phoneCode:[
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
@@ -153,7 +153,8 @@ export default {
             countSec:60,
             counter:null,
             countTxt:'发送短信验证码',
-            isCountOver:true
+            isCountOver:true,
+            isMobileValid:false
         }
     },
     created(){
@@ -181,13 +182,16 @@ export default {
         getCookie(){
             this.loginForm.userName = sysUtil.getCookie('loginName');
         },
+        canClickSend(error){
+            this.isMobileValid = error ? false : true;
+        },
         loginByUserName(){
             this.$refs.loginForm.validate((valid)=>{
                 if(valid){
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
                         Message({
-                            message:ret.body.status,
-                            type:ret.body.status || 'info'
+                            message:ret.body.status == 'success' ? '登录成功' : '登陆失败',
+                            type:(ret.body.status=='success' ? 'success' : 'error')
                         })
                         if(ret.body.status=='success'){
                             comVue.$emit('login-for-menu',ret.body.user); 
@@ -212,8 +216,8 @@ export default {
                 if(valid){
                     loginService.loginByPhone(this.mloginForm).then((ret)=>{
                         Message({
-                            message:ret.body.loginInfo,
-                            type:ret.body.status || 'info'
+                            message:ret.body.status == 'success' ? '登录成功' : '登陆失败',
+                            type:(ret.body.status=='success' ? 'success' : 'error')
                         })
                         // alert(ret.body.loginInfo);
                     })

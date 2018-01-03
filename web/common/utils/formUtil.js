@@ -53,14 +53,17 @@ const formUtil = {
             callback();
         }
     },
-    isMobileNo(mess){
+    isMobileNo(mess,callbackFn){
         return (rule,value,callback)=>{
+            var error;
             if(!validationUtil.isNull(value)){
                 if(!validationUtil.isMobileNo(value)){
-                    callback(new Error(mess));
+                    error = new Error(mess)
+                    callback(error);
                 }
             }
             callback();
+            callbackFn && callbackFn(error);
         }
     },
     checkUserNameRepeat(mess){
