@@ -111,7 +111,9 @@
                 <div class="form-control row-new">
                     <label class="el-col-8 text-center">价格：</label>
                     <div class="el-col-16">
-                        <el-input type="primary" :placeholder="priceRange.lowestPrice+'-'+ priceRange.highestPrice" v-model="price" ></el-input>
+                        <el-input type="primary" :placeholder="priceRange.lowestPrice+'-'+ priceRange.highestPrice" v-model="price" >
+                            <template slot="append">球果</template>
+                        </el-input>
                     </div>
                 </div>
                 <div class="form-control row-new">
@@ -188,6 +190,7 @@ export default {
         },
         showInfoDialogFn(obj,category,team){
             obj.productCode=category.substring(0,2);
+            console.log(obj.productCode)
             return service.goPublishRecommend(obj).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.infoObj = obj;
@@ -354,8 +357,8 @@ export default {
                     let param = {'productCode':this.productCode};
                     this.getLeagueInfo(param);
                     this.getMatchesInfo(param);
+                    this.showInfo = false;//关闭弹层
                 }
-                this.showInfo = false;//关闭弹层
             })
         }
     }
