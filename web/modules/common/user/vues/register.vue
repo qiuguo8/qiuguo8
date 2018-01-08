@@ -163,8 +163,17 @@ export default {
         },
         getMessCode(){
             let info = {'phone':this.regisForm.phone,'type':'REGISTER'}
-            messCodeUtil.createPhoneCode(info)
-            this.countSeconds();
+            messCodeUtil.createPhoneCode(info).then((ret)=>{
+                if(ret.body.status=='success'){
+                    this.countSeconds();
+                }else{
+                    Message({
+                        message:ret.body.status,
+                        type:(ret.body.status=='success' ? 'success' : 'error')
+                    })
+                }
+                // alert(ret.body.loginInfo);
+            })
         },
         countSeconds(){
             var counter = this.counter;

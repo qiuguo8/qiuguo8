@@ -1,6 +1,5 @@
 <template>
     <div class="">
-        <div class="my-bitcon"><span>我的球果：000</span></div>
         <div class="search-input content-25-to-100 content-wrap">
             <!-- <input type="text" placeholder=""/> -->
             <el-input placeholder="搜索分析师" v-model="sendName" maxlength="20">

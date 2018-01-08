@@ -120,7 +120,7 @@
 
                     <label class="el-col-8 text-center">推荐分析：</label>
                     <div class="el-col-16">
-                        <el-input type="textarea" v-model="recommendContent"  rows="4"></el-input>
+                        <el-input type="textarea" v-model="recommendContent"  rows="4" placeholder="请限制在500字内" maxlength="500"></el-input>
                     </div>
                 </div>
             </div>
@@ -358,6 +358,8 @@ export default {
                     this.getLeagueInfo(param);
                     this.getMatchesInfo(param);
                     this.showInfo = false;//关闭弹层
+                    this.price = '';
+                    this.recommendContent='';
                 }
             })
         }
