@@ -109,12 +109,12 @@ export default {
                     {required:true,message:'请输入用户名',trigger:'blur'},
                     {max:20,message:'长度不能超过20个字符',trigger:'blur'},
                     {validator:formUtil.isLegalName('用户名只能由英文、数字和中文组成'),trigger:'change'},
-                    {validator:formUtil.checkUserNameRepeat('用户名已被注册'),trigger:'change blur'}
+                    {validator:formUtil.checkUserNameRepeat('用户名已被注册'),trigger:'blur'}
                 ],
                 phone:[
                     {required:true,message:'手机号码不能为空',trigger:'change blur'},
                     {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'},
-                    {validator:formUtil.checkPhoneRepeat('手机号码已被注册'),trigger:'change blur'}
+                    {validator:formUtil.checkPhoneRepeat('手机号码已被注册'),trigger:'blur'}
                 ],
                 phoneCode:[
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
