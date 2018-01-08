@@ -2,7 +2,7 @@
     <div class="in-time-goal">
         <div class="row-new">
             <div class="form-control el-col-19 text-center">
-                <label class="el-col-6">比赛时间</label>
+                <label class="el-col-6">足彩销售时间</label>
                 <div class="el-col-18">
                     <span class="el-col-11">
                         <mu-date-picker v-model="matchDate" @input="submitForm()" hintText="选择时间"/>

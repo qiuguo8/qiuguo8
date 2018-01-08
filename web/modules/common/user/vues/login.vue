@@ -198,7 +198,8 @@ export default {
                 if(valid){
                     loginService.loginByUserName(this.loginForm).then((ret)=>{
                         Message({
-                            message:ret.body.status == 'success' ? '登录成功' : '登陆失败',
+                            message:ret.body.info ,
+                            //message:ret.body.status == 'success' ? '登录成功' : '登陆失败',
                             type:(ret.body.status=='success' ? 'success' : 'error')
                         })
                         if(ret.body.status=='success'){
@@ -224,9 +225,16 @@ export default {
                 if(valid){
                     loginService.loginByPhone(this.mloginForm).then((ret)=>{
                         Message({
-                            message:ret.body.status == 'success' ? '登录成功' : '登陆失败',
+                            message:ret.body.info,
                             type:(ret.body.status=='success' ? 'success' : 'error')
                         })
+                        if(ret.body.status=='success'){
+                            comVue.$emit('login-for-menu',ret.body.user);
+                            comVue.$data.userInfo = ret.body.user;
+                            this.close();
+                        }else{
+                            this.picVerifyObj.refresh();
+                        }
                         // alert(ret.body.loginInfo);
                     })
                     return true;
