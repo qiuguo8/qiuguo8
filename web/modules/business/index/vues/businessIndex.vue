@@ -37,7 +37,10 @@
             <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
                 <div class="transition-ones"  v-slipping v-if="hotList.length>0" :style="{width:(250*hotList.length)+'px',height:'100%',position:'relative',left:'0px'}">
                     <div class="intro-wrap intro-wrap-index transition-halfs" v-for="item in hotList" :key="item.recommendNo">
-                        <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='01'" class="match-name text-elipse">亚盘:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='02'" class="match-name text-elipse">大小球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='03'" class="match-name text-elipse">竞彩足球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='04'" class="match-name text-elipse">北京单场:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
                             <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
                             <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
@@ -51,7 +54,9 @@
                         <div class="recomd-info text-elipse">
                             <span>{{item.recommendContent}}</span>
                         </div>
-                        <el-button type="warning"  @click="showOrderDetail(item)">{{item.price}}球果</el-button>
+                         <el-button type="success" v-if="item.buyStatus=='1' || item.userId==item.lookerId" @click="forFree(item)">查看</el-button>
+                         <el-button type="success" v-if="item.price == '0'" @click="forFree(item)">免费</el-button>
+                         <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
                     </div>
                 </div>
             </div>
@@ -126,10 +131,7 @@
             orderBuyTip:orderBuyTip,
         },
         methods:{
-            showOrderDetail(item){
-                sysUtil.checkLoginForBiz(this.showOrderDetailFn.bind(this,item));
-            },
-            showOrderDetailFn(item) {
+            showOrderDetail(item) {
                 this.orderData = item;
                 this.$refs.orderBuy.show();
             },
@@ -138,6 +140,13 @@
                 indexService.queryLongHuRank(sform).then((ret)=>{
                     this.rankList = ret.body.rankList;
                 })
+            },
+            forFree(item){
+                sysUtil.checkLoginForBiz(this.forFreeFn.bind(this,item));
+            },
+            forFreeFn(item){
+                this.$router.push({name:'order-detail',query: {recommendNo:item.recommendNo}})
+
             },
             hotQuery(){
                 indexService.queryHotRank().then((ret)=>{
