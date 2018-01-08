@@ -42,8 +42,8 @@
                         <div v-if="item.productCode =='03'" class="match-name text-elipse">竞彩足球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div v-if="item.productCode =='04'" class="match-name text-elipse">北京单场:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
-                            <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
-                            <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
+                            <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl" @click="otherPeopleView(item)"/>
+                            <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'" @click="otherPeopleView(item)">
                         </div>
                         <div class="intro-text">
                             <p class="text-elipse">{{item.userName}}</p>
@@ -168,6 +168,12 @@
             contentDetail(item){
                 this.$router.push({name:'news-detail',query: {recommendNo:item.recommendNo}})
 
+            },
+            otherPeopleView(item){
+                sysUtil.checkLoginForBiz(this.gotoOtherPeopleView.bind(this,item));
+            },
+            gotoOtherPeopleView(item){
+                this.$router.push({name:'other-people',query: {recommendNo:item.recommendNo}})
             }
         },
         created:function(){

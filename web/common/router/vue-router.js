@@ -332,13 +332,21 @@ const routes = [
                     component:resolve => require(['modules/common/user/vues/announce.vue'],resolve),
                 }
             ]
-        }
-        ]
+        },
+        {
+            path:'/other-people',
+            name:'other-people',
+            meta:{
+                aliasName:'推荐师页面'//别人可以看的，不是给自己看的，自己看的是另一个
+            },
+            component:resolve => require(['modules/business/buyrecommend/vues/other-people.vue'],resolve)
+        }]
     },
     { 
         path: '*', 
         redirect:'/index.html'
     }
+
 ];
 
 
