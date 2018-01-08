@@ -114,7 +114,8 @@ export default {
                 checkCode: [
                     {required: true, message: '验证码不能为空', trigger: 'change blur'},
                     {validator: formUtil.isNumber('验证码必须为数字'), trigger: 'change blur'},
-                    {type: 'number', validator: formUtil.maxSize(6, '验证码长度不大于6'), trigger: 'blur change'}
+                    {type: 'number', validator: formUtil.maxSize(6, '验证码长度不大于6'), trigger: 'blur change'},
+                    {validator: this.validateCode.bind(this), trigger: 'blur'},
                 ],
                 isAuto: [
                     {type: 'boolean', trigger: 'change'}
@@ -144,9 +145,9 @@ export default {
                 refresh:function(){
                     this.verify.refresh();
                 },
-                validate:function(){
-                    if(this.verifyCode){
-                        return this.verify.validate(this.verifyCode);
+                validate:function(code){
+                    if(code){
+                        return this.verify.validate(code);
                     }
                 }
             },
@@ -184,6 +185,13 @@ export default {
         },
         canClickSend(error){
             this.isMobileValid = error ? false : true;
+        },
+        validateCode(rule,val,callback){
+            if(val && this.picVerifyObj.validate(val)){
+                callback();
+            }else{
+                callback(new Error("输入验证码不正确"));
+            }
         },
         loginByUserName(){
             this.$refs.loginForm.validate((valid)=>{

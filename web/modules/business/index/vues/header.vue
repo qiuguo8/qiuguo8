@@ -4,6 +4,12 @@
             <div class="header-logo-wrap">
                 <router-link tag="a" :to="{name:'index'}"><img :src="logoUrl"/></router-link>
             </div>
+            <div class="not-for-icon header-menu" v-if="!isLogined">
+                <ul class="header-menu-list">
+                    <li class="transition-halfs" @click="showLogin()" v-if="!isLogined">登录</li>
+                    <router-link tag="li" :to="{name:'register'}" class="transition-halfs" v-if="!isLogined">注册</router-link>
+                </ul>
+            </div>
             <div class="user-info" v-if="isLogined">
                 <span class="msg-tip">1</span>
                 <div class="user-img-wrap" ref="usericon">
@@ -29,8 +35,8 @@
                     <router-link tag="li" :to="{name:'score'}" active-class="active" class="transition-halfs">比分</router-link>
                     <!-- <li>优惠活动</li> -->
                     <router-link tag="li" :to="{name:'help'}" active-class="active" class="transition-halfs">使用帮助</router-link>
-                    <li class="transition-halfs" @click="showLogin()" v-if="!isLogined">登录</li>
-                    <router-link tag="li" :to="{name:'register'}" class="transition-halfs" v-if="!isLogined">注册</router-link>
+                    <li class="transition-halfs for-icon" @click="showLogin()" v-if="!isLogined">登录</li>
+                    <router-link tag="li" :to="{name:'register'}" class="transition-halfs for-icon" v-if="!isLogined">注册</router-link>
                 </ul>
             </div>
             <!-- <div class="visitor-operation">
