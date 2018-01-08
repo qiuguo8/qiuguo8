@@ -23,7 +23,7 @@
                         <div class="el-col-12" style="margin-bottom:5px;margin-right:10px">
                             <el-input type="text" v-model="regisForm.phoneCode" auto-complete="off"></el-input>
                         </div>
-                        <el-button  :disabled="!isCountOver" @click="getMessCode()">{{countTxt}}</el-button>
+                        <el-button  :disabled="!isCountOver||!canSend" @click="getMessCode()">{{countTxt}}</el-button>
                     </el-form-item>
                     <el-form-item prop="signed">
                         <el-checkbox v-model="regisForm.signed">我已满18岁并同意<router-link target="_blank" style="color:#387EF5" :to="{name:'register=protocol'}">《球果吧服务条款》</router-link></el-checkbox>
@@ -58,40 +58,6 @@ Vue.component(Checkbox.name,Checkbox);
 
 export default {
     data(){
-        var SamePass = (rule,value,callback)=>{
-            var password = this.regisForm.password;
-            if(!validationUtil.isNull(password)){
-                if(password!=value){
-                    this.isCheckPassValid = false;
-                    callback(new Error('两次输入的密码不正确'));
-                }else{
-                    if(!this.isCheckPassValid){
-                        this.isCheckPassValid = true;
-                        this.$refs.regisForm.validateField('password');
-                    }
-                    callback();
-                }
-            }
-            callback();
-        }
-
-        var SameCheckPass = (rule,value,callback)=>{
-            var checkPass = this.regisForm.checkPass;
-            if(!validationUtil.isNull(checkPass)){
-                if(checkPass!=value){
-                    this.isPassValid = false;
-                    this.$refs.regisForm.validateField('checkPass');
-                }else{
-                    if(!this.isPassValid){
-                        this.isPassValid = true;
-                        this.$refs.regisForm.validateField('checkPass');
-                    }
-                    callback();
-                }
-            }
-            callback();
-        }
-
         return {
             isPassValid:true,
             isCheckPassValid:true,
@@ -113,8 +79,8 @@ export default {
                 ],
                 phone:[
                     {required:true,message:'手机号码不能为空',trigger:'change blur'},
-                    {validator:formUtil.isMobileNo("手机号码格式不正确"),trigger:'change blur'},
-                    {validator:formUtil.checkPhoneRepeat('手机号码已被注册'),trigger:'blur'}
+                    {validator:formUtil.isMobileNo("手机号码格式不正确",this.canSendSms),trigger:'change blur'},
+                    {validator:formUtil.checkPhoneRepeat('手机号码已被注册',this.canSendSms),trigger:'blur'}
                 ],
                 phoneCode:[
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
@@ -124,12 +90,12 @@ export default {
                 password:[
                     {required:true,message:'请输入密码',trigger:'blur'},
                     {min:6,max:20,message:'密码长度在6～20个字符之间',trigger:'blur'},
-                    {validator:SameCheckPass,trigger:'blur'}
+                    {validator:formUtil.SamePassCheck(this,'regisForm','checkPass','isPassValid','',true),trigger:'blur'}
                 ],
                 checkPass:[
                     {required:true,message:'请输入密码',trigger:'blur'},
                     {min:6,max:20,message:'密码长度在6～20个字符之间',trigger:'blur'},
-                    {validator:SamePass,trigger:'blur'}
+                    {validator:formUtil.SamePassCheck(this,'regisForm','password','isCheckPassValid','两次输入的密码不正确',false),trigger:'blur'}
                 ],
                 checkCode:[
                     {required:true,message:'请输入验证码'},
@@ -161,7 +127,8 @@ export default {
             countSec:60,
             counter:null,
             countTxt:'发送短信验证码',
-            isCountOver:true
+            isCountOver:true,
+            canSend:false,
         }
     },
     mounted(){
@@ -184,6 +151,9 @@ export default {
                     return false;
                 }
             })
+        },
+        canSendSms(err){
+            this.canSend = err ? false : true;
         },
         resetForm(){
             this.$refs.regisForm.resetFields();

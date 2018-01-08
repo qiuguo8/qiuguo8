@@ -79,19 +79,41 @@ const formUtil = {
             }
         }
     },
-    checkPhoneRepeat(mess){
+    checkPhoneRepeat(mess,successCb,notRegis){
         return (rule,value,callback)=>{
             if(!validationUtil.isNull(value)){
+                var error;
                 var param = {'phone':value};
                 registerService.phoneRepeat(param).then((ret)=>{
+                    error = new Error(mess);
                     if(ret.body.result){
-                        callback(new Error(mess));
+                        callback(!notRegis ? error : '');
+                        notRegis && successCb && successCb(error);
                     }
-                    callback();
+                    !notRegis && successCb && successCb(error);
+                    callback(notRegis ? error : '');
                 })
             }
         }
-    }
+    },
+    SamePassCheck(scope,formName,propName,flagPropName,mess,isFirst){
+        return (rule,value,callback)=>{
+            var prop = scope[formName][propName];
+            if(!validationUtil.isNull(prop)){
+                if(prop!=value){
+                    scope[flagPropName] = false;
+                    !isFirst ? callback(new Error(mess)) : scope.$refs[formName].validateField(propName);
+                }else{
+                    if(!scope[flagPropName]){
+                        scope[flagPropName] = true;
+                        scope.$refs[formName].validateField(propName);
+                    }
+                    callback();
+                }
+            }
+            callback();
+        }
+    },
 }
 
 export default formUtil;

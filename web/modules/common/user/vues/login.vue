@@ -24,7 +24,7 @@
                 <el-button type="primary" @click="loginByUserName()">确 定</el-button>
             </div>
         </div>
-        <div class="login-form" v-show="isMobile">
+        <div class="login-form" v-if="isMobile">
             <el-form :model="mloginForm" status-icon :rules="rules2" ref="mloginForm">
                 <el-form-item label="手机号码" prop="phone" label-width="100px">
                     <el-input v-model="mloginForm.phone" auto-complete="off"></el-input>
@@ -176,8 +176,8 @@ export default {
             this.dialogFormVisible = true;
         },
         close(){
-            this.$refs.loginForm.resetFields();
-            this.$refs.mloginForm.resetFields();
+            this.$refs.loginForm && this.$refs.loginForm.resetFields();
+            this.$refs.mloginForm && this.$refs.mloginForm.resetFields();
             this.dialogFormVisible = false;
         },
         getCookie(){
@@ -206,6 +206,7 @@ export default {
                             comVue.$emit('login-for-menu',ret.body.user); 
                             comVue.$data.userInfo = ret.body.user;
                             this.close();
+                            if(this.$route.name == 'register')this.$router.push({name:'index'});
                         }else{
                             this.picVerifyObj.refresh();
                         }
