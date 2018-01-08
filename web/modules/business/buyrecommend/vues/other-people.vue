@@ -1,22 +1,14 @@
 <template>
-    <div class="order-detail">
-        <div class="rank-common intro-rank-list content-25-to-100 content-wrap">
-            <div class="list-name"><span>同场推荐</span></div>
-            <div class="el-col-24">
-                <el-table :default-sort="{prop:'count',order:'ascending'}" :data="sameFieldList" border>
-                    <el-table-column prop="userName" label="推荐人" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column label="查看" min-width="80" align="center" head-align="center" class-name="table-fixed">
-                        <template slot-scope="scope">
-                            <router-link  v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId" style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">查看</router-link>
-                            <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
-                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div>
-        </div>
+    <div class="">
         <div class="content-75-to-100 content-wrap">
+            <div class="select-list content-wrap">
+                <el-radio-group v-model="productCode3" class="radio-list" @change = "changeProductCode3()">
+                    <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                    <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
+                    <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                    <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                </el-radio-group>
+            </div>
             <div class="info-list row-new">
                 <div class="content-25-to-all-50 content-wrap text-center">
                     <img :src="avatarUrl"/>
@@ -38,40 +30,6 @@
                     <p>3天战绩:<span>{{recommDetail.gainsRate3}}</span></p>
                     <p>7天战绩:<span>{{recommDetail.gainsRate7}}</span></p>
                     <p>30天战绩:<span>{{recommDetail.gainsRate30}}</span></p>
-                </div>
-            </div>
-            <div class="order-detail-info el-col-24 rank-common row-new">
-                <div class="left-name" style="margin-bottom:10px"><span>推荐内容</span></div>
-                <div class="el-col-24">
-                    <div class="el-col-8">
-                        <p>{{rDetails.leagueName}}{{rDetails.matchStartTime}}</p>
-                        <p>{{rDetails.homeTeamName}} VS {{rDetails.visitTeamName}}</p>
-                    </div>
-                    <div class="el-col-8">
-                        <span> 玩法：{{product[rDetails.productCode]}}</span><br>
-                        <span>盘口：{{rDetails.handicap}}</span>
-                    </div>
-                    <div class="el-col-8">
-                        <span>价格：{{rDetails.price}}</span>
-                    </div>
-                    <div class="el-col-24">
-                        推荐：{{null==rDetails.recommendTeamName?'平局':rDetails.recommendTeamName}}
-                    </div>
-                    <div class="el-col-24">
-                        <div style="width: 100%;word-wrap:break-word">
-                            推荐说明：{{rDetails.recommendContent}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="order-result el-col-24 rank-common row-new">
-                <div class="left-name" style="margin-bottom:10px"><span>开奖结果</span></div>
-                <div class="el-col-24">
-                    <span v-if="rDetails.homeScore">比分：{{rDetails.homeScore}}-{{rDetails.homeScore}}</span>
-                    <span v-if="!rDetails.homeScore">比分：暂无</span>
-                    <span v-if="rDetails.hitResult">结果：{{rDetails.hitResult}}</span>
-                    <span v-if="!rDetails.hitResult">结果：暂无</span>
-                    <p class="el-col-24">本推介仅代表作者观点，不代表球果吧立场。信息仅供竞彩参考，请勿用于非法博彩</p>
                 </div>
             </div>
             <div class="recent-recommend rank-common">
@@ -176,6 +134,7 @@ export default {
                 if(ret.body.status == 'success'){
                     this.recentRecommList = ret.body.list;
                     this.totalCount = ret.body.total;
+                    console.log(this.recentRecommList);
                 }
             })
         },

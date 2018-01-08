@@ -52,8 +52,8 @@
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
-                    <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
-                     <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
+                    <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl" @click="otherPeopleView(item)"/>
+                    <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'" @click="otherPeopleView(item)">
                     <!-- <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
                     <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button> -->
                 </div>
@@ -177,7 +177,12 @@
             },
             forFreeFn(item){
                 this.$router.push({name:'order-detail',query: {recommendNo:item.recommendNo}})
-
+            },
+            otherPeopleView(item){
+                sysUtil.checkLoginForBiz(this.gotoOtherPeopleView.bind(this,item));
+            },
+            gotoOtherPeopleView(item){
+                this.$router.push({name:'other-people',query: {recommendNo:item.recommendNo}})
             }
         }
     }
