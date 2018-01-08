@@ -49,7 +49,6 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="leagueName" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="recommendContent" label="标题" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="money" label="成交金额" min-width="80" align="center" head-align="center" class-name="table-fixed">
@@ -57,9 +56,15 @@
                         <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <span v-constant-tranlate="scope.row.recommendStatus" constant-type="RecommendStatus"></span>
+                        <span v-if="scope.row.hitResult=== '01'" style="color: red">赢</span>
+                        <span v-if="scope.row.hitResult=== '02'" style="color: red">赢半</span>
+                        <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
+                        <span v-if="scope.row.hitResult=== '04'">输半</span>
+                        <span v-if="scope.row.hitResult=== '05'">输</span>
+                        <span v-if="scope.row.hitResult=== '06'">待定</span>
+                         <span v-if="!scope.row.hitResult">待定</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>

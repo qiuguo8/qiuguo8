@@ -38,12 +38,18 @@
                 <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="profit" label="成交总价" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column prop="hitResult"  label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
+                        <span v-if="scope.row.hitResult=== '01'" style="color: red">赢</span>
+                        <span v-if="scope.row.hitResult=== '02'" style="color: red">赢半</span>
+                        <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
+                        <span v-if="scope.row.hitResult=== '04'">输半</span>
+                        <span v-if="scope.row.hitResult=== '05'">输</span>
+                        <span v-if="scope.row.hitResult=== '06'">待定</span>
+                         <span v-if="!scope.row.hitResult">待定</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                 <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-center">
                 <el-pagination
@@ -178,7 +184,7 @@ export default {
           this.tableData4 = data.list.list;
           this.tableData4Total = data.list.total;
         });
-    }
+    },
   }
 };
 </script>
