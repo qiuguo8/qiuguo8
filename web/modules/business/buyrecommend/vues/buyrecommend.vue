@@ -165,7 +165,10 @@
                     this.listRecomm();
                 })
             },
-            showOrderDetail(item) {
+            showOrderDetail(item){
+                sysUtil.checkLoginForBiz(this.showOrderDetailFn.bind(this,item));
+            },
+            showOrderDetailFn(item) {
                 this.orderData = item;
                 this.$refs.orderBuy.show();
             },
