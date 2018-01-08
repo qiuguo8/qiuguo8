@@ -41,14 +41,14 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="publishTime" label="推荐时间" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="publishTime" label="推荐时间" min-width="90" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="recommendNo" label="推荐单号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="productCode" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <span v-constant-tranlate="scope.row.productCode" constant-type="Product"></span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="leagueNameCn" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="leagueName" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="recommendContent" label="标题" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
