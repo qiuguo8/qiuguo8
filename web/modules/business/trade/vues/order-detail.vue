@@ -58,7 +58,9 @@
                         推荐：{{null==rDetails.recommendTeamName?'平局':rDetails.recommendTeamName}}
                     </div>
                     <div class="el-col-24">
-                        <span>推荐说明：{{rDetails.recommendContent}}</span>
+                        <div style="width: 100%;word-wrap:break-word">
+                            推荐说明：{{rDetails.recommendContent}}
+                        </div>
                     </div>
                 </div>
             </div>
