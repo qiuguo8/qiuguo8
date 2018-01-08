@@ -111,7 +111,7 @@
                 <div class="form-control row-new">
                     <label class="el-col-8 text-center">价格：</label>
                     <div class="el-col-16">
-                        <el-input type="primary" :placeholder="priceRange.lowestPrice+'-'+ priceRange.highestPrice" v-model="price" >
+                        <el-input type="number" :placeholder="priceRange.lowestPrice+'-'+ priceRange.highestPrice" :min="priceRange.lowestPrice" :max="priceRange.highestPrice" v-model="price" >
                             <template slot="append">球果</template>
                         </el-input>
                     </div>
