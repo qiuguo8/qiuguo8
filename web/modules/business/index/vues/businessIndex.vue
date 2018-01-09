@@ -21,7 +21,7 @@
                 <div class="achive-rank-list" ref="achiveRank">
                     <div class="scroll-bar"></div>
                     <ul scroll-content style="position:relative;margin:0px;padding:0px">
-                        <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap content-100-to-50">
+                        <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
                             <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
                             <span class="el-col-12 user-name text-elipse">{{rankItem.userName}}</span>
                             <span class="el-col-8 achive">{{rankItem.winCount}}胜{{rankItem.tieTotal}}平{{rankItem.loseCount}}负</span>
@@ -132,6 +132,9 @@
         },
         methods:{
             showOrderDetail(item) {
+                sysUtil.checkLoginForBiz(this.showOrderDetailFn.bind(this,item));
+            },
+            showOrderDetailFn(item) {
                 this.orderData = item;
                 this.$refs.orderBuy.show();
             },
@@ -173,7 +176,7 @@
                 sysUtil.checkLoginForBiz(this.gotoOtherPeopleView.bind(this,item));
             },
             gotoOtherPeopleView(item){
-                this.$router.push({name:'other-people',query: {recommendNo:item.recommendNo}})
+                this.$router.push({name:'user-info',query: {recommendNo:item.recommendNo}})
             }
         },
         created:function(){
