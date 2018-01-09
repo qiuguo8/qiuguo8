@@ -114,8 +114,8 @@ export default {
                 checkCode: [
                     {required: true, message: '验证码不能为空', trigger: 'change blur'},
                     {validator: formUtil.isNumber('验证码必须为数字'), trigger: 'change blur'},
-                    {type: 'number', validator: formUtil.maxSize(6, '验证码长度不大于6'), trigger: 'blur change'},
-                    {validator: this.validateCode.bind(this), trigger: 'blur'},
+                    {type: 'number', validator: formUtil.maxSize(4, '验证码长度不大于4'), trigger: 'blur change'},
+                    {validator: this.validateCode.bind(this), trigger: 'change'},
                 ],
                 isAuto: [
                     {type: 'boolean', trigger: 'change'}
@@ -187,7 +187,7 @@ export default {
             this.isMobileValid = error ? false : true;
         },
         validateCode(rule,val,callback){
-            if(val && this.picVerifyObj.validate(val)){
+            if(val && val.length>=4 && this.picVerifyObj.validate(val)){
                 callback();
             }else{
                 callback(new Error("输入验证码不正确"));
@@ -209,6 +209,7 @@ export default {
                             if(this.$route.name == 'register')this.$router.push({name:'index'});
                         }else{
                             this.picVerifyObj.refresh();
+                            this.$refs.loginForm.validateField('checkCode');
                         }
                     })
                     if(this.loginForm.isAuto){
