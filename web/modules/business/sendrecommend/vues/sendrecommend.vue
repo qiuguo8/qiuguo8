@@ -190,7 +190,6 @@ export default {
         },
         showInfoDialogFn(obj,category,team){
             obj.productCode=category.substring(0,2);
-            console.log(obj.productCode)
             return service.goPublishRecommend(obj).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.infoObj = obj;
@@ -271,7 +270,6 @@ export default {
             this.getMatchesInfo(param);
         },
         handleCheckedLeaguesChange(value) {
-            console.log(this.checkedLeague);
             let checkedCount = value.length;
             this.checkAll = checkedCount === this.leagues.length;
             this.isIndeterminate = checkedCount > 0 && checkedCount < this.leagues.length;
@@ -279,7 +277,6 @@ export default {
             this.getMatchesInfo(param);
         },
         handleOpposit(val,oppo,scope){
-            // console.log(oppo,val,scope);
             if(val){
                 for(var i=0,len=this.matchsTable;len=this.matchsTable.length;i++){
                     if(scope.row.matchId == this.matchsTable[i].matchId){
@@ -288,8 +285,7 @@ export default {
                     }
                 }
                 //scope.row[oppo] = false;
-            }
-            //console.log(scope.row[oppo],val);
+            }``
         },
         productChange(){
             let param = {'productCode':this.productCode};

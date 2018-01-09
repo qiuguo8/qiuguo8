@@ -136,7 +136,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import {RadioButton,RadioGroup,Rate,Table,TableColumn,Pagination} from 'element-ui'
+import {RadioButton,RadioGroup,Rate,Table,TableColumn,Pagination,Message} from 'element-ui'
 import service from 'web/modules/business/trade/service/orderService'
 import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
 import pathUtil from 'web/common/utils/pathUtil.js'
@@ -221,7 +221,12 @@ export default {
                     this.avatarUrl=pathUtil.getStaticPath()+this.recommDetail.faceUrl;
                     this.listRecentRecomm();
                     this.listSameFieldRecomm();
-                };
+                }else{
+                    Message({
+                        message:ret.body.info,
+                        type:ret.body.status || 'info'
+                    })
+                }
             })
         },
     },
