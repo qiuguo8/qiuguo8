@@ -12,7 +12,10 @@ export default {
     buyRecommDetails(item){
         return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/buyRecommDetails',item);
     },
-    listSameFieldRecomm(item){
-        return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/listSameFieldRecomm',item);
+    listSameFieldRecomm(item) {
+        return Vue.http.post(pathUtil.getBasePath() + '/buyRecomm/listSameFieldRecomm', item);
+    },
+    userInfo(item){
+        return Vue.http.post(pathUtil.getBasePath() + '/buyRecomm/recommUserInfo', item);
     }
 }

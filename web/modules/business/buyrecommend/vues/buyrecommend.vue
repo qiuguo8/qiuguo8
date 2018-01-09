@@ -182,7 +182,7 @@
                 sysUtil.checkLoginForBiz(this.gotoOtherPeopleView.bind(this,item));
             },
             gotoOtherPeopleView(item){
-                this.$router.push({name:'other-people',query: {recommendNo:item.recommendNo}})
+                this.$router.push({name:'user-info',query: {userName:item.userName,productCode:item.productCode}})
             }
         }
     }

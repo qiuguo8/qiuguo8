@@ -314,14 +314,12 @@ export default {
       personinfoService
         .getRecommendRecord()
         .then(data => {
-          console.log(data);
           this.tableData4 = data.list.list;
           this.tableData4Total = data.list.total;
         }),
       personinfoService
         .getSecurityInformation()
         .then(data => {
-          console.log(data);
           this.securityInformation = data;
         });
   },
@@ -382,7 +380,6 @@ export default {
           pageNum: this.currentPage4
         })
         .then(data => {
-          console.log(data);
           this.tableData4 = data.list.list;
           this.tableData4Total = data.list.total;
         });

@@ -152,7 +152,6 @@ export default {
 
         return {
             recommendNo: this.$route.query.recommendNo,
-            radioVal:'1',
             recentRecommList:[],
             //当前页码
             currentPage: 1,

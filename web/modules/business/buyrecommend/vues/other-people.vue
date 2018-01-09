@@ -1,8 +1,8 @@
 <template>
-    <div class="">
-        <div class="content-75-to-100 content-wrap">
-            <div class="select-list content-wrap">
-                <el-radio-group v-model="productCode3" class="radio-list" @change = "changeProductCode3()">
+    <div class="achive-detail">
+        <div class="content-75-to-100 content-wrap achive-list">
+            <div class="select-list content-wrap ">
+                <el-radio-group v-model="productCode" class="radio-list" @change = "changeProductCode()">
                     <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                     <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
                     <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
@@ -94,23 +94,39 @@
 </template>
 <script>
 import Vue from 'vue'
-import {RadioButton,RadioGroup,Rate,Table,TableColumn,Pagination} from 'element-ui'
+import {
+    Input,
+    Button,
+    Table,
+    TableColumn,
+    Pagination,
+    CheckboxButton,
+    RadioButton,
+    RadioGroup,
+    Dialog,
+    Form,
+    FormItem
+} from "element-ui";
 import service from 'web/modules/business/trade/service/orderService'
 import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
 import pathUtil from 'web/common/utils/pathUtil.js'
-Vue.component(RadioButton.name,RadioButton);
-Vue.component(RadioGroup.name,RadioGroup);
-Vue.component(Rate.name,Rate);
-Vue.component(Table.name,Table);
-Vue.component(TableColumn.name,TableColumn);
-Vue.component(Pagination.name,Pagination);
+Vue.component(Input.name, Input);
+Vue.component(Button.name, Button);
+Vue.component(Table.name, Table);
+Vue.component(TableColumn.name, TableColumn);
+Vue.component(Pagination.name, Pagination);
+Vue.component(CheckboxButton.name, CheckboxButton);
+Vue.component(RadioButton.name, RadioButton);
+Vue.component(RadioGroup.name, RadioGroup);
+Vue.component(Dialog.name,Dialog);
+Vue.component(Form.name,Form);
+Vue.component(FormItem.name,FormItem);
+
 
 export default {
     data(){
 
         return {
-            recommendNo: this.$route.query.recommendNo,
-            radioVal:'1',
             recentRecommList:[],
             //当前页码
             currentPage: 1,
@@ -119,30 +135,21 @@ export default {
             //默认数据总数
             totalCount: 0,
             recommDetail:{},
-            rDetails:{},
             product:{'01':'亚盘','02':'大小球','03':'竞彩足球','04':'北京单场'},
             orderData:'',
-            sameFieldList:'',
             assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
-            avatarUrl:''
+            avatarUrl:'',
+            productCode: '01',
+            userName:this.$route.query.userName
         }
     },
     methods:{
         listRecentRecomm(){
-            let recomm = {pageNum:this.currentPage,pageSize:this.pagesize,userId:this.recommDetail.userId,recommendNo:this.recommDetail.recommendNo};
+            let recomm = {pageNum:this.currentPage,pageSize:this.pagesize,userId:this.recommDetail.userId,productCode:this.productCode};
             service.pageRecentRecomm(recomm).then((ret)=>{
                 if(ret.body.status == 'success'){
                     this.recentRecommList = ret.body.list;
                     this.totalCount = ret.body.total;
-                    console.log(this.recentRecommList);
-                }
-            })
-        },
-        listSameFieldRecomm(){
-            let recomm = {recommendNo:this.recommDetail.recommendNo,matchId:this.recommDetail.matchId,productCode:this.recommDetail.productCode};
-            service.listSameFieldRecomm(recomm).then((ret)=>{
-                if(ret.body.status == 'success'){
-                    this.sameFieldList = ret.body.list;
                 }
             })
         },
@@ -155,35 +162,26 @@ export default {
             this.currentPage = val;
             this.listRecentRecomm();
         },
-        forFree(item){
-            service.buyRecommDetails(item).then((ret) => {
-                if(ret.body.status=='success'){
-                    this.recommDetail = ret.body.details;
-                    this.rDetails = ret.body.rdetails;
-                    this.listRecentRecomm();
-                    this.listSameFieldRecomm();
-                };
-            })
-        },
         showOrderDetail(item) {
             this.orderData = item;
             this.$refs.orderBuy.show();
         },
         buyRecommDetails(){
-            let item = {recommendNo:this.recommendNo}
-            service.buyRecommDetails(item).then((ret) => {
+            let item = {userName:this.userName,productCode:this.productCode}
+            service.userInfo(item).then((ret) => {
                 if(ret.body.status=='success'){
                     this.recommDetail = ret.body.details;
-                    this.rDetails = ret.body.rdetails;
                     if(!this.recommDetail.faceUrl){
                         this.recommDetail.faceUrl="avatar/default.jpg"
                     };
                     this.avatarUrl=pathUtil.getStaticPath()+this.recommDetail.faceUrl;
                     this.listRecentRecomm();
-                    this.listSameFieldRecomm();
                 };
             })
         },
+        changeProductCode(){
+            this.buyRecommDetails()
+        }
     },
     mounted:function () {
         this.buyRecommDetails();

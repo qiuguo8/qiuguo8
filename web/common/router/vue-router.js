@@ -334,8 +334,8 @@ const routes = [
             ]
         },
         {
-            path:'/other-people',
-            name:'other-people',
+            path:'/user-info',
+            name:'user-info',
             meta:{
                 aliasName:'推荐师页面'//别人可以看的，不是给自己看的，自己看的是另一个
             },
