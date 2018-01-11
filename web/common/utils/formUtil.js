@@ -85,13 +85,13 @@ const formUtil = {
                 var error;
                 var param = {'phone':value};
                 registerService.phoneRepeat(param).then((ret)=>{
-                    error = new Error(mess);
+                    error = !notRegis && ret.body.result || notRegis && !ret.body.result ? new Error(mess) : null;
                     if(ret.body.result){
-                        callback(!notRegis ? error : '');
+                        !notRegis ? callback(error) : callback();
                         notRegis && successCb && successCb(error);
                     }
                     !notRegis && successCb && successCb(error);
-                    callback(notRegis ? error : '');
+                    notRegis ? callback(error) : callback();
                 })
             }
         }
