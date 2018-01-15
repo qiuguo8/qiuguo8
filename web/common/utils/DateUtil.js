@@ -182,10 +182,10 @@ DateFormat.prototype = {
                     dateStr += date[i];
                     break;
                 case 'month':
-                    dateStr += (separator + (date[i].length>1 ? date[i] : "0"+date[i]));
+                    dateStr += separator + (date[i]>9 ? date[i] : "0"+date[i]);
                     break;
                 case 'day':
-                    dateStr += (separator + (date[i].length>1 ? date[i] : "0"+date[i]));
+                    dateStr += separator + (date[i]>9 ? date[i] : "0"+date[i]);
                     break;
                 case 'hour':
                     if(!withTime)break;
