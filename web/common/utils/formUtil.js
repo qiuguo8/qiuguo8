@@ -110,6 +110,7 @@ const formUtil = {
                     }
                     callback();
                 }
+                return;
             }
             callback();
         }

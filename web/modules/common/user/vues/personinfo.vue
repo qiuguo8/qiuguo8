@@ -171,6 +171,7 @@ import {
   RadioGroup,
   Dialog,
   Form,
+  Message,
   FormItem
 } from "element-ui";
 import personinfoService from "web/modules/common/user/service/personinfoService.js";
@@ -326,12 +327,37 @@ export default {
   methods: {
     modifyPwd(){
         this.$refs.loginPwdForm.validate((valid)=>{
-
+            if(valid){
+                console.log({oldPassWord:this.loginPwdForm.oldPassword,newPassWord:this.loginPwdForm.newPassword});
+                 personinfoService.modifyPassWord({oldPassWord:this.loginPwdForm.oldPassword,newPassWord:this.loginPwdForm.newPassword})
+                 .then((data)=>{
+                     Message({
+                            message:data.message ,
+                            type:(data.status=='success' ? 'success' : 'error')
+                        })
+                        if(data.status=='success'){
+                           this.loginpwdset = false 
+                          this.$refs.loginPwdForm.resetFields();
+                        }
+                 })
+            }
         })
     },
     modifyTradePwd(){
         this.$refs.tradePwdForm.validate((valid)=>{
-
+   if(valid){
+                 personinfoService.modifyTradePassWord({oldPassWord:this.tradePwdForm.oldPassword,newPassWord:this.tradePwdForm.newPassword})
+                 .then((data)=>{
+                     Message({
+                            message:data.message ,
+                            type:(data.status=='success' ? 'success' : 'error')
+                        })
+                        if(data.status=='success'){
+                           this.tradepwdset = false 
+                          this.$refs.tradePwdForm.resetFields();
+                        }
+                 })
+            }
         })
     },
     canSendSmsFn(err){

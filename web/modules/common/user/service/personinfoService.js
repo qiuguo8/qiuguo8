@@ -21,4 +21,16 @@ export default {
                 return ret.data;
                 });
                 },
+    modifyPassWord(obj){
+        return Vue.http.post(pathUtil.getBasePath()+'/userCenter/modifyPassWord',obj)
+                .then((ret)=>{
+                return ret.data;
+                });
+                },
+    modifyTradePassWord(obj){
+        return Vue.http.post(pathUtil.getBasePath()+'/userCenter/modifyTradePassWord',obj)
+                .then((ret)=>{
+                return ret.data;
+                });
+                },
 }

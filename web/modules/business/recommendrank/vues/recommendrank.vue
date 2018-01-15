@@ -115,7 +115,7 @@ export default {
             week:'',
             month:'',
             list:[],
-            currentPage:1,
+            currentPage:0,
             isFull:false
         }
     },
@@ -127,7 +127,7 @@ export default {
         }),
            recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
             this.tableData5 = ret.list.list;
-            this.month = ret.month;
+            this.month = (ret.month == 0)?12:ret.month;
             this.checkIsFull(ret.list.total);
         })
     },
