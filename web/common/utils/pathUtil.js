@@ -4,7 +4,7 @@ const DEVELOPMENT = 'development';
 var curEnv = DEVELOPMENT;
 var origin = location.origin;
 var basePath = origin;
-var sataticPath = "http://120.79.65.250/";
+var sataticPath = "http://image.qiuguo8.com/";
 
 if(curEnv === DEVELOPMENT){
     basePath += '/qiuguo8'; 

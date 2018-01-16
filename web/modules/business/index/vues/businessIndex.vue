@@ -11,16 +11,15 @@
             <div class="achive-rank rank-common content-wrap">
                 <div class="list-name"><span>龙虎榜</span></div>
                 <div class="rank-types text-center">
-                    <el-radio-group v-model="productType"  @change="rankQuery()" class="radio-list small-radio">
-                        <el-radio-button label="1" class="danger-radio small-checkbox">亚盘</el-radio-button>
-                        <el-radio-button label="2" class="danger-radio small-checkbox">大小球</el-radio-button>
-                        <el-radio-button label="3" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                        <el-radio-button label="4" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                    <el-radio-group v-model="productCode"  @change="rankQuery()" class="radio-list small-radio">
+                        <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
+                        <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
+                        <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                        <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                    <div class="scroll-bar"></div>
-                    <ul scroll-content style="position:relative;margin:0px;padding:0px">
+                    <ul style="position:relative;margin:0px;padding:0px">
                         <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
                             <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
                             <span class="el-col-12 user-name text-elipse">{{rankItem.userName}}</span>
@@ -116,7 +115,7 @@
                 bannerList:[],
                 rankList:[],
                 hotList:[],
-                productType:'1',
+                productCode:'01',
                 ttList:[],
                 xwList:[],
                 ycList:[],
@@ -139,7 +138,7 @@
                 this.$refs.orderBuy.show();
             },
             rankQuery(){
-                var sform= {'productType':this.productType}
+                var sform= {'productCode':this.productCode}
                 indexService.queryLongHuRank(sform).then((ret)=>{
                     this.rankList = ret.body.rankList;
                 })
