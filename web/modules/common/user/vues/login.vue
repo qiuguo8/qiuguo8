@@ -16,7 +16,7 @@
                 </el-form-item>
                 <el-form-item label-width="80px" prop="isAuto">
                     <el-checkbox v-model="loginForm.isAuto">自动登录</el-checkbox>
-                    <a class="miss-pass">忘记密码?</a>
+                    <a class="miss-pass" @click="updatePass()">忘记密码?</a>
                 </el-form-item>
             </el-form>
             <div class="btn-login text-right">
@@ -301,7 +301,11 @@ export default {
                 this.countTxt = this.countSec+'秒后重新获取验证码';
                 this.countSeconds();
             },1000)
-        }
+        },
+        updatePass() {
+            this.$router.push({name:'update-password'})
+            this.close();
+        },
     }
 }
 </script>

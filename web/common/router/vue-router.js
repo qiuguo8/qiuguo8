@@ -340,7 +340,16 @@ const routes = [
                 aliasName:'推荐师页面'//别人可以看的，不是给自己看的，自己看的是另一个
             },
             component:resolve => require(['modules/business/buyrecommend/vues/other-people.vue'],resolve)
+        },
+        {
+            path:'/update-password',
+            name:'update-password',
+            meta:{
+                aliasName:'修改密码页面'//修改密码
+            },
+            component:resolve => require(['modules/common/user/vues/updatePassword.vue'],resolve)
         }]
+
     },
     { 
         path: '*', 

@@ -85,6 +85,7 @@ const formUtil = {
                 var error;
                 var param = {'phone':value};
                 registerService.phoneRepeat(param).then((ret)=>{
+                    console.log(ret.body.result)
                     error = !notRegis && ret.body.result || notRegis && !ret.body.result ? new Error(mess) : null;
                     if(ret.body.result){
                         !notRegis ? callback(error) : callback();
@@ -113,6 +114,23 @@ const formUtil = {
                 return;
             }
             callback();
+        }
+    },
+    checkPhoneExist(mess,successCb,notRegis){
+        return (rule,value,callback)=>{
+            if(!validationUtil.isNull(value)){
+                var error;
+                var param = {'phone':value};
+                registerService.phoneExist(param).then((ret)=>{
+                    error = !notRegis && !ret.body.result || notRegis && ret.body.result ? new Error(mess) : null;
+                    if(!ret.body.result){
+                        !notRegis ? callback(error) : callback();
+                        notRegis && successCb && successCb(error);
+                    }
+                    !notRegis && successCb && successCb(error);
+                    notRegis ? callback(error) : callback();
+                })
+            }
         }
     },
 }
