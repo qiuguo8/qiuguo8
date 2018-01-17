@@ -14,6 +14,12 @@ export default {
                 .then((ret)=>{
                 return ret.data;
                 });
+    },
+    modifyAvatar(obj){
+        return Vue.http.post(pathUtil.getBasePath()+'/userCenter/modifyAvatar',obj)
+                .then((ret)=>{
+                return ret.data;
+                });
     }
 
 }

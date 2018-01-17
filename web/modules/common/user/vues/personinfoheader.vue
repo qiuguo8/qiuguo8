@@ -49,7 +49,7 @@
         <el-dialog title="修改头像" :visible.sync="isShowImgMd" width="300px">
             <el-upload
                 class="avatar-uploader"
-                action="http://localhost:9090/qiuguo8/upload/uploadImg"
+                :action="uploadAction"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
@@ -58,7 +58,7 @@
             </el-upload>
             <div slot="footer">
                 <el-button @click="isShowImgMd=false">取消</el-button>
-                <el-button type="primary">确定</el-button>
+                <el-button type="primary" @click="modifyAvatar()">确定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -80,10 +80,13 @@ export default {
             base:{baseInfo:''},
             tempSign:'',
             avatarUrl:'',
-
+            newFaceUrl:'',
+            uploadAction:'',
+            imageUrl:'',
         }
     },
     mounted(){
+        this.uploadAction=pathUtil.getBasePath()+'/upload/uploadAvatar';
         personInfoHeaderService.getQgAvailableBalance().then((data)=>{
             this.base = data;
             this.base.baseInfo.registTime = this.base.baseInfo.registTime.substr(0,10);
@@ -95,7 +98,9 @@ export default {
     },
     methods:{
         handleAvatarSuccess(){
-            console.log(arguments);
+            console.log(arguments[0].status);
+            this.newFaceUrl=arguments[0].newFaceUrl;
+            this.imageUrl=pathUtil.getStaticPath()+this.newFaceUrl;
         },
         changePersonalSign(){
             personInfoHeaderService.submitPersonalSign({personSign:this.tempSign}).then((data)=>{
@@ -103,6 +108,15 @@ export default {
                 this.isShowDeclare = false;
                 if(data.status){
                     this.base.baseInfo.personalSign = this.tempSign;
+                }
+            })
+        },
+        modifyAvatar(){
+            personInfoHeaderService.modifyAvatar({faceUrl:this.newFaceUrl}).then((data)=>{
+                this.isShowImgMd = false;
+                if(data.status){
+                    this.base.baseInfo.faceUrl=this.newFaceUrl;
+                    this.avatarUrl=pathUtil.getStaticPath()+this.newFaceUrl;
                 }
             })
         }
