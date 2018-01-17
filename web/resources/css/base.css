@@ -327,7 +327,7 @@ nav ul{list-style: none}
     .header-container>nav .header-menu{padding:0px;box-shadow:initial;height:70px;position: relative;top:-5px;float:left}
     .header-container>nav .header-menu-icon{display: none}
     .header-container>nav div.not-for-icon{display:block}
-    .header-container>nav .header-menu-list{padding:0px;width:auto;display:block;position: relative;top:-3px;left:0px;box-shadow: none}
+    .header-container>nav .header-menu-list{padding:0px;width:auto;display:block;position: relative;top:-4px;left:0px;box-shadow: none}
     .header-container>nav .header-menu-list>li{float: left;margin:0px 10px;padding:25px 15px 25px}
     .header-container>nav .header-menu-list>.for-icon{display: none;}
     /* .header-container>nav .header-menu:hover ul{display: block;}
@@ -627,7 +627,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 .mu-date-picker .mu-text-field-content>.mu-text-field-hint{font-size:14px;padding:5px 15px;line-height:30px;color:#d8dce4}
 .mu-date-picker .mu-text-field-content>.mu-text-field-input{border-radius:5px;border:1px solid #d8dce5;height:40px;padding:0px 15px}
 .mu-date-picker .mu-text-field-content>div:last-child>.mu-text-field-line{height: 0px}
-
+.mu-dialog-wrapper .mu-dialog{width:auto}
 .mu-date-picker-dialog>.mu-dialog-body .mu-date-display{background-color: #e90304}
 .mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container .mu-day-button>.mu-day-button-bg{background-color: #e90304}
 .mu-date-picker-dialog>.mu-dialog-body .mu-calendar-container .mu-calendar-actions>button{color:#e90304}
