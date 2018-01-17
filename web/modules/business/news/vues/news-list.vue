@@ -6,7 +6,7 @@
             </div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="ttItem in ttList" :key="ttItem.contentId">
-                    <router-link target="_blank"  :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs">{{ttItem.contentTitle}}</router-link>
+                    <router-link target="_blank"  :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs text-elipse">{{ttItem.contentTitle}}</router-link>
                 </li>
             </ul>
             <div class="page-block text-center">
@@ -25,7 +25,7 @@
             </div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="xwItem in xwList" :key="xwItem.contentId">
-                    <router-link target="_blank" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs">{{xwItem.contentTitle}}</router-link>
+                    <router-link target="_blank" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs text-elipse">{{xwItem.contentTitle}}</router-link>
                 </li>
             </ul>
             <div class="page-block text-center">
@@ -45,7 +45,7 @@
             </div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="ycItem in ycList" :key="ycItem.contentId">
-                    <router-link target="_blank" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs">{{ycItem.contentTitle}}</router-link>
+                    <router-link target="_blank" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs text-elipse">{{ycItem.contentTitle}}</router-link>
                 </li>
             </ul>
             <div class="page-block text-center">

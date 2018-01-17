@@ -30,7 +30,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.min.js',
       'web': resolve('web'),
       'resources': resolve('web/resources'),
-      'modules': resolve('web/modules')
+      'modules': resolve('web/modules'),
+      'muse-components': 'muse-ui/src'
     }
   },
   externals: {
@@ -55,13 +56,12 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
-      // {
-      //   test: /muse-ui.src.*?.\.(js|vue)$/,
-      //   use: [
-      //     {loader:'babel-loader'},
-      //     {loader:'vue-loader',options:vueLoaderConfig}
-      //   ]
-      // },
+      {
+        test: /muse-ui.src.*?js$/,
+        use: [
+          {loader:'babel-loader'},
+        ]
+      },
       {
         test: /\.js$/,
         include: [resolve('web')],
