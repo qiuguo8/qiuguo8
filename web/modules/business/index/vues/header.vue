@@ -81,18 +81,22 @@ export default {
     },
     methods:{
         showMenu(e,clickObj,showObj){
-            // console.log(e,e.target != clickObj,e.target,showObj,clickObj);
+            e.stopPropagation();
+            if(!clickObj || !showObj)return;
             var $menu = $(showObj);
-            var path = e.path || e.originalEvent.path
-            if(e.target != clickObj&&path.indexOf(clickObj)<0){
+            var path = e.path || e.originalEvent.path;
+            if(e.target != clickObj&&$menu.find(e.target).length<1){
                 $menu.removeClass('menu-show');
                 return;
+            }else{
+                if($menu.find(e.target).length>0)return;
             }
             if($menu.hasClass('menu-show')){
                 $menu.removeClass('menu-show');
             }else{
                 $menu.addClass('menu-show');
             }
+            e.preventDefault();
         },
         showUserMenu(e){
              this.showMenu(e,this.$refs.usericon,this.$refs.userlist);
