@@ -19,13 +19,13 @@
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                    <ul style="position:relative;margin:0px;padding:0px">
                         <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
-                            <img class="el-col-4" src="/web/resources/img/index/u170.jpg"/>
-                            <span class="el-col-12 user-name text-elipse">{{rankItem.userName}}</span>
-                            <span class="el-col-8 achive">{{rankItem.winCount}}胜{{rankItem.tieTotal}}平{{rankItem.loseCount}}负</span>
+                            <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
+                            <img class="el-col-3" src="/web/resources/img/index/u170.jpg"/>
+                             <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
+                            <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
+                            <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
                         </router-link>
-                    </ul>
                 </div>
             </div>
         </div>
