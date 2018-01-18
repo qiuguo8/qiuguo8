@@ -1,5 +1,5 @@
 import Vue from "vue"
-import Vuex from "vuex"
+// import Vuex from "vuex"
 import VueRouter from "vue-router"
 window.VueRouter = VueRouter;
 import VueResource from "vue-resource"
@@ -23,7 +23,7 @@ import datePicker from 'muse-components/datePicker'
 
 Vue.use(VueRouter);
 Vue.use(VueResource); 
-Vue.use(Vuex);
+// Vue.use(Vuex);
 Vue.use(infiniteScroll)
 Vue.component(datePicker.name,datePicker);
 
