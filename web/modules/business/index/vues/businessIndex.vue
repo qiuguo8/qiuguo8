@@ -21,8 +21,9 @@
                 <div class="achive-rank-list" ref="achiveRank">
                         <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
                             <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
-                            <img class="el-col-3" src="/web/resources/img/index/u170.jpg"/>
-                             <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
+                            <img class="el-col-3" v-if="item.faceUrl" :src="staticPath+rankItem.faceUrl"/>
+                            <img class="el-col-3" v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'" />
+                            <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
                             <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
                             <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
                         </router-link>
