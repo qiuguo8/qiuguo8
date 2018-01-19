@@ -114,7 +114,7 @@ export default {
                 checkCode: [
                     {required: true, message: '验证码不能为空', trigger: 'change blur'},
                     {validator: formUtil.isNumber('验证码必须为数字'), trigger: 'change blur'},
-                    {type: 'number', validator: formUtil.maxSize(4, '验证码长度不大于4'), trigger: 'blur change'},
+                    {type: 'number', validator: formUtil.maxSize(4, '验证码长度等于4'), trigger: 'blur change'},
                     {validator: this.validateCode.bind(this), trigger: 'change'},
                 ],
                 isAuto: [
@@ -171,9 +171,15 @@ export default {
         },
         validateCode(rule,val,callback){
             if(val && val.length==4){
-                callback();
+                loginService.validateImgCode({checkCode:this.loginForm.checkCode}).then((ret)=>{
+                    if(ret === true){
+                        callback();
+                    }else{
+                        callback(new Error("输入的验证码不正确"));
+                    }
+                })
             }else{
-                callback(new Error("验证码长度为4"));
+                callback(new Error("验证码长度等于4"));
             }
         },
         getImgCode(){

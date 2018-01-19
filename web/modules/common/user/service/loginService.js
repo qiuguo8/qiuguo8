@@ -18,5 +18,10 @@ export default {
         return Vue.http.post(pathUtil.getBasePath()+'/registerUser/createPictureCode').then(function(ret){
             return ret.data;
         });
+    },
+    validateImgCode(obj){
+        return Vue.http.post(pathUtil.getBasePath()+'/registerUser/checkCode',obj).then(function(ret){
+            return ret.data;
+        });
     }
 }
