@@ -13,5 +13,10 @@ export default {
         return Vue.http.post(pathUtil.getBasePath()+'/login/checkLogin').then(function(ret){
             return ret.data;
         });
+    },
+    getImgCode(){
+        return Vue.http.post(pathUtil.getBasePath()+'/registerUser/createPictureCode').then(function(ret){
+            return ret.data;
+        });
     }
 }

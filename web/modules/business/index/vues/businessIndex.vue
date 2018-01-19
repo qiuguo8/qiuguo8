@@ -19,14 +19,14 @@
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                        <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
-                            <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
-                            <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
-                            <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
-                            <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
-                            <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
-                            <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
-                        </router-link>
+                    <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
+                        <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
+                        <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
+                        <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
+                        <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
+                        <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
+                        <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -125,7 +125,6 @@
             }
         },
         mounted(){
-            $(this.$refs.achiveRank).scrollBar();
         },
         components:{
             orderBuyTip:orderBuyTip,
@@ -141,7 +140,7 @@
             rankQuery(){
                 var sform= {'productCode':this.productCode}
                 indexService.queryLongHuRank(sform).then((ret)=>{
-                    this.rankList = ret.body.rankList;
+                    this.rankList = ret.body.rankList.concat(ret.body.rankList).concat(ret.body.rankList[0]);
                 })
             },
             forFree(item){

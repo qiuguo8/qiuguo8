@@ -47,7 +47,6 @@ import {Form,FormItem,Input,Button,Checkbox,Message} from 'element-ui'
 import validationUtil from 'web/common/utils/validationUtil.js'
 import formUtil from 'web/common/utils/formUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
-import 'web/common/utils/pVerify.js'
 import messCodeUtil from 'web/common/utils/messCodeUtil'
 import registerService from 'web/modules/common/user/service/registerService'
 Vue.component(Form.name,Form);
@@ -105,24 +104,6 @@ export default {
                 signed:[
                     {type:'boolean',validator:formUtil.isChecked('请勾选协议'),trigger:'change'},
                 ],
-            },
-            picVerifyObj:{
-                verify:null,
-                createVPic:function(){
-                    this.verify = new GVerify({
-                        id:'vPic',
-                        type:"number",
-                        isOnclick:false
-                    });
-                },
-                refresh:function(){
-                    this.verify.refresh();
-                },
-                validate:function(){
-                    if(this.verifyCode){
-                        return this.verify.validate(this.verifyCode);
-                    }
-                }
             },
             countSec:60,
             counter:null,

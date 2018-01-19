@@ -367,7 +367,7 @@ nav ul{list-style: none}
 .rank-types .radio-list>.el-radio-button{margin:5px}
 /* .rank-types span:hover{background-color: #e90304;color:#fff} */
 .achive-rank{padding:0px 10px 10px 30px;margin-left: 640px;text-align: left;-moz-appearance: none !important; }
-.achive-rank-list{overflow:auto;list-style: none;margin:0px;padding:0px;width:100%;text-align: center;height:285px;}
+.achive-rank-list{overflow:hidden;list-style: none;margin:0px;padding:0px;width:100%;text-align: center;height:285px;}
 .achive-rank-list li{padding:5px;float:left;margin-bottom:3px;margin-top:3px;cursor: pointer}
 .achive-rank-list li>img{width:40px;height: 40px;border-radius: 100%;}
 .achive-rank-list li>span{padding:5px;position:relative;top:6px}

@@ -1,7 +1,7 @@
 <template>
     <div class="news-detail">
         <div class="content-wrap content-75-to-100 news-content float-left">
-            <p>{{contentTitle}}<p/>
+            <h2 class="text-center">{{contentTitle}}</h2>
             <div>{{contentValue}}</div>
         </div>
         <div class="content-wrap content-25-to-100 rank-common">

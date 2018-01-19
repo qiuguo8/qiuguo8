@@ -15,7 +15,7 @@
             </el-radio-group>
         </div>
         <div class="">
-            <div class="content-wrap types-news type-rank-list content-60-to-100" style="display:inline-block">
+            <div class="content-wrap float-left types-news type-rank-list content-60-to-100" style="display:inline-block">
                 <!-- <ul class="select-list date-list text-left">
                     <li>3天</li>
                     <li>7天</li>
@@ -58,7 +58,7 @@
 
                 </div>
             </div> -->
-            <div class="content-wrap float-left last-rank content-40-to-100 text-center">
+            <div class="content-wrap last-rank content-40-to-100 text-center">
                 <div class="content-wrap rank-common content-100-to-50">
                     <div class="list-name"><span>第{{week}}周 周榜</span></div>
                     <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">

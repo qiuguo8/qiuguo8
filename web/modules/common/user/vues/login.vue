@@ -12,7 +12,7 @@
                     <div class="el-col-12">
                         <el-input v-model="loginForm.checkCode" auto-complete="off"></el-input>
                     </div>
-                    <div id="qPic" style="float:left;width:75px;height:40px;margin-left:10px"></div>
+                    <img @click="getImgCode()" :src="'data:image/jpg;base64,'+imgCode" style="cursor:pointer;float:left;width:85px;height:40px;margin-left:10px"/>
                 </el-form-item>
                 <el-form-item label-width="80px" prop="isAuto">
                     <el-checkbox v-model="loginForm.isAuto">自动登录</el-checkbox>
@@ -132,25 +132,7 @@ export default {
                     {type:'number',validator:formUtil.maxSize(6,'验证码长度不大于6'),trigger:'blur change'}
                 ]
             },
-            picVerifyObj:{
-                verify:null,
-                createVPic:function(){
-                    this.verify = new GVerify({
-                        id:'qPic',
-                        type:"number",
-                        canvasId:'qPicanves',
-                        isOnclick:false
-                    });
-                },
-                refresh:function(){
-                    this.verify.refresh();
-                },
-                validate:function(code){
-                    if(code){
-                        return this.verify.validate(code);
-                    }
-                }
-            },
+            imgCode:'',
             countSec:60,
             counter:null,
             countTxt:'发送短信验证码',
@@ -164,6 +146,7 @@ export default {
             comVue.$data.userInfo = ret.user;
             comVue.$emit('is-manage-for-menu');
         })
+        this.getImgCode();
     },
     mounted(){
         comVue.$on('show-login-form',(data)=>{
@@ -187,11 +170,16 @@ export default {
             this.isMobileValid = error ? false : true;
         },
         validateCode(rule,val,callback){
-            if(val && val.length>=4 && this.picVerifyObj.validate(val)){
+            if(val && val.length==4){
                 callback();
             }else{
-                callback(new Error("输入验证码不正确"));
+                callback(new Error("验证码长度为4"));
             }
+        },
+        getImgCode(){
+            loginService.getImgCode().then((ret)=>{
+                this.imgCode = ret.status;
+            })
         },
         loginByUserName(){
             this.$refs.loginForm.validate((valid)=>{
@@ -208,7 +196,7 @@ export default {
                             this.close();
                             if(this.$route.name == 'register')this.$router.push({name:'index'});
                         }else{
-                            this.picVerifyObj.refresh();
+                            this.getImgCode();
                             this.$refs.loginForm.validateField('checkCode');
                         }
                     })
@@ -235,7 +223,7 @@ export default {
                             comVue.$data.userInfo = ret.body.user;
                             this.close();
                         }else{
-                            this.picVerifyObj.refresh();
+                            this.getImgCode();
                         }
                         // alert(ret.body.loginInfo);
                     })
@@ -248,9 +236,7 @@ export default {
         commonLogin(){
             this.isCommon = true;
             this.isQQlogin = this.isWXlogin = this.isMobile = false;
-            setTimeout(()=>{
-                this.picVerifyObj.createVPic();
-            },0);
+            this.getImgCode();
         },
         qqLogin(){
             this.isCommon = this.isWXlogin = this.isMobile = false;
