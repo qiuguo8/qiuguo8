@@ -140,7 +140,7 @@
             rankQuery(){
                 var sform= {'productCode':this.productCode}
                 indexService.queryLongHuRank(sform).then((ret)=>{
-                    this.rankList = ret.body.rankList.concat(ret.body.rankList).concat(ret.body.rankList[0]);
+                    this.rankList = ret.body.rankList;
                 })
             },
             forFree(item){
