@@ -239,6 +239,7 @@ export default {
          },
        starLevelFormat(row,column){
             switch (row.starLevel) {
+                case '00':return '零星';break;
                 case '01':return '一星';break;
                 case '02':return '二星';break;
                 case '03':return '三星';break;

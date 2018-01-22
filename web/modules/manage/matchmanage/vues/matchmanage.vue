@@ -1,17 +1,17 @@
 <template>
     <dvi class="match-manage">
         <div class="row-new text-center">
-            <div class="form-control content-60-to-60 float-left">
-                <label class="el-col-7">比赛时间</label>
-                <div class="el-col-17">
-                    <span class="el-col-11">
-                        <mu-date-picker v-model="query.matchTimeStart" hintText="选择时间"/>
-                    </span>
-                    <span class="el-col-2 mid-word">至</span>
-                    <span class="el-col-11">
-                        <mu-date-picker v-model="query.matchTimeEnd" hintText="选择时间"/>
-                    </span>
-                </div>
+        
+            <div class="form-control content-40-to-40 float-left">
+                <label class="el-col-7">产品类型</label>
+                <el-select class="el-col-17" v-model="query.productCode" filterable placeholder="请选择">
+                    <el-option
+                    v-for="item in pdoptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                </el-select>
             </div> 
             <div class="form-control content-40-to-40 float-left">
                 <label class="el-col-7">开奖状态</label>
@@ -23,6 +23,18 @@
                     :value="item.value">
                     </el-option>
                 </el-select>
+            </div> 
+                <div class="form-control content-60-to-60 float-left">
+                <label class="el-col-7">比赛时间</label>
+                <div class="el-col-17">
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="query.matchTimeStart" hintText="选择时间"/>
+                    </span>
+                    <span class="el-col-2 mid-word">至</span>
+                    <span class="el-col-11">
+                        <mu-date-picker v-model="query.matchTimeEnd" hintText="选择时间"/>
+                    </span>
+                </div>
             </div> 
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary" @click="getMatchList">查询</el-button>
@@ -37,13 +49,7 @@
                 <el-table-column prop="homeTeamName" label="主队" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="overFlag" label="开奖状态" :formatter="overFlagForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="handiCap" label="盘口" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="disabled" label="是否隐藏":formatter="disabledForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
-                     <template slot-scope="scope">
-                        <el-button type="text" size="small" @click="updateMatch(scope.row)">修改</el-button>
-                    </template>
-                </el-table-column>
             </el-table>
             <div class="page-block text-right">
                 <el-pagination
@@ -76,6 +82,7 @@ export default {
         return {
             query:{
                 overFlag:'',
+                productCode:'',
                 matchTimeStart:'',
                 matchTimeEnd:'',
             },
@@ -84,6 +91,12 @@ export default {
                 {value: '', label: '全部' },
                 {value: '0', label: '未开奖' },
                 {value: '1',label: '已开奖'}],
+            pdoptions:[
+                {value: '', label: '全部' },
+                {value: '01', label: '亚盘' },
+                {value: '02',label: '大小球'},
+                {value: '03',label: '竞彩足球'},
+                {value: '04',label: '北京单场'}],
             //当前页码
             currentPage: 1,
             //默认每页数据量
@@ -121,6 +134,7 @@ export default {
                 overFlag:'',
                 matchTimeStart:'',
                 matchTimeEnd:'',
+                productCode:'',
             }
         },
         updateMatch(id,status){

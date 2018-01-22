@@ -11,7 +11,7 @@
                     <li class="transition-halfs" @click="showContacts = true">加盟合作</li>
                     <!-- <li class="transition-halfs">网站地图</li> -->
                     <!-- <li class="transition-halfs">友情链接</li> -->
-                    <router-link :to="{name:'recruit'}" tag="li" class="transition-halfs">网站招聘</router-link>
+                    <!--<router-link :to="{name:'recruit'}" tag="li" class="transition-halfs">网站招聘</router-link>-->
                 </ul>
             </div>
             <el-dialog title="公众号" width="250px" :lock-scroll="false" append-to-body="true" :visible.sync="showgzh">
