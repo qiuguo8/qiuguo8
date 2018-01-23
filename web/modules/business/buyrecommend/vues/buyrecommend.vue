@@ -15,7 +15,7 @@
                 <li>北京单场</li>
             </ul> -->
             <div class="types-list">
-                <el-radio-group v-model="productCode" class="radio-list" @change="listRecomm">
+                <el-radio-group v-model="productCode" class="radio-list" @change="changeProductCode">
                     <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                     <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
                     <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
@@ -36,7 +36,7 @@
                 <li>指定赛事</li>
             </ul> -->
             <div class="types-list">
-                <el-radio-group v-model="radioVal" class="radio-list" @change="listRecomm">
+                <el-radio-group v-model="radioVal" class="radio-list" @change="changeProductCode">
                     <el-radio-button label="1" class="danger-radio small-checkbox">综合</el-radio-button>
                     <el-radio-button label="2" class="danger-radio small-checkbox">3天准确率</el-radio-button>
                     <el-radio-button label="3" class="danger-radio small-checkbox">7天准确率</el-radio-button>
@@ -52,10 +52,10 @@
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
-                    <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl" @click="otherPeopleView(item)"/>
-                    <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'" @click="otherPeopleView(item)">
-                    <!-- <button class="el-button btn-success" v-if="item.subscribeStatus=='1'">已关注</button>
-                    <button class="el-button btn-orange" v-if="item.subscribeStatus=='0'" @click="addUserSubscribe(item)" >关注</button> -->
+                    <router-link class="recommender-content" :key="item.userId" target="_blank" :to="{name:'recommender-info', params: { userName: item.userName }}" >
+                        <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
+                        <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
+                    </router-link>
                 </div>
                 <div class="intro-text">
                     <p class="text-elipse">{{item.userName}}</p>
@@ -70,8 +70,9 @@
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
             </div>
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-                <span v-show="busy"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
-                <span v-show="!busy">加载更多</span>
+                <span v-show="busy && !loadOver"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
+                <span v-show="!busy && !loadOver">加载更多</span>
+                <span v-show="loadOver">加载完毕</span>
             </div>
         </div>
 
@@ -118,6 +119,9 @@
                 orderData:null,
                 staticPath:pathUtil.getStaticPath(),
                 assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
+                pageNum:1,
+                pageSize:8,
+                loadOver:false,
             }
         },
         created:function(){
@@ -131,28 +135,54 @@
                 this.isShowMatches = true;
             },
             selectedMatch() {
+                this.pageNum = 1;
                 this.isShowMatches = false;
                 this.listRecomm();
             },
-            listRecomm() {
+            changeProductCode(){ //每次改变种类的时候，页码数设置为1
+                this.pageNum = 1;
+                this.listRecomm();
+            },
+            listRecomm(flag) {
                 let buyRecommInfo = {
                     'productCode': this.productCode,
                     'userName': this.sendName,
                     'matchIds': this.matchesVal.join(','),
                     'sortRule': this.radioVal,
+                    'pageNum':this.pageNum,
+                    'pageSize':this.pageSize,
                 }
+                console.log(buyRecommInfo)
                 if (this.radioVal == '5') {
-                    buyService.listMyAttion(buyRecommInfo).then((ret) => {
-                        if (ret.body.status == 'success') {
-                            this.list = ret.body.list;
-                            this.matches = ret.body.listMatch
+                    buyService.listMyAttion(buyRecommInfo).then((res) => {
+                        if (res.data.status == 'success') {
+                            if(flag){
+                                this.list = this.list.concat(res.data.list); // 多次加载数据
+                            }else{
+                                this.list = res.data.list;// 第一次加载数据
+                            }
+                            if(res.data.list.length == 0){ //如果数据返回的列表长度为0，证明全部查询出来了
+                                this.loadOver = true;
+                            }else{
+                                this.busy = false;
+                            }
+                            this.matches = res.data.listMatch
                         }
                     })
                 } else {
-                    buyService.listRecom(buyRecommInfo).then((ret) => {
-                        if (ret.body.status == 'success') {
-                            this.list = ret.body.list;
-                            this.matches = ret.body.listMatch
+                    buyService.listRecom(buyRecommInfo).then((res) => {
+                        if (res.data.status == 'success') {
+                            if(flag){
+                                this.list = this.list.concat(res.data.list); // 多次加载数据
+                            }else{
+                                this.list = res.data.list;// 第一次加载数据
+                            }
+                            if(res.data.list.length == 0){ //如果数据返回的列表长度为0，证明全部查询出来了
+                                this.loadOver = true;
+                            }else{
+                                this.busy = false;
+                            }
+                            this.matches = res.data.listMatch
                         }
                     })
                 }
@@ -178,11 +208,15 @@
             forFreeFn(item){
                 this.$router.push({name:'order-detail',query: {recommendNo:item.recommendNo}})
             },
-            otherPeopleView(item){
-                sysUtil.checkLoginForBiz(this.gotoOtherPeopleView.bind(this,item));
-            },
-            gotoOtherPeopleView(item){
-                this.$router.push({name:'user-info',query: {userName:item.userName,productCode:item.productCode}})
+            loadMore: function() {
+                if(!loadOver){
+                    this.busy = true;
+                    // 多次加载数据
+                    setTimeout(() => {
+                        this.pageNum ++;
+                        this.listRecomm(true);
+                    }, 1000);
+                }
             }
         }
     }
