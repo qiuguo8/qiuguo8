@@ -41,18 +41,13 @@
                 <el-button type="primary" @click="loginByPhone()">确 定</el-button>
             </div>
         </div>
-        <div class="qq-login-code login-img" v-if="isQQlogin">
-            <img src=""/>
-        </div>
         <div class="weixin-login-code login-img" v-if="isWXlogin">
             <img src=""/>
         </div>
         <div slot="footer" class="dialog-footer">
             <div class="other-login">
-                <label>其它登录方式:</label>
-                <el-tooltip class="item" effect="dark" content="QQ登录" placement="top">
-                    <span @click="qqLogin()"><i class="fa fa-qq"></i></span>
-                </el-tooltip>
+                <label>登录方式:</label>
+                
                 <el-tooltip class="item" effect="dark" content="微信登录" placement="top">
                     <span @click="wxLogin()"><i class="fa fa-weixin"></i></span>
                 </el-tooltip>
@@ -60,7 +55,7 @@
                     <span @click="mobileLogin()" style="font-size:25px;position:relative;top:3px"><i class="fa fa-mobile-phone"></i></span>
                 </el-tooltip>
                 <el-tooltip class="item" effect="dark" content="账号登录" placement="top">
-                    <span v-show="!isCommon" @click="commonLogin()"><i class="fa fa-edit"></i></span>
+                    <span @click="commonLogin()"><i class="fa fa-edit"></i></span>
                 </el-tooltip>
             </div>
         </div>
