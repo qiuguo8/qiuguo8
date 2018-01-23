@@ -19,7 +19,7 @@
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                    <router-link v-for="rankItem in rankList"  :key="rankItem.userId" tag="li" :to="{name:'recommender-info'}" class="content-wrap el-col-24">
+                    <router-link v-for="rankItem in rankList"  :key="rankItem.userId" target="_blank" :to="{name:'recommender-info', params: { userId: rankItem.userId }}" class="content-wrap el-col-24">
                         <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
                         <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
                         <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
@@ -42,8 +42,10 @@
                         <div v-if="item.productCode =='03'" class="match-name text-elipse">竞彩足球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div v-if="item.productCode =='04'" class="match-name text-elipse">北京单场:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
-                            <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl" @click="otherPeopleView(item)"/>
-                            <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'" @click="otherPeopleView(item)">
+                            <router-link class="recommender-content" :key="item.userId" target="_blank" :to="{name:'recommender-info', params: { userName: item.userName }}" >
+                                <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
+                                <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
+                            </router-link>
                         </div>
                         <div class="intro-text">
                             <p class="text-elipse">{{item.userName}}</p>
@@ -171,12 +173,6 @@
                 this.$router.push({name:'news-detail',query: {recommendNo:item.recommendNo}})
 
             },
-            otherPeopleView(item){
-                sysUtil.checkLoginForBiz(this.gotoOtherPeopleView.bind(this,item));
-            },
-            gotoOtherPeopleView(item){
-                this.$router.push({name:'user-info',query: {recommendNo:item.recommendNo}})
-            }
         },
         created:function(){
             this.bannerQuery();
