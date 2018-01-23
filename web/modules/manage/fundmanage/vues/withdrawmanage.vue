@@ -44,7 +44,7 @@
             </div>   
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary">查询</el-button>
-                <el-button >重置</el-button>
+                <el-button @click="resetForm()">重置</el-button>
             </div>
         </div>
         <div class="el-col-24">
@@ -103,10 +103,10 @@ export default {
                 {value: '03',label: '审核中'}],
             startWithdrawDate:null,
             endWithdrawDate:null,
-            withdrawStatus:null,
-            withdrawRecvNo:null,
-            userName:null,
-            phone:null,
+            withdrawStatus:'',
+            withdrawRecvNo:'',
+            userName:'',
+            phone:'',
             //当前页码
             currentPage: 1,
             //默认每页数据量
@@ -118,6 +118,14 @@ export default {
     methods:{
         submitForm(){
             this.query();
+        },
+        resetForm(){
+            this.startWithdrawDate='';
+            this.endWithdrawDate='';
+            this.withdrawStatus='';
+            this.withdrawRecvNo='';
+            this.userName='';
+            this.phone='';
         },
         query(){
             var sform= {'userName':this.userName,'phone':this.phone,'startWithdrawDate':this.startWithdrawDate,'endWithdrawDate':this.endWithdrawDate,'withdrawStatus':this.withdrawStatus,'withdrawRecvNo':this.withdrawRecvNo,'pageNum':this.currentPage,'pageSize':this.pagesize}

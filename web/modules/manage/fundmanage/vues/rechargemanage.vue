@@ -38,7 +38,7 @@
             </div>    
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary">查询</el-button>
-                <el-button >重置</el-button>
+                <el-button @click="resetForm()">重置</el-button>
             </div>
         </div>
         <div class="el-col-24">
@@ -85,11 +85,11 @@ export default {
                 {value: '01', label: '支付成功' }, 
                 {value: '02',label: '支付失败'},
                 {value: '03', label: '支付已发起' }],
-            startRechargeDate:null,
-            endRechargeDate:null,
-            paymentType:null,
-            userName:null,
-            phone:null,
+            startRechargeDate:'',
+            endRechargeDate:'',
+            paymentStatus:'',
+            userName:'',
+            phone:'',
             //当前页码
             currentPage: 1,
             //默认每页数据量
@@ -102,8 +102,15 @@ export default {
         submitForm(){
             this.query();
         },
+        resetForm(){
+            this.startRechargeDate='';
+            this.endRechargeDate='';
+            this.paymentStatus='';
+            this.userName='';
+            this.phone='';
+        },
         query(){
-            var sform= {'userName':this.userName,'phone':this.phone,'startRechargeDate':this.startRechargeDate,'endRechargeDate':this.endRechargeDate,'paymentType':this.paymentType,'pageNum':this.currentPage,'pageSize':this.pagesize}
+            var sform= {'userName':this.userName,'phone':this.phone,'startRechargeDate':this.startRechargeDate,'endRechargeDate':this.endRechargeDate,'paymentStatus':this.paymentStatus,'pageNum':this.currentPage,'pageSize':this.pagesize}
             rechargemanageService.queryAllRechargeDetails(sform).then((ret)=>{
                         this.datatable = ret.body.list;
                         this.totalCount = ret.body.total;

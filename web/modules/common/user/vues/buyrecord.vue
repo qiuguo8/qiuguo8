@@ -26,6 +26,7 @@
             </div>   
             <div class="form-control el-col-12 text-center">
                 <el-button type="primary" @click="query()">查询</el-button>
+                <el-button  @click="resetForm()">重置</el-button>
             </div>    
         </div>
         <div class="el-col-24">
@@ -105,7 +106,12 @@ export default {
             buyRecordService.getBuyRecordList({userId:"20171206201103946446",pageNum:this.currentPage4}).then((data)=>{
              console.log(data);
             this.tableData3 = data.list.list;
-        });
+         });
+        },
+        resetForm(){
+            this.buyTimeStart='';
+            this.buyTimeEnd='';
+            this.productValue='';
         },
         query(){
              buyRecordService.getBuyRecordList({userId:"20171206201103946446",productValue:this.productValue,buyTimeStart:this.buyTimeStart,buyTimeEnd:this.buyTimeEnd}).then((data)=>{

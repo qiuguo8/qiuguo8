@@ -26,6 +26,7 @@
             </div>   
             <div class="form-control el-col-12 text-center">
                 <el-button type="primary" @click="submitForm()">查询</el-button>
+                <el-button  @click="resetForm()">重置</el-button>
             </div>    
         </div>
         <div class="el-col-24">
@@ -88,6 +89,11 @@ export default {
     methods:{
         submitForm(){
             this.query();
+        },
+        resetForm(){
+            this.startChangeTime='';
+            this.endChangeTime='';
+            this.changeType='';
         },
         query(){
             var sform= {'startChangeTime':this.startChangeTime,'endChangeTime':this.endChangeTime,'changeType':this.changeType,'pageNum':this.currentPage,'pageSize':this.pagesize}
