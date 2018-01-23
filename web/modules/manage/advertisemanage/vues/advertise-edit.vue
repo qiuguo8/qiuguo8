@@ -35,7 +35,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Form,FormItem,Input,Button,Radio,RadioGroup} from 'element-ui'
+import {Form,FormItem,Input,Button,Radio,RadioGroup,Message} from 'element-ui'
 import advertisemanageService from 'web/modules/manage/advertisemanage/service/advertisemanageService.js'
 import pathUtil from 'web/common/utils/pathUtil.js'
 import validationUtil from 'web/common/utils/validationUtil.js'
@@ -93,7 +93,10 @@ export default {
         submitBanner(){
             advertisemanageService.addBanner(this.editForm).then((data)=>{
                 if(data.status){
-                    $root.goBack();
+                     Message({
+                            message:'新增成功' ,
+                            type: 'success'
+                        })
                 }else{
                     alert('上传失败!');
                 }
