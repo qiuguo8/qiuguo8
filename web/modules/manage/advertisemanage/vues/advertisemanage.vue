@@ -21,17 +21,17 @@
             </div>
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary" @click="submitForm()">查询</el-button>
-                <el-button >重置</el-button>
+                <el-button  @click="resetForm()">重置</el-button>
                 <el-button type="danger" @click="add()">新增</el-button>
             </div>  
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="datatable" border>
-                <el-table-column prop="bannerName" label="标题" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="bannerUrl" label="图片URL" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                <el-table-column prop="bannerLinkUrl" label="正文链接" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="bannerName" label="标题" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="bannerUrl" label="图片URL" min-width="100" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="bannerLinkUrl" label="正文编号" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="enabled" :formatter="enabledFormat" label="是否启用" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="createTime" label="创建时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="createTime" label="创建时间" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="userName" label="创建人" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
@@ -91,6 +91,10 @@ export default {
         },
         submitForm(){
             this.query();
+        },
+        resetForm(){
+            this.bannerName='';
+            this.enabled='';
         },
         query(){
             var sform= {'bannerName':this.bannerName,'enabled':this.enabled,'pageNum':this.currentPage,'pageSize':this.pagesize}

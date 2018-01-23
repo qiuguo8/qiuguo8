@@ -38,6 +38,7 @@
             </div>
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary" @click="submitForm()">查询</el-button>
+                 <el-button  @click="resetForm()">重置</el-button>
             </div>    
         </div>
         <div class="el-col-24">
@@ -103,6 +104,13 @@ export default {
     methods:{
         submitForm(){
             this.query();
+        },
+        resetForm(){
+            this.startFreezeTime='';
+            this.endFreezeTime='';
+            this.freezeType='';
+            this.userName='';
+            this.phone='';
         },
         query(){
             var sform= {'userName':this.userName,'phone':this.phone,'startFreezeTime':this.startFreezeTime,'endFreezeTime':this.endFreezeTime,'freezeType':this.freezeType,'pageNum':this.currentPage,'pageSize':this.pagesize}

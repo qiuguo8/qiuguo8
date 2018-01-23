@@ -37,6 +37,7 @@
             </div>  
             <div class="form-control el-col-6 text-center">
                 <el-button type="primary" @click="query()">查询</el-button>
+                <el-button  @click="resetForm()">重置</el-button>
             </div>    
         </div>
         <div class="el-col-24">
@@ -132,6 +133,12 @@ export default {
             this.tableData3 = data.list.list;
             this.tableData3Total = data.list.total;
             })
+        },
+        resetForm(){
+            this.RecommendStatusValue='';
+            this.ProductValue='';
+            this.recommendTimeStart='';
+            this.recommendTimeEnd='';
         },
         query(){
             recommendService.getRecommendList({productCode:this.ProductValue,recommendStatus:this.RecommendStatusValue,recommendTimeStart:this.recommendTimeStart,recommendTimeEnd:this.recommendTimeEnd}).then((data)=>{

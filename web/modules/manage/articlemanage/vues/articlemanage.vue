@@ -20,7 +20,7 @@
             </div>
             <div class="form-control el-col-24 text-center">
                 <el-button type="primary"  @click="submitForm()">查询</el-button>
-                <el-button >重置</el-button>
+                <el-button @click="resetForm()">重置</el-button>
                 <el-button type="danger" @click="add()">新增</el-button>
             </div>  
         </div>
@@ -73,8 +73,8 @@ export default {
                 {value: '', label: '全部' }, 
                 {value: '1', label: '启用' }, 
                 {value: '0',label: '禁用'}],
-            contentTitle:null,
-            enabled:null, 
+            contentTitle:'',
+            enabled:'', 
             //当前页码
             currentPage: 1,
             //默认每页数据量
@@ -86,6 +86,10 @@ export default {
      methods:{
         add(){
             this.$router.push({name:'article-edit'});
+        },
+        resetForm(){
+            this.contentTitle='';
+            this.enabled='';
         },
         submitForm(){
             this.query();
