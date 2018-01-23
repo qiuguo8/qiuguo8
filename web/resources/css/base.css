@@ -431,6 +431,8 @@ nav ul{list-style: none}
 .intros-wrap .intro-wrap:hover{box-shadow: 0px 3px 7px 5px rgba(0, 0, 0, 0.1)}
 .intros-wrap .intro-wrap>button{background-color: rgba(255, 102, 51, 0.8);border-color:rgba(255, 102, 51, 0.7)}
 .intros-wrap .intro-wrap>button:hover{background-color: rgba(255, 102, 51, 1);}
+.intros-wrap .intro-wrap>a>button{background-color: rgba(255, 102, 51, 0.8);border-color:rgba(255, 102, 51, 0.7)}
+.intros-wrap .intro-wrap>a>button:hover{background-color: rgba(255, 102, 51, 1);}
 .intros-wrap .intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
 .intros-wrap .intro-wrap>.intro-info{height:100px;width:48%;position: relative;float: left;text-align: center}
 .intros-wrap .intro-wrap>.intro-info>.recommender-content>img{width:100px;height: 100px;border-radius:100%}
@@ -438,6 +440,7 @@ nav ul{list-style: none}
 .intros-wrap .intro-wrap>.intro-text{height:100px;width:52%;padding:5px 0px 5px 3px;word-break: break-all;display: inline-block;text-align: left;overflow:hidden}
 .intros-wrap .intro-wrap>.intro-text>p{margin:2px;}
 .intros-wrap .intro-wrap>button{float: right;width: 50%}
+.intros-wrap .intro-wrap>a>button{float: right;width: 50%}
 .intros-wrap .intro-wrap>.recomd-info{padding:8px 5px;height:54px;word-break: break-all;overflow: hidden}
 .intro-rank-list{margin-top:20px;}
 .intro-rank-list>.list-name{border-bottom: 1px solid #e90304}

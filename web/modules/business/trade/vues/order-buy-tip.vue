@@ -36,24 +36,15 @@ export default {
         confirm(){
             service.orderUnder(this.orderData).then((ret) => {
                 if(ret.body.status == 'success'){
-                    this.gotoDetail();
-
+                    let {href} = this.$router.resolve({name:'order-detail',query: {recommendNo:this.orderData.recommendNo}})
+                    window.open(href, '_blank');
                 }else{
                     Message({
                         message:ret.body.errInfo,
                         type:'error'
                     })
-                    // alert(ret.body.errInfo);
                 }
             })
-        },
-        gotoDetail(){
-            /*service.buyRecommDetails(this.orderData).then((ret) => {
-                if(ret.body.status=='success'){
-                    this.$router.push({name:'order-detail',params: {buyDetail:ret.body.details,recommDetail:ret.body.rdetails}})
-                };
-            })*/
-            this.$router.push({name:'order-detail',query: {recommendNo:this.orderData.recommendNo}})
         }
     }
 }

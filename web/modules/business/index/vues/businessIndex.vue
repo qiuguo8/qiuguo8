@@ -56,8 +56,12 @@
                         <div class="recomd-info text-elipse">
                             <span>{{item.recommendContent}}</span>
                         </div>
-                         <el-button type="success" v-if="item.buyStatus=='1' || item.userId==item.lookerId" @click="forFree(item)">查看</el-button>
-                         <el-button type="success" v-if="item.price == '0'" @click="forFree(item)">免费</el-button>
+                         <router-link  v-if="item.buyStatus!='0' || item.userId==item.lookerId" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                             <el-button type="success">查看</el-button>
+                         </router-link>
+                         <router-link  v-if="item.price == '0'" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                             <el-button type="success">免费</el-button>
+                         </router-link>
                          <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
                     </div>
                 </div>
