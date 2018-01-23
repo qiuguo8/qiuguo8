@@ -143,7 +143,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 /*排行类通用 start*/
 
 /*常用文字排版 start*/
-h3.com-title{width:100%;text-align:center;color:#333333;font-size:20px;margin:20px 0px 64px;position:relative;}
+h3.com-title{width:100%;text-align:center;color:#333333;font-size:20px;margin:20px 0px 30px;position:relative;}
 h3.com-title:before{content:'';position:absolute;width:100%;height:1px;background-color:#e5e5e5;bottom:0px;left:0px}
 .zn-name{padding-bottom:10px;display:inline-block;position:relative;z-index:1000}
 .zn-name:before{z-index:1000;content:'';position:absolute;bottom:-0.5px;height:4px;width:100%;background-color:#e90304}
