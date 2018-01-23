@@ -69,7 +69,7 @@
                     <el-table-column label="结果" min-width="120" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
                             <div class="match-wrap">
-                                <p class="result">{{scope.row.hitResult}}</p>
+                                <p class="result">{{hitResult[scope.row.hitResult]}}</p>
                             </div>
                         </template>
                     </el-table-column>
@@ -137,7 +137,8 @@ export default {
             assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
             avatarUrl:'',
             productCode: '01',
-            userName:this.$route.query.userName
+            userName:this.$route.query.userName,
+            hitResult:{'00':'待开奖','01':'赢','02':'赢半','03':'走水','04':'输半','05':'输'}
         }
     },
     methods:{

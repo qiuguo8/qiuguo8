@@ -66,13 +66,18 @@
                 <div class="recomd-info text-elipse">
                     <span>{{item.recommendContent}}</span>
                 </div>
-                <el-button type="success" v-if="item.buyStatus>='1' || item.price == '0' || item.userId==item.lookerId" @click="forFree(item)">免费</el-button>
+                <router-link  v-if="item.buyStatus!='0' || item.userId==item.lookerId" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                    <el-button type="success">查看</el-button>
+                </router-link>
+                <router-link  v-if="item.price == '0'" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                    <el-button type="success">免费</el-button>
+                </router-link>
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
             </div>
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-                <span v-show="busy && !loadOver"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
-                <span v-show="!busy && !loadOver">加载更多</span>
-                <span v-show="loadOver">加载完毕</span>
+                <span v-show="busy && !loaded"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
+                <span v-show="!busy && !loaded">加载更多</span>
+                <span v-show="loaded">加载完毕</span>
             </div>
         </div>
 
@@ -121,7 +126,7 @@
                 assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
                 pageNum:1,
                 pageSize:8,
-                loadOver:false,
+                loaded:false,
             }
         },
         created:function(){
@@ -152,7 +157,6 @@
                     'pageNum':this.pageNum,
                     'pageSize':this.pageSize,
                 }
-                console.log(buyRecommInfo)
                 if (this.radioVal == '5') {
                     buyService.listMyAttion(buyRecommInfo).then((res) => {
                         if (res.data.status == 'success') {
@@ -162,7 +166,7 @@
                                 this.list = res.data.list;// 第一次加载数据
                             }
                             if(res.data.list.length == 0){ //如果数据返回的列表长度为0，证明全部查询出来了
-                                this.loadOver = true;
+                                this.loaded = true;
                             }else{
                                 this.busy = false;
                             }
@@ -178,7 +182,7 @@
                                 this.list = res.data.list;// 第一次加载数据
                             }
                             if(res.data.list.length == 0){ //如果数据返回的列表长度为0，证明全部查询出来了
-                                this.loadOver = true;
+                                this.loaded = true;
                             }else{
                                 this.busy = false;
                             }
@@ -202,14 +206,8 @@
                 this.orderData = item;
                 this.$refs.orderBuy.show();
             },
-            forFree(item){
-                sysUtil.checkLoginForBiz(this.forFreeFn.bind(this,item));
-            },
-            forFreeFn(item){
-                this.$router.push({name:'order-detail',query: {recommendNo:item.recommendNo}})
-            },
             loadMore: function() {
-                if(!loadOver){
+                if(!this.loaded){
                     this.busy = true;
                     // 多次加载数据
                     setTimeout(() => {
