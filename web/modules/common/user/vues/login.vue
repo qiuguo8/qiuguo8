@@ -1,6 +1,6 @@
 <template>
     <el-dialog @open="commonLogin()" @close="close()" title="用户登录" :lock-scroll="false" custom-class="login-dialog" :visible.sync="dialogFormVisible" width="340px">
-        <div class="login-form" v-show="isCommon">
+        <div class="login-form" v-show="isCommon" @keyup.enter="loginByUserName()">
             <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm">
                 <el-form-item label="用户名" prop="userName" label-width="80px">
                     <el-input v-model="loginForm.userName" auto-complete="off"></el-input>
@@ -24,7 +24,7 @@
                 <el-button type="primary" @click="loginByUserName()">确 定</el-button>
             </div>
         </div>
-        <div class="login-form" v-if="isMobile">
+        <div class="login-form" v-if="isMobile" @keyup.enter="loginByPhone()">
             <el-form :model="mloginForm" status-icon :rules="rules2" ref="mloginForm">
                 <el-form-item label="手机号码" prop="phone" label-width="100px">
                     <el-input v-model="mloginForm.phone" auto-complete="off"></el-input>
