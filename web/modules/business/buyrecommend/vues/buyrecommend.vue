@@ -52,7 +52,7 @@
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
-                    <router-link class="recommender-content" :key="item.userId" target="_blank" :to="{name:'recommender-info', params: { userName: item.userName }}" >
+                    <router-link class="recommender-content" :key="item.userId" target="_blank" :to="{name:'recommender-info', query: { userName: item.userName }}" >
                         <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
                         <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
                     </router-link>
