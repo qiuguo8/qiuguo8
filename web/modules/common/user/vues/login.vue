@@ -152,10 +152,10 @@ export default {
     methods:{
         open(){
             this.dialogFormVisible = true;
-        },
-        close(){
             this.$refs.loginForm && this.$refs.loginForm.resetFields();
             this.$refs.mloginForm && this.$refs.mloginForm.resetFields();
+        },
+        close(){
             this.dialogFormVisible = false;
         },
         getCookie(){

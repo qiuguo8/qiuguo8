@@ -45,6 +45,10 @@ function isMatch(userInfo,to,next){
         }
     }
     if(!userInfo){
+        if(to.meta.requireAuth){
+            next({name:'index'});
+            return;
+        }
         for(var i = 0,len=matched.length;i<len;i++){
             if(matched[i].name == 'person-center'){
                 next({name:'index'});

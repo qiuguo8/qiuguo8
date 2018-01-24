@@ -19,14 +19,14 @@
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                    <router-link v-for="rankItem in rankList"  :key="rankItem.userId" target="_blank" :to="{name:'recommender-info', query: { userName: rankItem.userName }}" class="content-wrap el-col-24">
+                    <a v-for="rankItem in rankList" :key="rankItem.userId" target="_blank" @click="goInfo(rankItem)" class="content-wrap el-col-24">
                         <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
                         <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
                         <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
                         <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
                         <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
                         <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
-                    </router-link>
+                    </a>
                 </div>
             </div>
         </div>
@@ -42,10 +42,10 @@
                         <div v-if="item.productCode =='03'" class="match-name text-elipse">竞彩足球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div v-if="item.productCode =='04'" class="match-name text-elipse">北京单场:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
-                            <router-link class="recommender-content" :key="item.userId" target="_blank" :to="{name:'recommender-info', query: { userName: item.userName }}" >
+                            <a class="recommender-content" :key="item.userId" target="_blank" @click="goInfo(item)" >
                                 <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
                                 <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
-                            </router-link>
+                            </a>
                         </div>
                         <div class="intro-text">
                             <p class="text-elipse">{{item.userName}}</p>
@@ -136,6 +136,15 @@
             orderBuyTip:orderBuyTip,
         },
         methods:{
+            goInfo(item){
+                if(sysUtil.checkLoginForBiz()){
+                    //this.$router.push({name:'recommender-info', query: { userName: rankItem.userName }});
+                    window.open(location.origin+"/recommender-info?userName="+item.userName,'_blank');
+                    return true;
+                }else{
+                    return false;
+                }
+            },
             showOrderDetail(item) {
                 sysUtil.checkLoginForBiz(this.showOrderDetailFn.bind(this,item));
             },

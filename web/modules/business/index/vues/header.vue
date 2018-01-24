@@ -119,6 +119,7 @@ export default {
                     comVue.$data.userInfo = null;
                     this.isLogined = false;
                     comVue.$emit('is-manage-for-menu');
+                    comVue.$emit('login-for-sysUtil',false);
                     this.$router.push({name:'index'});
                 }else{
                     alert("退出登录失败！")

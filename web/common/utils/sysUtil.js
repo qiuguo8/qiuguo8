@@ -3,24 +3,26 @@ import validationUtil from './validationUtil.js'
 import comVue from 'web/modules/commonVue.js'
 import loginService from 'web/modules/common/user/service/loginService.js'
 
+var userInfo; //判断是否登录的标识
+//监听是否登录
+comVue.$on('login-for-menu',(data)=>{
+    userInfo = data;
+})
+comVue.$on('login-for-sysUtil',(data)=>{
+    userInfo = data;
+})
+
 const sysUtil = {
     checkLoginForBiz(fn){
-        loginService.isLogined().then((ret)=>{
-            if(ret.status == 'success'){
-                var result = fn && fn();
-                comVue.$emit('login-for-menu',ret.user);
-                if(result && (typeof result === 'Promise' || typeof result.then === 'function')){
-                    return result;
-                }else{
-                    return ret;
-                }
-            }else{
-                comVue.$emit('show-login-form');
-                comVue.$emit('login-for-menu',false);
-                comVue.$data.userInfo = null;
-                return ret;
-            }
-        })
+        if(userInfo){
+            var result = fn && fn();
+            // if(result && (typeof result === 'Promise' || typeof result.then === 'function')){
+            //     return result;
+            // }
+        }else{
+            comVue.$emit('show-login-form');
+        }
+        return !!userInfo;
     },
     showLogin(){
         comVue.$emit('show-login-form');

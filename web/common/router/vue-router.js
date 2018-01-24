@@ -115,7 +115,8 @@ const routes = [
             path:'/recommender-info',
             name:'recommender-info',
             meta:{
-                aliasName:'推荐师主页'
+                aliasName:'推荐师主页',
+                requireAuth:true
             },
             component:resolve => require(['modules/common/user/vues/recommender-info.vue'],resolve)
         },
