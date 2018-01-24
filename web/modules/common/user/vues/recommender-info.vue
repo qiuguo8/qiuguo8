@@ -166,6 +166,7 @@ export default {
         },
         recommmenderInfo(item){
             item = {userName:this.userName,productCode:this.productCode}
+            console.log(item+'fn')
             service.userInfo(item).then((ret) => {
                 if(ret.body.status=='success'){
                     this.recommDetail = ret.body.details;
@@ -176,14 +177,11 @@ export default {
                     this.listRecentRecomm();
                 };
             })
-        },
-        recommmenderInfoFn(item){
-            sysUtil.checkLoginForBiz(this.recommmenderInfo.bind(this,item));
-        },
+        }
 
     },
     mounted:function () {
-        this.recommmenderInfoFn();
+        this.recommmenderInfo();
     },
     components:{
         orderBuyTip:orderBuyTip

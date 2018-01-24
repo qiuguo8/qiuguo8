@@ -52,10 +52,10 @@
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
                 <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                 <div class="intro-info">
-                    <router-link class="recommender-content" :key="item.userId" target="_blank" :to="{name:'recommender-info', query: { userName: item.userName }}" >
+                    <a class="recommender-content" :key="item.userId" target="_blank" @click="goInfo(item)" >
                         <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
                         <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
-                    </router-link>
+                    </a>
                 </div>
                 <div class="intro-text">
                     <p class="text-elipse">{{item.userName}}</p>
@@ -66,12 +66,12 @@
                 <div class="recomd-info text-elipse">
                     <span>{{item.recommendContent}}</span>
                 </div>
-                <router-link  v-if="item.buyStatus!='0' || item.userId==item.lookerId" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                <a  v-if="item.buyStatus!='0' || item.userId==item.lookerId" target="_blank" @click="forFree(item)">
                     <el-button type="success">查看</el-button>
-                </router-link>
-                <router-link  v-if="item.price == '0'" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                </a>
+                <a  v-if="item.price == '0'" target="_blank" @click="forFree(item)">
                     <el-button type="success">免费</el-button>
-                </router-link>
+                </a>
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
             </div>
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
@@ -215,7 +215,24 @@
                         this.listRecomm(true);
                     }, 1000);
                 }
-            }
+            },
+            goInfo(item){
+                if(sysUtil.checkLoginForBiz()){
+                    //this.$router.push({name:'recommender-info', query: { userName: rankItem.userName }});
+                    window.open(location.origin+"/recommender-info?userName="+item.userName,'_blank');
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            forFree(item){
+                if(sysUtil.checkLoginForBiz()){
+                    window.open(location.origin+"/order-detail?recommendNo="+item.recommendNo,'_blank');
+                    return true;
+                }else{
+                    return false;
+                }
+            },
         }
     }
 </script>

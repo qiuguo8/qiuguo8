@@ -9,7 +9,6 @@
                     <el-table-column label="查看" min-width="80" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
                             <router-link  v-if="scope.row.price==0 || scope.row.buyStatus!='0' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId" style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">查看</router-link>
-                            <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
                             <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
                         </template>
                     </el-table-column>
@@ -105,7 +104,6 @@
                                 <p v-if="scope.row.price==0 || scope.row.buyStatus!='0' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId">
                                 <router-link  style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">免费查看</router-link>
                                 </p>
-                                <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
                                 <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
                             </template>
                         </el-table-column>
@@ -197,22 +195,9 @@ export default {
             this.currentPage = val;
             this.listRecentRecomm();
         },
-        forFree(item){
-            service.buyRecommDetails(item).then((ret) => {
-                if(ret.body.status=='success'){
-                    this.recommDetail = ret.body.details;
-                    this.rDetails = ret.body.rdetails;
-                    this.listRecentRecomm();
-                    this.listSameFieldRecomm();
-                };
-            })
-        },
         showOrderDetail(item) {
             this.orderData = item;
             this.$refs.orderBuy.show();
-        },
-        buyRecommDetailsFn(item){
-            sysUtil.checkLoginForBiz(this.buyRecommDetails.bind(this,item));
         },
         buyRecommDetails(item){
             item = {recommendNo:this.recommendNo}
@@ -236,7 +221,7 @@ export default {
         },
     },
     mounted:function () {
-        this.buyRecommDetailsFn();
+        this.buyRecommDetails();
     },
     components:{
         orderBuyTip:orderBuyTip

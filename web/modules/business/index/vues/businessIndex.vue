@@ -56,12 +56,12 @@
                         <div class="recomd-info text-elipse">
                             <span>{{item.recommendContent}}</span>
                         </div>
-                         <router-link  v-if="item.buyStatus!='0' || item.userId==item.lookerId" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                         <a  v-if="item.buyStatus!='0' || item.userId==item.lookerId"target="_blank" @click="forFree(item)">
                              <el-button type="success">查看</el-button>
-                         </router-link>
-                         <router-link  v-if="item.price == '0'" target="_blank" :to="{name:'order-detail',query:{recommendNo:item.recommendNo}}">
+                         </a>
+                         <a  v-if="item.price == '0'" target="_blank" @click="forFree(item)">
                              <el-button type="success">免费</el-button>
-                         </router-link>
+                         </a>
                          <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>
                     </div>
                 </div>
@@ -145,6 +145,14 @@
                     return false;
                 }
             },
+            forFree(item){
+                if(sysUtil.checkLoginForBiz()){
+                    window.open(location.origin+"/order-detail?recommendNo="+item.recommendNo,'_blank');
+                    return true;
+                }else{
+                    return false;
+                }
+            },
             showOrderDetail(item) {
                 sysUtil.checkLoginForBiz(this.showOrderDetailFn.bind(this,item));
             },
@@ -157,13 +165,6 @@
                 indexService.queryLongHuRank(sform).then((ret)=>{
                     this.rankList = ret.body.rankList;
                 })
-            },
-            forFree(item){
-                sysUtil.checkLoginForBiz(this.forFreeFn.bind(this,item));
-            },
-            forFreeFn(item){
-                this.$router.push({name:'order-detail',query: {recommendNo:item.recommendNo}})
-
             },
             hotQuery(){
                 indexService.queryHotRank().then((ret)=>{
