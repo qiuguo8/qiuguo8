@@ -234,6 +234,14 @@ const routes = [
                     component:resolve => require(['modules/manage/articlemanage/vues/articlemanage.vue'],resolve),
                 },
                 {
+                    path:'/job-manage',
+                    name:'job-manage',
+                    meta:{
+                        aliasName:'调度任务管理'
+                    },
+                    component:resolve => require(['modules/manage/jobmanage/vues/jobManager.vue'],resolve),
+                },
+                {
                     path:'/article-edit',
                     name:'article-edit',
                     meta:{

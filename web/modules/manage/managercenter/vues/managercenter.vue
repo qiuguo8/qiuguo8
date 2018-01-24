@@ -13,6 +13,7 @@
             <router-link tag="li" :to="{name:'order-manage'}" active-class="active" class="transition-halfs">订单管理</router-link>
             <router-link tag="li" :to="{name:'advertise-manage'}" active-class="active" class="transition-halfs">广告配置</router-link>
             <router-link tag="li" :to="{name:'article-manage'}" active-class="active" class="transition-halfs">文章管理</router-link>
+            <router-link tag="li" :to="{name:'job-manage'}" active-class="active" class="transition-halfs">调度任务管理</router-link>
             <router-link tag="li" :to="{name:'rules-manage'}" active-class="active" class="transition-halfs">规则管理</router-link>
             <div class="left-side-btn hor-ver-mid">后台管理菜单</div>
         </ul>
