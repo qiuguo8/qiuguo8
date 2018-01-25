@@ -166,7 +166,6 @@ export default {
         },
         recommmenderInfo(item){
             item = {userName:this.userName,productCode:this.productCode}
-            console.log(item+'fn')
             service.userInfo(item).then((ret) => {
                 if(ret.body.status=='success'){
                     this.recommDetail = ret.body.details;

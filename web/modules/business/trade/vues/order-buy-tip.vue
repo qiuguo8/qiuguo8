@@ -6,7 +6,7 @@
             <p class="row-new"><span class="el-col-8">价格：</span><span class="el-col-16">{{orderData.price}}</span></p>
         </div>
         <div slot="footer">
-            <a target="_blank"  @click="confirm()"><el-button type="primary" >确定</el-button></a>
+            <el-button  @click="confirm()"type="primary" >确定</el-button>
             <el-button @click="close()">取消</el-button>
         </div>
     </el-dialog>
@@ -34,10 +34,12 @@ export default {
             this.showDialog = false;
         },
         confirm(){
+            let tempwindow=window.open('_blank');
             service.orderUnder(this.orderData).then((ret) => {
                 if(ret.body.status == 'success'){
                     this.showDialog = false;
-                    window.open(location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo,'_blank');
+                    tempwindow.location = location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo;
+                    //window.open(location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo,'_blank');
                     return true;
                 }else{
                     Message({
