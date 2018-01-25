@@ -137,6 +137,7 @@ export default {
     },
     created(){
         loginService.isLogined().then((ret)=>{
+            if(ret.status == 'success' && this.$route.name == 'register')this.$router.push({name:'index'});
             comVue.$emit('login-for-menu',ret.status=='success' && ret.user);
             comVue.$data.userInfo = ret.user;
             comVue.$emit('is-manage-for-menu');
@@ -192,19 +193,21 @@ export default {
                             type:(ret.body.status=='success' ? 'success' : 'error')
                         })
                         if(ret.body.status=='success'){
-                            comVue.$emit('login-for-menu',ret.body.user); 
-                            comVue.$data.userInfo = ret.body.user;
-                            this.close();
-                            if(this.$route.name == 'register')this.$router.push({name:'index'});
+                            if(this.loginForm.isAuto){
+                                sysUtil.saveCookie('loginName',this.loginForm.userName);
+                                sysUtil.saveCookie('autotLogin',true);
+                            }
+                            // comVue.$emit('login-for-menu',ret.body.user); 
+                            // comVue.$data.userInfo = ret.body.user;
+                            // this.close();
+                            // if(this.$route.name == 'register')this.$router.push({name:'index'});
+                            location.reload();
+                            return;
                         }else{
                             this.getImgCode();
                             this.$refs.loginForm.validateField('checkCode');
                         }
                     })
-                    if(this.loginForm.isAuto){
-                        sysUtil.saveCookie('loginName',this.loginForm.userName);
-                        sysUtil.saveCookie('autotLogin',true);
-                    }
                     return true;
                 }else{
                     return false;
