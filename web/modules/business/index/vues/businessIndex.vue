@@ -4,7 +4,7 @@
             <div class="carousel-wrap content-wrap">
                 <el-carousel :interval="5000" arrow="always">
                     <el-carousel-item v-for="item in bannerList" :key="item.bannerId">
-                        <img style="width:100%;height:100%" :src="staticPath+item.bannerUrl"/>
+                      <router-link target="_blank" :to="{name:'news-detail',query:{contentId:item.bannerLinkUrl}}" > <img style="width:100%;height:100%" :src="staticPath+item.bannerUrl"/></router-link>
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -19,7 +19,7 @@
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                    <a v-for="rankItem in rankList" :key="rankItem.userId" target="_blank" @click="goInfo(rankItem)" class="content-wrap el-col-24">
+                    <a v-for="rankItem in rankList" :key="rankItem.userId" target="_blank" @click="goInfo(rankItem)" class="content-wrap el-col-24" style="cursor:pointer">
                         <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
                         <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
                         <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />

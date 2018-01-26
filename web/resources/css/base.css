@@ -438,7 +438,7 @@ nav ul{list-style: none}
 .intros-wrap .intro-wrap>a>button:hover{background-color: rgba(255, 102, 51, 1);}
 .intros-wrap .intro-wrap>.match-name{text-align: center;font-size:16px;padding:10px}
 .intros-wrap .intro-wrap>.intro-info{height:100px;width:48%;position: relative;float: left;text-align: center}
-.intros-wrap .intro-wrap>.intro-info>.recommender-content>img{width:100px;height: 100px;border-radius:100%}
+.intros-wrap .intro-wrap>.intro-info>.recommender-content>img{width:100px;height: 100px;border-radius:100%;cursor:pointer}
 .intros-wrap .intro-wrap>.intro-info>button{width:100%}
 .intros-wrap .intro-wrap>.intro-text{height:100px;width:52%;padding:5px 0px 5px 3px;word-break: break-all;display: inline-block;text-align: left;overflow:hidden}
 .intros-wrap .intro-wrap>.intro-text>p{margin:2px;}

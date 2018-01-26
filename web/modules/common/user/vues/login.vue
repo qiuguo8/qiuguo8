@@ -15,7 +15,6 @@
                     <img @click="getImgCode()" :src="'data:image/jpg;base64,'+imgCode" style="cursor:pointer;float:left;width:85px;height:40px;margin-left:10px"/>
                 </el-form-item>
                 <el-form-item label-width="80px" prop="isAuto">
-                    <el-checkbox v-model="loginForm.isAuto">自动登录</el-checkbox>
                     <a class="miss-pass" @click="updatePass()">忘记密码?</a>
                 </el-form-item>
             </el-form>
