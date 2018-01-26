@@ -2,7 +2,7 @@
     <div class="news-detail">
         <div class="content-wrap content-75-to-100 news-content float-left">
             <h2 class="text-center">{{contentTitle}}</h2>
-            <div>{{contentValue}}</div>
+            <div v-html="contentValue"></div>
         </div>
         <div class="content-wrap content-25-to-100 rank-common">
             <div  v-if="this.contentType=='01'" class="list-name"><span>头条</span></div>
