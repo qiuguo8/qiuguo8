@@ -41,20 +41,20 @@
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
                             <span class="table-span">{{scope.row.handiCap}}</span>
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
-                            <el-button v-if="!scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" @click="void (0)" class="table-btn" type="primary" size="small">暂未出售</el-button>
+                            <el-tag v-if="!scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" @click="void (0)" type="warning">暂未出售</el-tag>
                         </div>
                         <div v-if="productCode=='03'">
                             <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','home')">{{scope.row.win}}</el-button>
                             <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','draw')">{{scope.row.draw}}</el-button>
                             <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','visit')">{{scope.row.lost}}</el-button>
-                            <el-button v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " @click="void (0)" class="table-btn" type="primary" size="small">暂未出售</el-button>
+                            <el-tag v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " @click="void (0)" type="warning" >暂未出售</el-tag>
                         </div>
                         <div v-if="productCode=='04'">
                             <span class="table-span"></span>
                             <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','home')">{{scope.row.win}}</el-button>
                             <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','draw')">{{scope.row.draw}}</el-button>
                             <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','visit')">{{scope.row.lost}}</el-button>
-                            <el-button v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " @click="void (0)" class="table-btn" type="primary" size="small">暂未出售</el-button>
+                            <el-tag v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " @click="void (0)" type="warning" >暂未出售</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -64,14 +64,14 @@
                             <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
                             <span class="table-span">{{scope.row.fullSizeBall}}</span>
                             <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
-                            <el-button v-if="!scope.row.fullSizeBall" class="table-btn" type="primary" @click="void (0)" size="small">暂未出售</el-button>
+                            <el-tag v-if="!scope.row.fullSizeBall" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
                         </div>
                         <div v-if="productCode=='03'">
                             <span class="table-span">{{scope.row.handiCap}}</span>
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','home')">{{scope.row.letBallWin}}</el-button>
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','draw')">{{scope.row.letBallDraw}}</el-button>
                             <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','visit')">{{scope.row.letBallLost}}</el-button>
-                            <el-button v-if="!scope.row.handiCap" class="table-btn" type="primary" @click="void (0)" size="small">暂未出售</el-button>
+                            <el-tag v-if="!scope.row.handiCap" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
                         </div>
                     </template>
                 </el-table-column>

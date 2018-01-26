@@ -66,10 +66,10 @@
                 <div class="recomd-info text-elipse">
                     <span>{{item.recommendContent}}</span>
                 </div>
-                <a  v-if="item.buyStatus!='0' || item.userId==item.lookerId" target="_blank" @click="forFree(item)">
+                <a  v-if="item.buyStatus >= 1 || item.userId==item.lookerId" target="_blank" @click="forFree(item)">
                     <el-button type="success">查看</el-button>
                 </a>
-                <a  v-if="item.price == '0'" target="_blank" @click="forFree(item)">
+                <a  v-if="item.price == '0' && item.userId!=item.lookerId" target="_blank" @click="forFree(item)">
                     <el-button type="success">免费</el-button>
                 </a>
                 <el-button type="danger" v-if="item.buyStatus=='0' && item.price != '0' && item.userId!=item.lookerId " @click="showOrderDetail(item)">{{item.price}}球果</el-button>

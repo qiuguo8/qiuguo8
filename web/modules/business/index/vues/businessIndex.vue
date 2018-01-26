@@ -37,10 +37,10 @@
             <div ref="introWrap" style="width:100%;overflow:hidden;height:100%">
                 <div class="transition-ones"  v-slipping v-if="hotList.length>0" :style="{width:(250*hotList.length)+'px',height:'100%',position:'relative',left:'0px'}">
                     <div class="intro-wrap intro-wrap-index transition-halfs" v-for="item in hotList" :key="item.recommendNo">
-                        <div v-if="item.productCode =='01'" class="match-name text-elipse">亚盘:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
-                        <div v-if="item.productCode =='02'" class="match-name text-elipse">大小球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
-                        <div v-if="item.productCode =='03'" class="match-name text-elipse">竞彩足球:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
-                        <div v-if="item.productCode =='04'" class="match-name text-elipse">北京单场:{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='01'" class="match-name text-elipse"><span style="color: #F56C6C">亚盘:</span>{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='02'" class="match-name text-elipse"><span style="color: #F56C6C">大小球:</span>{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='03'" class="match-name text-elipse"><span style="color: #F56C6C">竞彩足球:</span>{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                        <div v-if="item.productCode =='04'" class="match-name text-elipse"><span style="color: #F56C6C">北京单场:</span>{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
                         <div class="intro-info">
                             <a class="recommender-content" :key="item.userId" target="_blank" @click="goInfo(item)" >
                                 <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
