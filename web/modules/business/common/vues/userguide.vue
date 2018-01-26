@@ -51,13 +51,12 @@
              <div class="problems-case clearfix">
                 <h3 style="text-align:center">个人中心</h3>
                 <h4>1、安全中心</h4>
-                <div><p>
-                绑定身份证、修改密码、手机、银行卡等信息、密码找回
-                </p>
-                <p>我要充值</p>
-                <p>我要提款</p>
-                <p>我的推荐记录</p>
-                <p>我的购买方案</p>
+                <div>
+                <p><router-link  :to="{name:'person-info'}"  class="transition-halfs">我要绑定身份证、修改密码、修改手机、修改银行卡等信息</router-link></p>
+                <p><router-link  :to="{name:'recharge'}"  class="transition-halfs">我要充值</router-link></p>
+                <p><router-link  :to="{name:'withdraw'}"  class="transition-halfs">我要提款</router-link></p>
+                <p><router-link  :to="{name:'recommend-record'}"  class="transition-halfs">我的推荐记录</router-link></p>
+                <p><router-link  :to="{name:'buy-record'}"  class="transition-halfs">我的购买方案</router-link></p>
                 </div>
             </div>
             <div class="problems-case clearfix">
