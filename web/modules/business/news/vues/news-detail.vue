@@ -5,12 +5,12 @@
             <div v-html="contentValue"></div>
         </div>
         <div class="content-wrap content-25-to-100 rank-common">
-            <div  v-if="this.contentType=='01'" class="list-name"><span>头条</span></div>
-            <div  v-if="this.contentType=='02'" class="list-name"><span>新闻</span></div>
+            <div  v-if="this.contentType=='01'" class="list-name"><span>网站头条</span></div>
+            <div  v-if="this.contentType=='02'" class="list-name"><span>足球新闻</span></div>
             <div  v-if="this.contentType=='03'" class="list-name"><span>足彩预测</span></div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="item in contentList" :key="item.contentId">
-                    <router-link target="_blank" :to="{name:'news-detail',query:{contentId:item.contentId}}" class="transition-halfs text-elipse">{{item.contentTitle}}</router-link>
+                    <a @click="changeDetail(item.contentId)"   class="transition-halfs text-elipse">{{item.contentTitle}}</a>
                 </li>
             </ul>
         </div>
@@ -47,11 +47,15 @@ export default {
                     this.contentList = ret.contentList;
                 }
             })
+        },
+        changeDetail(newcontentId){
+            this.contentId=newcontentId;
+            this.queryContentDetail();
         }
+
     },
     mounted:function () {
         this.queryContentDetail();
-      
     },
 }
 </script>

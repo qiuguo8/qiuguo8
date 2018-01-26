@@ -2,11 +2,11 @@
     <div class="news-list text-center el-col-24">
         <div class="news">
             <div class="head">
-                <span>头条</span>
+                <span>网站头条</span>
             </div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="ttItem in ttList" :key="ttItem.contentId">
-                    <router-link target="_blank"  :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs text-elipse">{{ttItem.contentTitle}}</router-link>
+                    <router-link :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs text-elipse">{{ttItem.contentTitle}}</router-link>
                 </li>
             </ul>
             <div class="page-block text-center">
@@ -21,11 +21,11 @@
         </div>
         <div class="news">
             <div class="head">
-                <span>新闻</span>
+                <span>足球新闻</span>
             </div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="xwItem in xwList" :key="xwItem.contentId">
-                    <router-link target="_blank" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs text-elipse">{{xwItem.contentTitle}}</router-link>
+                    <router-link :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs text-elipse">{{xwItem.contentTitle}}</router-link>
                 </li>
             </ul>
             <div class="page-block text-center">
@@ -41,11 +41,11 @@
        
         <div class="news">
             <div class="head">
-                <span>足球预测</span>
+                <span>足彩预测</span>
             </div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="ycItem in ycList" :key="ycItem.contentId">
-                    <router-link target="_blank" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs text-elipse">{{ycItem.contentTitle}}</router-link>
+                    <router-link :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs text-elipse">{{ycItem.contentTitle}}</router-link>
                 </li>
             </ul>
             <div class="page-block text-center">

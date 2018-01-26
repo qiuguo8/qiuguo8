@@ -69,7 +69,7 @@
         </div>
         <div class="el-col-24 content-wrap text-center transition-halfs">
             <div class="text-left min-max-640 content-wrap content-30-to-100">
-                <div class="normal-news-title"><span class="list-name">头条</span><router-link target="_blank"  :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
+                <div class="normal-news-title"><span class="list-name">网站头条</span><router-link target="_blank"  :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
                 <ul class="normal-news-list">
                     <li class="transition-halfs"  v-for="ttItem in ttList" :key="ttItem.contentId" >
                         <router-link target="_blank" :to="{name:'news-detail',query:{contentId:ttItem.contentId}}" class="transition-halfs text-elipse">{{ttItem.contentTitle}}</router-link>
@@ -79,7 +79,7 @@
                <!-- @click="contentDetail(ttItem)"-->
             </div>
             <div class="text-left min-max-640 content-wrap content-30-to-100">
-                <div class="normal-news-title"><span class="list-name">新闻</span><router-link target="_blank"  :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
+                <div class="normal-news-title"><span class="list-name">足球新闻</span><router-link target="_blank"  :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
                 <ul class="normal-news-list">
                     <li class="transition-halfs"  v-for="xwItem in xwList" :key="xwItem.contentId">
                         <router-link target="_blank" :to="{name:'news-detail',query:{contentId:xwItem.contentId}}" class="transition-halfs text-elipse">{{xwItem.contentTitle}}</router-link>
@@ -87,10 +87,10 @@
                 </ul>
             </div>
             <div class="text-left min-max-640 content-wrap content-30-to-100">
-                <div class="normal-news-title"><span class="list-name">足球预测</span><router-link target="_blank"  :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
+                <div class="normal-news-title"><span class="list-name">足彩预测</span><router-link target="_blank"  :to="{name:'news-list'}" class="more-btn">更多</router-link></div>
                 <ul class="normal-news-list">
                     <li class="transition-halfs"  v-for="ycItem in ycList" :key="ycItem.contentId">
-                        <router-link target="_blank" :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs text-elipse">{{ycItem.contentTitle}}</router-link>
+                        <router-link  :to="{name:'news-detail',query: {contentId:ycItem.contentId}}" class="transition-halfs text-elipse">{{ycItem.contentTitle}}</router-link>
                     </li>
                 </ul>
             </div>
