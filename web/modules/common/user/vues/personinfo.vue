@@ -335,7 +335,9 @@ export default {
         this.tableData3.push(data.map.lastMonthList);
       }),
       personinfoService
-        .getRecommendRecord()
+        .getRecommendRecord({
+        productCode: this.productCode3
+      })
         .then(data => {
           this.tableData4 = data.list.list;
           this.tableData4Total = data.list.total;
@@ -422,10 +424,19 @@ export default {
           data.map.lastMonthList.title = "上月战绩";
           this.tableData3.push(data.map.lastMonthList);
         });
+        personinfoService.getRecommendRecord({
+          pageNum: this.currentPage4,
+           productCode: this.productCode3
+        })
+        .then(data => {
+          this.tableData4 = data.list.list;
+          this.tableData4Total = data.list.total;
+        });
     },
     handleCurrentChange4() {
       personinfoService.getRecommendRecord({
-          pageNum: this.currentPage4
+          pageNum: this.currentPage4,
+           productCode: this.productCode3
         })
         .then(data => {
           this.tableData4 = data.list.list;
