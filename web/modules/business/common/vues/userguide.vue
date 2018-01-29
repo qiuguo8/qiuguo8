@@ -52,11 +52,12 @@
                 <h3 style="text-align:center">个人中心</h3>
                 <h4>1、安全中心</h4>
                 <div>
-                <p><router-link  :to="{name:'person-info'}"  class="transition-halfs">我要绑定身份证、修改密码、修改手机、修改银行卡等信息</router-link></p>
-                <p><router-link  :to="{name:'recharge'}"  class="transition-halfs">我要充值</router-link></p>
-                <p><router-link  :to="{name:'withdraw'}"  class="transition-halfs">我要提款</router-link></p>
-                <p><router-link  :to="{name:'recommend-record'}"  class="transition-halfs">我的推荐记录</router-link></p>
-                <p><router-link  :to="{name:'buy-record'}"  class="transition-halfs">我的购买方案</router-link></p>
+                <p>
+                <a @click="goPersonInfo()"  class="transition-halfs" style="cursor:pointer">我要绑定身份证、修改密码、修改手机、修改银行卡等信息</a></p>
+                <p><a :to="{name:'recharge'}"  class="transition-halfs" style="cursor:pointer">我要充值</a></p>
+                <p><a  :to="{name:'withdraw'}"  class="transition-halfs" style="cursor:pointer">我要提款</a></p>
+                <p><a  :to="{name:'recommend-record'}"  class="transition-halfs" style="cursor:pointer">我的推荐记录</a></p>
+                <p><a  :to="{name:'buy-record'}"  class="transition-halfs" style="cursor:pointer">我的购买方案</a></p>
                 </div>
             </div>
             <div class="problems-case clearfix">
@@ -114,7 +115,20 @@
     </div>
 </template>
 <script>
+import Vue from 'vue';
+import sysUtil from 'web/common/utils/sysUtil.js'
 export default {
-  
+      methods:{
+           goPersonInfo(){
+                if(sysUtil.checkLoginForBiz()){
+                    this.$router.push({
+                        path:"/person-info",
+                    })
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+      }
 }
 </script>

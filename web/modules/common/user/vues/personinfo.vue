@@ -13,15 +13,30 @@
                 </el-radio-group>
             </div> 
             <div class="left-menu-table">
-               
-                
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border >
                     <el-table-column prop="title" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column prop="recommTotal" label="推荐数量" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="winTotal" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
-                    <el-table-column prop="loseTotal" label="输" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="accuracyRate" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="profitRate" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="win" label="赢" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                        <template slot-scope="scope">
+                            {{Number(parseInt(scope.row.winTotal))+(parseInt(scope.row.halfWinTotal))}}
+                        </template>
+                     </el-table-column>
+                      <el-table-column prop="tieTotal" label="平" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column prop="lose" label="输" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                        <template slot-scope="scope">
+                            {{Number(parseInt(scope.row.loseTotal))+(parseInt(scope.row.halfLoseTotal))}}
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="zql" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                        <template slot-scope="scope">
+                                <span>{{(scope.row.accuracyRate*100).toFixed(2)}}</span>%
+                            </template>
+                    </el-table-column>
+                    <el-table-column prop="yll" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                        <template slot-scope="scope">
+                                <span>{{(scope.row.profitRate*100).toFixed(2)}}</span>%
+                            </template>
+                    </el-table-column>
                 </el-table>
             </div>
         </div>
@@ -38,9 +53,16 @@
                 <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="profit" label="成交总价" min-width="60" align="center" head-align="center" class-name="table-fixed">
-                    <template slot-scope="scope">
-                        <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
+                <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="jg" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                      <template slot-scope="scope">
+                        <span v-if="scope.row.hitResult=== '01'" style="color: red">赢</span>
+                        <span v-if="scope.row.hitResult=== '02'" style="color: red">赢半</span>
+                        <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
+                        <span v-if="scope.row.hitResult=== '04'">输半</span>
+                        <span v-if="scope.row.hitResult=== '05'">输</span>
+                        <span v-if="scope.row.hitResult=== '06'">待定</span>
+                         <span v-if="!scope.row.hitResult">待定</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
