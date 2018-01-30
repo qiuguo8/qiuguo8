@@ -93,7 +93,7 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
     .content-25-to-50{width:23%;}
     .content-25-to-100{width:23%;}
     .content-30-to-50{width:31%;}
-    .content-30-to-100{width:31%;}
+    .content-30-to-100{width:31%;float:left}
     .content-40-to-40{width:38%;}
     .content-40-to-100{width:38%;}
     .content-40-to-40-full{width:40%;}
@@ -110,10 +110,10 @@ body{font-size:14px;font-family:"Helvetica Neue","Hiragino Sans GB","Microsoft Y
 .btn-danger{color:#fff;background-color: rgb(233, 3, 4);opacity: 0.8;border:1px solid rgba(233,3,4,0.8)}
 .btn:hover{opacity: 1}
 .btn-orange,.btn-orange.active{background: rgba(255, 102, 51, 1);border-color: rgb(255, 102, 51);color:#fff}
-.el-button.btn-orange:hover{background: rgba(255, 102, 51, 0.7);border-color:rgb(255, 102, 51);color:#fff}
+.el-button.btn-orange:hover,.btn-orange:hover{background: rgba(255, 102, 51, 0.9);border-color:rgb(255, 102, 51);color:#fff}
 .btn-orange:focus{background: rgba(255, 102, 51, 1);border-color:rgb(255, 102, 51);color:#fff}
 .btn-success{background: rgb(133, 206, 97);border-color: #67c23a;color:#fff}
-.btn-success:hover{background: rgba(133, 206, 97, 0.7);color:#fff}
+.btn-success:hover{background: rgba(133, 206, 97, 0.9);color:#fff}
 .btn-success:focus{background: rgb(133, 206, 97);border-color: #67c23a;}
 .el-button.table-btn{margin:5px 3px}
 @media(min-width:318px){
@@ -677,7 +677,7 @@ table .cell>.el-checkbox-button.is-focus .el-checkbox-button__inner,.match-selec
 
 /*recommender-info start*/
 .info-list{padding:10px 5px}
-.info-list>div{float:left;height:138px;margin:0px 1% 20px}
+.info-list>div{float:left;height:150px;margin:0px 1% 20px}
 .info-list>div:not(:first-child){padding:10px;background-color: #eee;border-radius: 3px}
 .info-list>div:not(:first-child)>p>span{margin-left:10px;letter-spacing: 1px}
 .info-list>div>img{width:100px;height: 100px;border-radius: 100%}

@@ -77,7 +77,7 @@
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
                 <span v-show="busy && !loaded"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
                 <span v-show="!busy && !loaded">加载更多</span>
-                <span v-show="loaded">加载完毕</span>
+                <span v-show="loaded" style="color: rgb(204, 204, 204); cursor: no-drop;">没有更多</span>
             </div>
         </div>
 

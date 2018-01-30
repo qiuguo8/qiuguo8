@@ -12,6 +12,8 @@
             <div class="content-25-to-all-50 content-wrap text-center">
                 <img :src="avatarUrl"/>
                 <p class="user-name">{{recommDetail.userName}}</p>
+                <button class="btn btn-orange btn-padding" style="margin-top:5px;padding:5px 30px">关 注</button>
+                <button class="btn btn-success btn-padding" style="margin-top:5px;padding:5px 30px">已关注</button>
             </div>
             <div class="content-25-to-all-50 content-wrap">
                 <p>等级:<span>{{assessLevelForm[recommDetail.assessLevel]}}</span></p>
