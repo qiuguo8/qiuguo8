@@ -43,17 +43,22 @@
         <div class="el-col-24 rank-common">
             <div class="left-name" style="margin-bottom:10px"><span>近期推荐</span></div>
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData4" border>
+              <el-table-column prop="publishTime" label="推荐时间" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="rNo" label="推荐单号" min-width="130" align="center" head-align="center" class-name="table-fixed"> 
+                     <template slot-scope="scope">
+                        <el-button type="text"  size="small" @click="recommDetail(scope.row)">{{scope.row.recommendNo}}</el-button>
+                    </template>
+                </el-table-column>
                 <el-table-column label="比赛类型" min-width="50" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <span v-constant-tranlate="scope.row.productCode" constant-type="Product"></span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="leagueName" label="联赛类型" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                 <el-table-column prop="score" label="比分" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="price" label="价格" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="viewTimes" label="购买人数" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="jg" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
                       <template slot-scope="scope">
                         <span v-if="scope.row.hitResult=== '01'" style="color: red">赢</span>
@@ -61,19 +66,20 @@
                         <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
                         <span v-if="scope.row.hitResult=== '04'">输半</span>
                         <span v-if="scope.row.hitResult=== '05'">输</span>
-                        <span v-if="scope.row.hitResult=== '06'">待定</span>
-                         <span v-if="!scope.row.hitResult">待定</span>
+                        <span v-if="scope.row.hitResult=== '06'">待开奖</span>
+                         <span v-if="!scope.row.hitResult">待开奖</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="profit" label="操作" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                
+                 
             </el-table>
             <div class="page-block text-center">
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange4()"
                 :current-page.sync="currentPage4"
-                :page-sizes="[10, 15, 20, 25]"
-                :page-size="10"
+                :page-size="5"
                 layout=" prev, pager, next"
                 :total="tableData4Total">
                 </el-pagination>
@@ -197,6 +203,7 @@ import {
   FormItem
 } from "element-ui";
 import personinfoService from "web/modules/common/user/service/personinfoService.js";
+import sysUtil from 'web/common/utils/sysUtil.js';
 Vue.component(Input.name, Input);
 Vue.component(Button.name, Button);
 Vue.component(Table.name, Table);
@@ -319,7 +326,7 @@ export default {
   mounted() {
     personinfoService
       .getRecordList({
-        productCode: this.productCode3
+        productCode: this.productCode3,
       })
       .then(data => {
         this.tableData3 = [];
@@ -336,7 +343,9 @@ export default {
       }),
       personinfoService
         .getRecommendRecord({
-        productCode: this.productCode3
+        productCode: this.productCode3,
+         pageNum: this.currentPage4,
+        pageSize:5,
       })
         .then(data => {
           this.tableData4 = data.list.list;
@@ -426,6 +435,7 @@ export default {
         });
         personinfoService.getRecommendRecord({
           pageNum: this.currentPage4,
+          pageSize:5,
            productCode: this.productCode3
         })
         .then(data => {
@@ -436,6 +446,7 @@ export default {
     handleCurrentChange4() {
       personinfoService.getRecommendRecord({
           pageNum: this.currentPage4,
+          pageSize:5,
            productCode: this.productCode3
         })
         .then(data => {
@@ -471,7 +482,16 @@ export default {
             this.countTxt = this.countSec+'秒后重新获取验证码';
             this.countSeconds();
         },1000)
-    }
+    },
+
+    recommDetail(item){
+                if(sysUtil.checkLoginForBiz()){
+                    window.open(location.origin+"/order-detail?recommendNo="+item.recommendNo,'_blank');
+                    return true;
+                }else{
+                    return false;
+                }
+            },
   }
 };
 </script>

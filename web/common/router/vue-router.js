@@ -107,7 +107,7 @@ const routes = [
             path:'/order-detail',
             name:'order-detail',
             meta:{
-                aliasName:'订单详情'
+                aliasName:'推荐详情'
             },
             component:resolve => require(['modules/business/trade/vues/order-detail.vue'],resolve)
         },

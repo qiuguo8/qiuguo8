@@ -54,10 +54,10 @@
                 <div>
                 <p>
                 <a @click="goPersonInfo()"  class="transition-halfs" style="cursor:pointer">我要绑定身份证、修改密码、修改手机、修改银行卡等信息</a></p>
-                <p><a :to="{name:'recharge'}"  class="transition-halfs" style="cursor:pointer">我要充值</a></p>
-                <p><a  :to="{name:'withdraw'}"  class="transition-halfs" style="cursor:pointer">我要提款</a></p>
-                <p><a  :to="{name:'recommend-record'}"  class="transition-halfs" style="cursor:pointer">我的推荐记录</a></p>
-                <p><a  :to="{name:'buy-record'}"  class="transition-halfs" style="cursor:pointer">我的购买方案</a></p>
+                <p><a  @click="goRechargeInfo()"   :to="{name:'recharge'}"  class="transition-halfs" style="cursor:pointer">我要充值</a></p>
+                <p><a  @click="goWithDrawInfo()"   :to="{name:'withdraw'}"  class="transition-halfs" style="cursor:pointer">我要提款</a></p>
+                <p><a  @click="goReRecordInfo()"  :to="{name:'recommend-record'}"  class="transition-halfs" style="cursor:pointer">我的推荐记录</a></p>
+                <p><a  @click="goBuyRecordInfo()"   :to="{name:'buy-record'}"  class="transition-halfs" style="cursor:pointer">我的购买方案</a></p>
                 </div>
             </div>
             <div class="problems-case clearfix">
@@ -123,6 +123,46 @@ export default {
                 if(sysUtil.checkLoginForBiz()){
                     this.$router.push({
                         path:"/person-info",
+                    })
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            goRechargeInfo(){
+                if(sysUtil.checkLoginForBiz()){
+                    this.$router.push({
+                        path:"/recharge",
+                    })
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            goWithDrawInfo(){
+                if(sysUtil.checkLoginForBiz()){
+                    this.$router.push({
+                        path:"/withdraw",
+                    })
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            goReRecordInfo(){
+                if(sysUtil.checkLoginForBiz()){
+                    this.$router.push({
+                        path:"/recommend-record",
+                    })
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            goBuyRecordInfo(){
+                if(sysUtil.checkLoginForBiz()){
+                    this.$router.push({
+                        path:"/buy-record",
                     })
                     return true;
                 }else{
