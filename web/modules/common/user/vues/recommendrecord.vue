@@ -42,20 +42,23 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="publishTime" label="推荐时间" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="recommendNo" label="推荐单号" min-width="70" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="publishTime" label="推荐时间" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="rNo" label="推荐单号" min-width="130" align="center" head-align="center" class-name="table-fixed"> 
+                     <template slot-scope="scope">
+                        <el-button type="text"  size="small" @click="recommDetail(scope.row)">{{scope.row.recommendNo}}</el-button>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="productCode" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <span v-constant-tranlate="scope.row.productCode" constant-type="Product"></span>
                     </template>
                 </el-table-column>
+                 <el-table-column prop="homeTeamName" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                 <el-table-column prop="score" label="比分" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="money" label="成交金额" min-width="80" align="center" head-align="center" class-name="table-fixed">
-                    <template slot-scope="scope">
-                        <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
-                    </template>
-                </el-table-column>
                 <el-table-column label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <span v-if="scope.row.hitResult=== '01'" style="color: red">赢</span>
@@ -101,7 +104,6 @@ export default {
                 {value: '02', label: '大小球' }, 
                 {value: '03',label: '竞彩'}, 
                 {value: '04',label: '北单'}, 
-                {value: '',label: '全部'}, 
             ],
             RecommendStatus:[
                 {value: '01', label: '发布中' }, 
@@ -112,14 +114,18 @@ export default {
             value8:'2017-11-15',
             currentPage4: 1,
             RecommendStatusValue:'',
-            ProductValue:'',
+            ProductValue:'01',
             recommendTimeStart:'',
             recommendTimeEnd:'',
             tableData3Total:0
         }
     },
     mounted(){
-        recommendService.getRecommendList().then((data)=>{
+        recommendService.getRecommendList(
+            {
+                productCode:this.ProductValue,
+            }
+        ).then((data)=>{
             this.tableData3 = data.list.list;
             this.tableData3Total = data.list.total;
         })
@@ -146,7 +152,11 @@ export default {
             this.tableData3 = data.list.list;
             this.tableData3Total = data.list.total;
         })
-        }
+        },
+        recommDetail(item){
+            window.open(location.origin+"/order-detail?recommendNo="+item.recommendNo,'_blank');
+            return true;
+        },
     },
     components:{
         //datePickerModal:datePickerModal
