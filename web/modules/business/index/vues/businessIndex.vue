@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="el-col-24 index-center content-wrap">
+        <div class="el-col-24 index-center content-wrap" style="margin-bottom:10px">
             <div class="carousel-wrap content-wrap">
                 <el-carousel :interval="5000" arrow="always">
                     <el-carousel-item v-for="item in bannerList" :key="item.bannerId">

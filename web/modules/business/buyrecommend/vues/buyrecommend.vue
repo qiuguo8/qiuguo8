@@ -101,6 +101,7 @@
     import pathUtil from 'web/common/utils/pathUtil.js'
     import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
     import orderDetail from 'web/modules/business/trade/vues/order-detail.vue'
+    import comVue from 'web/modules/commonVue.js'
     Vue.component(Input.name,Input);
     Vue.component(Button.name,Button);
     Vue.component(Table.name, Table)
@@ -131,6 +132,9 @@
         },
         created:function(){
             this.listRecomm();
+            comVue.$on('reload-recom-list',()=>{
+                this.changeProductCode();
+            })
         },
         components:{
             orderBuyTip:orderBuyTip
