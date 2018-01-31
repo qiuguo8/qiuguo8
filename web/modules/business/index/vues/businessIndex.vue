@@ -131,6 +131,9 @@
             }
         },
         mounted(){
+            comVue.$on('reload-recom-list',()=>{
+                this.hotQuery();
+            })
         },
         components:{
             orderBuyTip:orderBuyTip,

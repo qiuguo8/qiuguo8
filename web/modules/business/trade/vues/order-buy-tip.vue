@@ -38,9 +38,8 @@ export default {
             service.orderUnder(this.orderData).then((ret) => {
                 if(ret.body.status == 'success'){
                     this.showDialog = false;
-                    window.open(location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo,'_blank');
                     comVue.$emit('reload-recom-list');
-                    return true;
+                    window.open(location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo,'_blank');
                 }else{
                     Message({
                         message:ret.body.errInfo,
