@@ -12,8 +12,8 @@
             <div class="content-25-to-all-50 content-wrap text-center">
                 <img :src="avatarUrl"/>
                 <p class="user-name">{{recommDetail.userName}}</p>
-                <button class="btn btn-orange btn-padding" style="margin-top:5px;padding:5px 30px">关 注</button>
-                <button class="btn btn-success btn-padding" style="margin-top:5px;padding:5px 30px">已关注</button>
+                <button v-if="!recommDetail.subscribeStatus || recommDetail.subscribeStatus==0 " class="btn btn-orange btn-padding" @click="addUserSubscribe()" style="margin-top:5px;padding:5px 30px">关 注</button>
+                <button v-if="recommDetail.subscribeStatus==1" class="btn btn-success btn-padding" @click="cancelUserSubscribe()" style="margin-top:5px;padding:5px 30px">已关注</button>
             </div>
             <div class="content-25-to-all-50 content-wrap">
                 <p>等级:<span>{{assessLevelForm[recommDetail.assessLevel]}}</span></p>
@@ -65,7 +65,9 @@
                                 <router-link  style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">免费查看</router-link>
                             </p>
                             <!-- <el-button v-if="scope.row.price==0 || scope.row.buyStatus=='1' || scope.row.recommendStatus=='02'" type="warning" @click="forFree(scope.row)">免费查看</el-button> -->
-                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
+                            <p v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId">
+                                <el-button type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}球果</el-button>
+                            </p>
                         </template>
                     </el-table-column>
                     <el-table-column label="结果" min-width="120" align="center" head-align="center" class-name="table-fixed">
@@ -111,6 +113,8 @@ import service from 'web/modules/business/trade/service/orderService'
 import orderBuyTip from 'web/modules/business/trade/vues/order-buy-tip.vue'
 import pathUtil from 'web/common/utils/pathUtil.js'
 import sysUtil from 'web/common/utils/sysUtil.js'
+import buyService from 'web/modules/business/buyrecommend/service/buyRecommService'
+import {Message} from 'element-ui';
 Vue.component(Input.name, Input);
 Vue.component(Button.name, Button);
 Vue.component(Table.name, Table);
@@ -176,6 +180,29 @@ export default {
                     };
                     this.avatarUrl=pathUtil.getStaticPath()+this.recommDetail.faceUrl;
                     this.listRecentRecomm();
+                };
+            })
+        },
+        addUserSubscribe(){
+            let item={subscribeUserId:this.recommDetail.userId}
+            buyService.addUserSubscribe(item).then((ret) => {
+                console.log(ret)
+                if(ret.body.status=='success'){
+                    this.recommmenderInfo();
+                }else{
+                    Message({
+                        message:ret.body.errInfo,
+                        type:'error'
+                    })
+                }
+            })
+        },
+        cancelUserSubscribe(){
+            let item={subscribeUserId:this.recommDetail.userId}
+            buyService.cancelUserSubscribe(item).then((ret) => {
+                console.log(ret)
+                if(ret.bodyText=='success'){
+                    this.recommmenderInfo();
                 };
             })
         }

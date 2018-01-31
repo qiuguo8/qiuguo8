@@ -15,5 +15,7 @@ export default {
     buyRecommDetails(item){
         return Vue.http.post(pathUtil.getBasePath()+'/buyRecomm/buyRecommDetails',item);
     },
-
+    cancelUserSubscribe(item){
+        return Vue.http.post(pathUtil.getBasePath()+'/userInfo/cancelUserSubscribe',item);
+    },
 }

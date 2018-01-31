@@ -104,7 +104,7 @@
                                 <p style="margin-top:5px" v-if="scope.row.price==0 || scope.row.buyStatus!='0' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId">
                                     <router-link  class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">免费查看</router-link>
                                 </p>
-                                <el-button style="margin-top:5px;min-width:96px" v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="danger" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
+                                <el-button style="margin-top:5px;min-width:96px" v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="danger" @click="showOrderDetail(scope.row)">{{scope.row.price}}球果</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column label="结果" min-width="120" align="center" head-align="center" class-name="table-fixed">
