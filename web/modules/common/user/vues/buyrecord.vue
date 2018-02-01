@@ -39,14 +39,8 @@
                         <span v-constant-tranlate="scope.row.categoryCode" constant-type="Product"></span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="leagueNameCn" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="leagueName" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="viewTimes" label="购买人数" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="money" label="成交金额" min-width="60" align="center" head-align="center" class-name="table-fixed">
-                    <template slot-scope="scope">
-                        <span>{{Number(parseInt(scope.row.price))*Number(parseInt(scope.row.viewTimes))}}</span>
-                    </template>
-                </el-table-column>
                 <el-table-column prop="recommendStatus" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <span v-constant-tranlate="scope.row.recommendStatus" constant-type="RecommendStatus"></span>
@@ -57,11 +51,11 @@
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange()"
-                :current-page.sync="currentPage4"
+                :current-page.sync="pageNum"
                 :page-sizes="[10, 15, 20, 25]"
-                :page-size="15"
+                :page-size="pagesize"
                 layout=" prev, pager, next"
-                :total="400">
+                :total="totalCount">
                 </el-pagination>
             </div>
         </div>
@@ -92,20 +86,26 @@ export default {
             buyTimeEnd:"",
             productValue:"",
             value8:'2017-11-15',
-            currentPage4:1
+            //当前页码
+            pageNum: 1,
+            //默认每页数据量
+            pagesize: 10,
+            //默认数据总数
+            totalCount: 0,
         }
     },
     mounted(){
         buyRecordService.getBuyRecordList({userId:"20171206201103946446"}).then((data)=>{
-             console.log(data);
             this.tableData3 = data.list.list;
+            console.log(data)
+            this.totalCount = data.list.total;
         });
     },
     methods:{
         handleCurrentChange(){
-            buyRecordService.getBuyRecordList({userId:"20171206201103946446",pageNum:this.currentPage4}).then((data)=>{
-             console.log(data);
+            buyRecordService.getBuyRecordList({userId:"20171206201103946446",pageNum:this.pageNum}).then((data)=>{
             this.tableData3 = data.list.list;
+            this.totalCount = data.list.total;
          });
         },
         resetForm(){
@@ -114,9 +114,9 @@ export default {
             this.productValue='';
         },
         query(){
-             buyRecordService.getBuyRecordList({userId:"20171206201103946446",productValue:this.productValue,buyTimeStart:this.buyTimeStart,buyTimeEnd:this.buyTimeEnd}).then((data)=>{
-             console.log(data);
+            buyRecordService.getBuyRecordList({userId:"20171206201103946446",productValue:this.productValue,buyTimeStart:this.buyTimeStart,buyTimeEnd:this.buyTimeEnd}).then((data)=>{
             this.tableData3 = data.list.list;
+            this.totalCount = data.list.total;
         });
         }
     }
