@@ -2,6 +2,7 @@
     <div class="news-detail">
         <div class="content-wrap content-75-to-100 news-content float-left">
             <h2 class="text-center">{{contentTitle}}</h2>
+            <p class="author-con"><span>{{contentAuthor}}</span><span>{{contentCtime}}</span></p>
             <div v-html="contentValue"></div>
             <div style="margin-top: 30px;font-size: 8px;color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明:本网站所收集文字、图片等内容均系网民撰写或程序在互联网中自动收录转载，文章著作权归原作者所有，内容为作者个人观点。
 转载的目的在于非盈利传递更多信息及用于网络分享，并不代表本站赞同其观点和对其真实性负责，也不构成任何其他建议，只供参考之用。本网站
@@ -14,7 +15,7 @@
             <div  v-if="this.contentType=='03'" class="list-name"><span>24小时最热推荐</span></div>
             <ul class="normal-news-list">
                 <li class="transition-halfs" v-for="item in contentList" :key="item.contentId">
-                    <a @click="changeDetail(item.contentId)"   class="transition-halfs text-elipse">{{item.contentTitle}}</a>
+                    <a @click="changeDetail(item.contentId)"   class="transition-halfs"><p class="text-elipse" style="width:65%">{{item.contentTitle}}</p><p style="width:35%">{{item.createTime.slice(0,11)}}</p></a>
                 </li>
             </ul>
         </div>
@@ -29,6 +30,8 @@ export default {
             contentType:'01',
             contentValue:'',
             contentTitle:'',
+            contentAuthor:'',
+            contentCtime:'',
             contentList:[],
         }
     },
@@ -40,7 +43,10 @@ export default {
                     this.contentType = ret.systemContent.contentType;
                     this.contentValue = ret.systemContent.content;
                     this.contentTitle = ret.systemContent.contentTitle;
-                      this.querContentList();
+                    this.contentAuthor = ret.systemContent.createUsername;
+                    this.contentCtime = ret.systemContent.createTime;
+                    this.querContentList();
+                    console.log(ret);
                 }
             })
         },
@@ -63,3 +69,8 @@ export default {
     },
 }
 </script>
+<style type="stylus">
+.author-con{border-bottom:1px solid #aaa;margin-bottom:40px;padding:10px 20px}
+.author-con>span:first-child{color:#333;margin-right:50px}
+.author-con>span:last-child{color:#666;font-size:13px}
+</style>

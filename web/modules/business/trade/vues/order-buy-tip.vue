@@ -39,7 +39,13 @@ export default {
                 if(ret.body.status == 'success'){
                     this.showDialog = false;
                     comVue.$emit('reload-recom-list');
-                    window.open(location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo,'_blank');
+                    this.$nextTick(()=>{
+                        var aNode = $("a");
+                        aNode.attr('target','_blank');
+                        aNode.attr('href', location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo);
+                        aNode[0].click();
+                    })
+                    // window.open(location.origin+"/order-detail?recommendNo="+this.orderData.recommendNo,'_blank');
                 }else{
                     Message({
                         message:ret.body.errInfo,
