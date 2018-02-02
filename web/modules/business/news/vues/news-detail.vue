@@ -3,6 +3,10 @@
         <div class="content-wrap content-75-to-100 news-content float-left">
             <h2 class="text-center">{{contentTitle}}</h2>
             <div v-html="contentValue"></div>
+            <div style="margin-top: 30px;font-size: 8px;color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明:本网站所收集文字、图片等内容均系网民撰写或程序在互联网中自动收录转载，文章著作权归原作者所有，内容为作者个人观点。
+转载的目的在于非盈利传递更多信息及用于网络分享，并不代表本站赞同其观点和对其真实性负责，也不构成任何其他建议，只供参考之用。本网站
+不保证信息的准确性、有效性、及时性和完整性。</div>
+            <div style="font-size: 8px;color: grey;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您发现网站上有侵权您的知识产权的作品及其它问题，请与我们取得联系，我们会及时修改或删除。</div>
         </div>
         <div class="content-wrap content-25-to-100 rank-common">
             <div  v-if="this.contentType=='01'" class="list-name"><span>网站头条</span></div>
