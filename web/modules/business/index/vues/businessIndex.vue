@@ -39,7 +39,7 @@
                     <div class="intro-wrap intro-wrap-index transition-halfs" v-for="item in hotList" :key="item.recommendNo">
                         <div v-if="item.productCode =='01'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">亚盘:</span><span style="font-size: 12px">{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
                         <div v-if="item.productCode =='02'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">大小球:</span><span style="font-size: 12px">{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
-                        <div v-if="item.productCode =='03'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">竞彩:</span><span> style="font-size: 12px"{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
+                        <div v-if="item.productCode =='03'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">竞彩:</span><span style="font-size: 12px">{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
                         <div v-if="item.productCode =='04'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">北单:</span><span style="font-size: 12px">{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
                         <div class="intro-info">
                             <a class="recommender-content" :key="item.userId" target="_blank" @click="goInfo(item)" >

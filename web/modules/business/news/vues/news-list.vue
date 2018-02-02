@@ -85,7 +85,7 @@ export default {
     },
     methods:{
        queryTtList(){
-            let params = {contentType:'01'};
+            let params = {contentType:'01',pageNum:this.currentPage1,pageSize:this.pagesize1};
             service.pageContentList(params).then((ret)=>{
                 if(ret.status == 'success'){
                     this.ttList = ret.list;
@@ -94,7 +94,7 @@ export default {
             })
         },
         queryXwList(){
-            let params = {contentType:'02'};
+            let params = {contentType:'02',pageNum:this.currentPage2,pageSize:this.pagesize2};
             service.pageContentList(params).then((ret)=>{
                 if(ret.status == 'success'){
                     this.xwList = ret.list;
@@ -103,7 +103,7 @@ export default {
             })
         },
         queryYcList(){
-            let params = {contentType:'03'};
+            let params = {contentType:'03',pageNum:this.currentPage3,pageSize:this.pagesize3};
             service.pageContentList(params).then((ret)=>{
                 if(ret.status == 'success'){
                     this.ycList = ret.list;
