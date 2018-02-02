@@ -140,7 +140,7 @@ export default {
             recommDetail:{},
             product:{'01':'亚盘','02':'大小球','03':'竞彩足球','04':'北京单场'},
             orderData:'',
-            assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
+            assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级','':'暂无'},
             avatarUrl:'',
             productCode: '01',
             userName:this.$route.query.userName,

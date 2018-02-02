@@ -95,7 +95,7 @@ export default {
         }
     },
     mounted(){
-        buyRecordService.getBuyRecordList({userId:"20171206201103946446"}).then((data)=>{
+        buyRecordService.getBuyRecordList().then((data)=>{
             this.tableData3 = data.list.list;
             console.log(data)
             this.totalCount = data.list.total;
@@ -103,7 +103,7 @@ export default {
     },
     methods:{
         handleCurrentChange(){
-            buyRecordService.getBuyRecordList({userId:"20171206201103946446",pageNum:this.pageNum}).then((data)=>{
+            buyRecordService.getBuyRecordList({pageNum:this.pageNum,pagesize:this.pagesize}).then((data)=>{
             this.tableData3 = data.list.list;
             this.totalCount = data.list.total;
          });
@@ -114,7 +114,7 @@ export default {
             this.productValue='';
         },
         query(){
-            buyRecordService.getBuyRecordList({userId:"20171206201103946446",productValue:this.productValue,buyTimeStart:this.buyTimeStart,buyTimeEnd:this.buyTimeEnd}).then((data)=>{
+            buyRecordService.getBuyRecordList({productValue:this.productValue,buyTimeStart:this.buyTimeStart,buyTimeEnd:this.buyTimeEnd}).then((data)=>{
             this.tableData3 = data.list.list;
             this.totalCount = data.list.total;
         });
