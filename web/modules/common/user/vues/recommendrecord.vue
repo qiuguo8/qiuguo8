@@ -136,7 +136,7 @@ export default {
             console.log(val);
         },
         handleCurrentChange(){
-            recommendService.getRecommendList({pageNum:this.currentPage4}).then((data)=>{
+            recommendService.getRecommendList({productCode:this.ProductValue,recommendStatus:this.RecommendStatusValue,recommendTimeStart:this.recommendTimeStart,recommendTimeEnd:this.recommendTimeEnd,pageNum:this.currentPage4}).then((data)=>{
             this.tableData3 = data.list.list;
             this.tableData3Total = data.list.total;
             })
@@ -149,7 +149,6 @@ export default {
         },
         query(){
             recommendService.getRecommendList({productCode:this.ProductValue,recommendStatus:this.RecommendStatusValue,recommendTimeStart:this.recommendTimeStart,recommendTimeEnd:this.recommendTimeEnd}).then((data)=>{
-            console.log(data);
             this.tableData3 = data.list.list;
             this.tableData3Total = data.list.total;
         })
