@@ -100,6 +100,7 @@ export default {
         return {
             tableData3:[],
             Product:[
+                {value: '', label: '全部' }, 
                 {value: '01', label: '亚盘' }, 
                 {value: '02', label: '大小球' }, 
                 {value: '03',label: '竞彩'}, 
@@ -114,7 +115,7 @@ export default {
             value8:'2017-11-15',
             currentPage4: 1,
             RecommendStatusValue:'',
-            ProductValue:'01',
+            ProductValue:'',
             recommendTimeStart:'',
             recommendTimeEnd:'',
             tableData3Total:0
