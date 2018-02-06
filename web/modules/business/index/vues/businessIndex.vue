@@ -25,7 +25,7 @@
                         <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
                         <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
                         <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
-                        <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
+                        <span class="el-col-4  text-elipse"><span>{{(rankItem.accuracyRate*100).toFixed(2)}}</span>%</span>
                     </a>
                 </div>
             </div>
