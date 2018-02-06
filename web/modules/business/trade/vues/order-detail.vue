@@ -5,7 +5,13 @@
             <div class="el-col-24">
                 <el-table :default-sort="{prop:'count',order:'ascending'}" :data="sameFieldList" border>
                     <el-table-column prop="userName" label="推荐人" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                        <template slot-scope="scope">
+                            <div class="match-wrap">
+                                <p class="result">{{hitResult[scope.row.hitResult]}}</p>
+                            </div>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="查看" min-width="80" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
                             <router-link  v-if="scope.row.price==0 || scope.row.buyStatus!='0' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId" style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">查看</router-link>
@@ -43,22 +49,25 @@
                 <div class="left-name" style="margin-bottom:10px"><span>推荐内容</span></div>
                 <div class="el-col-24">
                     <div class="el-col-8">
-                        <p>{{rDetails.leagueName}}{{rDetails.matchStartTime}}</p>
+                        <p style="color: #ef473a">{{rDetails.leagueName}}<br>{{rDetails.matchStartTime}}</p>
                         <p>{{rDetails.homeTeamName}} VS {{rDetails.visitTeamName}}</p>
                     </div>
                     <div class="el-col-8">
-                        <span> 玩法：{{product[rDetails.productCode]}}</span><br>
-                        <span>盘口：{{rDetails.handicap}}</span>
+                        <span style="color: #ef473a"> 玩法：{{product[rDetails.productCode]}}</span><br>
+                        <span style="color: #ef473a">盘口：{{rDetails.handicap}}</span>
                     </div>
                     <div class="el-col-8">
-                        <span>价格：{{rDetails.price}}</span>
+                        <span style="color: #67c23a">价格：{{rDetails.price}}球果</span>
                     </div>
-                    <div class="el-col-24">
+                    <div v-if="rDetails.productCode != 2" class="el-col-24">
                         推荐：{{null==rDetails.recommendTeamName?'平局':rDetails.recommendTeamName}}
+                    </div>
+                    <div v-if="rDetails.productCode == 2" class="el-col-24">
+                        推荐：{{rDetails.homeTeamName==rDetails.recommendTeamName?'大球':'小球'}}
                     </div>
                     <div class="el-col-24">
                         <div style="width: 100%;word-wrap:break-word">
-                            推荐说明：{{rDetails.recommendContent}}
+                            推荐说明：{{null==rDetails.recommendContent||''==rDetails.recommendContent?'分析师太懒，什么都没留下':rDetails.recommendContent}}
                         </div>
                     </div>
                 </div>
@@ -66,15 +75,15 @@
             <div class="order-result el-col-24 rank-common row-new">
                 <div class="left-name" style="margin-bottom:10px"><span>开奖结果</span></div>
                 <div class="el-col-24">
-                    <span v-if="rDetails.homeScore">比分：{{rDetails.homeScore}}-{{rDetails.homeScore}}</span>
+                    <span v-if="rDetails.homeScore">比分：{{rDetails.homeScore}}-{{rDetails.visitScore}}</span>
                     <span v-if="!rDetails.homeScore">比分：暂无</span>
-                    <span v-if="rDetails.hitResult">结果：{{rDetails.hitResult}}</span>
+                    <span v-if="rDetails.hitResult">结果：{{hitResult[rDetails.hitResult]}}</span>
                     <span v-if="!rDetails.hitResult">结果：暂无</span>
                     <p class="el-col-24">本推介仅代表作者观点，不代表球果吧立场。信息仅供竞彩参考，请勿用于非法博彩</p>
                 </div>
             </div>
             <div class="recent-recommend rank-common">
-                <div class="left-name" style="margin-bottom:10px"><span>近期推荐</span></div>
+                <div class="left-name" style="margin-bottom:10px"><span>{{recommDetail.userName}}近期推荐</span></div>
                 <div class="el-col-24">
                     <el-table :data="recentRecommList" border>
                         <el-table-column label="赛事" min-width="160" align="center" head-align="center" class-name="table-fixed">
