@@ -32,7 +32,7 @@
                     <el-table-column type="index" label="排行" width="50" align="center" head-align="center" ></el-table-column>
                     <el-table-column prop="userName" label="推荐师" min-width="50" align="center" head-align="center" class-name="table-fixed"> 
                         <template slot-scope="scope">
-                                <a style="cursor:pointer;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
+                                <a style="cursor:pointer;color:#409eff;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
                         </template>
                     </el-table-column>
                     <el-table-column prop="recommTotal" label="场次" min-width="30" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -43,7 +43,7 @@
                     </el-table-column>
                     <el-table-column prop="recomming" label="正在推荐" min-width="80" align="center" head-align="center" class-name="table-fixed">
                           <template slot-scope="scope">
-                                <span v-if="scope.row.recomms && scope.row.recomms.length>0"><a style="cursor:pointer;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.recomms[0].leagueName}}：{{scope.row.recomms[0].homeTeamName}} &nbsp;VS&nbsp; {{scope.row.recomms[0].visitTeamName}}</a></span><br/>
+                                <span v-if="scope.row.recomms && scope.row.recomms.length>0"><a style="cursor:pointer;color:#409eff;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.recomms[0].leagueName}}：{{scope.row.recomms[0].homeTeamName}} &nbsp;VS&nbsp; {{scope.row.recomms[0].visitTeamName}}</a></span><br/>
                           </template>  
                     </el-table-column>
                 </el-table>
@@ -77,7 +77,7 @@
                         <el-table-column type="index" label="排行" width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                         <el-table-column  prop="userName" label="用户名" min-width="100" align="center" head-align="center" class-name="table-fixed"> 
                             <template slot-scope="scope">
-                                <a style="cursor:pointer;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
+                                <a style="cursor:pointer;color:#409eff;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
                             </template>
                         </el-table-column>
                         <el-table-column  prop="zj" label="战绩" min-width="140" align="center" head-align="center" class-name="table-fixed">
@@ -98,7 +98,7 @@
                         <el-table-column type="index" label="排行" width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                         <el-table-column  prop="userName" label="用户名" min-width="120" align="center" head-align="center" class-name="table-fixed">
                              <template slot-scope="scope">
-                                <a style="cursor:pointer;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
+                                <a style="cursor:pointer;color:#409eff;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
                             </template>
                          </el-table-column>
                         <el-table-column  prop="zj" label="战绩" min-width="120" align="center" head-align="center" class-name="table-fixed">
