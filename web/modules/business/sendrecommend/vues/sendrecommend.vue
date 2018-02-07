@@ -333,28 +333,30 @@ export default {
         publishRecom(){
             let recommendDetails = this.infoObj;
             if(this.recommendInfo.categoryCode == '0101'){
-                recommendDetails.handicap = this.infoObj.handiCap;
-                recommendDetails.homeTeamSp = this.infoObj.win;
-                recommendDetails.tieSp = this.infoObj.draw;
-                recommendDetails.visitTeamSp = this.infoObj.lost;
-            }
-            if(this.recommendInfo.categoryCode == '0201'){
-                recommendDetails.handicap = this.infoObj.fullSizeBall;
+                recommendDetails.handicap = this.infoObj.handiCapYa;
+                recommendDetails.homeTeamSp = this.infoObj.winYa;
+                recommendDetails.tieSp = '0';//亚盘没有平局说法
+                recommendDetails.visitTeamSp = this.infoObj.lostYa;
+            }else if(this.recommendInfo.categoryCode == '0201'){
+                recommendDetails.handicap = this.infoObj.handiCapDaXiao;
                 recommendDetails.homeTeamSp = this.infoObj.daXiaoWin;
-                recommendDetails.tieSp = this.infoObj.daXiaoDraw;
+                recommendDetails.tieSp = '0';//大小球没有平局说法
                 recommendDetails.visitTeamSp = this.infoObj.daXiaoLost;
-            }
-            if(this.recommendInfo.categoryCode == '0301' || this.recommendInfo.categoryCode == '0401'){
-                recommendDetails.handicap = '0';
-                recommendDetails.homeTeamSp = this.infoObj.win;
-                recommendDetails.tieSp = this.infoObj.draw;
-                recommendDetails.visitTeamSp = this.infoObj.lost;
-            }
-            if(this.recommendInfo.categoryCode == '0302'){
-                recommendDetails.handicap = this.infoObj.handiCap;
+            }else if(this.recommendInfo.categoryCode == '0301'){
+                recommendDetails.handicap = '无';
+                recommendDetails.homeTeamSp = this.infoObj.winJC;
+                recommendDetails.tieSp = this.infoObj.drawJC;
+                recommendDetails.visitTeamSp = this.infoObj.lostJC;
+            }else if(this.recommendInfo.categoryCode == '0302'){
+                recommendDetails.handicap = this.infoObj.letBallHandiCap;
                 recommendDetails.homeTeamSp = this.infoObj.letBallWin;
                 recommendDetails.tieSp = this.infoObj.letBallDraw;
                 recommendDetails.visitTeamSp = this.infoObj.letBallLost;
+            }else if(this.recommendInfo.categoryCode == '0401'){
+                recommendDetails.handicap = this.infoObj.handiCapBD;
+                recommendDetails.homeTeamSp = this.infoObj.winBD;
+                recommendDetails.tieSp = this.infoObj.drawBD;
+                recommendDetails.visitTeamSp = this.infoObj.lostBD;
             }
 
             recommendDetails.productCode = this.recommendInfo.productCode;
