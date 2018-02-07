@@ -28,11 +28,17 @@
                 <el-form-item label="手机号码" prop="phone" label-width="100px">
                     <el-input v-model="mloginForm.phone" auto-complete="off"></el-input>
                 </el-form-item>
+                <el-form-item label="验证码" prop="checkCode" label-width="100px">
+                    <div class="el-col-12">
+                        <el-input v-model="mloginForm.checkCode" auto-complete="off"></el-input>
+                    </div>
+                    <img @click="getImgCode()" :src="'data:image/jpg;base64,'+imgCode" style="cursor:pointer;float:left;width:80px;height:40px;margin-left:5px"/>
+                </el-form-item>
                 <el-form-item label="短信验证码" prop="phoneCode" label-width="100px">
                     <div>
                         <el-input type="text" v-model="mloginForm.phoneCode" auto-complete="off"></el-input>
                     </div>
-                    <el-button style="margin-top:10px"  :disabled="!isCountOver||!isMobileValid" @click="getMessCode()">{{countTxt}}</el-button>
+                    <el-button style="margin-top:10px"  :disabled="!isCountOver||!isMobileValid||!isCheckCodeValid" @click="getMessCode()">{{countTxt}}</el-button>
                 </el-form-item>
             </el-form>
             <div class="btn-login text-right">
@@ -93,7 +99,8 @@ export default {
             },
             mloginForm:{
                 phoneCode:'',
-                phone:''
+                phone:'',
+                checkCode:''
             },
             rules: {
                 userName: [
@@ -109,7 +116,7 @@ export default {
                     {required: true, message: '验证码不能为空', trigger: 'change blur'},
                     {validator: formUtil.isNumber('验证码必须为数字'), trigger: 'change blur'},
                     {type: 'number', validator: formUtil.maxSize(4, '验证码长度等于4'), trigger: 'blur change'},
-                    {validator: this.validateCode.bind(this), trigger: 'change'},
+                    {validator: this.validateCode('loginForm'), trigger: 'change'},
                 ],
                 isAuto: [
                     {type: 'boolean', trigger: 'change'}
@@ -124,14 +131,21 @@ export default {
                     {required:true,message:'短信验证码不能为空',trigger:'change blur'},
                     {validator:formUtil.isNumber('验证码必须为数字'),trigger:'change blur'},
                     {type:'number',validator:formUtil.maxSize(6,'验证码长度不大于6'),trigger:'blur change'}
-                ]
+                ],
+                checkCode: [
+                    {required: true, message: '验证码不能为空', trigger: 'change blur'},
+                    {validator: formUtil.isNumber('验证码必须为数字'), trigger: 'change blur'},
+                    {type: 'number', validator: formUtil.maxSize(4, '验证码长度等于4'), trigger: 'blur change'},
+                    {validator: this.validateCode('mloginForm'), trigger: 'change'},
+                ],
             },
             imgCode:'',
             countSec:60,
             counter:null,
             countTxt:'发送短信验证码',
             isCountOver:true,
-            isMobileValid:false
+            isMobileValid:false,
+            isCheckCodeValid:false
         }
     },
     created(){
@@ -164,17 +178,24 @@ export default {
         canClickSend(error){
             this.isMobileValid = error ? false : true;
         },
-        validateCode(rule,val,callback){
-            if(val && val.length==4){
-                loginService.validateImgCode({checkCode:this.loginForm.checkCode}).then((ret)=>{
-                    if(ret === true){
-                        callback();
-                    }else{
-                        callback(new Error("输入的验证码不正确"));
-                    }
-                })
-            }else{
-                callback(new Error("验证码长度等于4"));
+        validateCode(form){
+            return (rule,val,callback)=>{
+                var error;
+                if(val && val.length==4){
+                    loginService.validateImgCode({checkCode:this[form].checkCode}).then((ret)=>{
+                        if(ret === true){
+                            callback();
+                        }else{
+                            error = new Error("输入的验证码不正确");
+                            callback(error);
+                        }
+                        this.isCheckCodeValid = error ? false : true;
+                    })
+                }else{
+                    error = new Error("验证码长度等于4");
+                    this.isCheckCodeValid = false;
+                    callback(error);
+                }
             }
         },
         getImgCode(){
