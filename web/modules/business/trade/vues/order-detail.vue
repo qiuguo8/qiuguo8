@@ -15,7 +15,7 @@
                     <el-table-column label="查看" min-width="80" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
                             <router-link  v-if="scope.row.price==0 || scope.row.buyStatus!='0' || scope.row.recommendStatus=='02' || scope.row.userId==scope.row.lookerId" style="margin-top:10px" class="btn btn-orange btn-padding" target="_blank" :to="{name:'order-detail',query:{recommendNo:scope.row.recommendNo}}">查看</router-link>
-                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}</el-button>
+                            <el-button v-if="scope.row.buyStatus=='0' && scope.row.price>0 && scope.row.recommendStatus=='01' && scope.row.userId!=scope.row.lookerId" type="warning" @click="showOrderDetail(scope.row)">{{scope.row.price}}球果</el-button>
                         </template>
                     </el-table-column>
                 </el-table>

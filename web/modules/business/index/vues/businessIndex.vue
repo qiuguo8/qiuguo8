@@ -19,14 +19,14 @@
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
-                    <a v-for="rankItem in rankList" :key="rankItem.userId" target="_blank" @click="goInfo(rankItem)" class="content-wrap el-col-24" style="cursor:pointer">
+                    <div v-for="rankItem in rankList" :key="rankItem.userId"  class="content-wrap el-col-24" >
                         <span class="el-col-3  text-elipse">{{rankItem.index}}</span>
                         <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
                         <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
-                        <span class="el-col-6 user-name text-elipse">{{rankItem.userName}}</span>
+                        <span class="el-col-6 user-name text-elipse"><a target="_blank" @click="goInfo(rankItem)" style="cursor:pointer;color:#409eff;">{{rankItem.userName}}</a></span>
                         <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
-                        <span class="el-col-4  text-elipse">{{rankItem.accuracyRate}}</span>
-                    </a>
+                        <span class="el-col-4  text-elipse"><span>{{(rankItem.accuracyRate*100).toFixed(2)}}</span>%</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,13 +42,13 @@
                         <div v-if="item.productCode =='03'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">竞彩:</span><span style="font-size: 12px">{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
                         <div v-if="item.productCode =='04'" class="match-name text-elipse"><span style="color: #F56C6C;font-size: 14px">北单:</span><span style="font-size: 12px">{{item.homeTeamName}}VS{{item.visitTeamName}}</span></div>
                         <div class="intro-info">
-                            <a class="recommender-content" :key="item.userId" target="_blank" @click="goInfo(item)" >
+                            <div class="recommender-content" :key="item.userId"  >
                                 <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
                                 <img  v-if="!item.faceUrl" :src="staticPath+'avatar/default.jpg'">
-                            </a>
+                            </div>
                         </div>
                         <div class="intro-text">
-                            <p class="text-elipse">{{item.userName}}</p>
+                            <p class="text-elipse"><a target="_blank" @click="goInfo(item)" style="cursor:pointer;color:#409eff;">{{item.userName}}</a></p>
                             <p class="text-elipse">{{item.assessLevel}}</p>
                             <p class="text-elipse">{{item.starLevel}}</p>
                             <p class="text-elipse">{{item.recordsValue}}</p>

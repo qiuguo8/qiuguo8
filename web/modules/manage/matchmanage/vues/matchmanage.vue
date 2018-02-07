@@ -48,7 +48,7 @@
                 <el-table-column prop="matchStartTime" label="比赛时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="overFlag" label="开奖状态" :formatter="overFlagForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="overFlag" label="比赛状态" :formatter="overFlagForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="disabled" label="是否隐藏":formatter="disabledForma" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
             </el-table>
             <div class="page-block text-right">
@@ -147,8 +147,12 @@ export default {
         },
         overFlagForma(row,column){
             switch (row.overFlag) {
-                case '0':return '比赛未结束';break;
-                case '1':return '比赛已结束';break;
+                case '0':return '未结束';break;
+                case '1':return '进行中';break;
+                case '2':return '已结束';break;
+                case '6':return '待定';break;
+                case '7':return '改期';break;
+                case '8':return '腰斩';break;
             };
         },
         disabledForma(row,column){

@@ -30,48 +30,72 @@
                     <el-checkbox-button @change="handleAlterCheckChange">反选</el-checkbox-button>
                 </div>
             </div>
-            <el-table :data="matchsTable" border style="width: 100%">
+            <el-table v-if="productCode=='01'" :data="matchsTable" border style="width: 100%">
+                <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column label="亚盘" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <div class="two-one">
+                            <el-button v-if="scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
+                            <span class="table-span">{{scope.row.handiCapYa}}</span>
+                            <el-button v-if="scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
+                            <el-tag v-if="!scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" @click="void (0)" type="warning">暂未出售</el-tag>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="fullSizeBall" label="大小球" min-width="190" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <div class="two-one">
+                            <el-button v-if="scope.row.handiCapDaXiao" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
+                            <span class="table-span">{{scope.row.handiCapDaXiao}}</span>
+                            <el-button v-if="scope.row.handiCapDaXiao" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
+                            <el-tag v-if="!scope.row.handiCapDaXiao" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
+                        </div>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-table v-if="productCode=='03'" :data="matchsTable" border style="width: 100%">
+                <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column label="不让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <div>
+                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','home')">{{scope.row.winJC}}</el-button>
+                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','draw')">{{scope.row.drawJC}}</el-button>
+                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','visit')">{{scope.row.lostJC}}</el-button>
+                            <el-tag v-if="!scope.row.winJC || !scope.row.drawJC || !scope.row.lostJC " @click="void (0)" type="warning" >暂未出售</el-tag>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="让球" min-width="190" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <div>
+                            <span class="table-span">{{scope.row.letBallHandiCap}}</span>
+                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','home')">{{scope.row.letBallWin}}</el-button>
+                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','draw')">{{scope.row.letBallDraw}}</el-button>
+                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','visit')">{{scope.row.letBallLost}}</el-button>
+                            <el-tag v-if="!scope.row.letBallHandiCap" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
+                        </div>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-table v-if="productCode=='04'" :data="matchsTable" border style="width: 100%">
                 <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column  prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="visitTeamName" label="客队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="fullLetBall" :label="productCode=='01'?'亚盘':(productCode=='03'?'不让球':'赔率')" min-width="170" align="center" head-align="center" class-name="table-fixed">
+                <el-table-column label="赔率" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
-                        <div v-if="productCode=='01'" class="two-one">
-                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
-                            <span class="table-span">{{scope.row.handiCap}}</span>
-                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
-                            <el-tag v-if="!scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" @click="void (0)" type="warning">暂未出售</el-tag>
-                        </div>
-                        <div v-if="productCode=='03'">
-                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','home')">{{scope.row.win}}</el-button>
-                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','draw')">{{scope.row.draw}}</el-button>
-                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','visit')">{{scope.row.lost}}</el-button>
-                            <el-tag v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " @click="void (0)" type="warning" >暂未出售</el-tag>
-                        </div>
-                        <div v-if="productCode=='04'">
-                            <span class="table-span"></span>
-                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','home')">{{scope.row.win}}</el-button>
-                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','draw')">{{scope.row.draw}}</el-button>
-                            <el-button v-if="scope.row.win && scope.row.draw && scope.row.lost " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','visit')">{{scope.row.lost}}</el-button>
-                            <el-tag v-if="!scope.row.win || !scope.row.draw || !scope.row.lost " @click="void (0)" type="warning" >暂未出售</el-tag>
-                        </div>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="fullSizeBall" v-if="productCode!='04'" :label="productCode=='01'?'大小球':'让球'" min-width="190" align="center" head-align="center" class-name="table-fixed">
-                    <template slot-scope="scope">
-                        <div v-if="productCode=='01'" class="two-one">
-                            <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
-                            <span class="table-span">{{scope.row.fullSizeBall}}</span>
-                            <el-button v-if="scope.row.fullSizeBall" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
-                            <el-tag v-if="!scope.row.fullSizeBall" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
-                        </div>
-                        <div v-if="productCode=='03'">
-                            <span class="table-span">{{scope.row.handiCap}}</span>
-                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','home')">{{scope.row.letBallWin}}</el-button>
-                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','draw')">{{scope.row.letBallDraw}}</el-button>
-                            <el-button v-if="scope.row.handiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','visit')">{{scope.row.letBallLost}}</el-button>
-                            <el-tag v-if="!scope.row.handiCap" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
+                        <div>
+                            <span class="table-span">{{scope.row.handiCapBD}}</span>
+                            <el-button v-if="scope.row.winBD && scope.row.drawBD && scope.row.lostBD " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','home')">{{scope.row.winBD}}</el-button>
+                            <el-button v-if="scope.row.winBD && scope.row.drawBD && scope.row.lostBD " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','draw')">{{scope.row.drawBD}}</el-button>
+                            <el-button v-if="scope.row.winBD && scope.row.drawBD && scope.row.lostBD " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','visit')">{{scope.row.lostBD}}</el-button>
+                            <el-tag v-if="!scope.row.winBD || !scope.row.drawBD || !scope.row.lostBD " @click="void (0)" type="warning" >暂未出售</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -309,28 +333,30 @@ export default {
         publishRecom(){
             let recommendDetails = this.infoObj;
             if(this.recommendInfo.categoryCode == '0101'){
-                recommendDetails.handicap = this.infoObj.handiCap;
-                recommendDetails.homeTeamSp = this.infoObj.win;
-                recommendDetails.tieSp = this.infoObj.draw;
-                recommendDetails.visitTeamSp = this.infoObj.lost;
-            }
-            if(this.recommendInfo.categoryCode == '0201'){
-                recommendDetails.handicap = this.infoObj.fullSizeBall;
+                recommendDetails.handicap = this.infoObj.handiCapYa;
+                recommendDetails.homeTeamSp = this.infoObj.winYa;
+                recommendDetails.tieSp = '0';//亚盘没有平局说法
+                recommendDetails.visitTeamSp = this.infoObj.lostYa;
+            }else if(this.recommendInfo.categoryCode == '0201'){
+                recommendDetails.handicap = this.infoObj.handiCapDaXiao;
                 recommendDetails.homeTeamSp = this.infoObj.daXiaoWin;
-                recommendDetails.tieSp = this.infoObj.daXiaoDraw;
+                recommendDetails.tieSp = '0';//大小球没有平局说法
                 recommendDetails.visitTeamSp = this.infoObj.daXiaoLost;
-            }
-            if(this.recommendInfo.categoryCode == '0301' || this.recommendInfo.categoryCode == '0401'){
-                recommendDetails.handicap = '0';
-                recommendDetails.homeTeamSp = this.infoObj.win;
-                recommendDetails.tieSp = this.infoObj.draw;
-                recommendDetails.visitTeamSp = this.infoObj.lost;
-            }
-            if(this.recommendInfo.categoryCode == '0302'){
-                recommendDetails.handicap = this.infoObj.handiCap;
+            }else if(this.recommendInfo.categoryCode == '0301'){
+                recommendDetails.handicap = '无';
+                recommendDetails.homeTeamSp = this.infoObj.winJC;
+                recommendDetails.tieSp = this.infoObj.drawJC;
+                recommendDetails.visitTeamSp = this.infoObj.lostJC;
+            }else if(this.recommendInfo.categoryCode == '0302'){
+                recommendDetails.handicap = this.infoObj.letBallHandiCap;
                 recommendDetails.homeTeamSp = this.infoObj.letBallWin;
                 recommendDetails.tieSp = this.infoObj.letBallDraw;
                 recommendDetails.visitTeamSp = this.infoObj.letBallLost;
+            }else if(this.recommendInfo.categoryCode == '0401'){
+                recommendDetails.handicap = this.infoObj.handiCapBD;
+                recommendDetails.homeTeamSp = this.infoObj.winBD;
+                recommendDetails.tieSp = this.infoObj.drawBD;
+                recommendDetails.visitTeamSp = this.infoObj.lostBD;
             }
 
             recommendDetails.productCode = this.recommendInfo.productCode;
