@@ -100,7 +100,8 @@ export default {
             mloginForm:{
                 phoneCode:'',
                 phone:'',
-                checkCode:''
+                checkCode:'',
+                type:'LOGIN'
             },
             rules: {
                 userName: [
@@ -275,8 +276,7 @@ export default {
             this.isQQlogin = this.isWXlogin = this.isCommon = false;
         },
         getMessCode(){
-            let info = {'phone':this.mloginForm.phone,'type':'LOGIN'}
-            messCodeUtil.createPhoneCode(info).then((ret)=>{
+            messCodeUtil.createPhoneCode(this.mloginForm).then((ret)=>{
                 if(ret.body.status=='success'){
                     this.countSeconds();
                 }else{
