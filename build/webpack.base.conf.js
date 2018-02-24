@@ -89,7 +89,7 @@ module.exports = {
         include:[resolve('node_modules')],
         query: {
           limit: process.env.NODE_ENV === 'production'?10000:'',
-          name: process.env.NODE_ENV === 'production'?'./fonts/[name].[hash:7].[ext]':''
+          name: process.env.NODE_ENV === 'production'?utils.assetsPath('fonts/[name].[hash:7].[ext]'):''
         }
       },
       {test:/\.html$/,loader:"html-loader"}
