@@ -2,7 +2,7 @@ const PRODUCTION = 'production';
 const DEVELOPMENT = 'development';
 
 var curEnv = DEVELOPMENT;
-var origin = location.origin;
+var origin = location.protocol+"//"+location.host;
 var basePath = origin;
 var sataticPath = "http://image.qiuguo8.com/";
 
