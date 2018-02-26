@@ -50,6 +50,9 @@ export default {
                 }
             })
         },
+        goTop(){
+            $(window).scrollTop(0);
+        },
         querContentList(){
              let params = {contentType:this.contentType};
              service.queryContentList(params).then((ret)=>{
@@ -61,6 +64,7 @@ export default {
         changeDetail(newcontentId){
             this.contentId=newcontentId;
             this.queryContentDetail();
+            this.goTop();
         }
 
     },
