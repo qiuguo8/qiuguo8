@@ -30,6 +30,11 @@
                     <el-checkbox-button @change="handleAlterCheckChange">反选</el-checkbox-button>
                 </div>
             </div>
+            <el-radio-group v-model="matchStartTime" @change="matchTimeChange()">
+                <el-radio-button label="今天比赛" ></el-radio-button>
+                <el-radio-button label="明天比赛"></el-radio-button>
+                <el-radio-button label="后天比赛"></el-radio-button>
+            </el-radio-group>
             <el-table v-if="productCode=='01'" :data="matchsTable" border style="width: 100%">
                 <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -57,6 +62,9 @@
                 </el-table-column>
             </el-table>
             <el-table v-if="productCode=='03'" :data="matchsTable" border style="width: 100%">
+                <button class="btn btn-padding btn-orange">今天比赛</button>
+                <button class="btn btn-padding btn-orange">明天比赛</button>
+                <button class="btn btn-padding btn-orange">后天比赛</button>
                 <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -84,6 +92,9 @@
                 </el-table-column>
             </el-table>
             <el-table v-if="productCode=='04'" :data="matchsTable" border style="width: 100%">
+                <button class="btn btn-padding btn-orange">今天比赛</button>
+                <button class="btn btn-padding btn-orange">明天比赛</button>
+                <button class="btn btn-padding btn-orange">后天比赛</button>
                 <el-table-column prop="leagueName" label="联赛" min-width="40" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column  prop="matchStartTimeToStr" label="比赛时间" min-width="50" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="homeTeamName" label="主队" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -160,6 +171,7 @@ import Vue from 'vue'
 import sysUtil from 'web/common/utils/sysUtil.js'
 import {Checkbox,CheckboxGroup,Button,Table,TableColumn,CheckboxButton,RadioGroup,RadioButton,Dialog,Input,Message} from 'element-ui'
 import service from 'web/modules/business/sendrecommend/service/sendrecommendService'
+import DateUtil from '../../../../common/utils/DateUtil.js';
 Vue.component(Checkbox.name,Checkbox);
 Vue.component(CheckboxGroup.name,CheckboxGroup);
 Vue.component(Button.name,Button);
@@ -181,6 +193,7 @@ export default {
             checkedLeague: [],
             leagues: [],
             matchsTable:[],
+            matchStartTime:'今天比赛',
             tableData4:[{index:'1',reward:'200球果'},
                         {index:'2',reward:'150球果'},
                         {index:'3',reward:'100球果'},
@@ -204,7 +217,7 @@ export default {
         }
     },
     created:function () {
-        let param = {'productCode':this.productCode};
+        let param = {'productCode':this.productCode,'daysDifference':'0'};
         this.getLeagueInfo(param);
         this.getMatchesInfo(param);
     },
@@ -312,7 +325,22 @@ export default {
             }``
         },
         productChange(){
-            let param = {'productCode':this.productCode};
+            let param = {'productCode':this.productCode,'daysDifference':'0'};
+            switch (this.matchStartTime) {
+                case '今天比赛':param.daysDifference = '0';break
+                case '明天比赛':param.daysDifference = '1';break;
+                case '后天比赛':param.daysDifference = '2';break;
+            }
+            this.getLeagueInfo(param);
+            this.getMatchesInfo(param);
+        },
+        matchTimeChange(){
+            let param = {'productCode':this.productCode,'daysDifference':''};
+            switch (this.matchStartTime) {
+                case '今天比赛':param.daysDifference = '0';break
+                case '明天比赛':param.daysDifference = '1';break;
+                case '后天比赛':param.daysDifference = '2';break;
+            }
             this.getLeagueInfo(param);
             this.getMatchesInfo(param);
         },
