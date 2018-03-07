@@ -27,7 +27,7 @@
                         <el-radio-button label="7" class="danger-radio small-checkbox">7天</el-radio-button>
                         <el-radio-button label="30"  class="danger-radio small-checkbox">30天</el-radio-button>
                          <el-radio-button label="week"  class="danger-radio small-checkbox">上周周榜</el-radio-button>
-                          <el-radio-button label="month"  class="danger-radio small-checkbox">上个月月榜</el-radio-button>
+                          <el-radio-button label="month"  class="danger-radio small-checkbox">上月月榜</el-radio-button>
                     </el-radio-group>
                 </div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
