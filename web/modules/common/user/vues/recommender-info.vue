@@ -2,10 +2,11 @@
     <div class="recommender-info">
         <div class="select-list content-wrap text-center">
             <el-radio-group v-model="productCode" class="radio-list" @change = "recommmenderInfo()">
+                <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                 <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                 <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
-                <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                
+                
             </el-radio-group>
         </div>
         <div class="info-list row-new">

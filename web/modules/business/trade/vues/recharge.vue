@@ -22,7 +22,6 @@
                             <el-radio-group v-model="chargeForm.bank"  size="normal">
                                 <div class="weixin-pay">
                                     <el-radio label="01" border>微信支付</el-radio>
-                                    <el-radio label="02" border>支付宝支付</el-radio>
                                 </div>
                             </el-radio-group>
                         </el-form-item>
@@ -69,7 +68,7 @@ export default {
                     })
         },
         initRecharge(){
-             var sform= {'rechargeAmount':this.chargeForm.money,'rechargeType':this.chargeForm.bank}
+            var sform= {'rechargeAmount':this.chargeForm.money,'rechargeType':this.chargeForm.bank}
             rechargeService.initRecharge(sform).then((ret)=>{
                         alert( ret.body.status);
                     })

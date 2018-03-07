@@ -101,10 +101,11 @@ export default {
             tableData3:[],
             Product:[
                 {value: '', label: '全部' }, 
+                {value: '03',label: '竞彩足球'}, 
                 {value: '01', label: '亚盘' }, 
                 {value: '02', label: '大小球' }, 
-                {value: '03',label: '竞彩'}, 
-                {value: '04',label: '北单'}, 
+                
+                
             ],
             RecommendStatus:[
                 {value: '01', label: '发布中' }, 
