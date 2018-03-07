@@ -23,7 +23,7 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="文章内容" prop="isUsed">
-                    <umeditor></umeditor>
+                    <umeditor ref="editor"></umeditor>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm()">提交</el-button>
@@ -75,7 +75,12 @@ export default {
             }
         }
     },
+    mounted(){
+    },
     methods:{
+        submitForm(){
+            console.log(this.$refs.editor.editor.getContent());
+        }
     },
     components:{
         umeditor:umeditor
