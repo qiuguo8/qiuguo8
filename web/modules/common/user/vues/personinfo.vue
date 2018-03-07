@@ -6,10 +6,10 @@
             
             <div class="select-list content-wrap">
                 <el-radio-group v-model="productCode3" class="radio-list" @change = "changeProductCode3()">
+                    <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                     <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                     <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
-                    <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                    <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                    <!--<el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>-->
                 </el-radio-group>
             </div> 
             <div class="left-menu-table">
@@ -27,12 +27,12 @@
                             {{Number(parseInt(scope.row.loseTotal))+(parseInt(scope.row.halfLoseTotal))}}
                         </template>
                     </el-table-column>
-                    <el-table-column prop="zql" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <el-table-column v-if="productCode3=='01' || productCode3=='02'" prop="zql" label="准确率" min-width="60" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
                                 <span>{{(scope.row.accuracyRate*100).toFixed(2)}}</span>%
                             </template>
                     </el-table-column>
-                    <el-table-column prop="yll" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                    <el-table-column v-if="productCode3=='03'" prop="yll" label="盈利率" min-width="60" align="center" head-align="center" class-name="table-fixed">
                         <template slot-scope="scope">
                                 <span>{{(scope.row.profitRate*100).toFixed(2)}}</span>%
                             </template>
@@ -224,7 +224,7 @@ export default {
         tableData4: [],
         securityInformation:[],
         testVal: false,
-        productCode3: "01",
+        productCode3: "03",
         currentPage4: 1,
         tableData4Total:0,
 

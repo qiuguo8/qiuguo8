@@ -1,14 +1,14 @@
 <template>
     <div class="person-focus">
-        <div class="select-list content-wrap text-left">
+        <div class="select-list content-wrap text-center">
             <el-radio-group v-model="productCode" class="radio-list" @change="changeProduct()">
+                <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                 <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                 <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
-                <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
+                <!--<el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>-->
             </el-radio-group>
         </div>
-        <div class="focus-wrap el-col-24 text-center transition-halfs" v-for="data in list">
+        <div class="focus-wrap el-col-24 text-center transition-halfs" v-for="data in list" :key="data.userId">
             <div class="short-info-wrap float-left-to-none">
                 <img src="web/resources/img/index/u170.jpg"/>
                 <div class="short-info">
@@ -36,7 +36,7 @@
             </div>
             <div class="recommends content-mid-100">
                 <p>当前推荐</p>
-                <ul v-for="data in data.recommendList"> 
+                <ul v-for="data in data.recommendList" :key="data.recommendNo"> 
                     <li class="row-new"><span class="el-col-4">{{data.categoryCode}}</span><span class="el-col-12 text-elipse">{{data.homeTeamName}}VS{{data.visitTeamName}}</span><span class="el-col-8"><el-button type="danger">{{data.price}}球果</el-button></span></li>
                 </ul>
             </div>
@@ -62,7 +62,7 @@ export default {
     data(){
         return{
             value5:3.8,
-            productCode:'01',
+            productCode:'03',
             list:[],
             currentPage:1
         }

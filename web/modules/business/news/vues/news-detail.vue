@@ -46,7 +46,6 @@ export default {
                     this.contentAuthor = ret.systemContent.createUsername;
                     this.contentCtime = ret.systemContent.createTime;
                     this.querContentList();
-                    console.log(ret);
                 }
             })
         },

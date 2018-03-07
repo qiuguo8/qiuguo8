@@ -25,7 +25,7 @@
             </el-dialog>
         </div>
         <div class="footer-web-alert">
-            <p>深圳市球果科技有限公司      版权所有 球果吧Copyright © 2017-2018</p>
+            <p>深圳市球果科技有限公司版权所有 </p>
             <p>公网安备：XXXXXXXXXXXX号 | <a href="http://www.miitbeian.gov.cn/" target="_blank" style="color:#fff" >ICP备案：粤ICP备18005676号</a></p>
             <p>声明：球果吧是中立的第三方推荐平台，任何推荐信息均由网站用户发表，球果吧不对发布者及所发布的推荐信息负责、不对彩民任何购买行为负责。
 本网资讯仅供体育爱好者浏览、购买中国体育彩票竞彩参考之用。任何人不得用于非法用途，否则责任自负。
