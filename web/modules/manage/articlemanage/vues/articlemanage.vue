@@ -113,7 +113,7 @@ export default {
         updateContent(obj,status){
             obj.enabled=status;
             articlemanageService.updateContent(obj).then((ret)=>{
-                        alert( ret.body.status);
+                        //alert( ret.body.status);
                     })
         }, 
         enabledFormat(row,column){
@@ -128,7 +128,10 @@ export default {
                 case '02':return '新闻';break;
                 case '03':return '预测';break;
             };
-        },            
+        },
+         toUpdate(item) {
+             this.$router.push({name:'article-edit',query: {article:item}})
+         }
 
     },
     created:function () {
