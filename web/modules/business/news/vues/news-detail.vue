@@ -14,8 +14,8 @@
             <div  v-if="this.contentType=='02'" class="list-name"><span>24小时新闻排行榜</span></div>
             <div  v-if="this.contentType=='03'" class="list-name"><span>24小时最热推荐</span></div>
             <ul class="normal-news-list">
-                <li class="transition-halfs" v-for="item in contentList" :key="item.contentId">
-                    <a @click="changeDetail(item.contentId)"   class="transition-halfs"><p class="text-elipse" style="width:65%">{{item.contentTitle}}</p><p style="width:35%">{{item.createTime.slice(0,11)}}</p></a>
+                <li v-for="item in contentList" :key="item.contentId">
+                    <a @click="changeDetail(item.contentId)"><p class="text-elipse" style="width:65%">{{item.contentTitle}}</p><p style="width:35%">{{item.createTime.slice(0,11)}}</p></a>
                 </li>
             </ul>
         </div>

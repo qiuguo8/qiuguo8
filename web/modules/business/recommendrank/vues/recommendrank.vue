@@ -13,6 +13,12 @@
                 <el-radio-button label="01"  class="danger-radio small-checkbox">亚盘</el-radio-button>
                 <el-radio-button label="02"  class="danger-radio small-checkbox">大小球</el-radio-button>
             </el-radio-group>
+            <div class="search-input content-30-to-100 content-wrap" style="float:right;margin-bottom:0px">
+                <!-- <input type="text" placeholder=""/> -->
+                <el-input placeholder="搜索分析师" v-model="sendName" maxlength="20">
+                    <template slot="append"><button class="el-button el-button--primary" @click="">搜索</button></template>
+                </el-input>
+            </div>
         </div>
         <div class="">
             <div class="content-wrap float-left types-news type-rank-list el-col-24" style="display:inline-block">

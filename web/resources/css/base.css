@@ -486,7 +486,7 @@ nav ul{list-style: none}
 .date-list{width:100%;padding:10px 5px;margin:0px;border-top:1px solid rgba(0, 0, 0, 0.1);border-left:1px solid rgba(0, 0, 0, 0.1);border-right:1px solid rgba(0, 0, 0, 0.1);}
 .date-list .el-radio-button.danger-radio{margin:0px 5px}
 .date-list .el-radio-button.danger-radio span.el-radio-button__inner{padding:10px 20px}
-.type-rank-list{max-width: 98%}
+.type-rank-list{max-width: 100%}
 /*recommendrank end*/
 
 /*sendrecommend start*/
