@@ -6,13 +6,19 @@
             <li>竞彩足球</li>
             <li>北京单场</li>
         </ul> -->
-        <div class="select-list content-wrap text-center" @change = "changeProductCode()">
+        <div class="select-list content-wrap" @change = "changeProductCode()">
             <el-radio-group v-model="productCode" class="radio-list" >
                 <el-radio-button label="01"  class="danger-radio small-checkbox">亚盘</el-radio-button>
                 <el-radio-button label="02"  class="danger-radio small-checkbox">大小球</el-radio-button>
                 <el-radio-button label="03"  class="danger-radio small-checkbox">竞彩足球</el-radio-button>
                 <el-radio-button label="04"  class="danger-radio small-checkbox">北京单场</el-radio-button>
             </el-radio-group>
+            <div class="search-input content-30-to-100 content-wrap" style="float:right;margin-bottom:0px">
+                <!-- <input type="text" placeholder=""/> -->
+                <el-input placeholder="搜索分析师" v-model="sendName" maxlength="20">
+                    <template slot="append"><button class="el-button el-button--primary" @click="">搜索</button></template>
+                </el-input>
+            </div>
         </div>
         <div class="">
             <div class="content-wrap float-left types-news type-rank-list content-60-to-100" style="display:inline-block">
