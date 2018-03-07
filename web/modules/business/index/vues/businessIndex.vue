@@ -12,10 +12,10 @@
                 <div class="list-name"><span>龙虎榜</span></div>
                 <div class="rank-types text-center">
                     <el-radio-group v-model="productCode"  @change="rankQuery()" class="radio-list small-radio">
+                        <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                        <!--<el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>-->
                         <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                         <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
-                        <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                        <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
                     </el-radio-group>
                 </div>
                 <div class="achive-rank-list" ref="achiveRank">
@@ -122,7 +122,7 @@
                 bannerList:[],
                 rankList:[],
                 hotList:[],
-                productCode:'01',
+                productCode:'03',
                 ttList:[],
                 xwList:[],
                 ycList:[],

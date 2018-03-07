@@ -8,9 +8,9 @@
         </ul> -->
         <div class="select-list content-wrap">
             <el-radio-group v-model="productCode" class="radio-list" @change="productChange">
-                <el-radio-button label="01" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
                 <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
+               <!-- <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>-->
+                <el-radio-button label="01" class="danger-radio small-checkbox">亚盘/大小球</el-radio-button>
             </el-radio-group>
         </div>
         <div class="match-list content-wrap content-75-to-100">
@@ -112,27 +112,60 @@
                 </el-table-column>
             </el-table>
         </div>
-        <div class="content-25-to-100 float-left content-wrap">
+        <div v-if="productCode=='03'"  class="content-25-to-100 float-left content-wrap">
             <div class="send-rule rank-text">
-                <div class="list-name text-center"><span>推荐规则</span></div>
+                <div class="list-name text-center"><span>竞彩推荐规则</span></div>
                 <div class="rule-text">
                     <p>推荐模式</p>
-                    <p>准确率计算：准确率 = [胜*1+胜半*0.5] / [胜*1+胜半*0.5+负*1+负半*0.5]*100% </p>
+                     <p>注册成功后即可发布竞彩推荐方案，且一场比赛只能从不让球和让球种选择一种结果，即时赔率低于1.3的不能推荐该结果</p>
                 </div>
                 <div class="rule-text">
                     <p>排行榜规则</p>
-                    <p>周榜：每周一12：00时统计前一个自然周成绩；<br>月榜：每月1号12：00时统计前一个自然月成绩。</p>
+                    <p>排行判断顺序：盈利率>> 发布总场次 >> 赢场次</p>
+                    <p>周榜：单周推荐必须大于等于14场，每周一12：00时统计前一个自然周成绩；<br>月榜：单月推荐大于等于42场，每月1号12：00时统计前一个自然月成绩。</p>
+                    <p>盈利率计算：盈利率 =  所有推荐正确的盈利积分[（选择赔率-1）*100]相加/[正确数量+错误数量]*100 </p>
                 </div>
             </div>
             <div class="rank-common content-wrap content-100-to-50">
-                <div class="list-name text-center" style="margin-bottom:10px"><span>周榜奖励</span></div>
+                <div class="list-name text-center" style="margin-bottom:10px"><span>竞彩周榜奖励</span></div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
                     <el-table-column prop="index" label="名次" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column  prop="reward" label="奖励" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 </el-table>
             </div>
             <div class="rank-common content-100-to-50 content-wrap">
-                <div class="list-name text-center" style="margin-bottom:10px"><span>月榜奖励</span></div>
+                <div class="list-name text-center" style="margin-bottom:10px"><span>竞彩月榜奖励</span></div>
+                <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border style="width: 100%">
+                    <el-table-column prop="index" label="名次" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column  prop="reward" label="奖励" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                </el-table>
+            </div>
+        </div>
+        <div  v-if="productCode=='01' || productCode=='02'" class="content-25-to-100 float-left content-wrap">
+            <div class="send-rule rank-text">
+                <div class="list-name text-center"><span>亚盘/大小球推荐规则</span></div>
+                <div class="rule-text">
+                    <p>推荐模式</p>
+                    <p>注册成功后即可发布亚盘和大小球推荐方案</p>
+                    <p>准确率计算：准确率 = [赢*1+赢半*0.5] / [赢*1+赢半*0.5+输*1+输半*0.5]*100% </p>
+                </div>
+                <div class="rule-text">
+                    <p>排行榜规则</p>
+                    <p>亚盘和大小球分开统计排行</p>
+                    <p>排行判断顺序：准确率 >> 发布总场次 >> 赢场次 >> 赢半场次 >> 平场次</p>
+
+                    <p>周榜：单周推荐必须大于等于14场，每周一12：00时统计前一个自然周成绩；<br>月榜：单月推荐大于等于42场，每月1号12：00时统计前一个自然月成绩。</p>
+                </div>
+            </div>
+            <div class="rank-common content-wrap content-100-to-50">
+                <div class="list-name text-center" style="margin-bottom:10px"><span>亚盘/大小球周榜奖励</span></div>
+                <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData4" border style="width: 100%">
+                    <el-table-column prop="index" label="名次" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column  prop="reward" label="奖励" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                </el-table>
+            </div>
+            <div class="rank-common content-100-to-50 content-wrap">
+                <div class="list-name text-center" style="margin-bottom:10px"><span>亚盘/大小球月榜奖励</span></div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData5" border style="width: 100%">
                     <el-table-column prop="index" label="名次" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                     <el-table-column  prop="reward" label="奖励" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
@@ -197,16 +230,13 @@ export default {
             tableData4:[{index:'1',reward:'200球果'},
                         {index:'2',reward:'150球果'},
                         {index:'3',reward:'100球果'},
-                        {index:'4',reward:'88球果'},
-                        {index:'5',reward:'66球果'}],
-            tableData5:[{index:'1',reward:'800球果'},
-                        {index:'2',reward:'600球果'},
-                        {index:'3',reward:'400球果'},
-                        {index:'4',reward:'200球果'},
-                        {index:'5',reward:'100球果'},
-                        {index:'6-10',reward:'88球果'},
+                        {index:'4-10',reward:'50球果'}],
+            tableData5:[{index:'1',reward:'500球果'},
+                        {index:'2',reward:'400球果'},
+                        {index:'3',reward:'300球果'},
+                        {index:'4-10',reward:'200球果'}
                         ],
-            productCode:'01',
+            productCode:'03',
             isShowCheckList:false,
             showInfo:false,
             infoObj:{homeTeamName:null,visitTeamName:null},

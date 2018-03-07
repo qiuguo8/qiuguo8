@@ -16,10 +16,10 @@
             </ul> -->
             <div class="types-list">
                 <el-radio-group v-model="productCode" class="radio-list" @change="changeProductCode">
+                    <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                    <!-- <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>-->
                     <el-radio-button label="01" class="danger-radio small-checkbox">亚盘</el-radio-button>
                     <el-radio-button label="02" class="danger-radio small-checkbox">大小球</el-radio-button>
-                    <el-radio-button label="03" class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                    <el-radio-button label="04" class="danger-radio small-checkbox">北京单场</el-radio-button>
                 </el-radio-group>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <div class="el-col-24 text-center infinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
                 <span v-show="busy && !loaded"><i class="keepRotate fa fa-circle-o-notch"></i>加载中</span>
                 <span v-show="!busy && !loaded">加载更多</span>
-                <span v-show="loaded" style="color: rgb(204, 204, 204); cursor: no-drop;">没有更多</span>
+                <span v-show="loaded" style="color: rgb(204, 204, 204); cursor: no-drop;">暂无数据</span>
             </div>
         </div>
 
@@ -117,7 +117,7 @@
                 total:[],
                 list:[],
                 radioVal:'1',
-                productCode:'01',
+                productCode:'03',
                 matches:[],
                 matchesVal:[],
                 isShowMatches:false,

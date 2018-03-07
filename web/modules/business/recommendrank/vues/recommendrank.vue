@@ -6,26 +6,28 @@
             <li>竞彩足球</li>
             <li>北京单场</li>
         </ul> -->
-        <div class="select-list content-wrap text-center" @change = "changeProductCode()">
+        <div class="select-list content-wrap" @change = "changeProductCode()">
             <el-radio-group v-model="productCode" class="radio-list" >
+                <el-radio-button label="03"  class="danger-radio small-checkbox">竞彩足球</el-radio-button>
+                <!--<el-radio-button label="04"  class="danger-radio small-checkbox">北京单场</el-radio-button>-->
                 <el-radio-button label="01"  class="danger-radio small-checkbox">亚盘</el-radio-button>
                 <el-radio-button label="02"  class="danger-radio small-checkbox">大小球</el-radio-button>
-                <el-radio-button label="03"  class="danger-radio small-checkbox">竞彩足球</el-radio-button>
-                <el-radio-button label="04"  class="danger-radio small-checkbox">北京单场</el-radio-button>
             </el-radio-group>
         </div>
         <div class="">
-            <div class="content-wrap float-left types-news type-rank-list content-60-to-100" style="display:inline-block">
+            <div class="content-wrap float-left types-news type-rank-list el-col-24" style="display:inline-block">
                 <!-- <ul class="select-list date-list text-left">
                     <li>3天</li>
                     <li>7天</li>
                     <li>30天</li>
                 </ul> -->
-                <div class="select-list date-list text-left" @change = "changeDays()">
-                    <el-radio-group v-model="days" class="radio-list" >
-                        <el-radio-button label="3" class="danger-radio small-checkbox">3天</el-radio-button>
+                <div class="select-list date-list text-center" @change = "changeDays()">
+                    <el-radio-group v-model="days" class="radio-list "  >
+                        <el-radio-button label="3" class="danger-radio small-checkbox ">3天</el-radio-button>
                         <el-radio-button label="7" class="danger-radio small-checkbox">7天</el-radio-button>
                         <el-radio-button label="30"  class="danger-radio small-checkbox">30天</el-radio-button>
+                         <el-radio-button label="week"  class="danger-radio small-checkbox">上周周榜</el-radio-button>
+                          <el-radio-button label="month"  class="danger-radio small-checkbox">上个月月榜</el-radio-button>
                     </el-radio-group>
                 </div>
                 <el-table :default-sort="{prop:'index',order:'ascending'}" :data="tableData3" border style="width: 100%">
@@ -35,10 +37,15 @@
                                 <a style="cursor:pointer;color:#409eff;" :key="scope.row.userId" target="_blank" @click="goInfo(scope.row)" >{{scope.row.userName}}</a>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="recommTotal" label="场次" min-width="30" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                    <el-table-column prop="accuracyRate" label="胜率" min-width="40" align="center" head-align="center" class-name="table-fixed">
+                    <el-table-column prop="recommTotal" label="战绩" min-width="30" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                    <el-table-column v-if="productCode=='01' || productCode=='02'" prop="accuracyRate" label="准确率" min-width="40" align="center" head-align="center" class-name="table-fixed">
                          <template slot-scope="scope">
                                 <span>{{(scope.row.accuracyRate*100).toFixed(2)}}</span>%
+                         </template>
+                    </el-table-column>
+                    <el-table-column v-if="productCode=='03' || productCode=='04'" prop="profitRate" label="盈利率" min-width="40" align="center" head-align="center" class-name="table-fixed">
+                         <template slot-scope="scope">
+                                <span>{{(scope.row.profitRate*100).toFixed(2)}}</span>%
                          </template>
                     </el-table-column>
                     <el-table-column prop="recomming" label="正在推荐" min-width="80" align="center" head-align="center" class-name="table-fixed">
@@ -69,7 +76,7 @@
                 <div class="rule-text text-left">
 
                 </div>
-            </div> -->
+            </div> 
             <div class="content-wrap last-rank content-40-to-100 text-center">
                 <div class="content-wrap rank-common content-100-to-50">
                     <div class="list-name"><span>第{{week}}周 周榜</span></div>
@@ -85,9 +92,15 @@
                                 <span>{{scope.row.winCount}}胜{{scope.row.tieTotal}}平{{scope.row.loseCount}}负</span>
                             </template>
                          </el-table-column>
-                        <el-table-column prop="zql" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed">
+                        <el-table-column prop="zql" v-if="productCode=='01' || productCode=='02'" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed">
                             <template slot-scope="scope">
                                 <span>{{(scope.row.accuracyRate*100).toFixed(2)}}</span>%
+                            </template>
+                        </el-table-column>
+
+                         <el-table-column prop="yll" v-if="productCode=='03' || productCode=='04'" label="盈利率" min-width="70" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{(scope.row.profitRate*100).toFixed(2)}}</span>%
                             </template>
                         </el-table-column>
                     </el-table>
@@ -106,14 +119,21 @@
                                 <span>{{scope.row.winCount}}胜{{scope.row.tieTotal}}平{{scope.row.loseCount}}负</span>
                             </template>
                          </el-table-column>
-                        <el-table-column prop="zql" label="准确率" min-width="70" align="center" head-align="center" class-name="table-fixed">
+                        <el-table-column prop="zql" v-if="productCode=='01' || productCode=='02'" label="准确率" min-width="80" align="center" head-align="center" class-name="table-fixed">
                             <template slot-scope="scope">
                                 <span>{{(scope.row.accuracyRate*100).toFixed(2)}}</span>%
+                            </template>
+                        </el-table-column>
+
+                         <el-table-column prop="yll" v-if="productCode=='03' || productCode=='04'" label="盈利率" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                            <template slot-scope="scope">
+                                <span>{{(scope.row.profitRate*100).toFixed(2)}}</span>%
                             </template>
                         </el-table-column>
                     </el-table>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </template>
@@ -136,7 +156,7 @@ export default {
             tableData4:[],
             tableData5:[],
             days:'3',
-            productCode:'01',
+            productCode:'03',
             week:'',
             month:'',
             list:[],
