@@ -10,6 +10,7 @@ import umeditor from 'web/resources/lib/umeditor/umeditor.js'
 import 'web/resources/lib/umeditor/lang/zh-cn/zh-cn.js'
 import 'web/resources/lib/umeditor/themes/default/css/umeditor.css'
 export default {
+    props:['content'],
     data(){
         return {
             isShowBackdrop:false,
@@ -18,6 +19,7 @@ export default {
     },
     mounted(){
         this.editor = UM.getEditor('content',config);
+        if(this.content)this.editor.setContent(this.content);
     },
     destroyed(){
         this.editor.destroy();
