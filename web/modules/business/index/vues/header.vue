@@ -11,7 +11,7 @@
                 </ul>
             </div>
             <div class="user-info" v-if="isLogined">
-                <span class="msg-tip">1</span>
+                <!--<span class="msg-tip">1</span>-->
                 <div class="user-img-wrap" ref="usericon">
                      <img :src="avatarUrl"/>
                 </div>

@@ -46,7 +46,7 @@
                             <el-button v-if="scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','home')">选主</el-button>
                             <span class="table-span">{{scope.row.handiCapYa}}</span>
                             <el-button v-if="scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0101','visit')">选客</el-button>
-                            <el-tag v-if="!scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" @click="void (0)" type="warning">暂未出售</el-tag>
+                            <el-tag v-if="!scope.row.handiCapYa" :disabled="scope.row.usedFlag=='1'" @click="void (0)" type="warning">暂无盘口信息</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -56,7 +56,7 @@
                             <el-button v-if="scope.row.handiCapDaXiao" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn left-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','home')">大球</el-button>
                             <span class="table-span">{{scope.row.handiCapDaXiao}}</span>
                             <el-button v-if="scope.row.handiCapDaXiao" :disabled="scope.row.usedFlagDaXiao=='1'" class="table-btn right-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0201','visit')">小球</el-button>
-                            <el-tag v-if="!scope.row.handiCapDaXiao" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
+                            <el-tag v-if="!scope.row.handiCapDaXiao" type="primary" @click="void (0)" size="small">暂无盘口信息</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -72,10 +72,10 @@
                 <el-table-column label="不让球" min-width="170" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
                         <div>
-                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','home')">{{scope.row.winJC}}</el-button>
-                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','draw')">{{scope.row.drawJC}}</el-button>
-                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','visit')">{{scope.row.lostJC}}</el-button>
-                            <el-tag v-if="!scope.row.winJC || !scope.row.drawJC || !scope.row.lostJC " @click="void (0)" type="warning" >暂未出售</el-tag>
+                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1' ||scope.row.winJC<1.45" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','home')">{{scope.row.winJC}}</el-button>
+                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1' ||scope.row.drawJC<1.45" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','draw')">{{scope.row.drawJC}}</el-button>
+                            <el-button v-if="scope.row.winJC && scope.row.drawJC && scope.row.lostJC " :disabled="scope.row.usedFlag=='1' ||scope.row.lostJC<1.45 " class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0301','visit')">{{scope.row.lostJC}}</el-button>
+                            <el-tag v-if="!scope.row.winJC || !scope.row.drawJC || !scope.row.lostJC " @click="void (0)" type="warning" >暂无赔率信息</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -83,10 +83,10 @@
                     <template slot-scope="scope">
                         <div>
                             <span class="table-span">{{scope.row.letBallHandiCap}}</span>
-                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','home')">{{scope.row.letBallWin}}</el-button>
-                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','draw')">{{scope.row.letBallDraw}}</el-button>
-                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','visit')">{{scope.row.letBallLost}}</el-button>
-                            <el-tag v-if="!scope.row.letBallHandiCap" type="primary" @click="void (0)" size="small">暂未出售</el-tag>
+                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1' ||scope.row.letBallWin<1.45" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','home')">{{scope.row.letBallWin}}</el-button>
+                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1' ||scope.row.letBallDraw<1.45" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','draw')">{{scope.row.letBallDraw}}</el-button>
+                            <el-button v-if="scope.row.letBallHandiCap" :disabled="scope.row.usedFlag=='1' ||scope.row.letBallLost<1.45" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0302','visit')">{{scope.row.letBallLost}}</el-button>
+                            <el-tag v-if="!scope.row.letBallHandiCap" type="primary" @click="void (0)" size="small">暂无赔率信息</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -106,7 +106,7 @@
                             <el-button v-if="scope.row.winBD && scope.row.drawBD && scope.row.lostBD " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','home')">{{scope.row.winBD}}</el-button>
                             <el-button v-if="scope.row.winBD && scope.row.drawBD && scope.row.lostBD " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','draw')">{{scope.row.drawBD}}</el-button>
                             <el-button v-if="scope.row.winBD && scope.row.drawBD && scope.row.lostBD " :disabled="scope.row.usedFlag=='1'" class="table-btn" type="primary" size="small" @click="showInfoDialog(scope.row,'0401','visit')">{{scope.row.lostBD}}</el-button>
-                            <el-tag v-if="!scope.row.winBD || !scope.row.drawBD || !scope.row.lostBD " @click="void (0)" type="warning" >暂未出售</el-tag>
+                            <el-tag v-if="!scope.row.winBD || !scope.row.drawBD || !scope.row.lostBD " @click="void (0)" type="warning" >暂无赔率信息</el-tag>
                         </div>
                     </template>
                 </el-table-column>
@@ -117,7 +117,7 @@
                 <div class="list-name text-center"><span>竞彩推荐规则</span></div>
                 <div class="rule-text">
                     <p>推荐模式</p>
-                     <p>注册成功后即可发布竞彩推荐方案，且一场比赛只能从不让球和让球种选择一种结果，即时赔率低于1.3的不能推荐该结果</p>
+                     <p>注册成功后即可发布竞彩推荐方案，且一场比赛只能从不让球和让球种选择一种结果，即时赔率低于1.45的不能推荐该结果</p>
                 </div>
                 <div class="rule-text">
                     <p>排行榜规则</p>

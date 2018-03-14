@@ -16,7 +16,7 @@
             <div class="search-input content-30-to-100 content-wrap" style="float:right;margin-bottom:0px">
                 <!-- <input type="text" placeholder=""/> -->
                 <el-input placeholder="搜索分析师" v-model="sendName" maxlength="20">
-                    <template slot="append"><button class="el-button el-button--primary" @click="">搜索</button></template>
+                    <template slot="append"><button class="el-button el-button--primary" @click="changeDays()">搜索</button></template>
                 </el-input>
             </div>
         </div>
@@ -163,6 +163,7 @@ export default {
             tableData5:[],
             days:'3',
             productCode:'03',
+            sendName:'',
             week:'',
             month:'',
             list:[],
@@ -171,15 +172,13 @@ export default {
         }
     },
     mounted(){
-        recommendrankService.getLastWeekRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
-            this.tableData4 = ret.list.list;
-            this.week = ret.week;
-            this.checkIsFull(ret.list.total);
-        }),
-           recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
-            this.tableData5 = ret.list.list;
-            this.month = (ret.month == 0)?12:ret.month;
-            this.checkIsFull(ret.list.total);
+         recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
+           if(ret.status == "success" && (ret.list.size >0)){
+                    this.tableData3 = this.tableData3.concat(ret.list.list);
+                    this.checkIsFull(ret.list.total);
+                }else{
+                   this.currentPage -= 1; 
+                }
         })
     },
     methods:{
@@ -199,7 +198,7 @@ export default {
             if(this.isFull)return;
                 this.currentPage += 1;
                if(this.days == '3'){
-                recommendrankService.getLastThreeDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
+                recommendrankService.getLastThreeDayRankList({productCode:this.productCode,userName:this.sendName,pageNum:this.currentPage}).then((ret)=>{
                 if(ret.status == "success" && (ret.list.size >0)){
                     this.tableData3 = this.tableData3.concat(ret.list.list);
                     this.checkIsFull(ret.list.total);
@@ -208,7 +207,7 @@ export default {
                 }
             })}
             else if(this.days == '7'){
-                recommendrankService.lastSevenDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
+                recommendrankService.lastSevenDayRankList({productCode:this.productCode,userName:this.sendName,pageNum:this.currentPage}).then((ret)=>{
                   if(ret.status == "success" && (ret.list.size >0)){
                     this.tableData3 = this.tableData3.concat(ret.list.list);
                     this.checkIsFull(ret.list.total);
@@ -217,41 +216,62 @@ export default {
                 }
             })}
             else if(this.days == '30'){
-                recommendrankService.lastThirtyDayRankList({productCode:this.productCode,pageNum:this.currentPage}).then((ret)=>{
+                recommendrankService.lastThirtyDayRankList({productCode:this.productCode,userName:this.sendName,pageNum:this.currentPage}).then((ret)=>{
                   if(ret.status == "success" && (ret.list.size >0)){
                     this.tableData3 = this.tableData3.concat(ret.list.list);
                     this.checkIsFull(ret.list.total);
                 }else{
                    this.currentPage -= 1; 
                 }
-            })};
+            })}
+            else if(this.days == 'week'){
+                recommendrankService.getLastWeekRankList({productCode:this.productCode,userName:this.sendName,pageNum:this.currentPage}).then((ret)=>{
+                  if(ret.status == "success" && (ret.list.size >0)){
+                    this.tableData3 = this.tableData3.concat(ret.list.list);
+                    this.checkIsFull(ret.list.total);
+                }else{
+                   this.currentPage -= 1; 
+                }
+            })}
+            else if(this.days == 'month'){
+                recommendrankService.getLastMonthRankList({productCode:this.productCode,userName:this.sendName,pageNum:this.currentPage}).then((ret)=>{
+                  if(ret.status == "success" && (ret.list.size >0)){
+                    this.tableData3 = this.tableData3.concat(ret.list.list);
+                    this.checkIsFull(ret.list.total);
+                }else{
+                   this.currentPage -= 1; 
+                }
+            })}
+            ;
         },
         changeDays(){
             this.isFull = false;
             if(this.days == '3'){
-                recommendrankService.getLastThreeDayRankList({productCode:this.productCode}).then((ret)=>{
+                recommendrankService.getLastThreeDayRankList({userName:this.sendName,productCode:this.productCode}).then((ret)=>{
                 this.tableData3 = ret.list.list;
                 this.checkIsFull(ret.list.total);
             })}
             else if(this.days == '7'){
-                recommendrankService.lastSevenDayRankList({productCode:this.productCode}).then((ret)=>{
+                recommendrankService.lastSevenDayRankList({userName:this.sendName,productCode:this.productCode}).then((ret)=>{
                 this.tableData3 = ret.list.list;
                 this.checkIsFull(ret.list.total);
             })}
             else if(this.days == '30'){
-                recommendrankService.lastThirtyDayRankList({productCode:this.productCode}).then((ret)=>{
+                recommendrankService.lastThirtyDayRankList({userName:this.sendName,productCode:this.productCode}).then((ret)=>{
+                this.tableData3 = ret.list.list;
+                this.checkIsFull(ret.list.total);
+            })} else if(this.days == 'week'){
+                recommendrankService.getLastWeekRankList({userName:this.sendName,productCode:this.productCode}).then((ret)=>{
+                this.tableData3 = ret.list.list;
+                this.checkIsFull(ret.list.total);
+            })} else if(this.days == 'month'){
+                recommendrankService.getLastMonthRankList({userName:this.sendName,productCode:this.productCode}).then((ret)=>{
                 this.tableData3 = ret.list.list;
                 this.checkIsFull(ret.list.total);
             })};
                      
         },
         changeProductCode(){
-            recommendrankService.getLastWeekRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
-                this.tableData4 = ret.list.list;
-            }),
-            recommendrankService.getLastMonthRankList({productCode:this.productCode,pageSize:'5'}).then((ret)=>{
-                this.tableData5 = ret.list.list;
-            }),
              this.changeDays();
         }
 
