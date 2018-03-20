@@ -367,7 +367,6 @@ export default {
                 case '明天比赛':this.daysDifference = '1';break;
                 case '后天比赛':this.daysDifference = '2';break;
             }
-            console.log(this.daysDifference);
             let param = {'productCode':this.productCode,'daysDifference':this.daysDifference};          
             this.getLeagueInfo(param);
             this.getMatchesInfo(param);
