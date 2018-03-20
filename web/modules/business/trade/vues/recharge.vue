@@ -9,7 +9,7 @@
                 <p class="user-name">用户名：<span>{{userName}}</span><span></span></p>
                 <p class="charge-tip">请输入充值球果数量及选择支付方式进行充值（注：充值部分的球果不能提现）</p>
                 <div class="el-col-24">
-                    <el-form :model="chargeForm" :rules="rules" ref="chargeForm" label-width="80px">
+                    <el-form v-if="!showPic" :model="chargeForm" :rules="rules" ref="chargeForm" label-width="80px">
                         <el-form-item label="充值金额" prop="money">
                             <el-input type="primary" v-model="chargeForm.money" auto-complete="off">
                                 <label slot="append">
@@ -29,6 +29,9 @@
                             <button class="btn btn-padding btn-danger charge-btn" @click="initRecharge()" >立即充值</button>
                         </el-form-item>
                     </el-form>
+                      <el-form v-if="showPic"  ref="chargeForm" label-width="80px">
+                         <img :src="qrCodePath"/>
+                     </el-form>
                 </div>
             </div>
         </div>
@@ -37,6 +40,7 @@
 <script>
 import Vue from 'vue'
 import formUtil from 'web/common/utils/formUtil.js'
+import pathUtil from 'web/common/utils/pathUtil.js'
 import {RadioGroup,Radio,Form,FormItem,Input,Button} from 'element-ui'
 import rechargeService from 'web/modules/business/trade/service/rechargeService.js'
 Vue.component(Form.name,Form);
@@ -49,6 +53,8 @@ export default {
     data(){
         return {
             userName:'',
+            qrCodePath:'',
+            showPic:false,
             chargeForm:{
                 money:'0',
                 bank:'01'
@@ -70,7 +76,11 @@ export default {
         initRecharge(){
             var sform= {'rechargeAmount':this.chargeForm.money,'rechargeType':this.chargeForm.bank}
             rechargeService.initRecharge(sform).then((ret)=>{
-                        alert( ret.body.status);
+                        if('success'== ret.body.status){
+                            this.qrCodePath=pathUtil.getStaticPath()+ret.body.qrCodePath;
+                            this.showPic=true;
+                        }
+                        
                     })
         },
     },
