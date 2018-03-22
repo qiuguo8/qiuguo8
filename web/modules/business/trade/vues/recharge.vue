@@ -9,7 +9,7 @@
                 <p class="user-name">用户名：<span>{{userName}}</span><span></span></p>
                 <p class="charge-tip">请输入充值球果数量及选择支付方式进行充值（注：充值部分的球果不能提现）</p>
                 <div class="el-col-24">
-                    <el-form v-if="!showPic" :model="chargeForm" :rules="rules" ref="chargeForm" label-width="80px">
+                    <el-form v-if="!showPic"  :rules="rules" ref="chargeForm" label-width="80px">
                         <el-form-item label="充值金额" prop="money">
                             <el-input type="primary" v-model="chargeForm.money" auto-complete="off">
                                 <label slot="append">

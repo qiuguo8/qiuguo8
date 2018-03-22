@@ -24,8 +24,9 @@
                         <img class="el-col-3" v-if="rankItem.faceUrl" :src="staticPath+rankItem.faceUrl"/>
                         <img class="el-col-3" v-if="!rankItem.faceUrl" :src="staticPath+'avatar/default.jpg'" />
                         <span class="el-col-6 user-name text-elipse"><a target="_blank" @click="goInfo(rankItem)" style="cursor:pointer;color:#409eff;">{{rankItem.userName}}</a></span>
-                        <span class="el-col-8 text-elipse">{{rankItem.starLevel}}</span>
                         <span class="el-col-4  text-elipse"><span>{{(rankItem.accuracyRate*100).toFixed(2)}}</span>%</span>
+                        <span class="el-col-8 text-elipse">{{rankItem.recordValue}}</span>
+                       
                     </div>
                 </div>
             </div>
@@ -49,8 +50,8 @@
                         </div>
                         <div class="intro-text">
                             <p class="text-elipse"><a target="_blank" @click="goInfo(item)" style="cursor:pointer;color:#409eff;">{{item.userName}}</a></p>
-                            <p class="text-elipse">{{item.assessLevel}}</p>
-                            <p class="text-elipse">{{item.starLevel}}</p>
+                            <p class="text-elipse">{{assessLevelForm[item.assessLevel]}}</p>
+                            <el-rate style="display:inline-block" v-model="item.starLevel" disabled show-score text-color="#ff9900" score-template=""></el-rate>
                             <p class="text-elipse">{{item.recordsValue}}</p>
                         </div>
                         <div class="recomd-info text-elipse">
@@ -128,6 +129,7 @@
                 ycList:[],
                 orderData:null,
                 staticPath:pathUtil.getStaticPath(),
+                assessLevelForm:{'01':'初级','02':'中级','03':'高级','04':'资深级','05':'专家级'},
             }
         },
         mounted(){
