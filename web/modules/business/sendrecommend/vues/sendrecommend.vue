@@ -244,10 +244,11 @@ export default {
             recommendInfo:{recommendTeamId:null, recommendTeamName:null, categoryCode:null, productCode:null},
             recommendContent:null,
             price:null,
+            daysDifference:'0',
         }
     },
     created:function () {
-        let param = {'productCode':this.productCode,'daysDifference':'0'};
+        let param = {'productCode':this.productCode,'daysDifference':this.daysDifference};
         this.getLeagueInfo(param);
         this.getMatchesInfo(param);
     },
@@ -355,22 +356,18 @@ export default {
             }``
         },
         productChange(){
-            let param = {'productCode':this.productCode,'daysDifference':'0'};
-            switch (this.matchStartTime) {
-                case '今天比赛':param.daysDifference = '0';break
-                case '明天比赛':param.daysDifference = '1';break;
-                case '后天比赛':param.daysDifference = '2';break;
-            }
+            let param = {'productCode':this.productCode,'daysDifference':this.daysDifference};
+           
             this.getLeagueInfo(param);
             this.getMatchesInfo(param);
         },
         matchTimeChange(){
-            let param = {'productCode':this.productCode,'daysDifference':''};
-            switch (this.matchStartTime) {
-                case '今天比赛':param.daysDifference = '0';break
-                case '明天比赛':param.daysDifference = '1';break;
-                case '后天比赛':param.daysDifference = '2';break;
+             switch (this.matchStartTime) {
+                case '今天比赛':this.daysDifference = '0';break
+                case '明天比赛':this.daysDifference = '1';break;
+                case '后天比赛':this.daysDifference = '2';break;
             }
+            let param = {'productCode':this.productCode,'daysDifference':this.daysDifference};          
             this.getLeagueInfo(param);
             this.getMatchesInfo(param);
         },
@@ -423,6 +420,7 @@ export default {
             recommendDetails.recommendContent = this.recommendContent;
             recommendDetails.price = this.price;
 
+            recommendDetails.daysDifference = this.daysDifference;
             service.publishRecommend(recommendDetails).then((ret)=>{
                 if(ret.body.status == 'failure'){
                     Message({
@@ -434,7 +432,8 @@ export default {
                         message:"发布成功！",
                         type:ret.body.status || 'info'
                     })
-                    let param = {'productCode':this.productCode};
+                    this.daysDifference=ret.body.daysDifference;
+                    let param = {'productCode':this.productCode,'daysDifference':this.daysDifference};
                     this.getLeagueInfo(param);
                     this.getMatchesInfo(param);
                     this.showInfo = false;//关闭弹层
