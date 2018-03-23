@@ -3,7 +3,7 @@
         <el-tabs type="border-card">
             <el-tab-pane>
                 <span slot="label"><i class="fa fa-envelope"></i>未读</span>
-                <div class="message-wrap row-new" v-for="data in unreadList">
+                <div class="message-wrap row-new" v-for="data in unreadList" :key="data.msgId">
                     <span class="let-aside-icon float-left"><i class="fa fa-bell"></i></span>
                     <div class="mess-content el-col-20">
                         <p class="mess-type">{{data.subject}}</p>
@@ -14,7 +14,7 @@
             </el-tab-pane>
             <el-tab-pane>
                 <span slot="label"><i class="fa fa-envelope-open"></i>已读</span>
-                <div class="message-wrap row-new" v-for="data in readList">
+                <div class="message-wrap row-new" v-for="data in readList" :key="data.msgId">
                     <span class="let-aside-icon float-left"><i class="fa fa-bell"></i></span>
                     <div class="mess-content el-col-20">
                         <p class="mess-type">{{data.subject}}</p>
@@ -42,11 +42,9 @@ export default {
   },
   mounted(){
       messageService.getUnReadMessageList({readStatus:'0'}).then((data)=>{
-          console.log(data);
           this.unreadList = data.list.list;
       }),
       messageService.getUnReadMessageList({readStatus:'1'}).then((data)=>{
-          console.log(data);
           this.readList = data.list.list;
       })
   }

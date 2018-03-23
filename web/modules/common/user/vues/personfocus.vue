@@ -69,7 +69,6 @@ export default {
     },
     mounted(){
         personForcusService.getUnReadMessageList({productCode:this.productCode}).then((data)=>{
-            console.log(data);
             this.list = data.list.list;
         })
     },

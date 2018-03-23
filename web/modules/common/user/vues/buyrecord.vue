@@ -31,8 +31,12 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="createTime" label="购买时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="recommendNo" label="推荐单号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
+                <el-table-column prop="createTime" label="购买时间" min-width="70" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="recommendNo" label="推荐单号" min-width="80" align="center" head-align="center" class-name="table-fixed">
+                    <template slot-scope="scope">
+                        <el-button type="text"  size="small" @click="recommDetail(scope.row)">{{scope.row.recommendNo}}</el-button>
+                    </template>    
+                </el-table-column>
                 <el-table-column prop="userName" label="推荐师" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="categoryCode" label="推荐类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">
@@ -40,10 +44,18 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="leagueName" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                 <el-table-column prop="homeTeamName" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                  <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="recommendStatus" label="开奖状态" min-width="60" align="center" head-align="center" class-name="table-fixed">
-                    <template slot-scope="scope">
-                        <span v-constant-tranlate="scope.row.recommendStatus" constant-type="RecommendStatus"></span>
+                <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                       <template slot-scope="scope">
+                        <span v-if="scope.row.hitResult=== '01'" style="color: red">赢</span>
+                        <span v-if="scope.row.hitResult=== '02'" style="color: red">赢半</span>
+                        <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
+                        <span v-if="scope.row.hitResult=== '04'">输半</span>
+                        <span v-if="scope.row.hitResult=== '05'">输</span>
+                        <span v-if="scope.row.hitResult=== '06'">待定</span>
+                         <span v-if="!scope.row.hitResult">待定</span>
                     </template>
                 </el-table-column>
             </el-table>
@@ -118,7 +130,11 @@ export default {
             this.tableData3 = data.list.list;
             this.totalCount = data.list.total;
         });
-        }
+        },
+        recommDetail(item){
+            window.open(location.origin+"/order-detail?recommendNo="+item.recommendNo,'_blank');
+            return true;
+        },
     }
   
 }
