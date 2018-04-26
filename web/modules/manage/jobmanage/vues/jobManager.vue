@@ -30,6 +30,9 @@
                    <div class="float-left info-bar">
                     <el-button type="primary" @click="runSerialHitJob()">连中记录调度</el-button>
                 </div>
+                <div class="float-left info-bar">
+                    <el-button type="primary" @click="runUnFreezeJob()">资金调度</el-button>
+                </div>
             </div>
         </div>
     </div>

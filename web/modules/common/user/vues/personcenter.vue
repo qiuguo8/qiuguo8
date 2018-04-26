@@ -8,7 +8,8 @@
             <router-link tag="li" :to="{name:'buy-record'}" active-class="active" class="transition-halfs">购买记录</router-link>
             <router-link tag="li" :to="{name:'recharge'}" active-class="active" class="transition-halfs">我要充值</router-link>
             <router-link tag="li" :to="{name:'withdraw'}" active-class="active" class="transition-halfs">我要提现</router-link>
-            <router-link tag="li" :to="{name:'user-announce'}" active-class="active" class="transition-halfs">我要推广</router-link>
+            <router-link tag="li" :to="{name:'user-announce'}" active-class="active" class="transition-halfs"  v-if="isDL">我是代理</router-link>
+            <router-link tag="li" :to="{name:'user-announce'}" active-class="active" class="transition-halfs"  v-if="isCPD">我是彩票店</router-link>
             <router-link tag="li" :to="{name:'money-flow-detail'}" active-class="active" class="transition-halfs">资金明细</router-link>
             <router-link tag="li" :to="{name:'manager-index'}" active-class="active" class="transition-halfs" v-if="isManager">后台管理</router-link>
             <div class="left-side-btn hor-ver-mid">个人中心菜单</div>
@@ -31,7 +32,8 @@ export default {
     data(){
         return {
             showHeader:true,
-            isManager:false
+            isManager:false,
+            isDL:false,
         }
     },
     created(){
@@ -41,9 +43,11 @@ export default {
         //监听是否具有管理员权限从而是否显示管理入口
         comVue.$on('is-manage-for-menu',(data)=>{
             this.isManager = comVue.$data.userInfo&&comVue.$data.userInfo.userJurisdictionType == '02';
+            this.isDL=comVue.$data.userInfo&&comVue.$data.userInfo.dlFlag == '1';
         });
         if(comVue.$data.userInfo){
             this.isManager = comVue.$data.userInfo.userJurisdictionType == '02';
+            this.isDL= comVue.$data.userInfo.dlFlag == '1';
         }
     },
     mounted(){

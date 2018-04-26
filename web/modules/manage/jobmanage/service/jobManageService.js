@@ -30,4 +30,7 @@ export default {
     runSerialHitJob(){
         return Vue.http.post(pathUtil.getBasePath()+'/admin/runSerialHitJob');
     },
+    runUnFreezeJob(){
+        return Vue.http.post(pathUtil.getBasePath()+'/admin/runUnFreezeJob');
+    },
 }
