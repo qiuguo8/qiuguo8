@@ -66,8 +66,8 @@
                         <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
                         <span v-if="scope.row.hitResult=== '04'">输半</span>
                         <span v-if="scope.row.hitResult=== '05'">输</span>
-                        <span v-if="scope.row.hitResult=== '06'">待开奖</span>
-                         <span v-if="!scope.row.hitResult">待开奖</span>
+                        <span v-if="scope.row.hitResult=== '06'">待开</span>
+                         <span v-if="!scope.row.hitResult">待开</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
@@ -89,24 +89,31 @@
             <p class="select-name"><span>账户安全</span></p>
             <div class="text-left two-colums-to-one transition-halfs">
                 <div class="float-left">
-                    <span class="el-col-14">登录密码：<span v-if="securityInformation.password == '1'">已设置</span><span v-if="securityInformation.password == '0'">未设置</span></span>
+                    <span class="el-col-14">登录密码：<span v-if="securityInformation.password == '1'">已设置</span></span>
                     <el-button type="primary" @click = "loginpwdset = true">修改</el-button>
                 </div>
                 <div class="float-left">
-                    <span class="el-col-14">手机认证：<span v-if="securityInformation.mobilePhone == '1'">已设置</span><span v-if="securityInformation.mobilePhone == '0'">未设置</span></span>
-                    <el-button type="primary" @click="phoneset = true">修改</el-button>
+                    <span class="el-col-14">
+                        手机认证：<span v-if="securityInformation.mobilePhone == '1'">已设置</span></span>
+                    <el-button  v-if="securityInformation.mobilePhone == '1'" type="primary" @click="phoneset = true">修改</el-button>
                 </div>
                 <div class="float-left">
-                    <span class="el-col-14">交易密码：<span v-if="securityInformation.tradePassword == '1'">已设置</span><span v-if="securityInformation.tradePassword == '0'">未设置</span></span>
-                    <el-button type="primary" @click="tradepwdset = true">修改/去设置</el-button>
+                    <span class="el-col-14">交易密码：<span v-if="securityInformation.tradePassword == '1'">已设置</span>
+                    <span v-if="securityInformation.tradePassword == '0'">未设置</span></span>
+                    <el-button type="primary" v-if="securityInformation.tradePassword == '0'" @click="tradepwdset = true">去设置</el-button>
+                    <el-button type="primary" v-if="securityInformation.tradePassword == '1'" @click="tradepwdset = true">修改</el-button>
                 </div>
                 <div class="">
-                    <span class="el-col-14">身份认证：<span v-if="securityInformation.userCertificate == '1'">已设置</span><span v-if="securityInformation.userCertificate == '0'">未设置</span></span>
-                    <el-button type="primary">修改</el-button>
+                    <span class="el-col-14">身份信息(绑定后不可修改):
+                    <span v-if="securityInformation.userCertificate == '0'">未绑定</span>
+                     <span v-if="securityInformation.userCertificate == '1'">已绑定</span></span>
+                    <el-button v-if="securityInformation.userCertificate == '0'" type="primary">去绑定</el-button>
                 </div>
                 <div class="">
-                    <span class="el-col-14">银行卡绑定：<span v-if="securityInformation.userAuthCard == '1'">已设置</span><span v-if="securityInformation.userAuthCard == '0'">未设置</span></span>
-                    <el-button type="primary" @click="bindcardset = true">去绑定</el-button>
+                    <span class="el-col-14">支付宝账号（用于提现）：
+                        <span v-if="securityInformation.userAuthCard == '1'">已设置</span>
+                        <span v-if="securityInformation.userAuthCard == '0'">未设置</span></span>
+                    <el-button type="primary" @click="bindcardset = true">去设置</el-button>
                 </div>
             </div>
         </div>

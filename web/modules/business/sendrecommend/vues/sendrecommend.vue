@@ -341,7 +341,7 @@ export default {
             let checkedCount = value.length;
             this.checkAll = checkedCount === this.leagues.length;
             this.isIndeterminate = checkedCount > 0 && checkedCount < this.leagues.length;
-            let param = {'productCode':this.productCode,'leagueIds':value.join(",")};
+            let param = {'productCode':this.productCode,'leagueIds':value.join(","),'daysDifference':this.daysDifference};
             this.getMatchesInfo(param);
         },
         handleOpposit(val,oppo,scope){

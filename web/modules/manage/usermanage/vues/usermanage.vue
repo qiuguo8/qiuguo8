@@ -52,7 +52,7 @@
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="realName" label="真实姓名" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="phone" label="手机号" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="email" label="邮箱" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <!--<el-table-column prop="email" label="邮箱" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>-->
                 <el-table-column prop="registTime" label="注册时间" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="status" label="状态" :formatter="statusForma" min-width="60" align="center" head-align="center" class-name="table-fixed">
                     <template slot-scope="scope">

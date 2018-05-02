@@ -14,7 +14,7 @@
                 </div>
             </div>  
             <div class="form-control el-col-12 text-center">
-                <label class="el-col-9">购买类型</label>
+                <label class="el-col-9">推荐类型</label>
                 <el-select class="el-col-15" v-model="productValue" filterable placeholder="请选择">
                     <el-option
                     v-for="item in Product"
@@ -43,9 +43,9 @@
                         <span v-constant-tranlate="scope.row.categoryCode" constant-type="Product"></span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="leagueName" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                 <el-table-column prop="homeTeamName" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                  <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+            <!--<el-table-column prop="leagueName" label="联赛类型" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>-->
+                <el-table-column prop="homeTeamName" label="主队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="visitTeamName" label="客队" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="price" label="价格" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="hitResult" label="结果" min-width="60" align="center" head-align="center" class-name="table-fixed">
                        <template slot-scope="scope">
@@ -54,8 +54,8 @@
                         <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
                         <span v-if="scope.row.hitResult=== '04'">输半</span>
                         <span v-if="scope.row.hitResult=== '05'">输</span>
-                        <span v-if="scope.row.hitResult=== '06'">待定</span>
-                         <span v-if="!scope.row.hitResult">待定</span>
+                        <span v-if="scope.row.hitResult=== '06'">待开</span>
+                         <span v-if="!scope.row.hitResult">待开</span>
                     </template>
                 </el-table-column>
             </el-table>

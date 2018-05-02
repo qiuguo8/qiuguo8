@@ -35,9 +35,13 @@
                 <el-table-column prop="changeTime" label="时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="changeId" label="资金流水号" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="totalAmount" label="金额" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="changeType" :formatter="changeTypeFormat" label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
-                    <template slot-scope="scope">
-                        <span v-constant-tranlate="scope.row.changeType" constant-type="changeType"></span>
+                <el-table-column prop="jylx"  label="交易类型" min-width="60" align="center" head-align="center" class-name="table-fixed">
+                     <template slot-scope="scope">
+                        <span v-if="scope.row.changeType=== '01'" style="color: red">充值收入</span>
+                        <span v-if="scope.row.changeType=== '04'" style="color: red">佣金收入</span>
+                        <span v-if="scope.row.changeType=== '05'" style="color: red">退款收入</span>
+                        <span v-if="scope.row.changeType=== '02'">提现支出</span>
+                        <span v-if="scope.row.changeType=== '03'">消费支出</span>
                     </template>
                 </el-table-column>
             </el-table>
@@ -71,10 +75,12 @@ export default {
             datatable:[],
             options:[
                 {value: '', label: '全部' }, 
-                {value: '01', label: '充值' }, 
-                {value: '02',label: '提现'}, 
-                {value: '03',label: '消费'}, 
-                {value: '04',label: '佣金'}],
+                {value: '01', label: '充值收入' },
+                {value: '04',label: '佣金收入'},
+                {value: '05',label: '退款收入'},
+                {value: '02',label: '提现支出'}, 
+                {value: '03',label: '消费支出'} 
+                ],
             startChangeTime:null,
             endChangeTime:null,
             changeType:'',
@@ -113,10 +119,11 @@ export default {
         }, 
         changeTypeFormat(row,column){
             switch (row.changeType) {
-                case '01':return '充值';break;
-                case '02':return '提现';break;
-                case '03':return '消费';break;
-                case '04':return '佣金';break;
+                case '01':return '充值收入';break;
+                case '02':return '提现支出';break;
+                case '03':return '消费支出';break;
+                case '04':return '消费支出';break;
+                case '05':return '退款收入';break;
             };
         },           
     },

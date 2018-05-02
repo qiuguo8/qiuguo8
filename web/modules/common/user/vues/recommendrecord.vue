@@ -42,8 +42,8 @@
         </div>
         <div class="el-col-24">
             <el-table :default-sort="{prop:'count',order:'ascending'}" :data="tableData3" border>
-                <el-table-column prop="publishTime" label="推荐时间" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="rNo" label="推荐单号" min-width="130" align="center" head-align="center" class-name="table-fixed"> 
+                <el-table-column prop="publishTime" label="推荐时间" min-width="90" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="rNo" label="推荐单号" min-width="140" align="center" head-align="center" class-name="table-fixed"> 
                      <template slot-scope="scope">
                         <el-button type="text"  size="small" @click="recommDetail(scope.row)">{{scope.row.recommendNo}}</el-button>
                     </template>
@@ -66,8 +66,8 @@
                         <span v-if="scope.row.hitResult=== '03'" style="color: red">走水</span>
                         <span v-if="scope.row.hitResult=== '04'">输半</span>
                         <span v-if="scope.row.hitResult=== '05'">输</span>
-                        <span v-if="scope.row.hitResult=== '06'">待定</span>
-                         <span v-if="!scope.row.hitResult">待定</span>
+                        <span v-if="scope.row.hitResult=== '06'">待开</span>
+                         <span v-if="!scope.row.hitResult">待开</span>
                     </template>
                 </el-table-column>
                 <el-table-column prop="commission" label="佣金" min-width="60" align="center" head-align="center" class-name="table-fixed"></el-table-column>

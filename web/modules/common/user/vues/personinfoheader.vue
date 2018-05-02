@@ -23,7 +23,7 @@
                     球果余额：{{base.qgAvailableBalance}}
                 </div>
                 <div class="float-left info-bar">
-                    关注人数：{{base.focusNum}}
+                    关注我的：{{base.focusNum}}
                 </div>
                 <div class="float-left info-bar">
                     我的关注：{{base.myFocus}}

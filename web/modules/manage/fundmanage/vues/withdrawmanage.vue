@@ -53,12 +53,11 @@
                 <el-table-column prop="userName" label="用户名" min-width="80" align="center" head-align="center" class-name="table-fixed"> </el-table-column>
                 <el-table-column prop="withdrawAmount" label="提现金额" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="withdrawTime" label="提现时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="withdrawStatus" :formatter="withdrawStatusFormat" label="提现状态" min-width="50" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="withdrawStatus" :formatter="withdrawStatusFormat" label="提现状态" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="operTime" label="审核时间" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="operUserName" label="审核人员" min-width="80" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                <el-table-column prop="withdrawRecvNo" label="收款卡号" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
+                <el-table-column prop="withdrawRecvNo" label="收款账号" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column prop="freezeId" label="冻结流水号" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
-                  <el-table-column prop="" label="收款卡号" min-width="100" align="center" head-align="center" class-name="table-fixed"></el-table-column>
                 <el-table-column label="操作" min-width="90" align="center" head-align="center" class-name="table-fixed" fixed="right">
                      <template slot-scope="scope">
                         <el-button type="text" size="small"  v-show="scope.row.withdrawStatus=='03'" @click="approve(scope.row,'01')">通过</el-button>
