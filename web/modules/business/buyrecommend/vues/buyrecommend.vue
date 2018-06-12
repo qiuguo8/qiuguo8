@@ -50,7 +50,7 @@
         <div class="clear-fix"></div>
         <div class="intros-wrap content-wrap el-col-24">
             <div class="intro-wrap transition-halfs" v-for="item in list" :key="item.index">
-                <div class="match-name text-elipse">{{item.homeTeamName}}VS{{item.visitTeamName}}</div>
+                <div class="match-name text-elipse">{{item.homeTeamName}}&nbsp;VS&nbsp;{{item.visitTeamName}}</div>
                 <div class="intro-info">
                     <div class="recommender-content" :key="item.userId"  >
                         <img  v-if="item.faceUrl" :src="staticPath+item.faceUrl"/>
@@ -61,7 +61,7 @@
                     <p class="text-elipse"> <a target="_blank" @click="goInfo(item)" style="cursor:pointer;color:#409eff;">{{item.userName}}</a></p>
                     <p class="text-elipse">{{assessLevelForm[item.assessLevel]}}</p>
                     <el-rate style="display:inline-block" v-model="item.starLevel" disabled show-score text-color="#ff9900" score-template=""></el-rate>
-                    <p class="text-elipse">{{item.recordsValue}}</p>
+                    <p class="text-elipse">近5场{{item.recordsValue}}</p>
                 </div>
                 <div class="recomd-info text-elipse">
                     <span>{{item.recommendContent}}</span>

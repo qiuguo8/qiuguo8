@@ -1,13 +1,15 @@
 <template>
     <div class="withdraw">
         <div class="withdraw-wrap el-col-24">
+            <p style="color:red">（提款前请先完善身份信息和支付宝信息，首次绑定身份信息后不能更改。支付宝收款账号需要和身份信息一致）</p>
             <div class="head">
                 <span>提款</span>
             </div>
+            
             <div class="form-wrap">
                 <el-form :model="withDrawForm" :rules="rules" ref="withDrawForm" label-width="110px">
                     <el-form-item label="可提金额:">
-                        <span style="color:#e90304">{{withDrawForm.availableBalance}}</span>元
+                        <span style="color:#e90304">{{withDrawForm.availableBalance}}</span>元，
                     </el-form-item>
                     <el-form-item required label="提现金额:" prop="money" label-width="110px">
                         <div class="el-col-8" style="min-width:160px;">
